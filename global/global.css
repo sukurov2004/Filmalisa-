@@ -62,7 +62,7 @@ body {
   color: #fff;
 }
 
-.item.active {
+.item:hover {
   background: #5b21b6;
   color: #fff;
   border-radius: 0;
