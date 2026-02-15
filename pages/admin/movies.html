@@ -1,159 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-      <!-- !Reset Css link -->
-    <link rel="stylesheet" href="../../global/reset.css">
-        <!-- !Global Css link -->
+    <!-- !Reset Css link -->
+    <link rel="stylesheet" href="../../global/reset.css" />
+    <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/global.css" />
-     <!-- !login Css link -->
-    <link rel="stylesheet" href="../../styles/admin/movies.css">
+    <!-- !login Css link -->
+    <link rel="stylesheet" href="../../styles/admin/movies.css" />
     <title>Admin / Movies</title>
-</head>
-<body>
-<div class="app">
+  </head>
+  <body>
+    <div class="app">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="../../assets/Admin/images/logo.svg" alt="logo" />
+          <span>filmalisa</span>
+        </div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
+        <nav class="menu">
+          <a href="dashboard.html" class="item">
+            <img
+              src="../../assets/Admin/icons/Dashboard.svg"
+              alt="Dashboard Icon"
+            />
+            Dashboard
+          </a>
 
-    <div class="brand">
-    <img src="../../assets/Admin/images/logo.svg" alt="logo">
-      <span>filmalisa</span>
+          <a href="movies.html" class="item">
+            <img
+              src="../../assets/Admin/icons/Movies.svg"
+              alt="Movies Icon"
+            />Movies
+          </a>
+
+          <a href="categories.html" class="item">
+            <img
+              src="../../assets/Admin/icons/Categories.svg"
+              alt="Categories Icon"
+            />Categories
+          </a>
+
+          <a href="users.html" class="item">
+            <img
+              src="../../assets/Admin/icons/Users.svg"
+              alt="Users Icon"
+            />Users
+          </a>
+
+          <a href="comments.html" class="item">
+            <img
+              src="../../assets/Admin/icons/Comments.svg"
+              alt="Comments Icon"
+            />Comments
+          </a>
+
+          <a href="contactus.html" class="item">
+            <img
+              src="../../assets/Admin/icons/Contactus.svg"
+              alt="Contact us Icon"
+            />Contact us
+          </a>
+
+          <a href="actors.html" class="item">
+            <img
+              src="../../assets/Admin/icons/Actors.svg"
+              alt="Actors Icon"
+            />Actors
+          </a>
+        </nav>
+
+        <a href="login.html" class="logout">
+          <img src="../../assets/Admin/icons/Logout.svg" alt="Logout Icon" />
+          Logout
+        </a>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="hi">Hi Admin</div>
+            <h1>Movies</h1>
+          </div>
+
+          <div class="profile">
+            <img src="../../assets/Admin/images/profilimg.svg" alt="" />
+            <span>Admin</span>
+          </div>
+        </header>
+
+        <section class="table-wrapper">
+          <table class="movies-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Overview</th>
+                <th>Category</th>
+                <th>IMDB</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+
+                <td class="actions">
+                  <i class="fa-solid fa-pen edit"></i>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="movies-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Overview</th>
+                <th>Category</th>
+                <th>IMDB</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+
+                <td class="actions">
+                  <i class="fa-solid fa-pen edit"></i>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
     </div>
 
-    <nav class="menu">
-      <a href="dashboard.html" class="item">
-       <img src="../../assets/Admin/icons/Dashboard.svg" alt="Dashboard Icon"> Dashboard
-      </a>
-
-      <a href="movies.html" class="item">
-       <img src="../../assets/Admin/icons/Movies.svg" alt="Movies Icon">Movies
-      </a>
-
-      <a href="categories.html" class="item">
-        <img src="../../assets/Admin/icons/Categories.svg" alt="Categories Icon">Categories
-      </a>
-
-      <a href="users.html" class="item">
-        <img src="../../assets/Admin/icons/Users.svg" alt="Users Icon">Users
-      </a>
-
-      <a href="comments.html" class="item">
-        <img src="../../assets/Admin/icons/Comments.svg" alt="Comments Icon">Comments
-      </a>
-
-      <a href="contactus.html" class="item">
-        <img src="../../assets/Admin/icons/Contactus.svg" alt="Contact us Icon">Contact us
-      </a>
-
-      <a href="actors.html" class="item">
-        <img src="../../assets/Admin/icons/Actors.svg" alt="Actors Icon">Actors
-      </a>
-    </nav>
-
-    <a href="login.html" class="logout">
-        <img src="../../assets/Admin/icons/Logout.svg" alt="Logout Icon">
-      Logout
-    </a>
-
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <header class="topbar">
-      <div>
-        <div class="hi">Hi Admin</div>
-        <h1>Movies</h1>
-      </div>
-
-      <div class="profile">
-        <img src="../../assets/Admin/images/profilimg.svg" alt="">
-        <span>Admin</span>
-      </div>
-    </header>
-
-    <section class="table-wrapper">
-
-  <table class="movies-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Overview</th>
-        <th>Category</th>
-        <th>IMDB</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>1</td>
-
-        <td class="movie-title">
-          <img src="../../assets/Admin/images/movies.svg" alt="">
-          <span>Lost in space</span>
-        </td>
-
-        <td>Lorem ipsum test...</td>
-        <td>Action</td>
-        <td>7.6</td>
-
-        <td class="actions">
-  <i class="fa-solid fa-pen edit"></i>
-  <i class="fa-solid fa-trash delete"></i>
-</td>
-
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="movies-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Overview</th>
-        <th>Category</th>
-        <th>IMDB</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>1</td>
-
-        <td class="movie-title">
-          <img src="../../assets/Admin/images/movies.svg" alt="">
-          <span>Lost in space</span>
-        </td>
-
-        <td>Lorem ipsum test...</td>
-        <td>Action</td>
-        <td>7.6</td>
-
-        <td class="actions">
-  <i class="fa-solid fa-pen edit"></i>
-  <i class="fa-solid fa-trash delete"></i>
-</td>
-
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-  </main>
-
-</div>
-
-
-
-
-        <script src="../../script/admin/movies.js"></script>
-</body>
+    <script src="../../script/admin/movies.js"></script>
+  </body>
 </html>
