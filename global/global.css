@@ -1,12 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 body {
-  background: #111;
+  background: #171616;
 }
 
 .layout {
@@ -16,23 +11,24 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-  width: 240px;
-  background: #1b1b1f;
+  /* width: 240px; */
+  background: #1e1e1e;
   color: #ccc;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 25px 0;
+  /* justify-content: space-between; */
+  /* padding: 20px 50px 45px 47px; */
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 25px;
-  margin-bottom: 40px;
+  gap: 13px;
 }
-
+.logo h2 {
+  font-family: "Numans", sans-serif;
+  font-size: 20px;
+}
 .logo-icon {
   width: 20px;
   height: 20px;
@@ -48,7 +44,6 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 25px;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -88,7 +83,7 @@ body {
 }
 
 .hi-text {
-  color: #aaa;
+  color: #ffffff;
   font-size: 14px;
 }
 
@@ -105,8 +100,8 @@ body {
   color: #fff;
 }
 
-.profile img {
-  border-radius: 50%;
+.admin-profile spam {
+  color: #ffffff;
 }
 
 /* CONTENT */
@@ -129,5 +124,5 @@ body {
   font-size: 32px;
   font-weight: bold;
   color: #fff;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
