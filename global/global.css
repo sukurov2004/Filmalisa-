@@ -4,8 +4,15 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Numans";
+  src: url("../Numans-Regular.ttf");
+}
+
+
 body {
   background: #111;
+   font-family: "Numans", sans-serif;
 }
 
 .layout {
