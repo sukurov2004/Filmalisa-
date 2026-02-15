@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 body {
   font-family: Arial, sans-serif;
   background: #0f0f10;
@@ -36,8 +36,12 @@ body {
 }
 
 .brand span {
-  font-weight: 600;
+  font-family: "Numans", sans-serif;
+  line-height: 80px;
+  letter-spacing: -2%;
+  font-weight: 400;
   font-size: 18px;
+  color: #C3C8D4;
 }
 
 .menu {
@@ -120,4 +124,52 @@ body {
   height: 36px;
   border-radius: 50%;
   background: linear-gradient(135deg, #22c55e, #a855f7);
+}/* ================= TABLE SECTION ================= */
+
+.table-wrapper {
+  margin-top: 30px;
+}
+
+/* ================= TABLE ================= */
+
+.movies-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+.movies-table thead {
+  background: #111;
+  color: white;
+}
+
+.movies-table th {
+  text-align: left;
+  padding: 16px;
+  font-weight: 500;
+}
+
+.movies-table tbody tr {
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+.movies-table td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+/* Movie title cell */
+
+.movie-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.movie-title img {
+  width: 45px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 6px;
 }
