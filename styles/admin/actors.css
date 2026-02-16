@@ -101,40 +101,79 @@ body{
 }
 .action-pill i{ font-size:14px; }
 
-/* edit green pill */
+/* Edit pill – Movies səhifəsindəki kimi */
 .edit-pill{
-  background:#dff1e0;
-  color:#2e7d32;
+ background: rgba(34,197,94,0.15);
+  color: #22c55e;
 }
 
-/* delete pink pill */
+.edit-pill:hover{
+  background:#22c55e;
+  transform:scale(1.03);
+  color: white;
+}
+
+/* Delete */
 .del-pill{
-  background:#f4d6d6;
+  background:#f1caca;
   color:#e53935;
 }
 
+.del-pill:hover{
+  background:#e53935;
+  transform:scale(1.03);
+  color: white;
+}
+
+/* Klik zamanı heç nə etməsin */
+.action-pill:active{
+  transform:scale(1);
+}
 .action-pill:hover{ transform:translateY(-1px); }
 .action-pill:active{ transform:translateY(0); }
 
 /* Pagination */
 .pagination{
   width:min(980px, 92%);
-  margin:18px auto 0;
+  margin:30px auto 0;
   display:flex;
-  gap:10px;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
 }
+
 .page-btn{
-  width:38px; height:38px;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,.12);
-  background:#fff; color:#111;
+  min-width:48px;
+  height:40px;
+  padding:0 14px;
+  border-radius:10px;
+  border:none;
+  background:#fff;
+  color:#111;
+  font-weight:600;
   cursor:pointer;
+  transition:0.2s ease;
 }
+
+/* Active page */
 .page-btn.active{
   background:#7b2cff;
-  border-color:#7b2cff;
   color:#fff;
+  box-shadow:0 0 12px rgba(123,44,255,.6);
 }
+
+/* Hover */
+.page-btn:hover:not(.active):not(:disabled){
+  background:#ececec;
+}
+
+/* Prev disabled */
+.page-btn:disabled{
+  background:#555;
+  color:#aaa;
+  cursor:not-allowed;
+}
+
 
 /* Modal */
 .modal-overlay{

@@ -77,15 +77,7 @@ tbody.addEventListener("click", (e) => {
   const row = e.target.closest("tr");
   if (!row) return;
 
-  // REMOVE
-  if (e.target.closest(".del-pill")) {
-    const ok = confirm("Bu actor silinsin?");
-    if (!ok) return;
-
-    row.remove();
-    reIndexIds();
-    return;
-  }
+  
 
   // EDIT
   if (e.target.closest(".edit-pill")) {
@@ -93,14 +85,6 @@ tbody.addEventListener("click", (e) => {
     const surnameCell = row.children[2];
     const imgEl = row.querySelector(".actor-img");
 
-    const newName = prompt("Yeni Name:", nameCell.textContent.trim());
-    if (newName === null) return;
-
-    const newSurname = prompt("Yeni Surname:", surnameCell.textContent.trim());
-    if (newSurname === null) return;
-
-    const newImg = prompt("Yeni Image URL:", imgEl.getAttribute("src"));
-    if (newImg === null) return;
 
     nameCell.textContent = newName.trim() || nameCell.textContent;
     surnameCell.textContent = newSurname.trim() || surnameCell.textContent;
