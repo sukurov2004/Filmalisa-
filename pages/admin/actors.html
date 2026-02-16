@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="../../global/global.css" />
      <!-- !login Css link -->
     <link rel="stylesheet" href="../../styles/admin/actors.css">
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <title>Admin / Actors</title>
 </head>
 <body>
@@ -99,133 +103,109 @@
         </header>
 
         <section class="table-wrapper">
-          <table class="movies-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Image</th>
-                <th>Edit</th>
-                <th>Remove</th>
-              </tr>
-            </thead>
+  <table class="movies-table">
+    <thead>
+      <tr>
+        <th class="col-id">ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th class="col-img">Image</th>
+        <th class="col-action">Edit</th>
+        <th class="col-action">Remove</th>
+      </tr>
+    </thead>
 
-            <tbody>
-              <tr>
-                <td>1</td>
-                  
-                <td>Bruce</td>
-              
-                <td>Tim</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Bruce</td>
+        <td>Tim</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
 
-              <tr>
-                <td>2</td>
-                  <span></span>
-                </td>
-                <td>Lisa</td>
-              
-                <td>Vicari</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+      <tr>
+        <td>2</td>
+        <td>Lisa</td>
+        <td>Vicari</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
 
-              <tr>
-                <td>3</td>
-                  <span></span>
-                </td>
-                <td>Keira</td>
-              
-                <td>Knightley</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+      <tr>
+        <td>3</td>
+        <td>Keira</td>
+        <td>Knightley</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
 
-              <tr>
-                <td>4</td>
-                  <span></span>
-                </td>
-                <td>Halle</td>
-              
-                <td>Berry</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+      <tr>
+        <td>4</td>
+        <td>Halle</td>
+        <td>Berry</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
 
-              <tr>
-                <td>5</td>
-                  <span></span>
-                </td>
-                <td>Nick</td>
-              
-                <td>Robinson</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+      <tr>
+        <td>5</td>
+        <td>Nick</td>
+        <td>Robinson</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
 
-             <tr>
-                <td>6</td>
-                  <span></span>
-                </td>
-                <td>Brooke</td>
-              
-                <td>Carter</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+      <tr>
+        <td>6</td>
+        <td>Brooke</td>
+        <td>Carter</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
 
-             <tr>
-                <td>7</td>
-                  <span></span>
-                </td>
-                <td>Jennifer</td>
-              
-                <td>Lopezz</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-<tr>
-                <td>8</td>
-                  <span></span>
-                </td>
-                <td>  Angelina</td>
-              
-                <td>Jolie</td>
-                <td class="movie-title">
-                  <img src="../../assets/Admin/images/movies.svg" alt="" />
-             
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+      <tr>
+        <td>7</td>
+        <td>Jennifer</td>
+        <td>Lopezz</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
 
-              
-            </tbody>
-          </table>
-        </section>
+      <tr>
+        <td>8</td>
+        <td>Angelina</td>
+        <td>Jolie</td>
+        <td class="col-img">
+          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
+        </td>
+        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
+        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
         <div class="pagination"></div>
       </main>
