@@ -1,0 +1,127 @@
+
+
+/* Center */
+.page{
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 40px 16px;
+}
+
+.card{
+  width: min(520px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px; /* logo ilə title arası */
+}
+
+.logo img{
+  width: 249px;
+  height: 214px;
+  display: block;
+}
+
+.title{
+  width: 264px;
+  height: 80px;
+  margin: 0;
+  font-family: "Numans", sans-serif;
+  font-size: 70px;
+  line-height: 80px;
+  letter-spacing: -0.02em;
+  color: #C3C8D4;
+  text-align: center;
+}
+
+
+.form{
+  width: min(460px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.field{
+  position: relative;
+  display: block;
+}
+
+.field input{
+  width: 100%;
+  height: 48px;
+  padding: 0 46px 0 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(18, 18, 22, 0.55);
+  color: rgba(255,255,255,0.85);
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.25) inset;
+}
+
+.field input::placeholder{
+  color: rgba(255,255,255,0.35);
+  text-transform: lowercase;
+}
+
+.field input:focus{
+  border-color: rgba(147, 82, 255, 0.55);
+  box-shadow:
+    0 0 0 4px rgba(147, 82, 255, 0.18),
+    0 0 0 1px rgba(0,0,0,0.25) inset;
+}
+
+.icon{
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: rgba(255,255,255,0.35);
+}
+.icon svg{ width: 100%; height: 100%; }
+
+.eye{
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.28);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.eye:hover{ color: rgba(255,255,255,0.5); }
+.eye svg{ width: 18px; height: 18px; }
+
+.btn{
+  height: 54px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-transform: lowercase;
+
+  background: linear-gradient(90deg, #7C4DFF, #B04DFF);
+  box-shadow:
+    0 14px 30px rgba(124, 77, 255, 0.25),
+    0 2px 0 rgba(255,255,255,0.08) inset;
+}
+
+.btn:hover{
+  filter: brightness(1.05);
+}
+
+.btn:active{
+  transform: translateY(1px);
+}
+

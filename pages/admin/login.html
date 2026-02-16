@@ -12,8 +12,80 @@
     <title>Admin / Login</title>
   </head>
   <body>
-    <h1>Admin Login</h1>
 
+  <main class="page">
+    <section class="card">
+      <!-- Logo -->
+      <div class="logo" aria-hidden="true">
+        <img src="../../assets/Admin/images/logo.svg" alt="">
+          <path d="M47 30 L110 18 L125 86 L62 98 Z"
+                stroke="url(#g1)" stroke-width="8" stroke-linejoin="round" opacity="0.9"/>
+          <path d="M40 70 L72 22 L134 60 L102 108 Z"
+                stroke="url(#g2)" stroke-width="8" stroke-linejoin="round" opacity="0.9"/>
+          <path d="M35 42 L120 28 L140 98 L55 112 Z"
+                stroke="url(#g3)" stroke-width="8" stroke-linejoin="round" opacity="0.35"/>
+          <defs>
+            <linearGradient id="g1" x1="40" y1="20" x2="140" y2="120">
+              <stop stop-color="#23D5FF"/>
+              <stop offset="1" stop-color="#B300FF"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="30" y1="10" x2="150" y2="130">
+              <stop stop-color="#00E5FF"/>
+              <stop offset="0.55" stop-color="#7C4DFF"/>
+              <stop offset="1" stop-color="#FF2BD6"/>
+            </linearGradient>
+            <linearGradient id="g3" x1="40" y1="20" x2="140" y2="120">
+              <stop stop-color="#23D5FF"/>
+              <stop offset="1" stop-color="#B300FF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h1 class="title">Admin</h1>
+
+      <form class="form" action="#" method="post" autocomplete="on">
+        <!-- Username -->
+        <label class="field">
+          <span class="icon" aria-hidden="true">
+            <!-- mail/user icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="1.8" />
+              <path d="m4.6 7.2 7.4 6 7.4-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <input type="text" name="username" placeholder="username" />
+        </label>
+
+        <!-- Password -->
+        <label class="field">
+          <span class="icon" aria-hidden="true">
+            <!-- lock icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 11V8.8C7 6.15 9.24 4 12 4s5 2.15 5 4.8V11"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M6 11h12v9H6v-9Z" stroke="currentColor" stroke-width="1.8" />
+            </svg>
+          </span>
+
+          <input id="password" type="password" name="password" placeholder="password" />
+
+          <button class="eye" type="button" aria-label="Show password"
+            onclick="togglePassword()">
+            <!-- eye icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"
+                    stroke="currentColor" stroke-width="1.8" />
+              <path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"
+                    stroke="currentColor" stroke-width="1.8" />
+            </svg>
+          </button>
+        </label>
+
+        <button class="btn" type="submit">login</button>
+      </form>
+    </section>
+  </main>
     <script src="../../script/admin/login.js"></script>
   </body>
 </html>
