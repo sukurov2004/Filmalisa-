@@ -91,15 +91,184 @@
       </div>
 
       <div class="profile">
-        <img src="../../assets/Admin/images/profilimg.svg" alt="">
-        <span>Admin</span>
+            <button id="createBtn" class="create-btn">Create</button>
+
+            <img src="../../assets/Admin/images/profilimg.svg" alt="" />
+            <span>Admin</span>
+          </div>
+        </header>
+
+        <section class="table-wrapper">
+          <table class="movies-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+                  
+                <td>Bruce</td>
+              
+                <td>Tim</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+                  <span></span>
+                </td>
+                <td>Lisa</td>
+              
+                <td>Vicari</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>3</td>
+                  <span></span>
+                </td>
+                <td>Keira</td>
+              
+                <td>Knightley</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>4</td>
+                  <span></span>
+                </td>
+                <td>Halle</td>
+              
+                <td>Berry</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>5</td>
+                  <span></span>
+                </td>
+                <td>Nick</td>
+              
+                <td>Robinson</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+             <tr>
+                <td>6</td>
+                  <span></span>
+                </td>
+                <td>Brooke</td>
+              
+                <td>Carter</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+             <tr>
+                <td>7</td>
+                  <span></span>
+                </td>
+                <td>Jennifer</td>
+              
+                <td>Lopezz</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+<tr>
+                <td>8</td>
+                  <span></span>
+                </td>
+                <td>  Angelina</td>
+              
+                <td>Jolie</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+             
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              
+            </tbody>
+          </table>
+        </section>
+
+        <div class="pagination"></div>
+      </main>
+      <!-- MODAL -->
+      <div class="modal-overlay" id="movieModal">
+        <div class="modal">
+          <div class="modal-content">
+            <div class="modal-left">
+              <input type="text" placeholder="title" />
+              <textarea placeholder="overview"></textarea>
+              <input type="text" placeholder="cover url" />
+              <input type="text" placeholder="fragman (youtube embed url)" />
+              <input type="text" placeholder="watch url" />
+              <input type="text" placeholder="imdb" />
+              <input type="number" placeholder="run time minute" />
+
+              <select>
+                <option value="">category</option>
+                <option>Action</option>
+                <option>Drama</option>
+                <option>Comedy</option>
+              </select>
+
+              <label class="adult-check">
+                <input type="checkbox" />
+                Adult
+              </label>
+
+              <button class="submit-btn">Submit</button>
+            </div>
+
+            <div class="modal-right">
+              <img src="../../assets/Admin/images/movies.svg" alt="preview" />
+            </div>
+          </div>
+
+          <i class="fa-solid fa-xmark close-modal" id="closeModal"></i>
+        </div>
       </div>
-    </header>
+    </div>
 
-  </main>
-
-</div>
-
+    <script src="../../script/admin/movies.js"></script>
+    <script src="../../script/admin/pagination.js"></script>
 
     <script src="../../script/admin/actors.js"></script>
 </body>
