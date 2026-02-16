@@ -169,13 +169,13 @@ body {
 }
 
 .movie-title img {
-  width: 29px;
-  height: 39px;
+  width: 35px;
+  height: 45px;
   object-fit: cover;
   border-radius: 6px;
 }
 
-.movies-table  i {
+.movies-table i {
   padding: 8px;
   display: flex;
   align-items: center;
