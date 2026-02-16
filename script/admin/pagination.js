@@ -1,5 +1,5 @@
 
-const rowsPerPage = 5;
+const rowsPerPage = 4;
 const rows = Array.from(document.querySelectorAll(".movies-table tbody tr"));
 const pagination = document.querySelector(".pagination");
 
