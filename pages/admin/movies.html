@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- !Icon link -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -93,9 +94,8 @@
           </div>
 
           <div class="profile">
-        
-              <button id="createBtn" class="create-btn">Create</button>
-          
+            <button id="createBtn" class="create-btn">Create</button>
+
             <img src="../../assets/Admin/images/profilimg.svg" alt="" />
             <span>Admin</span>
           </div>
@@ -110,64 +110,133 @@
                 <th>Overview</th>
                 <th>Category</th>
                 <th>IMDB</th>
-                <th></th>
+                <th>Create</th>
+                <th>Remove</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
                 <td>1</td>
-
                 <td class="movie-title">
                   <img src="../../assets/Admin/images/movies.svg" alt="" />
                   <span>Lost in space</span>
                 </td>
-
                 <td>Lorem ipsum test...</td>
                 <td>Action</td>
                 <td>7.6</td>
-
-                <td class="actions">
-                  <i class="fa-solid fa-pen edit"></i>
-                  <i class="fa-solid fa-trash delete"></i>
-                </td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
-            </tbody>
-          </table>
 
-          <table class="movies-table">
-            <thead>
               <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Overview</th>
-                <th>Category</th>
-                <th>IMDB</th>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>1</td>
-
+                <td>2</td>
                 <td class="movie-title">
                   <img src="../../assets/Admin/images/movies.svg" alt="" />
                   <span>Lost in space</span>
                 </td>
-
                 <td>Lorem ipsum test...</td>
                 <td>Action</td>
                 <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
 
-                <td class="actions">
-                  <i class="fa-solid fa-pen edit"></i>
-                  <i class="fa-solid fa-trash delete"></i>
+              <tr>
+                <td>3</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
                 </td>
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>4</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>5</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>6</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>7</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>8</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+
+              <tr>
+                <td>10</td>
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+                <td><i class="fa-solid fa-pen edit"></i></td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
             </tbody>
           </table>
         </section>
+
+        <div class="pagination"></div>
       </main>
       <!-- MODAL -->
       <div class="modal-overlay" id="movieModal">
@@ -208,5 +277,6 @@
     </div>
 
     <script src="../../script/admin/movies.js"></script>
+    <script src="../../script/admin/pagination.js"></script>
   </body>
 </html>
