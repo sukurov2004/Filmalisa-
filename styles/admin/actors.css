@@ -1,9 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Numans";
-}
+
 
 body {
   background: #0f0f10;
@@ -126,3 +121,4 @@ body {
   border-radius: 50%;
   background: linear-gradient(135deg, #22c55e, #a855f7);
 }
+

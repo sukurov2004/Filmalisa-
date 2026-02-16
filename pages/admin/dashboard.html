@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,7 +12,124 @@
     <title>Admin / Dashboard</title>
   </head>
   <body>
-    <h1>Admin Dashboard</h1>
+    <div class="app">
+
+ <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div>
+          <div class="brand">
+            <img src="../../assets/Admin/images/logo.svg" alt="logo" />
+            <span>filmalisa</span>
+          </div>
+
+          <nav class="menu">
+            <a href="dashboard.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Dashboard.svg"
+                alt="Dashboard Icon"
+              />
+              Dashboard
+            </a>
+
+            <a href="movies.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Movies.svg"
+                alt="Movies Icon"
+              />Movies
+            </a>
+
+            <a href="categories.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Categories.svg"
+                alt="Categories Icon"
+              />Categories
+            </a>
+
+            <a href="users.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Users.svg"
+                alt="Users Icon"
+              />Users
+            </a>
+
+            <a href="comments.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Comments.svg"
+                alt="Comments Icon"
+              />Comments
+            </a>
+
+            <a href="contactus.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Contactus.svg"
+                alt="Contact us Icon"
+              />Contact us
+            </a>
+
+            <a href="actors.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Actors.svg"
+                alt="Actors Icon"
+              />Actors
+            </a>
+          </nav>
+        </div>
+        <a href="login.html" class="logout">
+          <img src="../../assets/Admin/icons/Logout.svg" alt="Logout Icon" />
+          Logout
+        </a>
+      </aside>
+
+  <!-- MAIN -->
+  <main class="main main-dash">
+
+    <header class="topbar">
+      <div>
+        <div class="hi">Hi Admin</div>
+        <h1>Dashboard</h1>
+      </div>
+
+      <div class="profile">
+        <img src="../../assets/Admin/images/profilimg.svg" alt="">
+        <span>Admin</span>
+      </div>
+    </header>
+
+        <section class="stats-flex">
+      <div class="card">
+        <p class="box-name">Favorite actions</p>
+        <span class="number-dash">121</span>
+      </div>
+      <div class="card-letter">
+        <p class="box-name">Users</p>
+        <span class="number-dash">10</span>
+      </div>
+      <div class="card-letter">
+        <p class="box-name">Movies</p>
+        <span class="number-dash">40</span>
+      </div>
+      <div class="card-letter">
+        <p class="box-name">Comments</p>
+        <span class="number-dash">45</span>
+      </div>
+      <div class="card">
+        <p class="box-name">Categories</p>
+        <span class="number-dash">12</span>
+      </div>
+      <div class="card-letter">
+        <p class="box-name">Actors</p>
+        <span class="number-dash">20</span>
+      </div>
+      <div class="card-letter">
+        <p class="box-name">Contacts</p>
+        <span class="number-dash">20</span>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
 
     <script src="../../script/admin/dashboard.js"></script>
   </body>

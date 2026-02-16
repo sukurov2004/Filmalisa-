@@ -1,15 +1,4 @@
-/* Reset-ish */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  color: #e9e9ef;
-  background:
-    radial-gradient(1200px 700px at 50% 10%, rgba(255,255,255,0.06), transparent 60%),
-    radial-gradient(900px 500px at 20% 30%, rgba(124,77,255,0.08), transparent 60%),
-    radial-gradient(900px 500px at 80% 35%, rgba(0,229,255,0.08), transparent 60%),
-    #141416;
-}
+
 
 /* Center */
 .page{
@@ -135,3 +124,4 @@ body {
 .btn:active{
   transform: translateY(1px);
 }
+

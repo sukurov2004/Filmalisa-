@@ -1,19 +1,212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- !Reset Css link -->
-    <link rel="stylesheet" href="../../global/reset.css">
-        <!-- !Global Css link -->
-    <link rel="stylesheet" href="../../global/global.css" />
-     <!-- !login Css link -->
-    <link rel="stylesheet" href="../../styles/admin/movies.css">
-    <title>Admin / Movies</title>
-</head>
-<body>
-    <h1>Admin / Movies</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-        <script src="../../script/admin/movies.js"></script>
-</body>
+    <!-- !Reset Css link -->
+    <link rel="stylesheet" href="../../global/reset.css" />
+    <!-- !Global Css link -->
+    <link rel="stylesheet" href="../../global/global.css" />
+    <!-- !login Css link -->
+    <link rel="stylesheet" href="../../styles/admin/movies.css" />
+    <title>Admin / Movies</title>
+  </head>
+  <body>
+    <div class="app">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div>
+          <div class="brand">
+            <img src="../../assets/Admin/images/logo.svg" alt="logo" />
+            <span>filmalisa</span>
+          </div>
+
+          <nav class="menu">
+            <a href="dashboard.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Dashboard.svg"
+                alt="Dashboard Icon"
+              />
+              Dashboard
+            </a>
+
+            <a href="movies.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Movies.svg"
+                alt="Movies Icon"
+              />Movies
+            </a>
+
+            <a href="categories.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Categories.svg"
+                alt="Categories Icon"
+              />Categories
+            </a>
+
+            <a href="users.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Users.svg"
+                alt="Users Icon"
+              />Users
+            </a>
+
+            <a href="comments.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Comments.svg"
+                alt="Comments Icon"
+              />Comments
+            </a>
+
+            <a href="contactus.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Contactus.svg"
+                alt="Contact us Icon"
+              />Contact us
+            </a>
+
+            <a href="actors.html" class="item">
+              <img
+                src="../../assets/Admin/icons/Actors.svg"
+                alt="Actors Icon"
+              />Actors
+            </a>
+          </nav>
+        </div>
+        <a href="login.html" class="logout">
+          <img src="../../assets/Admin/icons/Logout.svg" alt="Logout Icon" />
+          Logout
+        </a>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="hi">Hi Admin</div>
+            <h1>Movies</h1>
+          </div>
+
+          <div class="profile">
+        
+              <button id="createBtn" class="create-btn">Create</button>
+          
+            <img src="../../assets/Admin/images/profilimg.svg" alt="" />
+            <span>Admin</span>
+          </div>
+        </header>
+
+        <section class="table-wrapper">
+          <table class="movies-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Overview</th>
+                <th>Category</th>
+                <th>IMDB</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+
+                <td class="actions">
+                  <i class="fa-solid fa-pen edit"></i>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="movies-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Overview</th>
+                <th>Category</th>
+                <th>IMDB</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>1</td>
+
+                <td class="movie-title">
+                  <img src="../../assets/Admin/images/movies.svg" alt="" />
+                  <span>Lost in space</span>
+                </td>
+
+                <td>Lorem ipsum test...</td>
+                <td>Action</td>
+                <td>7.6</td>
+
+                <td class="actions">
+                  <i class="fa-solid fa-pen edit"></i>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <!-- MODAL -->
+      <div class="modal-overlay" id="movieModal">
+        <div class="modal">
+          <div class="modal-content">
+            <div class="modal-left">
+              <input type="text" placeholder="title" />
+              <textarea placeholder="overview"></textarea>
+              <input type="text" placeholder="cover url" />
+              <input type="text" placeholder="fragman (youtube embed url)" />
+              <input type="text" placeholder="watch url" />
+              <input type="text" placeholder="imdb" />
+              <input type="number" placeholder="run time minute" />
+
+              <select>
+                <option value="">category</option>
+                <option>Action</option>
+                <option>Drama</option>
+                <option>Comedy</option>
+              </select>
+
+              <label class="adult-check">
+                <input type="checkbox" />
+                Adult
+              </label>
+
+              <button class="submit-btn">Submit</button>
+            </div>
+
+            <div class="modal-right">
+              <img src="../../assets/Admin/images/movies.svg" alt="preview" />
+            </div>
+          </div>
+
+          <i class="fa-solid fa-xmark close-modal" id="closeModal"></i>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../script/admin/movies.js"></script>
+  </body>
 </html>
