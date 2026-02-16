@@ -1,11 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-.main-dash{
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
 .stats-flex{
+    max-width: 1440px;
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
