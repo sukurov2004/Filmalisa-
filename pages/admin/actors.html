@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- !Reset Css link -->
-    <link rel="stylesheet" href="../../global/reset.css">
-        <!-- !Global Css link -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <!-- !Reset Css link -->
+    <link rel="stylesheet" href="../../global/reset.css" />
+    <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/global.css" />
-     <!-- !login Css link -->
-    <link rel="stylesheet" href="../../styles/admin/actors.css">
-     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <title>Admin / Actors</title>
+     <!-- !Actors Css link -->
+  <link rel="stylesheet" href="../../styles/admin/actors.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <title>Admin / Actors</title>
 </head>
 <body>
-
-<div class="app">
+  <div class="app">
       <!-- SIDEBAR -->
       <aside class="sidebar">
         <div>
@@ -85,167 +83,224 @@
       </aside>
 
 
-  <!-- MAIN -->
-  <main class="main">
+    <!-- MAIN -->
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="hi">Hi Admin</div>
+          <h1>Actors</h1>
+        </div>
 
-    <header class="topbar">
-      <div>
-        <div class="hi">Hi Admin</div>
-        <h1>Actors</h1>
+        <div class="profile">
+          <button id="createBtn" class="create-btn" type="button">Create</button>
+          <span class="admin">Admin</span>
+        </div>
+      </header>
+
+      <section class="table-wrapper">
+        <table class="actors-table">
+          <thead>
+            <tr>
+              <th class="col-id">ID</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th class="col-img">Image</th>
+              <th class="col-action">Edit</th>
+              <th class="col-action">Remove</th>
+            </tr>
+          </thead>
+
+          <tbody id="actorsTbody">
+            <tr>
+              <td>1</td>
+              <td>Bruce</td>
+              <td>Tim</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>2</td>
+              <td>Lisa</td>
+              <td>Vicari</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>3</td>
+              <td>Keira</td>
+              <td>Knightley</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>4</td>
+              <td>Halle</td>
+              <td>Berry</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+
+
+             <tr>
+              <td>5</td>
+              <td>Nick</td>
+              <td>Robinson</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+ <tr>
+              <td>6</td>
+              <td>Brooke</td>
+              <td>Carter</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+
+ <tr>
+              <td>7</td>
+              <td>Jeninifer</td>
+              <td>Lopezz</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+ <tr>
+              <td>8</td>
+              <td>Angelina</td>
+              <td>Jolie</td>
+              <td class="col-img">
+                <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor"/>
+              </td>
+              <td class="col-action">
+                <button class="action-pill edit-pill" type="button" aria-label="Edit">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </td>
+              <td class="col-action">
+                <button class="action-pill del-pill" type="button" aria-label="Remove">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+
+
+
+
+          </tbody>
+        </table>
+      </section>
+
+      <!-- pagination (visual) -->
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">4</button>
+        <button class="page-btn">5</button>
+        <button class="page-btn">6</button>
       </div>
+    </main>
 
-      <div class="profile">
-            <button id="createBtn" class="create-btn">Create</button>
+    <!-- MODAL -->
+    <div class="modal-overlay" id="actorModal">
+      <div class="modal">
+        <h2 class="modal-title">Create New Actor</h2>
 
-            <img src="../../assets/Admin/images/profilimg.svg" alt="" />
-            <span>Admin</span>
-          </div>
-        </header>
+        <div class="modal-form">
+          <input id="nameInput" type="text" placeholder="Name" />
+          <input id="surnameInput" type="text" placeholder="Surname" />
+          <input id="imgInput" type="text" placeholder="Image URL" />
+        </div>
 
-        <section class="table-wrapper">
-  <table class="movies-table">
-    <thead>
-      <tr>
-        <th class="col-id">ID</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th class="col-img">Image</th>
-        <th class="col-action">Edit</th>
-        <th class="col-action">Remove</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Bruce</td>
-        <td>Tim</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-
-      <tr>
-        <td>2</td>
-        <td>Lisa</td>
-        <td>Vicari</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-
-      <tr>
-        <td>3</td>
-        <td>Keira</td>
-        <td>Knightley</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-
-      <tr>
-        <td>4</td>
-        <td>Halle</td>
-        <td>Berry</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-
-      <tr>
-        <td>5</td>
-        <td>Nick</td>
-        <td>Robinson</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-
-      <tr>
-        <td>6</td>
-        <td>Brooke</td>
-        <td>Carter</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-
-      <tr>
-        <td>7</td>
-        <td>Jennifer</td>
-        <td>Lopezz</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-
-      <tr>
-        <td>8</td>
-        <td>Angelina</td>
-        <td>Jolie</td>
-        <td class="col-img">
-          <img class="actor-img" src="../../assets/Admin/images/movies.svg" alt="actor" />
-        </td>
-        <td class="col-action"><i class="fa-solid fa-pen edit"></i></td>
-        <td class="col-action"><i class="fa-solid fa-trash delete"></i></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-        <div class="pagination"></div>
-      </main>
-      <!-- MODAL -->
-      <div class="modal-overlay" id="movieModal">
-        <div class="modal">
-          <div class="modal-content">
-            <div class="modal-left">
-              <input type="text" placeholder="title" />
-              <textarea placeholder="overview"></textarea>
-              <input type="text" placeholder="cover url" />
-              <input type="text" placeholder="fragman (youtube embed url)" />
-              <input type="text" placeholder="watch url" />
-              <input type="text" placeholder="imdb" />
-              <input type="number" placeholder="run time minute" />
-
-              <select>
-                <option value="">category</option>
-                <option>Action</option>
-                <option>Drama</option>
-                <option>Comedy</option>
-              </select>
-
-              <label class="adult-check">
-                <input type="checkbox" />
-                Adult
-              </label>
-
-              <button class="submit-btn">Submit</button>
-            </div>
-
-            <div class="modal-right">
-              <img src="../../assets/Admin/images/movies.svg" alt="preview" />
-            </div>
-          </div>
-
-          <i class="fa-solid fa-xmark close-modal" id="closeModal"></i>
+        <div class="modal-actions">
+          <button class="btn btn-save" id="saveBtn" type="button">Save</button>
+          <button class="btn btn-cancel" id="cancelBtn" type="button">Cancel</button>
         </div>
       </div>
     </div>
 
+  </div>
+
+  <script src="../../script/admin/actors.js"></script>
+  
 </body>
 </html>
