@@ -3,18 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- !Icon link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <!-- !Reset Css link -->
     <link rel="stylesheet" href="../../global/reset.css" />
-        <!-- !Global Css link -->
+    <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/global.css" />
     <!-- !login Css link -->
     <link rel="stylesheet" href="../../styles/admin/comments.css" />
     <title>Admin / Comments</title>
   </head>
   <body>
-<div class="app">
-
- <!-- SIDEBAR -->
+    <div class="app">
+      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div>
           <div class="brand">
@@ -80,27 +84,132 @@
         </a>
       </aside>
 
-  <!-- MAIN -->
-  <main class="main">
+      <!-- MAIN -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="hi">Hi Admin</div>
+            <h1>Comments</h1>
+          </div>
 
-    <header class="topbar">
-      <div>
-        <div class="hi">Hi Admin</div>
-        <h1>Comments</h1>
-      </div>
+          <div class="profile">
+            <img src="../../assets/Admin/images/profilimg.svg" alt="" />
+            <span>Admin</span>
+          </div>
+        </header>
+        <section class="table-wrapper">
+          <table class="movies-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Film</th>
+                <th>Comment</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
 
-      <div class="profile">
-        <img src="../../assets/Admin/images/profilimg.svg" alt="">
-        <span>Admin</span>
-      </div>
-    </header>
+            <tbody>
+              <tr>
+                <td>1</td>
 
-  </main>
+                <td>
+                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
+                </td>
 
-</div>
+                <td>Lost in Space</td>
 
+                <td>Lorem ipsum test...</td>
 
+                <td>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+
+                <td>
+                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
+                </td>
+
+                <td>Interstellar</td>
+
+                <td>Space travel story...</td>
+
+                <td>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>3</td>
+
+                <td>
+                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
+                </td>
+
+                <td>Inception</td>
+
+                <td>Dream inside dream...</td>
+
+                <td>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+                  <tr>
+                <td>4</td>
+
+                <td>
+                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
+                </td>
+
+                <td>Inception</td>
+
+                <td>Dream inside dream...</td>
+
+                <td>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+                  <tr>
+                <td>5</td>
+
+                <td>
+                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
+                </td>
+
+                <td>Inception</td>
+
+                <td>Dream inside dream...</td>
+
+                <td>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+                  <tr>
+                <td>6</td>
+
+                <td>
+                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
+                </td>
+
+                <td>Inception</td>
+
+                <td>Dream inside dream...</td>
+
+                <td>
+                  <i class="fa-solid fa-trash delete"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <div class="pagination"></div>
+      </main>
+    </div>
 
     <script src="../../script/admin/comments.js"></script>
+    <script src="../../script/admin/pagination.js"></script>
   </body>
 </html>
