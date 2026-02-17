@@ -1,72 +1,66 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin / Login</title>
-  <!-- !Reset Css link -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin / Login</title>
+    <!-- !Reset Css link -->
     <link rel="stylesheet" href="../../global/reset.css" />
-    <!-- !Global Css link -->
-    <link rel="stylesheet" href="../../global/global.css" />
-     <!-- !Login Css link -->
-  <link rel="stylesheet" href="../../styles/admin/login.css" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-</head>
-<body>
+    <!-- !Login Css link -->
+    <link rel="stylesheet" href="../../styles/admin/login.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card">
+        <div class="logo">
+          <img src="../../assets/Admin/images/logo.svg" alt="Filmalisa Logo" />
+        </div>
 
-  <main class="page">
-    <section class="card">
+        <h1 class="title">Admin</h1>
 
-      <div class="logo">
-        <img src="../../assets/Admin/images/logo.svg" alt="Filmalisa Logo" />
-      </div>
+        <form class="form" action="#" method="post">
+          <!-- Username -->
+          <label class="field">
+            <span class="icon" aria-hidden="true">
+              <!-- mail icon -->
+              <img
+                src="../../assets/Admin/icons/loginuserName.svg"
+                alt="login icon"
+              />
+            </span>
 
-      <h1 class="title">Admin</h1>
+            <input type="text" name="username" placeholder="Username" />
+          </label>
 
-      <form class="form" action="#" method="post">
-        <!-- Username -->
-        <label class="field">
-          <span class="icon" aria-hidden="true">
-            <!-- mail icon -->
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="1.8" />
-              <path d="m4.6 7.2 7.4 6 7.4-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </span>
+          <!-- Password -->
+          <label class="field">
+            <span class="icon" aria-hidden="true">
+              <!-- lock icon -->
+              <img src="../../assets/Admin/icons/loginPassword.svg" alt="" />
+            </span>
 
-          <input type="text" name="username" placeholder="Username" />
-        </label>
+            <input type="password" name="password" placeholder="Password" />
 
-        <!-- Password -->
-        <label class="field">
-          <span class="icon" aria-hidden="true">
-            <!-- lock icon -->
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 11V8.8C7 6.15 9.24 4 12 4s5 2.15 5 4.8V11"
-                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M6 11h12v9H6v-9Z" stroke="currentColor" stroke-width="1.8" />
-            </svg>
-          </span>
+            <span class="eye" aria-hidden="true">
+              <!-- eye icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </span>
+          </label>
 
-          <input type="password" name="password" placeholder="Password" />
-
-          <span class="eye" aria-hidden="true">
-            <!-- eye icon -->
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"
-                    stroke="currentColor" stroke-width="1.8" />
-              <path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"
-                    stroke="currentColor" stroke-width="1.8" />
-            </svg>
-          </span>
-        </label>
-
-        <button class="btn" type="submit">login</button>
-      </form>
-
-    </section>
-  </main>
-
-</body>
+          <button class="btn" type="submit">login</button>
+        </form>
+      </section>
+    </main>
+  </body>
 </html>
