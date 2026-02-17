@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="../../global/reset.css" />
     <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/global.css" />
-    <!-- !login Css link -->
+    <!-- !Comments Css link -->
     <link rel="stylesheet" href="../../styles/admin/comments.css" />
     <title>Admin / Comments</title>
   </head>
   <body>
     <div class="app">
+
       <!-- SIDEBAR -->
       <aside class="sidebar">
         <div>
@@ -28,61 +29,53 @@
 
           <nav class="menu">
             <a href="dashboard.html" class="item">
-              <img
-                src="../../assets/Admin/icons/Dashboard.svg"
-                alt="Dashboard Icon"
-              />
+              <img src="../../assets/Admin/icons/Dashboard.svg" alt="Dashboard Icon" />
               Dashboard
             </a>
-
             <a href="movies.html" class="item">
-              <img
-                src="../../assets/Admin/icons/Movies.svg"
-                alt="Movies Icon"
-              />Movies
+              <img src="../../assets/Admin/icons/Movies.svg" alt="Movies Icon" />
+              Movies
             </a>
-
             <a href="categories.html" class="item">
-              <img
-                src="../../assets/Admin/icons/Categories.svg"
-                alt="Categories Icon"
-              />Categories
+              <img src="../../assets/Admin/icons/Categories.svg" alt="Categories Icon" />
+              Categories
             </a>
-
             <a href="users.html" class="item">
-              <img
-                src="../../assets/Admin/icons/Users.svg"
-                alt="Users Icon"
-              />Users
+              <img src="../../assets/Admin/icons/Users.svg" alt="Users Icon" />
+              Users
             </a>
-
             <a href="comments.html" class="item">
-              <img
-                src="../../assets/Admin/icons/Comments.svg"
-                alt="Comments Icon"
-              />Comments
+              <img src="../../assets/Admin/icons/Comments.svg" alt="Comments Icon" />
+              Comments
             </a>
-
             <a href="contactus.html" class="item">
-              <img
-                src="../../assets/Admin/icons/Contactus.svg"
-                alt="Contact us Icon"
-              />Contact us
+              <img src="../../assets/Admin/icons/Contactus.svg" alt="Contact us Icon" />
+              Contact us
             </a>
-
             <a href="actors.html" class="item">
-              <img
-                src="../../assets/Admin/icons/Actors.svg"
-                alt="Actors Icon"
-              />Actors
+              <img src="../../assets/Admin/icons/Actors.svg" alt="Actors Icon" />
+              Actors
             </a>
           </nav>
         </div>
+
         <a href="login.html" class="logout">
           <img src="../../assets/Admin/icons/Logout.svg" alt="Logout Icon" />
           Logout
         </a>
       </aside>
+
+      <!-- DELETE MODAL -->
+      <div class="delete-overlay" id="deleteModal">
+        <div class="delete-modal">
+          <h2>Delete Comment</h2>
+          <p>Are you sure you want to delete this comment?</p>
+          <div class="modal-actions">
+            <button class="btn cancel-btn">Cancel</button>
+            <button class="btn delete-btn">Delete</button>
+          </div>
+        </div>
+      </div>
 
       <!-- MAIN -->
       <main class="main">
@@ -97,6 +90,7 @@
             <span>Admin</span>
           </div>
         </header>
+
         <section class="table-wrapper">
           <table class="movies-table">
             <thead>
@@ -108,108 +102,60 @@
                 <th>Remove</th>
               </tr>
             </thead>
-
             <tbody>
               <tr>
                 <td>1</td>
-
-                <td>
-                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
-                </td>
-
+                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
                 <td>Lost in Space</td>
-
                 <td>Lorem ipsum test...</td>
-
-                <td>
-                  <i class="fa-solid fa-trash delete"></i>
-                </td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
-
               <tr>
                 <td>2</td>
-
-                <td>
-                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
-                </td>
-
+                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
                 <td>Interstellar</td>
-
                 <td>Space travel story...</td>
-
-                <td>
-                  <i class="fa-solid fa-trash delete"></i>
-                </td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
-
               <tr>
                 <td>3</td>
-
-                <td>
-                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
-                </td>
-
+                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
                 <td>Inception</td>
-
                 <td>Dream inside dream...</td>
-
-                <td>
-                  <i class="fa-solid fa-trash delete"></i>
-                </td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
-                  <tr>
+              <tr>
                 <td>4</td>
-
-                <td>
-                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
-                </td>
-
+                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
                 <td>Inception</td>
-
                 <td>Dream inside dream...</td>
-
-                <td>
-                  <i class="fa-solid fa-trash delete"></i>
-                </td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
-                  <tr>
+              <tr>
                 <td>5</td>
-
-                <td>
-                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
-                </td>
-
+                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
                 <td>Inception</td>
-
                 <td>Dream inside dream...</td>
-
-                <td>
-                  <i class="fa-solid fa-trash delete"></i>
-                </td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
-                  <tr>
+              <tr>
                 <td>6</td>
-
-                <td>
-                  <img src="../../assets/Admin/images/movies.svg" alt="movie" />
-                </td>
-
+                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
                 <td>Inception</td>
-
                 <td>Dream inside dream...</td>
-
-                <td>
-                  <i class="fa-solid fa-trash delete"></i>
-                </td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
             </tbody>
           </table>
         </section>
+
         <div class="pagination"></div>
       </main>
+
     </div>
 
     <script src="../../script/admin/comments.js"></script>
     <script src="../../script/admin/pagination.js"></script>
+    <script src="../../script/admin/deleteModal.js"></script>
   </body>
 </html>
