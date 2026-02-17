@@ -1,127 +1,132 @@
 
+body{
+  margin:0;
+  background:#0f0f10;
+  color:#fff;
+}
 
-/* Center */
+/* ekran ortası + şəkildəkı kimi yumşaq qaranlıq gradient */
 .page{
-  min-height: 100%;
-  display: grid;
-  place-items: center;
-  padding: 40px 16px;
+  min-height:100%;
+  display:grid;
+  place-items:center;
+  padding:48px 16px;
+  background:
+    radial-gradient(900px 520px at 50% 12%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(900px 520px at 50% 85%, rgba(255,255,255,.03), transparent 60%),
+    linear-gradient(#0e0e10, #121214);
 }
 
 .card{
-  width: min(520px, 100%);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px; /* logo ilə title arası */
+  width:min(720px, 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:22px;
+  text-align:center;
 }
 
 .logo img{
-  width: 249px;
-  height: 214px;
-  display: block;
+  width:249px;
 }
 
 .title{
-  width: 264px;
-  height: 80px;
-  margin: 0;
-  font-family: "Numans", sans-serif;
-  font-size: 70px;
-  line-height: 80px;
-  letter-spacing: -0.02em;
-  color: #C3C8D4;
-  text-align: center;
+  margin:0;
+  font-size:76px;
+  font-weight:400;
+  letter-spacing:-0.02em;
+  color:#c3c8d4;
 }
 
-
+/* form ölçüsü: şəkildə inputlar orta en */
 .form{
-  width: min(460px, 100%);
-  margin: 0 auto;
-  display: grid;
-  gap: 14px;
+  width:min(560px, 100%);
+  display:grid;
+  gap:16px;
+  margin-top:10px;
 }
 
+/* input wrapper */
 .field{
-  position: relative;
-  display: block;
+  position:relative;
+  display:block;
 }
 
 .field input{
-  width: 100%;
-  height: 48px;
-  padding: 0 46px 0 44px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(18, 18, 22, 0.55);
-  color: rgba(255,255,255,0.85);
-  outline: none;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.25) inset;
+  width:100%;
+  height:56px;
+  padding: 0 54px 0 52px;  /* solda icon, sağda eye üçün */
+  border-radius:10px;
+  border: 1px solid rgba(140, 170, 255, .20);
+  background: rgba(0,0,0,.55);
+  color: rgba(255,255,255,.85);
+  outline:none;
+
+  /* içdən nazik xətt effekti */
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.55) inset;
 }
 
 .field input::placeholder{
-  color: rgba(255,255,255,0.35);
-  text-transform: lowercase;
+  color: rgba(160, 180, 255, .35);
 }
 
+/* focus effekti (şəkildə çox parlaq deyil) */
 .field input:focus{
-  border-color: rgba(147, 82, 255, 0.55);
+  border-color: rgba(140, 170, 255, .35);
   box-shadow:
-    0 0 0 4px rgba(147, 82, 255, 0.18),
-    0 0 0 1px rgba(0,0,0,0.25) inset;
+    0 0 0 1px rgba(140,170,255,.18) inset;
 }
 
+/* sol ikon */
 .icon{
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 18px;
-  height: 18px;
-  color: rgba(255,255,255,0.35);
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:18px;
+  height:18px;
+  color: rgba(160, 180, 255, .35);
 }
-.icon svg{ width: 100%; height: 100%; }
+.icon svg{ width:100%; height:100%; }
 
+/* sağ eye (JS yoxdur, sadəcə görünüş) */
 .eye{
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 34px;
-  height: 34px;
-  border: 0;
-  background: transparent;
-  color: rgba(255,255,255,0.28);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:20px;
+  height:20px;
+  color: rgba(160, 180, 255, .30);
+  display:grid;
+  place-items:center;
 }
-.eye:hover{ color: rgba(255,255,255,0.5); }
-.eye svg{ width: 18px; height: 18px; }
+.eye svg{ width:18px; height:18px; }
 
+/* button: şəkildəki kimi enli və bənövşəyi */
 .btn{
-  height: 54px;
-  margin-top: 10px;
-  border: 0;
-  border-radius: 12px;
-  cursor: pointer;
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 0.2px;
-  text-transform: lowercase;
-
-  background: linear-gradient(90deg, #7C4DFF, #B04DFF);
-  box-shadow:
-    0 14px 30px rgba(124, 77, 255, 0.25),
-    0 2px 0 rgba(255,255,255,0.08) inset;
+  height:62px;
+  margin-top:16px;
+  width:100%;
+  border:0;
+  border-radius:12px;
+  background:#8b53e3;
+  color:#fff;
+  font-size:18px;
+  font-weight:500;
+  text-transform:lowercase;
+  cursor:pointer;
+  box-shadow: 0 14px 30px rgba(139, 83, 227, .18);
 }
 
-.btn:hover{
-  filter: brightness(1.05);
-}
+.btn:hover{ filter: brightness(1.05); }
+.btn:active{ transform: translateY(1px); }
 
-.btn:active{
-  transform: translateY(1px);
+/* mobil */
+@media (max-width:520px){
+  .title{ font-size:58px; }
+  .logo img{ width:200px; }
+  .field input{ height:52px; }
+  .btn{ height:58px; }
 }
-
