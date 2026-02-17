@@ -1,176 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- !Icon link -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- !Icon link -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-      <!-- !Reset Css link -->
-    <link rel="stylesheet" href="../../global/reset.css">
-        <!-- !Global Css link -->
+    <!-- !Reset Css link -->
+    <link rel="stylesheet" href="../../global/reset.css" />
+    <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/global.css" />
-     <!-- !login Css link -->
-    <link rel="stylesheet" href="../../styles/admin/contactus.css">
+    <!-- !Contact Us Css link -->
+    <link rel="stylesheet" href="../../styles/admin/contactus.css" />
     <title>Admin / Contact Us</title>
-</head>
-<body>
-   <div class="app">
+  </head>
+  <body>
+    <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-<div>
-    <div class="brand">
-    <img src="../../assets/Admin/images/logo.svg" alt="logo">
-      <span>filmalisa</span>
-    </div>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div>
+          <div class="brand">
+            <img src="../../assets/Admin/images/logo.svg" alt="logo" />
+            <span>filmalisa</span>
+          </div>
 
-    <nav class="menu">
-      <a href="dashboard.html" class="item">
-       <img src="../../assets/Admin/icons/Dashboard.svg" alt="Dashboard Icon"> Dashboard
-      </a>
+          <nav class="menu">
+            <a href="dashboard.html" class="item">
+              <img src="../../assets/Admin/icons/Dashboard.svg" alt="Dashboard Icon" />
+              Dashboard
+            </a>
+            <a href="movies.html" class="item">
+              <img src="../../assets/Admin/icons/Movies.svg" alt="Movies Icon" />
+              Movies
+            </a>
+            <a href="categories.html" class="item">
+              <img src="../../assets/Admin/icons/Categories.svg" alt="Categories Icon" />
+              Categories
+            </a>
+            <a href="users.html" class="item">
+              <img src="../../assets/Admin/icons/Users.svg" alt="Users Icon" />
+              Users
+            </a>
+            <a href="comments.html" class="item">
+              <img src="../../assets/Admin/icons/Comments.svg" alt="Comments Icon" />
+              Comments
+            </a>
+            <a href="contactus.html" class="item">
+              <img src="../../assets/Admin/icons/Contactus.svg" alt="Contact us Icon" />
+              Contact us
+            </a>
+            <a href="actors.html" class="item">
+              <img src="../../assets/Admin/icons/Actors.svg" alt="Actors Icon" />
+              Actors
+            </a>
+          </nav>
+        </div>
 
-      <a href="movies.html" class="item">
-       <img src="../../assets/Admin/icons/Movies.svg" alt="Movies Icon">Movies
-      </a>
+        <a href="login.html" class="logout">
+          <img src="../../assets/Admin/icons/Logout.svg" alt="Logout Icon" />
+          Logout
+        </a>
+      </aside>
 
-      <a href="categories.html" class="item">
-        <img src="../../assets/Admin/icons/Categories.svg" alt="Categories Icon">Categories
-      </a>
-
-      <a href="users.html" class="item">
-        <img src="../../assets/Admin/icons/Users.svg" alt="Users Icon">Users
-      </a>
-
-      <a href="comments.html" class="item">
-        <img src="../../assets/Admin/icons/Comments.svg" alt="Comments Icon">Comments
-      </a>
-
-      <a href="contactus.html" class="item">
-        <img src="../../assets/Admin/icons/Contactus.svg" alt="Contact us Icon">Contact us
-      </a>
-
-      <a href="actors.html" class="item">
-        <img src="../../assets/Admin/icons/Actors.svg" alt="Actors Icon">Actors
-      </a>
-    </nav>
-</div>
-    <a href="login.html" class="logout">
-        <img src="../../assets/Admin/icons/Logout.svg" alt="Logout Icon">
-      Logout
-    </a>
-
-  </aside>
-
-  <!-- MAIN -->
-   <!-- DELETE MODAL -->
-<div class="modal-overlay" id="deleteModal">
-  <div class="modal">
-    <h2>Delete Message</h2>
-    <p>Are you sure you want to delete this message?</p>
-
-    <div class="modal-actions">
-      <button class="btn cancel-btn">Cancel</button>
-      <button class="btn delete-btn">Delete</button>
-    </div>
-  </div>
-</div>
-
-  <main class="main">
-
-    <header class="topbar">
-      <div>
-        <div class="hi">Hi Admin</div>
-        <h1>Contact us</h1>
+      <!-- DELETE MODAL -->
+      <div class="delete-overlay" id="deleteModal">
+        <div class="delete-modal">
+          <h2>Delete Message</h2>
+          <p>Are you sure you want to delete this message?</p>
+          <div class="modal-actions">
+            <button class="btn cancel-btn">Cancel</button>
+            <button class="btn delete-btn">Delete</button>
+          </div>
+        </div>
       </div>
 
-      <div class="profile">
-        <img src="../../assets/Admin/images/profilimg.svg" alt="">
-        <span>Admin</span>
-      </div>
-    </header>
-<section class="table-wrapper">
-  <table class="movies-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Question</th>
-        <th>Remove</th>
-      </tr>
-    </thead>
+      <!-- MAIN -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="hi">Hi Admin</div>
+            <h1>Contact us</h1>
+          </div>
 
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Malik</td>
-        <td>malik@mail.com</td>
-        <td>How can I reset my password?</td>
-        <td>
-          <i class="fa-solid fa-trash delete"></i>
-        </td>
-      </tr>
+          <div class="profile">
+            <img src="../../assets/Admin/images/profilimg.svg" alt="" />
+            <span>Admin</span>
+          </div>
+        </header>
 
-      <tr>
-        <td>2</td>
-        <td>Ali</td>
-        <td>ali@gmail.com</td>
-        <td>Where can I see my orders?</td>
-        <td>
-          <i class="fa-solid fa-trash delete"></i>
-        </td>
-      </tr>
-
-      <tr>
-        <td>3</td>
-        <td>Leyla</td>
-        <td>leyla@mail.com</td>
-        <td>How to change my email address?</td>
-        <td>
-          <i class="fa-solid fa-trash delete"></i>
-        </td>
-      </tr>
-            <tr>
-        <td>3</td>
-        <td>Leyla</td>
-        <td>leyla@mail.com</td>
-        <td>How to change my email address?</td>
-        <td>
-          <i class="fa-solid fa-trash delete"></i>
-        </td>
-      </tr>
-            <tr>
-        <td>3</td>
-        <td>Leyla</td>
-        <td>leyla@mail.com</td>
-        <td>How to change my email address?</td>
-        <td>
-          <i class="fa-solid fa-trash delete"></i>
-        </td>
-      </tr>
-            <tr>
-        <td>3</td>
-        <td>Leyla</td>
-        <td>leyla@mail.com</td>
-        <td>How to change my email address?</td>
-        <td>
-          <i class="fa-solid fa-trash delete"></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+        <section class="table-wrapper">
+          <table class="movies-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Question</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Malik</td>
+                <td>malik@mail.com</td>
+                <td>How can I reset my password?</td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Ali</td>
+                <td>ali@gmail.com</td>
+                <td>Where can I see my orders?</td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Leyla</td>
+                <td>leyla@mail.com</td>
+                <td>How to change my email address?</td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Leyla</td>
+                <td>leyla@mail.com</td>
+                <td>How to change my email address?</td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Leyla</td>
+                <td>leyla@mail.com</td>
+                <td>How to change my email address?</td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Leyla</td>
+                <td>leyla@mail.com</td>
+                <td>How to change my email address?</td>
+                <td><i class="fa-solid fa-trash delete"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
         <div class="pagination"></div>
-  </main>
+      </main>
 
-</div>
+    </div>
 
     <script src="../../script/admin/contactus.js"></script>
     <script src="../../script/admin/pagination.js"></script>
     <script src="../../script/admin/deleteModal.js"></script>
-</body>
+  </body>
 </html>
