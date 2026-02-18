@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+
+/* Sidebar */
+.sidebar{
+  background: rgba(255,255,255,0.02);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  padding: 18px 10px;
+  display:flex;
+  flex-direction: column;
+}
+
+.side-top{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 50px; /* LOGO ilə HOME arası məsafə */
+}
+
+.logo{
+  width: 56px;
+  height: 56px;
+  top: 40px;
+}
+
+.side-nav{
+  display:flex;
+  flex-direction:column;
+  gap: 80px; /* ikonlar arası */
+  align-items:center;
+}
+
+.side-link{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color: rgba(255,255,255,0.55);
+  text-decoration:none;
+  transition: .15s ease;
+}
+
+.side-link img{
+  width:32px;
+  height:32px;
+}
+
+.side-link:hover{
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.8);
+}
+
+.side-link.active{
+  background: rgba(255,255,255,0.08);
+  color: rgba(120, 170, 255, 0.9);
+}
