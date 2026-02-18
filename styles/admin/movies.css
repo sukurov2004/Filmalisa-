@@ -1,0 +1,143 @@
+
+/* ===========================================
+   MOVIE MODAL
+   =========================================== */
+.movie-modal {
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh; /* ekranın 90%-ni keçməsin */
+  overflow-y: auto; /* lazım olsa scroll */
+  background: linear-gradient(145deg, #141416, var(--bg-primary));
+  border-radius: var(--radius-2xl);
+  padding: 50px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+
+.modal-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* Left Side */
+.modal-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.modal-left input,
+.modal-left textarea,
+.modal-left select {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  padding: 16px 18px;
+  border-radius: var(--radius-lg);
+  color: #e4e4e7;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.modal-left input:focus,
+.modal-left textarea:focus,
+.modal-left select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+.modal-left textarea {
+  resize: none;
+  min-height: 110px;
+}
+
+.modal-left select {
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Adult Checkbox */
+.adult-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.adult-check input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+/* Submit Button */
+.submit-btn {
+  align-self: flex-end;
+  margin-top: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: var(--text-primary);
+  border: none;
+  padding: 12px 36px;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+}
+
+/* Right Side - Image Preview */
+.modal-right {
+  width: 260px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.modal-right img {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  object-fit: cover;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Close Icon */
+.close-modal {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  font-size: 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.close-modal:hover {
+  color: var(--text-primary);
+}
+.movie-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.movie-modal::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+.movie-modal::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}

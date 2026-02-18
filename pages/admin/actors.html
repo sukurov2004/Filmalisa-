@@ -77,6 +77,22 @@
     </div>
   </div>
 </div>
+<!-- ACTOR CREATE MODAL -->
+<div class="category-modal-overlay" id="actorModal">
+  <div class="category-modal">
+    <h2>Create Actor</h2>
+
+    <input type="text" placeholder="Name" id="nameInput" />
+    <input type="text" placeholder="Surname" id="surnameInput" />
+    <input type="text" placeholder="Image URL" id="imgInput" />
+
+    <div class="category-modal-actions">
+      <button class="category-cancel-btn" id="cancelBtn">Cancel</button>
+      <button class="category-submit-btn" id="saveBtn">Save</button>
+    </div>
+  </div>
+</div>
+
       <!-- MAIN -->
       <main class="main">
         <header class="topbar">
@@ -157,5 +173,6 @@
     <script src="../../script/admin/actors.js"></script>
     <script src="../../script/admin/pagination.js"></script>
     <script src="../../script/admin/deleteModal.js"></script>
+    <script src="../../global/adminGlobal.js" defer></script>
   </body>
 </html>

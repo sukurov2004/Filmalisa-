@@ -86,10 +86,27 @@ body {
 }
 
 /* Nav Menu */
-.menu {
+.menu a {
   display: flex;
-  flex-direction: column;
   gap: 5px;
+}
+.menu a:hover{
+  background: var(--accent-hover);
+  color: var(--text-primary);
+  border-radius: 0;
+  margin-left: -18px;
+  margin-right: -18px;
+  padding-left: 32px;
+}
+.menu a.active-link {
+  display: flex;
+  gap: 5px;
+  background-color: #5b21b6;
+    color: var(--text-primary);
+  border-radius: 0;
+  margin-left: -18px;
+  margin-right: -18px;
+  padding-left: 32px;
 }
 
 .item {
@@ -105,14 +122,7 @@ body {
     color var(--transition);
 }
 
-.item:hover {
-  background: var(--accent-hover);
-  color: var(--text-primary);
-  border-radius: 0;
-  margin-left: -18px;
-  margin-right: -18px;
-  padding-left: 32px;
-}
+
 
 /* Logout */
 .logout {
@@ -160,7 +170,7 @@ body {
 .profile {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .avatar {
@@ -183,11 +193,13 @@ body {
   background: var(--accent);
   color: var(--text-primary);
   padding: 8px 25px;
+  font-weight: 500;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
   font-size: 14px;
   transition: opacity var(--transition);
+  margin-right: 30px;
 }
 
 .create-btn:hover {
@@ -379,6 +391,8 @@ body {
 .movie-modal {
   width: 100%;
   max-width: 1000px;
+  max-height: 90vh; /* ekranın 90%-ni keçməsin */
+  overflow-y: auto; /* lazım olsa scroll */
   background: linear-gradient(145deg, #141416, var(--bg-primary));
   border-radius: var(--radius-2xl);
   padding: 50px;
@@ -500,6 +514,18 @@ body {
 .close-modal:hover {
   color: var(--text-primary);
 }
+.movie-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.movie-modal::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+.movie-modal::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
 
 /* ===========================================
    CONFIRM MODAL (delete / generic)
@@ -550,7 +576,6 @@ body {
   border: none;
   transition: background var(--transition);
 }
-
 .cancel-btn {
   background: #f3f4f6;
   color: #374151;
@@ -567,14 +592,4 @@ body {
 
 .delete-btn:hover {
   background: var(--danger-hover);
-}
-
-/* ===========================================
-   RESPONSIVE
-   =========================================== */
-@media (max-width: 480px) {
-  .modal {
-    margin: 0 16px;
-    padding: 22px;
-  }
 }
