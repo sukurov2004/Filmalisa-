@@ -1,36 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* ===========================================
    CSS VARIABLES
    =========================================== */
 :root {
-  --bg-primary:       #0f0f10;
-  --bg-secondary:     #111112;
-  --bg-sidebar:       #151516;
-  --bg-card:          #1e1e1e;
-  --bg-input:         #121214;
+  --bg-primary: #0f0f10;
+  --bg-secondary: #111112;
+  --bg-sidebar: #151516;
+  --bg-card: #1e1e1e;
+  --bg-input: #121214;
 
-  --border-color:     #232327;
+  --border-color: #232327;
 
-  --text-primary:     #ffffff;
-  --text-secondary:   #a1a1aa;
-  --text-muted:       #c3c8d4;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #c3c8d4;
 
-  --accent:           #7c3aed;
-  --accent-light:     #a855f7;
-  --accent-hover:     #5b21b6;
+  --accent: #7c3aed;
+  --accent-light: #a855f7;
+  --accent-hover: #5b21b6;
 
-  --success:          #22c55e;
-  --danger:           #ef4444;
-  --danger-hover:     #dc2626;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
 
-  --radius-sm:        8px;
-  --radius-md:        10px;
-  --radius-lg:        14px;
-  --radius-xl:        18px;
-  --radius-2xl:       28px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 28px;
 
-  --transition:       0.2s ease;
+  --transition: 0.2s ease;
 }
 
 /* ===========================================
@@ -102,7 +102,9 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  transition: background var(--transition), color var(--transition);
+  transition:
+    background var(--transition),
+    color var(--transition);
 }
 
 .item:hover {
@@ -224,32 +226,38 @@ body {
 .movies-table td {
   padding: 10px 16px;
   text-align: center;
+  vertical-align: middle;
 }
 
 /* Movie title cell */
 .movie-title {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
 }
-
-.movie-title img {
-  width: 35px;
-  height: 45px;
+.movies-table td img {
+  width: 45px;
+  height: 50px;
   object-fit: cover;
   border-radius: 6px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Action Icons */
-.movies-table i {
-  padding: 8px;
-  display: flex;
+.movies-table td i {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background var(--transition), color var(--transition);
+  font-size: 13px;
+  transition: 0.2s ease;
 }
 
 .edit {
@@ -295,8 +303,11 @@ body {
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
-  transition: background var(--transition), border-color var(--transition),
-              color var(--transition), transform var(--transition);
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
 }
 
 .pagination button:hover:not(.active):not(:disabled) {
@@ -343,7 +354,9 @@ body {
 .modal-overlay {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
 }
 
 .movie-overlay,
@@ -401,7 +414,9 @@ body {
   font-size: 14px;
   outline: none;
   box-sizing: border-box;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .modal-left input:focus,
@@ -448,7 +463,9 @@ body {
   font-weight: 500;
   font-size: 14px;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .submit-btn:hover {
