@@ -1,53 +1,67 @@
+.stats-flex {
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 79px;
+  margin-left: 30px;
+}
+.card {
+  background-color: #2d2d2d;
+  width: 288px;
+  height: 203px;
+  border-radius: 30px;
+  cursor: pointer;
+}
 
-.stats-flex{
-    max-width: 1440px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 79px;
+.card:hover {
+  background-color: #652f8d;
+  transition: 0.5s;
 }
-.card{
-    background-color: #2D2D2D;
-    width: 288px;
-    height: 203px;
-    border-radius: 30px;
-    cursor: pointer;
-    margin-left: 24px;
+.card-letter:hover {
+  background-color: #652f8d;
+  transition: 0.5s;
 }
-.card:hover{
-    background-color: #652F8D;
-    transition: 0.5s;
+.box-name {
+  color: #d7d7d7;
+  font-weight: 500;
+  font-family: "Raleway", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  padding-top: 24px;
+  padding-bottom: 8px;
+  padding-left: 24px;
 }
-.card-letter:hover{
-    background-color: #652F8D;
-    transition: 0.5s;
+.number-dash {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-style: bold;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #ffffff;
+  padding-left: 24px;
 }
-.box-name{
-    color: #D7D7D7;
-    font-weight: 500;
-    font-family: "Raleway", system-ui,sans-serif;
-    font-size: 15px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    padding-top: 24px;
-    padding-bottom: 8px;
-    padding-left: 24px;
+.card-letter {
+  background-color: #2d2d2d;
+  width: 234px;
+  height: 203px;
+  border-radius: 30px;
+  cursor: pointer;
 }
-.number-dash{
-    font-family: "Inter", system-ui,sans-serif;
-    font-weight: 600;
-    font-style: bold;
-    font-size: 30px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #ffffff;
-    padding-left: 24px;
-}
-.card-letter{
-    background-color: #2D2D2D;
-    width: 234px;
-    height: 203px;
-    border-radius: 30px;
-    cursor: pointer;
-    
+
+@media (max-width: 1024px) {
+  .stats-flex {
+    justify-content: center;
+  }
+
+  .card,
+  .card-letter {
+    width: 45%;
+  }
+
+  .card-letter {
+    margin-left: 0; /* tabletde pozulmasin deye silirik */
+  }
 }
