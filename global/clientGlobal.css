@@ -1,8 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
+:root{
+  --bg: #0b0c10;
+  --panel: rgba(255,255,255,0.04);
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.55);
+  --line: rgba(255,255,255,0.10);
+}
+
 body{
   font-family: 'Raleway', sans-serif;
+    background:
+    radial-gradient(900px 420px at 30% 0%, rgba(255,255,255,0.06), transparent 60%),
+    radial-gradient(800px 400px at 70% 0%, rgba(255,255,255,0.05), transparent 60%),
+    var(--bg);
+  color: var(--text);
 }
+
+.layout{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 86px 1fr;
+}
+
 /* Sidebar */
 .sidebar{
   background: rgba(255,255,255,0.02);
