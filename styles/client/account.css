@@ -1,0 +1,130 @@
+/* MAIN PROFILE */
+.account-profile {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* PROFILE CARD */
+.profile-card {
+    width: 100%;
+    max-width: 559px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* AVATAR */
+.avatar-gradient {
+    width: 232px;
+    height: 232px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #72F435, #027981);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 64px;
+    flex-shrink: 0;
+}
+
+.avatar-gradient img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* FORM */
+.account-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-account {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.p-input {
+    width: 100%;
+    height: 64px;
+    background-color: #1f1e1e1a;
+    border: 1.5px solid #323B54;
+    border-radius: 12px;
+    padding-left: 52px;
+    padding-right: 52px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+    letter-spacing: 0.01em;
+}
+
+.p-input::placeholder {
+    color: #475069;
+    font-size: 15px;
+}
+
+.p-input:focus {
+    border-color: #9B51E0;
+}
+.p-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+.input-icon .right{
+    right: 18px;
+    pointer-events: all;
+}
+.input-icon.left {
+    left: 18px;
+}
+
+.input-icon.right {
+    right: 18px;
+    pointer-events: all;
+}
+
+.input-icon.right:hover {
+    opacity: 0.9;
+}
+
+/* SAVE BUTTON */
+.account-btn {
+    width: 100%;
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #9B51E0);
+    color: #fff;
+    letter-spacing: 0.03em;
+    margin-top: 50px;
+}
+
+.account-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.account-btn:active {
+    transform: translateY(0);
+    opacity: 1;
+}
