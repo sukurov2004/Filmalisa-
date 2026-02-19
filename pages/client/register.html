@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>Register – Filmalisa</title>
 
     <link rel="stylesheet" href="../../global/reset.css" />
     <link rel="stylesheet" href="../../global/clientGlobal.css" />
@@ -13,6 +13,7 @@
   <body>
     <main class="page">
       <section class="card">
+
         <div class="logo">
           <img src="../../assets/admin/images/logo.svg" alt="Filmalisa Logo" />
         </div>
@@ -21,41 +22,57 @@
         <h2 class="title">register</h2>
 
         <form class="form" action="#" method="post">
-                    <!-- Full Name -->
+
+          <!-- Full Name -->
           <label class="field">
-            <span class="icon">
+            <span class="icon left">
               <img src="../../assets/admin/icons/Users.svg" alt="" />
             </span>
-
-            <input type="text" name="fullname" placeholder="Full Name" />
+            <input
+              type="text"
+              name="fullname"
+              placeholder="Full Name"
+              autocomplete="name"
+            />
           </label>
-          <!-- Username -->
+
+          <!-- Email -->
           <label class="field">
-            <span class="icon">
+            <span class="icon left">
               <img src="../../assets/admin/icons/loginuserName.svg" alt="" />
             </span>
-
-            <input type="email" name="username" placeholder="email" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              autocomplete="email"
+            />
           </label>
 
           <!-- Password -->
           <label class="field">
-            <span class="icon">
+            <span class="icon left">
               <img src="../../assets/admin/icons/loginPassword.svg" alt="" />
             </span>
-
-            <input type="password" name="password" placeholder="password" />
-
-            <span class="eye">
+            <input
+              type="password"
+              id="registerPassword"
+              name="password"
+              placeholder="Password"
+              autocomplete="new-password"
+            />
+            <span class="eye" id="registerEye" role="button" aria-label="Show password">
               <img src="../../assets/client/İconsİmages/eye.svg" alt="" />
             </span>
           </label>
 
-          <a href="login.html" class="register">Do you have a account? Login here</a>
+          <a href="login.html" class="register">Already have an account? Login here</a>
 
-          <button class="btn" type="submit">register</button>
+          <button class="btn btn-gradient" type="submit">register</button>
+
         </form>
       </section>
     </main>
+
   </body>
 </html>
