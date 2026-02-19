@@ -51,19 +51,20 @@
     display: block;
 }
 
+/* Page-specific input styles */
 .p-input {
     width: 100%;
     height: 64px;
     background-color: #1f1e1e1a;
     border: 1.5px solid #323B54;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding-left: 52px;
     padding-right: 52px;
     color: #fff;
     font-size: 15px;
     outline: none;
     box-sizing: border-box;
-    transition: border-color 0.25s ease;
+    transition: border-color var(--transition-medium);
     letter-spacing: 0.01em;
 }
 
@@ -73,37 +74,12 @@
 }
 
 .p-input:focus {
-    border-color: #9B51E0;
+    border-color: var(--accent-purple);
 }
+
 .p-input:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-.input-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    opacity: 0.5;
-    pointer-events: none;
-    z-index: 1;
-}
-.input-icon .right{
-    right: 18px;
-    pointer-events: all;
-}
-.input-icon.left {
-    left: 18px;
-}
-
-.input-icon.right {
-    right: 18px;
-    pointer-events: all;
-}
-
-.input-icon.right:hover {
-    opacity: 0.9;
 }
 
 /* SAVE BUTTON */
@@ -111,20 +87,12 @@
     width: 100%;
     padding: 16px 0;
     font-size: 16px;
-    font-weight: 500;
-    border-radius: 12px;
-    background: linear-gradient(90deg, #9B51E0);
-    color: #fff;
     letter-spacing: 0.03em;
     margin-top: 50px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(90deg, var(--accent-purple));
 }
 
 .account-btn:hover {
     opacity: 0.85;
-    transform: translateY(-1px);
-}
-
-.account-btn:active {
-    transform: translateY(0);
-    opacity: 1;
 }
