@@ -4,16 +4,34 @@ body {
 }
 
 body {
-  margin: 0;
   background: #1d1d1d;
   color: #fff;
   font-family: "Poppins", sans-serif;
 }
-
+/* ── Card layout ── */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* və ya flex-start, istəyinə görə */
+  gap: 8px;
+}
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* ── Logo ── */
-.logo img {
+.logo {
+  position: static;  /* global-dakı top: 40px-i ləğv edir */
   width: 250px;
-  filter: drop-shadow(0 10px 25px rgba(139, 83, 227, 0.25));
+  height: auto;      /* global-dakı height: 56px-i ləğv edir */
+  top: auto;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
 }
 
 /* ── Brand / Title ── */
@@ -29,7 +47,6 @@ body {
   font-size: 40px;
   line-height: 80px;
   font-weight: 500;
-  letter-spacing: -0.02em;
   color: #c3c8d4;
 }
 
