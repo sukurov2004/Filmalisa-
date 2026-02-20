@@ -38,8 +38,16 @@
 body {
   font-family: "Raleway", sans-serif;
   background:
-    radial-gradient(900px 420px at 30% 0%, rgba(255, 255, 255, 0.06), transparent 60%),
-    radial-gradient(800px 400px at 70% 0%, rgba(255, 255, 255, 0.05), transparent 60%),
+    radial-gradient(
+      900px 420px at 30% 0%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 400px at 70% 0%,
+      rgba(255, 255, 255, 0.05),
+      transparent 60%
+    ),
     var(--bg);
   color: var(--text);
 }
@@ -88,7 +96,9 @@ body {
   place-items: center;
   color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
-  transition: background var(--transition-base), transform var(--transition-base);
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base);
 }
 
 .side-link img {
@@ -268,7 +278,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity var(--transition-base), transform var(--transition-base);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
   z-index: 2;
 }
 
@@ -298,7 +310,9 @@ body {
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-medium), visibility var(--transition-medium);
+  transition:
+    opacity var(--transition-medium),
+    visibility var(--transition-medium);
 }
 
 .modal-overlay.active {
@@ -327,8 +341,16 @@ body {
   justify-content: center;
   padding: 40px 20px;
   background:
-    radial-gradient(900px 520px at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%),
-    radial-gradient(900px 520px at 50% 100%, rgba(255, 255, 255, 0.03), transparent 60%),
+    radial-gradient(
+      900px 520px at 50% 0%,
+      rgba(255, 255, 255, 0.05),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 50% 100%,
+      rgba(255, 255, 255, 0.03),
+      transparent 60%
+    ),
     linear-gradient(180deg, #0e0e10, #121214);
 }
 
