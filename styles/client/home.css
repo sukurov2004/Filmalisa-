@@ -64,3 +64,111 @@
   height: 100%;
   background: linear-gradient(to bottom, #1d1d1d00 0%, #1d1d1dcc 100%);
 }
+
+/* ===== CAROUSEL CSS ========== */
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel-track {
+  overflow: hidden;
+}
+
+.movie-grid {
+  transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+  cursor: grab;
+  user-select: none;
+}
+
+.movie-grid.dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.movie-grid img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.carousel-btn.prev {
+  left: 0;
+}
+
+.carousel-btn.next {
+  right: 0;
+}
+
+.carousel-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #444;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    width 0.3s,
+    border-radius 0.3s;
+}
+
+.dot.active {
+  background: #0feffd;
+  width: 24px;
+  border-radius: 4px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.main {
+  overflow-x: hidden;
+}
+
+.movie-grid {
+  flex-wrap: nowrap;
+}
+
+.movie-card {
+  flex-shrink: 0;
+}
+
+.carousel-btn img {
+  width: 17px;
+}
+
+.carousel-btn.prev img {
+  transform: rotate(180deg);
+}
+
+.carousel-btn.prev {
+  left: -30px;
+}
+
+.carousel-btn.next {
+  right: -30px;
+}
