@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account page</title>
+  <link rel="stylesheet" href="../../global/reset.css" />
+  <link rel="stylesheet" href="../../global/clientGlobal.css" />
+  <link rel="stylesheet" href="../../styles/client/account.css" />
+  <link rel="stylesheet" href="../../styles/client/responsive.css">
+</head>
+
+<body>
+  <div class="layout">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="side-top">
+        <img class="logo" src="../../assets/client/İconsİmages/logo.svg" alt="Logo" />
+
+        <nav class="side-nav">
+          <a class="side-link active" href="#">
+            <img src="../../assets/client/İconsİmages/home.svg" alt="Home" />
+          </a>
+
+          <a class="side-link" href="./search.html">
+            <img src="../../assets/client/İconsİmages/grid.svg" alt="Grid" />
+          </a>
+
+          <a class="side-link" href="./account.html">
+            <img src="../../assets/client/İconsİmages/video.svg" alt="Video" />
+          </a>
+
+          <a class="side-link" href="#">
+            <img src="../../assets/client/İconsİmages/star.svg" alt="Star" />
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+   <main class="account-profile">
+        <div class="profile-card">
+            <div class="avatar-gradient">
+                <img src="../../assets/client/GridImages/avatar.svg" alt="User Avatar">
+            </div>
+
+            <form class="account-form">
+                <div class="input-account">
+                    <img src="../../assets/client/İconsİmages/key.svg" class="input-icon left" alt="key">
+                    <input type="text" name="profileImage" placeholder="Profile image URL" class="p-input">
+                </div>
+                <div class="input-account">
+                    <img src="../../assets/client/İconsİmages/key.svg" class="input-icon left" alt="">
+                    <input type="text" name="fullName" placeholder="Full name" class="p-input">
+                </div>
+
+                <div class="input-account">
+                    <img src="../../assets/client/İconsİmages/email.svg" class="input-icon left" alt="">
+                    <input type="email" name="email" placeholder="Email" class="p-input" disabled>
+                </div>
+
+                <div class="input-account">
+                    <img src="../../assets/client/İconsİmages/key.svg" class="input-icon left" alt="">
+                    <input type="password" name="password" placeholder="Password" class="p-input">
+                    <img src="../../assets/client/İconsİmages/eye.svg" class="input-icon right"  alt="eye">
+                </div>
+                <button type="submit" class="account-btn">save</button>
+            </form>
+        </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -31,6 +31,13 @@
   --radius-2xl: 28px;
 
   --transition: 0.2s ease;
+  
+  /* Common Input Colors */
+  --bg-input-dark: rgba(0, 0, 0, 0.55);
+  --bg-input-dark-hover: rgba(0, 0, 0, 0.75);
+  --border-blue: rgba(140, 170, 255, 0.18);
+  --border-blue-hover: rgba(140, 170, 255, 0.3);
+  --border-blue-focus: rgba(140, 170, 255, 0.5);
 }
 
 /* ===========================================
@@ -592,4 +599,112 @@ body {
 
 .delete-btn:hover {
   background: var(--danger-hover);
+}
+
+/* ===========================================
+   COMMON MODAL STYLES (for category/actor modals)
+   =========================================== */
+.category-modal-overlay,
+.actor-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 16, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.category-modal-overlay.active,
+.actor-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.category-modal,
+.actor-modal {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  padding: 30px 25px;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.category-modal h2,
+.actor-modal h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.category-modal input,
+.actor-modal input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.category-modal input:focus,
+.actor-modal input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+.category-modal-actions,
+.actor-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.category-cancel-btn,
+.actor-cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background var(--transition);
+}
+
+.category-cancel-btn:hover,
+.actor-cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+.category-submit-btn,
+.actor-submit-btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.category-submit-btn:hover,
+.actor-submit-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
 }

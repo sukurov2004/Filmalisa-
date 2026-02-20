@@ -48,20 +48,13 @@
 }
 
 .error-btn {
-  background-color: #9b51e0;
-  color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5rem;
   letter-spacing: 0%;
-  opacity: 1;
-  cursor: pointer;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   border-width: 2px;
   padding: 16px 32px;
-}
-.error-btn:hover {
-  background-color: #8b3fd0;
-  transform: translateY(-1px);
+  background-color: var(--accent-purple);
 }

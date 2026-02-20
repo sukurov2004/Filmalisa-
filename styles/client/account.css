@@ -1,0 +1,98 @@
+/* MAIN PROFILE */
+.account-profile {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* PROFILE CARD */
+.profile-card {
+    width: 100%;
+    max-width: 559px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* AVATAR */
+.avatar-gradient {
+    width: 232px;
+    height: 232px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #72F435, #027981);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 64px;
+    flex-shrink: 0;
+}
+
+.avatar-gradient img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* FORM */
+.account-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-account {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+/* Page-specific input styles */
+.p-input {
+    width: 100%;
+    height: 64px;
+    background-color: #1f1e1e1a;
+    border: 1.5px solid #323B54;
+    border-radius: var(--radius-lg);
+    padding-left: 52px;
+    padding-right: 52px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color var(--transition-medium);
+    letter-spacing: 0.01em;
+}
+
+.p-input::placeholder {
+    color: #475069;
+    font-size: 15px;
+}
+
+.p-input:focus {
+    border-color: var(--accent-purple);
+}
+
+.p-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* SAVE BUTTON */
+.account-btn {
+    width: 100%;
+    padding: 16px 0;
+    font-size: 16px;
+    letter-spacing: 0.03em;
+    margin-top: 50px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(90deg, var(--accent-purple));
+}
+
+.account-btn:hover {
+    opacity: 0.85;
+}
