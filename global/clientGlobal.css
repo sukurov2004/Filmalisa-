@@ -75,11 +75,6 @@ body {
   gap: 50px;
 }
 
-.logo {
-  width: 56px;
-  height: 56px;
-  top: 40px;
-}
 
 .side-nav {
   display: flex;
@@ -115,20 +110,9 @@ body {
 
 .side-link:hover img {
   filter: brightness(1);
-}
-
-.side-link.active {
   color: #0FEFFD;
 }
 
-.side-link.active img {
-  filter: brightness(1) hue-rotate(200deg) saturate(1.5);
-}
-
-.side-link.active:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: scale(1.05);
-}
 
 /* ── Buttons ── */
 .btn {
