@@ -1,48 +1,429 @@
-/* SIDEBAR RESPONSIVE */
+/* ═══════════════════════════════════════════════════════════════
+   FILMALISA — RESPONSIVE CSS  (tam yenidən yazılmış)
+   
+   CSS YÜKLƏNMƏ SIRASI:
+     1. reset.css      — margin/padding/font sıfırlanır
+     2. responsive.css — bu fayl
+     3. landingPage.css / global.css
+   
+   DÜZƏLDİLƏN PROBLEMLƏR:
+   ① reset.css { font-family: system-ui } +
+     global.css { font-family: Raleway } →
+     Accordion, form, FAQ Raleway ilə yazılırdı.
+     HƏll: bütün landing page elementlərinə Roboto mənimsədildi.
+   
+   ② "Watch everywhere" section-da feature-section--reverse
+     class-ı HTML-dən silinib. nth-child(even) ilə CSS-də həll edildi.
+   
+   ③ font-size px dəyərləri düzəldildi —
+     ekran ölçüsünə görə daha kiçik, oxunaqlı ölçülər.
+   
+   ④ header padding overflow/qaçma problemi clamp() ilə həll edildi.
+   
+   ⑤ footer 2-sütun grid — flex:1 və padding-left sıfırlandı.
+   
+   Breakpoints: 1024px · 768px · 480px
+═══════════════════════════════════════════════════════════════ */
 
-@media screen and (max-width:768px){
-    .layout{
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
+/* ─── GLOBAL ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: hidden; }
+img  { max-width: 100%; height: auto; display: block; }
 
-    .sidebar{
-        order: 2;
-        width: 100%;
-        height: 70px;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        padding: 0;
-        background-color: var(--panel);
-    }
-
-    .side-top{
-        flex-direction: row;
-        height: 100%;
-        justify-content: space-around;
-        align-items: center;
-    }
-    .side-nav{
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-evenly;
-    }
-    .logo{
-        display: block; 
-        position: fixed; 
-        top: 18px;
-        left: 15px; 
-    }
-
-    /* ACCOUNT RESPONSIVE */
-    .account-profile {
-        padding-bottom: 100px; 
-    }
-
-    /* ERROR RESPONSIVE */
-    .main-err{
-        padding-top: 120px;
-    }
+/* ── Font override: global.css Raleway-i əzir, biz Roboto qaytarırıq ── */
+/* reset.css body { font-family: system-ui } → global.css { Raleway }
+   → landingPage.css { Roboto } — bu silsilə kövrəkdir.
+   Hər landing page elementinə açıq şəkildə Roboto veririk. */
+.site-header,
+.hero,
+.hero-content,
+.hero-sub,
+.hero-cta-text,
+.hero-form,
+.feature-section,
+.feature-text,
+.contact-section,
+.contact-form,
+.faq-section,
+.accordion,
+.accordion-header,
+.accordion-content,
+.site-footer,
+.site-footer nav a {
+  font-family: "Roboto", sans-serif;
 }
+
+/* ════════════════════════════════════════════════════════════════
+   SIDEBAR  (admin panel — landing page-də .layout class-ı yoxdur)
+════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .layout {
+    display: flex !important;      /* global.css grid-ini override edir */
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .sidebar {
+    order: 2;
+    width: 100%;
+    height: 64px;
+    position: fixed;
+    bottom: 0; left: 0;
+    padding: 0;
+    background: var(--panel, rgba(255, 255, 255, 0.04));
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-right: none;
+  }
+  .side-top {
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+  }
+  .side-nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 0;
+  }
+  .sidebar .logo   { display: none; }
+  .account-profile { padding-bottom: 80px; }
+  .main-err        { padding-top: 120px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HEADER
+   
+   Problem 1: padding:25px 120px → dar ekranda logo+düymə üst-üstə gəlir
+   Problem 2: global.css .logo { width:56px } sidebar logosuna aiddir,
+              amma .header-logo img-ə müdaxilə etmir — OK
+   
+   Həll: clamp() ilə axıcı padding, flex elementlərə min-width:0
+════════════════════════════════════════════════════════════════ */
+.site-header {
+  width: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(16px, 6vw, 120px);
+  gap: 16px;
+  min-width: 0;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.header-logo img {
+  /* clamp: min 36px, ideal 5% viewport, max 60px */
+  width: clamp(36px, 5vw, 60px);
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* logo-text: tablet ≤1024px-də gizlənir — yalnız icon qalır */
+.logo-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+  /* font: Numans — landingPage.css-dən gəlir */
+}
+
+@media (max-width: 1024px) {
+  .logo-text   { display: none; }
+  .header-logo { gap: 0; }
+}
+
+/* "Sign in" düyməsi: heç vaxt büzülməsin */
+.site-header .btn-primary {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: clamp(12px, 1.4vw, 14px);
+  padding: 8px clamp(12px, 1.5vw, 16px);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HERO — düzəldilmiş px ölçüləri
+   
+   Problem: 48px hero h1 → 768px-lik ekranda çox böyük görünür
+   Həll: clamp ilə ekran ölçüsünə mütənasib ölçülər
+   
+   Hesablamalar (nümunə):
+   h1: clamp(20px, 2.8vw + 10px, 44px)
+     • 320px ekran: 2.8×3.2 + 10 = ~19px → min 20px
+     • 480px ekran: 2.8×4.8 + 10 = ~23px
+     • 768px ekran: 2.8×7.68 + 10 = ~31px
+     • 1024px ekran: 2.8×10.24 + 10 = ~39px
+     • 1440px ekran: 2.8×14.4 + 10 = ~50px → max 44px
+════════════════════════════════════════════════════════════════ */
+.hero-content h1 {
+  font-size: clamp(20px, 2.8vw + 10px, 44px);
+  line-height: 1.3;
+  font-family: "Roboto", sans-serif;
+}
+
+.hero-sub {
+  font-size: clamp(14px, 1.2vw + 7px, 20px);
+  line-height: 1.45;
+}
+
+.hero-cta-text {
+  font-size: clamp(13px, 0.9vw + 6px, 17px);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;          /* iOS Safari dinamik viewport */
+    padding: 100px 20px 60px;
+    align-items: center;
+  }
+  .hero-content { width: 100%; padding: 0; }
+  .hero-form {
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 10px;
+  }
+  .hero-form input[type="email"] {
+    width: 100%;
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+  .btn-lg {
+    width: 100%;
+    font-size: clamp(15px, 4vw, 18px);
+    padding: 14px 20px;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 88px 16px 44px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FEATURE SECTIONS
+   
+   ƏSAS PROBLEM: HTML-də "Watch everywhere" section-unda
+   feature-section--reverse class-ı SİLİNİB.
+   
+   Həll: CSS nth-child(even) ilə 2-ci section-u avtomatik tərsinə çeviririk.
+   Bu həm HTML dəyişikliyi tələb etmir, həm də gələcək section-lar üçün
+   avtomatik işləyir.
+   
+   nth-child(even) = 2, 4, 6... → hər cüt section tərsinə dönür
+════════════════════════════════════════════════════════════════ */
+.feature-text h2 {
+  font-size: clamp(20px, 2.5vw + 8px, 42px);
+  line-height: 1.3;
+  font-family: "Roboto", sans-serif;
+}
+
+.feature-text p {
+  font-size: clamp(14px, 0.9vw + 9px, 20px);
+  line-height: 1.55;
+}
+
+/* Desktop: cüt section-lar (2,4,6...) tərsinə çevrilir */
+.feature-section:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 1024px) {
+  .feature-section {
+    padding: 60px clamp(24px, 5vw, 80px);
+    gap: 36px;
+  }
+  .feature-text  { flex: 1 1 auto; max-width: 480px; }
+  .feature-media { flex: 0 0 auto; }
+  .feature-media img {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobil: bütün section-lar düz column (mətn üstdə, şəkil altda) */
+  .feature-section,
+  .feature-section:nth-child(even) {
+    flex-direction: column;
+    padding: 44px 20px;
+    gap: 20px;
+    text-align: center;
+  }
+  .feature-text  { max-width: 100%; flex: none; }
+  .feature-media img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-section,
+  .feature-section:nth-child(even) {
+    padding: 32px 16px;
+    gap: 16px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CONTACT — fluid
+════════════════════════════════════════════════════════════════ */
+.contact-section h2 {
+  font-size: clamp(20px, 2.5vw + 8px, 42px);
+  line-height: 1.3;
+  font-family: "Roboto", sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .contact-section { padding: 50px clamp(20px, 5vw, 80px) 100px; }
+}
+
+@media (max-width: 768px) {
+  .contact-section    { padding: 44px 20px 64px; }
+  .contact-section h2 { margin-bottom: 24px; }
+  .contact-form { gap: 16px; max-width: 100%; }
+  .contact-form input,
+  .contact-form textarea { width: 100%; }
+  .contact-form input    { height: 50px; font-size: 15px; }
+  .contact-form textarea { height: 110px; font-size: 15px; }
+  .contact-form .btn     { width: 100%; max-width: 220px; font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+  .contact-section    { padding: 32px 16px 52px; }
+  .contact-form { gap: 12px; }
+  .contact-form input    { height: 46px; font-size: 14px; padding: 0 12px; }
+  .contact-form textarea { height: 96px; font-size: 14px; padding: 12px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FAQ — fluid
+   
+   Problem: reset.css { font: inherit } → accordion button Raleway alırdı
+   Həll: yuxarıda .accordion-header { font-family: "Roboto" } verildi
+════════════════════════════════════════════════════════════════ */
+.faq-section h2 {
+  font-size: clamp(20px, 2.5vw + 8px, 42px);
+  line-height: 1.3;
+  font-family: "Roboto", sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .faq-section { padding: 60px clamp(20px, 5vw, 72px); }
+  .accordion   { max-width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .faq-section    { padding: 44px 20px; }
+  .faq-section h2 { margin-bottom: 20px; }
+  .accordion-header      { font-size: 14px; padding: 16px 18px; font-family: "Roboto", sans-serif; }
+  .accordion-header span { font-size: 20px; }
+  .accordion-content     { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .faq-section    { padding: 32px 16px; }
+  .faq-section h2 { margin-bottom: 14px; }
+  .accordion-header      { font-size: 13px; padding: 14px 16px; }
+  .accordion-header span { font-size: 17px; }
+  .accordion-content     { font-size: 13px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FOOTER — 2 sütun grid
+   
+   Problem: landingPage.css .site-footer { display:flex }
+            .site-footer nav { flex:1; padding-left:40px }
+   Həll: display:grid !important ilə override; flex:none, padding-left:0
+════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .site-footer {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 28px;
+    padding: 52px clamp(20px, 5vw, 80px);
+    align-items: start;
+    justify-content: unset;
+  }
+  .site-footer nav {
+    flex: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 18px;
+    padding: 40px 20px 32px;
+    align-items: start;
+  }
+  .site-footer nav {
+    flex: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .site-footer nav a { font-size: 13px; line-height: 18px; }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 12px;
+    padding: 32px 16px 24px;
+  }
+  .site-footer nav { gap: 7px; }
+  .site-footer nav a { font-size: 11.5px; line-height: 15px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TOUCH  (WCAG 2.5.5 — min 44px tap hədəfi)
+════════════════════════════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse) {
+  .btn,
+  .accordion-header          { min-height: 44px; }
+  .site-footer nav a         { min-height: 32px; display: inline-flex; align-items: center; }
+  .accordion-header:hover    { background-color: #222; }
+  .btn-primary:hover         { background-color: var(--btn-color, #9b51e0); transform: none; }
+  .site-footer nav a:hover   { color: #b3b3b3; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   REDUCED MOTION
+════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .accordion-header,
+  .accordion-header span,
+  .accordion-content,
+  .site-footer nav a { transition: none; }
+}
+

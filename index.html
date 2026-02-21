@@ -3,18 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Filmalisa — unlimited movies, TV shows and more. Stream on any device." />
+    <meta
+      name="description"
+      content="Filmalisa — unlimited movies, TV shows and more. Stream on any device."
+    />
     <meta name="robots" content="index, follow" />
     <title>Filmalisa — Unlimited Movies &amp; TV Shows</title>
     <link rel="stylesheet" href="./global/reset.css" />
+    <link rel="stylesheet" href="./styles/client/responsive.css" />
     <link rel="stylesheet" href="./styles/client/landingPage.css" />
   </head>
   <body>
-
     <header class="site-header">
       <div class="header-inner">
         <a href="/" class="header-logo" aria-label="Filmalisa home">
-          <img src="./assets/Admin/images/logo.svg" alt="Filmalisa logo" width="60" height="62" />
+          <img
+            src="./assets/Admin/images/logo.svg"
+            alt="Filmalisa logo"
+            width="60"
+            height="62"
+          />
           <span class="logo-text">filmalisa</span>
         </a>
         <a href="./pages/client/login.html" class="btn btn-primary">Sign in</a>
@@ -22,18 +30,32 @@
     </header>
 
     <main>
-
       <!-- HERO -->
       <section class="hero" aria-label="Hero">
-        <img src="./assets/client/landingPage/landingPageHero.svg" alt="" class="hero-bg" aria-hidden="true" />
-        
+        <img
+          src="./assets/client/landingPage/landingPageHero.svg"
+          alt=""
+          class="hero-bg"
+          aria-hidden="true"
+        />
+
         <div class="hero-content">
           <h1>Unlimited movies, TV shows, and more</h1>
           <p class="hero-sub">Filmalisa is a movie search platform</p>
-          <p class="hero-cta-text">Ready to watch? Enter your email to create or restart your membership.</p>
+          <p class="hero-cta-text">
+            Ready to watch? Enter your email to create or restart your
+            membership.
+          </p>
           <form class="hero-form" action="/signup" method="get">
             <label for="emailInput" class="sr-only">Email address</label>
-            <input type="email" id="emailInput" name="email" placeholder="Email address" autocomplete="email" required />
+            <input
+              type="email"
+              id="emailInput"
+              name="email"
+              placeholder="Email address"
+              autocomplete="email"
+              required
+            />
             <button type="submit" class="btn btn-primary btn-lg">
               Get Started <span aria-hidden="true">›</span>
             </button>
@@ -45,32 +67,59 @@
       <section class="feature-section" aria-labelledby="tv-heading">
         <div class="feature-text">
           <h2 id="tv-heading">Enjoy on your TV</h2>
-          <p>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</p>
+          <p>
+            Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray
+            players, and more.
+          </p>
         </div>
         <figure class="feature-media">
-          <img src="./assets/client/landingPage/enjoy.svg" alt="Filmalisa streaming on a smart TV" width="500" height="350" loading="lazy" />
+          <img
+            src="./assets/client/landingPage/enjoy.svg"
+            alt="Filmalisa streaming on a smart TV"
+            width="500"
+            height="350"
+            loading="lazy"
+          />
         </figure>
       </section>
 
       <!-- WATCH EVERYWHERE -->
-      <section class="feature-section feature-section--reverse" aria-labelledby="stream-heading">
-        <figure class="feature-media">
-          <img src="./assets/client/landingPage/streamPart.svg" alt="Filmalisa on phone, tablet, laptop and TV" width="500" height="350" loading="lazy" />
-        </figure>
+      <section class="feature-section" aria-labelledby="stream-heading">
         <div class="feature-text">
           <h2 id="stream-heading">Watch everywhere</h2>
-          <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+          <p>
+            Stream unlimited movies and TV shows on your phone, tablet, laptop,
+            and TV.
+          </p>
         </div>
+        <figure class="feature-media">
+          <img
+            src="./assets/client/landingPage/streamPart.svg"
+            alt="Filmalisa on phone, tablet, laptop and TV"
+            width="500"
+            height="350"
+            loading="lazy"
+          />
+        </figure>
       </section>
 
       <!-- KIDS -->
       <section class="feature-section" aria-labelledby="kids-heading">
         <div class="feature-text">
           <h2 id="kids-heading">Create profiles for kids</h2>
-          <p>Send kids on adventures with their favorite characters in a space made just for them — free with your membership.</p>
+          <p>
+            Send kids on adventures with their favorite characters in a space
+            made just for them — free with your membership.
+          </p>
         </div>
         <figure class="feature-media">
-          <img src="./assets/client/landingPage/kids.svg" alt="Kids profile on Filmalisa" width="500" height="350" loading="lazy" />
+          <img
+            src="./assets/client/landingPage/kids.svg"
+            alt="Kids profile on Filmalisa"
+            width="500"
+            height="350"
+            loading="lazy"
+          />
         </figure>
       </section>
 
@@ -79,13 +128,33 @@
         <h2 id="contact-heading">Contact us</h2>
         <form class="contact-form" action="/contact" method="post">
           <label for="fullname" class="sr-only">Full name</label>
-          <input type="text" id="fullname" name="fullname" placeholder="Fullname" autocomplete="name" required />
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            placeholder="Fullname"
+            autocomplete="name"
+            required
+          />
 
           <label for="contactEmail" class="sr-only">Email address</label>
-          <input type="email" id="contactEmail" name="email" placeholder="Email address" autocomplete="email" required />
+          <input
+            type="email"
+            id="contactEmail"
+            name="email"
+            placeholder="Email address"
+            autocomplete="email"
+            required
+          />
 
           <label for="reason" class="sr-only">Reason</label>
-          <textarea id="reason" name="reason" placeholder="Reason" maxlength="200" required></textarea>
+          <textarea
+            id="reason"
+            name="reason"
+            placeholder="Reason"
+            maxlength="200"
+            required
+          ></textarea>
 
           <button type="submit" class="btn btn-primary">Send</button>
         </form>
@@ -94,58 +163,87 @@
       <!-- FAQ -->
       <section class="faq-section" aria-labelledby="faq-heading">
         <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+        <!-- hidden atributu ÇIXARILDI — JS ilə aria-expanded idarə edir -->
         <ul class="accordion" role="list">
           <li class="accordion-item">
-            <button class="accordion-header" aria-expanded="false" aria-controls="faq-1">
+            <button
+              class="accordion-header"
+              aria-expanded="false"
+              aria-controls="faq-1"
+            >
               What is Filmalisa? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-1" class="accordion-content" hidden>
+            <div id="faq-1" class="accordion-content">
               Filmalisa is a streaming platform offering movies and TV shows.
             </div>
           </li>
           <li class="accordion-item">
-            <button class="accordion-header" aria-expanded="false" aria-controls="faq-2">
+            <button
+              class="accordion-header"
+              aria-expanded="false"
+              aria-controls="faq-2"
+            >
               How much does Filmalisa cost? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-2" class="accordion-content" hidden>
+            <div id="faq-2" class="accordion-content">
               The cost varies depending on the subscription plan.
             </div>
           </li>
           <li class="accordion-item">
-            <button class="accordion-header" aria-expanded="false" aria-controls="faq-3">
+            <button
+              class="accordion-header"
+              aria-expanded="false"
+              aria-controls="faq-3"
+            >
               Where can I watch? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-3" class="accordion-content" hidden>
-              You can watch on multiple devices, including smartphones, tablets, and TVs.
+            <div id="faq-3" class="accordion-content">
+              You can watch on multiple devices, including smartphones, tablets,
+              and TVs.
             </div>
           </li>
           <li class="accordion-item">
-            <button class="accordion-header" aria-expanded="false" aria-controls="faq-4">
+            <button
+              class="accordion-header"
+              aria-expanded="false"
+              aria-controls="faq-4"
+            >
               How do I cancel? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-4" class="accordion-content" hidden>
-              You can cancel your subscription anytime through your account settings.
+            <div id="faq-4" class="accordion-content">
+              You can cancel your subscription anytime through your account
+              settings.
             </div>
           </li>
           <li class="accordion-item">
-            <button class="accordion-header" aria-expanded="false" aria-controls="faq-5">
+            <button
+              class="accordion-header"
+              aria-expanded="false"
+              aria-controls="faq-5"
+            >
               What can I watch on Filmalisa? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-5" class="accordion-content" hidden>
-              A wide variety of content, including movies, TV shows, and documentaries.
+            <div id="faq-5" class="accordion-content">
+              A wide variety of content, including movies, TV shows, and
+              documentaries.
             </div>
           </li>
           <li class="accordion-item">
-            <button class="accordion-header" aria-expanded="false" aria-controls="faq-6">
+            <button
+              class="accordion-header"
+              aria-expanded="false"
+              aria-controls="faq-6"
+            >
               Is Filmalisa good for kids? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-6" class="accordion-content" hidden>
-              Yes, it has a variety of family-friendly content and parental controls.
+            <div id="faq-6" class="accordion-content">
+              Yes, it has a variety of family-friendly content and parental
+              controls.
             </div>
           </li>
         </ul>
       </section>
-
     </main>
 
     <footer class="site-footer">
@@ -179,5 +277,54 @@
       </nav>
     </footer>
 
+    <!-- ═══════════════════════════════════════════════════
+         FAQ ACCORDION — JavaScript
+         
+         Problem: HTML-də hidden atributu vardı → browser display:none edir
+                  → CSS max-height transition işləmirdi, açılmırdı.
+         
+         Həll:
+         1. Bütün .accordion-content elementlərindən hidden atributu çıxarıldı.
+         2. CSS-də başlanğıc vəziyyət: max-height:0; overflow:hidden; opacity:0
+         3. JS aria-expanded="true" qoyanda CSS :not([aria-expanded="false"])
+            + sibling selector ilə content açılır.
+         4. Eyni vaxtda yalnız bir sual açıq qalır (accordion davranışı).
+    ═══════════════════════════════════════════════════ -->
+    <script>
+      (function () {
+        const headers = document.querySelectorAll('.accordion-header');
+
+        headers.forEach(function (btn) {
+          const contentId = btn.getAttribute('aria-controls');
+          const content   = document.getElementById(contentId);
+
+          // Başlanğıcda hamısı bağlı
+          content.style.maxHeight = '0';
+
+          btn.addEventListener('click', function () {
+            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+            // Əvvəlcə hamısını bağla
+            headers.forEach(function (otherBtn) {
+              const otherId      = otherBtn.getAttribute('aria-controls');
+              const otherContent = document.getElementById(otherId);
+              otherBtn.setAttribute('aria-expanded', 'false');
+              otherContent.style.maxHeight = '0';
+              otherContent.style.padding   = '0 15px';
+              otherContent.style.opacity   = '0';
+            });
+
+            // Kliklənəni aç (əgər bağlıydısa)
+            if (!isOpen) {
+              btn.setAttribute('aria-expanded', 'true');
+              // scrollHeight — elementin tam hündürlüyü
+              content.style.maxHeight = content.scrollHeight + 'px';
+              content.style.padding   = '15px';
+              content.style.opacity   = '1';
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
