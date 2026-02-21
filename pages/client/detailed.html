@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Details</title>
+  
+  <link rel="stylesheet" href="../../global/reset.css" />
+  <link rel="stylesheet" href="../../global/clientGlobal.css" />
+  <link rel="stylesheet" href="../../styles/client/detailed.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="layout">
+    
+    <aside class="sidebar">
+      <div class="side-top">
+        <a href="#" class="logo-link">
+            <img class="logo" src="../../assets/client/İconsİmages/logo.svg" alt="Logo" />
+        </a>
+        <nav class="side-nav">
+          <a class="side-link" href="#"><img src="../../assets/client/İconsİmages/home.svg" alt="Home" /></a>
+          <a class="side-link" href="./search.html"><img src="../../assets/client/İconsİmages/grid.svg" alt="Grid" /></a>
+          <a class="side-link active" href="#"><img src="../../assets/client/İconsİmages/video.svg" alt="Video" /></a>
+          <a class="side-link" href="#"><img src="../../assets/client/İconsİmages/star.svg" alt="Star" /></a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main-detail">
+      
+      <div class="top-header-profile">
+          <img src="../../assets/client/GridImages/avatar.svg" alt="Profile">
+      </div>
+
+      <div class="hero-container">
+          <div class="hero-backdrop" style="background-image: url('../../assets/client/GridImages/detailed.svg');">
+            <div class="hero-gradient-overlay"></div>
+          </div>
+
+          <div class="hero-floating-card">
+              <span class="hero-genre">MaileHereko / TV Shows</span>
+              <h1 class="hero-movie-name">Lost In Space</h1>
+          </div>
+      </div>
+
+      <div class="content-wrapper">
+        
+        <div class="main-info-container">
+            
+            <div class="left-column">
+
+               <div class="poster-card" id="mainPoster">
+                <img src="../../assets/client/GridImages/detailed.svg" alt="Movie Poster" />
+                <div class="play-overlay" onclick="toggleVideo()">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="right-column">
+              
+             <div class="movie-header">
+                <div class="header-content">
+                    <h2 class="promo-text">have you seen our robot?</h2>
+                    
+                    <div class="watch-actions">
+                        <button class="btn-watch" onclick="window.open('https://netflix.com', '_blank')">
+                           Watch Link
+                        </button>
+                        <button class="circle-btn">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+              </div>
+
+              <p class="description">
+                The mission to save Scarecrow takes an unexpected turn, throwing the Resolute into chaos. Judy hatches a plan to get a ship to Alpha Centauri.
+              </p>
+
+              <div class="rating-row">
+                <div class="rating-badge">
+                    <i class="fa-solid fa-star"></i> 8.1
+                </div>
+              </div>
+
+              <div class="meta-grid">
+                <div class="meta-item">
+                  <span class="label">Type</span>
+                  <span class="value">TV Show</span>
+                </div>
+                <div class="meta-item">
+                  <span class="label">Status</span>
+                  <span class="value">Returning Series</span>
+                </div>
+                <div class="meta-item">
+                  <span class="label">No. of episodes</span>
+                  <span class="value">20</span>
+                </div>
+                <div class="meta-item">
+                  <span class="label">First air date</span>
+                  <span class="value">2018-04-13</span>
+                </div>
+                <div class="meta-item">
+                  <span class="label">Last air date</span>
+                  <span class="value">2019-04-24</span>
+                </div>
+                <div class="meta-item">
+                  <span class="label">Episode run time</span>
+                  <span class="value">56 min</span>
+                </div>
+              </div>
+
+              <div class="genres-block">
+                <span class="label">Genres</span>
+                <span class="value">Action & Adventure, Sci-Fi & Fantasy, Drama</span>
+              </div>
+
+              <div class="section-block">
+                <h3 class="section-title">top cast</h3>
+                <div class="cast-list">
+                  <div class="cast-item">
+                    <div class="cast-img-box">
+                        <img src="../../assets/client/GridImages/detailedActor.svg" alt="Actor">
+                    </div>
+                    <div class="cast-info">
+                        <span class="actor-real-name">Maxwell Jenkins</span>
+                    </div>
+                  </div>
+                   <div class="cast-item">
+                    <div class="cast-img-box">
+                        <img src="../../assets/client/GridImages/detailedActor.svg" alt="Actor">
+                    </div>
+                    <div class="cast-info">
+                        <span class="actor-real-name">Maxwell Jenkins</span>
+                    </div>
+                  </div>
+                   <div class="cast-item">
+                    <div class="cast-img-box">
+                        <img src="../../assets/client/GridImages/detailedActor.svg" alt="Actor">
+                    </div>
+                    <div class="cast-info">
+                        <span class="actor-real-name">Maxwell Jenkins</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div> 
+        </div>
+        
+        <div class="comments-wrapper-full">
+             <div class="comment-input-area">
+                <div class="user-avatar-sm">
+                  <img src="../../assets/client/GridImages/avatar.svg" alt="User">
+                </div>
+                <input type="text" placeholder="your comment..." class="comment-field" />
+                <button class="btn-send-comment">
+                   <img src="../../assets/client/İconsİmages/send.svg" alt="Send"> 
+                </button>
+             </div>
+
+             <div class="existing-comment">
+                 <div class="comment-header">
+                     <div class="comment-user">
+                       <img src="../../assets/client/GridImages/avatar.svg" alt="Sarkhan">
+                       <span class="username">Sarkhan Rahimli</span>
+                     </div>
+                     <span class="time">18:32 today</span>
+                 </div>
+                 <p class="comment-text">
+                     Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon.
+                 </p>
+             </div>
+        </div>
+
+      </div>
+
+     <div class="similar-wrapper">
+        <h3 class="similar-title">similar movies ›</h3>
+        <div class="similar-grid">
+           <article class="movie-card">
+            <div class="card-poster" style="background-image:url('../../assets/client/GridImages/grid1.svg')"></div>
+            <div class="card-meta">
+              <span class="card-genre">Sci-Fi & Fantasy</span>
+              <div class="card-stars">★★★★★</div>
+              <h3 class="card-name">Game of thrones</h3>
+            </div>
+           </article>
+           <article class="movie-card">
+            <div class="card-poster" style="background-image:url('../../assets/client/GridImages/grid2.svg')"></div>
+            <div class="card-meta">
+              <span class="card-genre">Sci-Fi & Fantasy</span>
+              <div class="card-stars">★★★★★</div>
+              <h3 class="card-name">The Falcon and the Winter Soldier</h3>
+            </div>
+           </article>
+           <article class="movie-card">
+            <div class="card-poster" style="background-image:url('../../assets/client/GridImages/grid3.svg')"></div>
+            <div class="card-meta">
+              <span class="card-genre">Sci-Fi & Fantasy</span>
+              <div class="card-stars">★★★★★</div>
+              <h3 class="card-name">WandaVision</h3>
+            </div>
+           </article>
+           <article class="movie-card">
+            <div class="card-poster" style="background-image:url('../../assets/client/GridImages/grid4.svg')"></div>
+            <div class="card-meta">
+              <span class="card-genre">Action</span>
+              <div class="card-stars">★★★★★</div>
+              <h3 class="card-name">The Courier</h3>
+            </div>
+           </article>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div id="videoModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="close-modal-wrapper">
+          <span class="close-modal-btn" onclick="toggleVideo()">×</span>
+      </div>
+      <iframe 
+          id="youtubeFrame" 
+          width="100%" 
+          height="100%" 
+          src="https://www.youtube.com/embed/SwBJv5A-bA0?si=Ab47RBj3cEvhSeF2" 
+          title="Trailer" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+      </iframe>
+      <!-- <iframe id="youtubeFrame" width="100%" height="100%" src="" title="Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+    </div>
+  </div>
+
+  <script src="./detailed.js"></script>
+</body>
+</html>
