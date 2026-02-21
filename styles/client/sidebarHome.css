@@ -69,7 +69,7 @@
 
 /* Hover (ağ yox, açıq göy) */
 .side-link:hover{
-  background: rgba(36, 200, 216, 0.18); /* açıq göy fon */
+  color: #0FEFFD; /* açıq göy fon */
 }
 
 .side-link:hover img{
