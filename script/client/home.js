@@ -1,12 +1,8 @@
-// ===== HERO SLIDER JS =====
-// </body>-dən əvvəl <script> içinə yapışdır
-// ==========================
-
 (function () {
   const slides = document.querySelectorAll(".hero-slide");
   const dots = document.querySelectorAll(".hero-dot");
 
-  const AUTOPLAY_DELAY = 5000; // neçə millisaniyədə bir keçsin (5000 = 5 saniyə)
+  const AUTOPLAY_DELAY = 5000;
 
   let current = 0;
   let timer;
@@ -25,7 +21,6 @@
     goTo(current + 1);
   }
 
-  // Dot-lara klik
   dots.forEach((dot, i) => {
     dot.addEventListener("click", () => {
       clearInterval(timer);
@@ -34,12 +29,10 @@
     });
   });
 
-  // Autoplay
   function startAutoplay() {
     timer = setInterval(next, AUTOPLAY_DELAY);
   }
 
-  // Touch / swipe dəstəyi
   let touchStartX = 0;
 
   const slider = document.getElementById("heroSlider");
@@ -61,6 +54,5 @@
     }
   });
 
-  // Başlat
   startAutoplay();
 })();
