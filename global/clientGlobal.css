@@ -109,7 +109,7 @@ body {
 }
 
 .side-link:hover {
-  background: rgba(255, 255, 255, 0.1);
+  color: #0FEFFD;
   transform: scale(1.05);
 }
 
@@ -118,7 +118,7 @@ body {
 }
 
 .side-link.active {
-  background: rgba(255, 255, 255, 0.08);
+  color: #0FEFFD;
 }
 
 .side-link.active img {
