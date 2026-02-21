@@ -84,11 +84,8 @@
       </section>
 
       <!-- WATCH EVERYWHERE -->
-      <section
-        class="feature-section feature-section--reverse"
-        aria-labelledby="stream-heading"
-      >
-          <div class="feature-text">
+      <section class="feature-section" aria-labelledby="stream-heading">
+        <div class="feature-text">
           <h2 id="stream-heading">Watch everywhere</h2>
           <p>
             Stream unlimited movies and TV shows on your phone, tablet, laptop,
@@ -104,7 +101,6 @@
             loading="lazy"
           />
         </figure>
-    
       </section>
 
       <!-- KIDS -->
@@ -167,6 +163,8 @@
       <!-- FAQ -->
       <section class="faq-section" aria-labelledby="faq-heading">
         <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+        <!-- hidden atributu ÇIXARILDI — JS ilə aria-expanded idarə edir -->
         <ul class="accordion" role="list">
           <li class="accordion-item">
             <button
@@ -176,7 +174,7 @@
             >
               What is Filmalisa? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-1" class="accordion-content" hidden>
+            <div id="faq-1" class="accordion-content">
               Filmalisa is a streaming platform offering movies and TV shows.
             </div>
           </li>
@@ -188,7 +186,7 @@
             >
               How much does Filmalisa cost? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-2" class="accordion-content" hidden>
+            <div id="faq-2" class="accordion-content">
               The cost varies depending on the subscription plan.
             </div>
           </li>
@@ -200,7 +198,7 @@
             >
               Where can I watch? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-3" class="accordion-content" hidden>
+            <div id="faq-3" class="accordion-content">
               You can watch on multiple devices, including smartphones, tablets,
               and TVs.
             </div>
@@ -213,7 +211,7 @@
             >
               How do I cancel? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-4" class="accordion-content" hidden>
+            <div id="faq-4" class="accordion-content">
               You can cancel your subscription anytime through your account
               settings.
             </div>
@@ -226,7 +224,7 @@
             >
               What can I watch on Filmalisa? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-5" class="accordion-content" hidden>
+            <div id="faq-5" class="accordion-content">
               A wide variety of content, including movies, TV shows, and
               documentaries.
             </div>
@@ -239,7 +237,7 @@
             >
               Is Filmalisa good for kids? <span aria-hidden="true">+</span>
             </button>
-            <div id="faq-6" class="accordion-content" hidden>
+            <div id="faq-6" class="accordion-content">
               Yes, it has a variety of family-friendly content and parental
               controls.
             </div>
@@ -268,9 +266,7 @@
         <a href="/shop">Filmalisa Shop</a>
         <a href="/terms">Terms of Use</a>
         <a href="/contact">Contact Us</a>
-        <a href="/privacy/do-not-sell"
-          >Do Not Sell or Share Personal Information</a
-        >
+        <a href="/privacy/do-not-sell">Do Not Sell or Share Personal Information</a>
       </nav>
       <nav aria-label="Footer links 4">
         <a href="/media">Media Center</a>
@@ -280,5 +276,55 @@
         <a href="/ad-choices">Ad Choices</a>
       </nav>
     </footer>
+
+    <!-- ═══════════════════════════════════════════════════
+         FAQ ACCORDION — JavaScript
+         
+         Problem: HTML-də hidden atributu vardı → browser display:none edir
+                  → CSS max-height transition işləmirdi, açılmırdı.
+         
+         Həll:
+         1. Bütün .accordion-content elementlərindən hidden atributu çıxarıldı.
+         2. CSS-də başlanğıc vəziyyət: max-height:0; overflow:hidden; opacity:0
+         3. JS aria-expanded="true" qoyanda CSS :not([aria-expanded="false"])
+            + sibling selector ilə content açılır.
+         4. Eyni vaxtda yalnız bir sual açıq qalır (accordion davranışı).
+    ═══════════════════════════════════════════════════ -->
+    <script>
+      (function () {
+        const headers = document.querySelectorAll('.accordion-header');
+
+        headers.forEach(function (btn) {
+          const contentId = btn.getAttribute('aria-controls');
+          const content   = document.getElementById(contentId);
+
+          // Başlanğıcda hamısı bağlı
+          content.style.maxHeight = '0';
+
+          btn.addEventListener('click', function () {
+            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+            // Əvvəlcə hamısını bağla
+            headers.forEach(function (otherBtn) {
+              const otherId      = otherBtn.getAttribute('aria-controls');
+              const otherContent = document.getElementById(otherId);
+              otherBtn.setAttribute('aria-expanded', 'false');
+              otherContent.style.maxHeight = '0';
+              otherContent.style.padding   = '0 15px';
+              otherContent.style.opacity   = '0';
+            });
+
+            // Kliklənəni aç (əgər bağlıydısa)
+            if (!isOpen) {
+              btn.setAttribute('aria-expanded', 'true');
+              // scrollHeight — elementin tam hündürlüyü
+              content.style.maxHeight = content.scrollHeight + 'px';
+              content.style.padding   = '15px';
+              content.style.opacity   = '1';
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

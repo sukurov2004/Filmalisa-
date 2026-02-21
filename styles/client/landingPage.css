@@ -210,10 +210,7 @@ body {
   background-color: #000;
 }
 
-/* Reverse layout: image left, text right */
-.feature-section--reverse {
-  flex-direction: row-reverse;
-}
+
 
 .feature-text {
   max-width: 500px;
@@ -432,4 +429,34 @@ input:-webkit-autofill:focus {
   -webkit-text-fill-color: #bcbcbc;
   box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.1) inset;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+
+.accordion-content {
+  /* Transition — JS maxHeight dəyişdirəndə hamar açılır */
+  transition: max-height 0.35s ease, padding 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+  opacity: 0;
+
+  /* Dizayn */
+  background-color: #1a1a1a;          /* #555 əvəzinə — daha zərif tünd */
+  border-top: 1px solid #2e2e2e;      /* header ilə ayrım xətti */
+  color: rgba(255, 255, 255, 0.82);   /* tam ağ deyil, göz üçün rahat */
+  font-size: 15px;
+  line-height: 1.7;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.01em;
+}
+
+
+.accordion-header[aria-expanded="true"] {
+  background-color: #2a2a2a;          /* açıq halda bir az fərqli */
+  border-bottom: none;
+}
+
+.accordion-item:has(.accordion-header[aria-expanded="true"]) {
+  box-shadow: 0 0 0 1px rgba(155, 81, 224, 0.35);
+  border-radius: 2px;
 }
