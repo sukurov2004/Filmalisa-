@@ -38,20 +38,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
   text-align: center;
 }
 
 /* LOGO */
 .logo img {
-  width: 250px;
+  width: 200px;
 }
 
 /* TITLE */
 .title {
-  font-size: 72px;
+  font-size: 62px;
   font-weight: 400;
-  letter-spacing: -0.02em;
   color: #c3c8d4;
 }
 
