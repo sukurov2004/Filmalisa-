@@ -53,7 +53,6 @@ body{
 .card{
   position:relative;
   overflow:hidden;
-  border-radius:12px;
   background:#ffffff08;
   border:1px solid #ffffff0f;
   box-shadow:0 18px 55px #00000073;
@@ -77,9 +76,9 @@ body{
   z-index:1;
   background: linear-gradient(
     to top,
-    rgba(0,0,0,.75) 0%,
-    rgba(0,0,0,.18) 50%,
-    rgba(0,0,0,.08) 100%
+    #000000bf 0%,
+    #0000002e 50%,
+    #00000014 100%
   );
 }
 
