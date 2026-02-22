@@ -12,7 +12,7 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center;   /* və ya flex-start, istəyinə görə */
+  align-items: center;  
   gap: 8px;
 }
 .page {
@@ -23,9 +23,9 @@ body {
 }
 /* ── Logo ── */
 .logo {
-  position: static;  /* global-dakı top: 40px-i ləğv edir */
-  width: 250px;
-  height: auto;      /* global-dakı height: 56px-i ləğv edir */
+  position: static; 
+  width: 200px;
+  height: auto;     
   top: auto;
 }
 
@@ -36,16 +36,16 @@ body {
 
 /* ── Brand / Title ── */
 .brand {
-  font-size: 70px;
-  line-height: 80px;
+  font-size: 50px;
+  line-height: 70px;
   font-weight: 400;
   color: #c3c8d4;
 }
 
 .title {
   margin: 0;
-  font-size: 40px;
-  line-height: 80px;
+  font-size: 30px;
+  line-height: 60px;
   font-weight: 500;
   color: #c3c8d4;
 }
