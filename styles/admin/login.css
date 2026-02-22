@@ -75,8 +75,8 @@ body {
   height: 58px;
   padding: 0 55px 0 52px;
   border-radius: 12px;
-  border: 1px solid rgba(140, 170, 255, 0.2);
-  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid #8caaff33;
+  background: #0000008c;
   color: #fff;
   font-size: 14px;
   outline: none;
@@ -85,12 +85,12 @@ body {
 }
 
 .field input::placeholder {
-  color: rgba(160, 180, 255, 0.35);
+  color: #a0b4ff59;
 }
 
 .field input:focus {
-  border-color: rgba(140, 170, 255, 0.4);
-  box-shadow: 0 0 0 2px rgba(140, 170, 255, 0.15);
+  border-color: #8caaff66;
+  box-shadow: 0 0 0 2px #8caaff26;
 }
 
 /* Icon (left) */
@@ -150,12 +150,12 @@ body {
   font-family: "Raleway", sans-serif;
   cursor: pointer;
   transition: 0.2s ease;
-  box-shadow: 0 15px 35px rgba(139, 83, 227, 0.25);
+  box-shadow: 0 15px 35px #8b53e340;
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 45px rgba(139, 83, 227, 0.35);
+  box-shadow: 0 20px 45px #8b53e359;
 }
 
 .btn:active {

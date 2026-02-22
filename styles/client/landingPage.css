@@ -195,7 +195,7 @@ body {
 .hero-form input[type="email"]::placeholder { color: #bcbcbc; }
 
 .hero-form input[type="email"]:focus {
-  background: rgba(0, 0, 0, 0.4);
+  background: #00000066;
   color: #fff;
 }
 
@@ -299,7 +299,7 @@ body {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  background: rgba(0, 0, 0, 0.35);
+  background: #00000059;
   color: #fff;
   border-color: var(--btn-color);
 }
@@ -427,7 +427,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   border: 1px solid var(--border-color);
   -webkit-text-fill-color: #bcbcbc;
-  box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 0 0px 1000px #0000001a inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -457,6 +457,6 @@ input:-webkit-autofill:focus {
 }
 
 .accordion-item:has(.accordion-header[aria-expanded="true"]) {
-  box-shadow: 0 0 0 1px rgba(155, 81, 224, 0.35);
+  box-shadow: 0 0 0 1px #9b51e059;
   border-radius: 2px;
 }
