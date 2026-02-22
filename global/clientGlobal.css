@@ -114,6 +114,93 @@ body {
 }
 
 
+/* =====HOME SIDEBAR====== */
+.home-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+.home-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 100;
+  width: 56px;
+  flex-shrink: 0;
+  background: rgba(29, 29, 29, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid #ffffff0f;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 40px 40px 8px rgba(0, 0, 0, 0.16);
+}
+
+.home-side-top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.home-logo {
+  width: 56px;
+  height: 56px;
+  top: 40px;
+}
+
+.home-side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  align-items: center;
+}
+
+.home-side-link {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #ffffff8c;
+  text-decoration: none;
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base);
+}
+
+.home-side-link img {
+  width: 32px;
+  height: 32px;
+  transition: filter var(--transition-base);
+  filter: brightness(0.55);
+}
+
+.home-side-link:hover {
+  background: #ffffff1a;
+  transform: scale(1.05);
+}
+
+.home-side-link:hover img {
+  filter: brightness(1);
+}
+
+.home-side-link.active {
+  background: #ffffff14;
+}
+
+.home-side-link.active img {
+  filter: brightness(1) hue-rotate(200deg) saturate(1.5);
+}
+
+.home-side-link.active:hover {
+  background: #ffffff1f;
+  transform: scale(1.05);
+}
+
 /* ── Buttons ── */
 .btn {
   display: inline-flex;
