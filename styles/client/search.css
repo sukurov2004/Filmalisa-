@@ -118,7 +118,14 @@ body{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
+
+.card:hover .meta{
+  transform: translateY(-20px); /* nə qədər qalxsın */
+}
+
 
 .tag{
   display:inline-block;
