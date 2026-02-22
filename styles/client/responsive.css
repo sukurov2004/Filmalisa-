@@ -1,39 +1,18 @@
-/* ═══════════════════════════════════════════════════════════════
-   FILMALISA — RESPONSIVE CSS  (tam yenidən yazılmış)
-   
-   CSS YÜKLƏNMƏ SIRASI:
-     1. reset.css      — margin/padding/font sıfırlanır
-     2. responsive.css — bu fayl
-     3. landingPage.css / global.css
-   
-   DÜZƏLDİLƏN PROBLEMLƏR:
-   ① reset.css { font-family: system-ui } +
-     global.css { font-family: Raleway } →
-     Accordion, form, FAQ Raleway ilə yazılırdı.
-     HƏll: bütün landing page elementlərinə Roboto mənimsədildi.
-   
-   ② "Watch everywhere" section-da feature-section--reverse
-     class-ı HTML-dən silinib. nth-child(even) ilə CSS-də həll edildi.
-   
-   ③ font-size px dəyərləri düzəldildi —
-     ekran ölçüsünə görə daha kiçik, oxunaqlı ölçülər.
-   
-   ④ header padding overflow/qaçma problemi clamp() ilə həll edildi.
-   
-   ⑤ footer 2-sütun grid — flex:1 və padding-left sıfırlandı.
-   
-   Breakpoints: 1024px · 768px · 480px
-═══════════════════════════════════════════════════════════════ */
-
 /* ─── GLOBAL ──────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; }
-html { overflow-x: hidden; }
-img  { max-width: 100%; height: auto; display: block; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  overflow-x: hidden;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-/* ── Font override: global.css Raleway-i əzir, biz Roboto qaytarırıq ── */
-/* reset.css body { font-family: system-ui } → global.css { Raleway }
-   → landingPage.css { Roboto } — bu silsilə kövrəkdir.
-   Hər landing page elementinə açıq şəkildə Roboto veririk. */
 .site-header,
 .hero,
 .hero-content,
@@ -58,7 +37,7 @@ img  { max-width: 100%; height: auto; display: block; }
 ════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .layout {
-    display: flex !important;      /* global.css grid-ini override edir */
+    display: flex !important; /* global.css grid-ini override edir */
     flex-direction: column;
     min-height: 100vh;
   }
@@ -67,7 +46,8 @@ img  { max-width: 100%; height: auto; display: block; }
     width: 100%;
     height: 64px;
     position: fixed;
-    bottom: 0; left: 0;
+    bottom: 0;
+    left: 0;
     padding: 0;
     background: var(--panel, rgba(255, 255, 255, 0.04));
     border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -86,24 +66,25 @@ img  { max-width: 100%; height: auto; display: block; }
     justify-content: space-evenly;
     gap: 0;
   }
-  .sidebar .logo   { display: none; }
-  .account-profile { padding-bottom: 80px; }
-  .main-err        { padding-top: 120px; }
+  .sidebar .logo {
+    display: none;
+  }
+  .account-profile {
+    padding-bottom: 80px;
+  }
+  .main-err {
+    padding-top: 120px;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════
    HEADER
-   
-   Problem 1: padding:25px 120px → dar ekranda logo+düymə üst-üstə gəlir
-   Problem 2: global.css .logo { width:56px } sidebar logosuna aiddir,
-              amma .header-logo img-ə müdaxilə etmir — OK
-   
-   Həll: clamp() ilə axıcı padding, flex elementlərə min-width:0
 ════════════════════════════════════════════════════════════════ */
 .site-header {
   width: 100%;
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   z-index: 10;
 }
 
@@ -142,8 +123,12 @@ img  { max-width: 100%; height: auto; display: block; }
 }
 
 @media (max-width: 1024px) {
-  .logo-text   { display: none; }
-  .header-logo { gap: 0; }
+  .logo-text {
+    display: none;
+  }
+  .header-logo {
+    gap: 0;
+  }
 }
 
 /* "Sign in" düyməsi: heç vaxt büzülməsin */
@@ -156,17 +141,6 @@ img  { max-width: 100%; height: auto; display: block; }
 
 /* ════════════════════════════════════════════════════════════════
    HERO — düzəldilmiş px ölçüləri
-   
-   Problem: 48px hero h1 → 768px-lik ekranda çox böyük görünür
-   Həll: clamp ilə ekran ölçüsünə mütənasib ölçülər
-   
-   Hesablamalar (nümunə):
-   h1: clamp(20px, 2.8vw + 10px, 44px)
-     • 320px ekran: 2.8×3.2 + 10 = ~19px → min 20px
-     • 480px ekran: 2.8×4.8 + 10 = ~23px
-     • 768px ekran: 2.8×7.68 + 10 = ~31px
-     • 1024px ekran: 2.8×10.24 + 10 = ~39px
-     • 1440px ekran: 2.8×14.4 + 10 = ~50px → max 44px
 ════════════════════════════════════════════════════════════════ */
 .hero-content h1 {
   font-size: clamp(20px, 2.8vw + 10px, 44px);
@@ -188,11 +162,14 @@ img  { max-width: 100%; height: auto; display: block; }
   .hero {
     height: auto;
     min-height: 100vh;
-    min-height: 100dvh;          /* iOS Safari dinamik viewport */
+    min-height: 100dvh; /* iOS Safari dinamik viewport */
     padding: 100px 20px 60px;
     align-items: center;
   }
-  .hero-content { width: 100%; padding: 0; }
+  .hero-content {
+    width: 100%;
+    padding: 0;
+  }
   .hero-form {
     flex-direction: column;
     width: 100%;
@@ -214,20 +191,13 @@ img  { max-width: 100%; height: auto; display: block; }
 }
 
 @media (max-width: 480px) {
-  .hero { padding: 88px 16px 44px; }
+  .hero {
+    padding: 88px 16px 44px;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════
    FEATURE SECTIONS
-   
-   ƏSAS PROBLEM: HTML-də "Watch everywhere" section-unda
-   feature-section--reverse class-ı SİLİNİB.
-   
-   Həll: CSS nth-child(even) ilə 2-ci section-u avtomatik tərsinə çeviririk.
-   Bu həm HTML dəyişikliyi tələb etmir, həm də gələcək section-lar üçün
-   avtomatik işləyir.
-   
-   nth-child(even) = 2, 4, 6... → hər cüt section tərsinə dönür
 ════════════════════════════════════════════════════════════════ */
 .feature-text h2 {
   font-size: clamp(20px, 2.5vw + 8px, 42px);
@@ -250,8 +220,13 @@ img  { max-width: 100%; height: auto; display: block; }
     padding: 60px clamp(24px, 5vw, 80px);
     gap: 36px;
   }
-  .feature-text  { flex: 1 1 auto; max-width: 480px; }
-  .feature-media { flex: 0 0 auto; }
+  .feature-text {
+    flex: 1 1 auto;
+    max-width: 480px;
+  }
+  .feature-media {
+    flex: 0 0 auto;
+  }
   .feature-media img {
     width: 100%;
     max-width: 360px;
@@ -268,7 +243,10 @@ img  { max-width: 100%; height: auto; display: block; }
     gap: 20px;
     text-align: center;
   }
-  .feature-text  { max-width: 100%; flex: none; }
+  .feature-text {
+    max-width: 100%;
+    flex: none;
+  }
   .feature-media img {
     width: 100%;
     max-width: 320px;
@@ -295,32 +273,62 @@ img  { max-width: 100%; height: auto; display: block; }
 }
 
 @media (max-width: 1024px) {
-  .contact-section { padding: 50px clamp(20px, 5vw, 80px) 100px; }
+  .contact-section {
+    padding: 50px clamp(20px, 5vw, 80px) 100px;
+  }
 }
 
 @media (max-width: 768px) {
-  .contact-section    { padding: 44px 20px 64px; }
-  .contact-section h2 { margin-bottom: 24px; }
-  .contact-form { gap: 16px; max-width: 100%; }
+  .contact-section {
+    padding: 44px 20px 64px;
+  }
+  .contact-section h2 {
+    margin-bottom: 24px;
+  }
+  .contact-form {
+    gap: 16px;
+    max-width: 100%;
+  }
   .contact-form input,
-  .contact-form textarea { width: 100%; }
-  .contact-form input    { height: 50px; font-size: 15px; }
-  .contact-form textarea { height: 110px; font-size: 15px; }
-  .contact-form .btn     { width: 100%; max-width: 220px; font-size: 15px; }
+  .contact-form textarea {
+    width: 100%;
+  }
+  .contact-form input {
+    height: 50px;
+    font-size: 15px;
+  }
+  .contact-form textarea {
+    height: 110px;
+    font-size: 15px;
+  }
+  .contact-form .btn {
+    width: 100%;
+    max-width: 220px;
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 480px) {
-  .contact-section    { padding: 32px 16px 52px; }
-  .contact-form { gap: 12px; }
-  .contact-form input    { height: 46px; font-size: 14px; padding: 0 12px; }
-  .contact-form textarea { height: 96px; font-size: 14px; padding: 12px; }
+  .contact-section {
+    padding: 32px 16px 52px;
+  }
+  .contact-form {
+    gap: 12px;
+  }
+  .contact-form input {
+    height: 46px;
+    font-size: 14px;
+    padding: 0 12px;
+  }
+  .contact-form textarea {
+    height: 96px;
+    font-size: 14px;
+    padding: 12px;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════
    FAQ — fluid
-   
-   Problem: reset.css { font: inherit } → accordion button Raleway alırdı
-   Həll: yuxarıda .accordion-header { font-family: "Roboto" } verildi
 ════════════════════════════════════════════════════════════════ */
 .faq-section h2 {
   font-size: clamp(20px, 2.5vw + 8px, 42px);
@@ -329,32 +337,55 @@ img  { max-width: 100%; height: auto; display: block; }
 }
 
 @media (max-width: 1024px) {
-  .faq-section { padding: 60px clamp(20px, 5vw, 72px); }
-  .accordion   { max-width: 100%; }
+  .faq-section {
+    padding: 60px clamp(20px, 5vw, 72px);
+  }
+  .accordion {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
-  .faq-section    { padding: 44px 20px; }
-  .faq-section h2 { margin-bottom: 20px; }
-  .accordion-header      { font-size: 14px; padding: 16px 18px; font-family: "Roboto", sans-serif; }
-  .accordion-header span { font-size: 20px; }
-  .accordion-content     { font-size: 14px; }
+  .faq-section {
+    padding: 44px 20px;
+  }
+  .faq-section h2 {
+    margin-bottom: 20px;
+  }
+  .accordion-header {
+    font-size: 14px;
+    padding: 16px 18px;
+    font-family: "Roboto", sans-serif;
+  }
+  .accordion-header span {
+    font-size: 20px;
+  }
+  .accordion-content {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
-  .faq-section    { padding: 32px 16px; }
-  .faq-section h2 { margin-bottom: 14px; }
-  .accordion-header      { font-size: 13px; padding: 14px 16px; }
-  .accordion-header span { font-size: 17px; }
-  .accordion-content     { font-size: 13px; }
+  .faq-section {
+    padding: 32px 16px;
+  }
+  .faq-section h2 {
+    margin-bottom: 14px;
+  }
+  .accordion-header {
+    font-size: 13px;
+    padding: 14px 16px;
+  }
+  .accordion-header span {
+    font-size: 17px;
+  }
+  .accordion-content {
+    font-size: 13px;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════
    FOOTER — 2 sütun grid
-   
-   Problem: landingPage.css .site-footer { display:flex }
-            .site-footer nav { flex:1; padding-left:40px }
-   Həll: display:grid !important ilə override; flex:none, padding-left:0
 ════════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .site-footer {
@@ -391,7 +422,10 @@ img  { max-width: 100%; height: auto; display: block; }
     gap: 10px;
     width: 100%;
   }
-  .site-footer nav a { font-size: 13px; line-height: 18px; }
+  .site-footer nav a {
+    font-size: 13px;
+    line-height: 18px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -400,8 +434,13 @@ img  { max-width: 100%; height: auto; display: block; }
     gap: 20px 12px;
     padding: 32px 16px 24px;
   }
-  .site-footer nav { gap: 7px; }
-  .site-footer nav a { font-size: 11.5px; line-height: 15px; }
+  .site-footer nav {
+    gap: 7px;
+  }
+  .site-footer nav a {
+    font-size: 11.5px;
+    line-height: 15px;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -409,11 +448,24 @@ img  { max-width: 100%; height: auto; display: block; }
 ════════════════════════════════════════════════════════════════ */
 @media (hover: none) and (pointer: coarse) {
   .btn,
-  .accordion-header          { min-height: 44px; }
-  .site-footer nav a         { min-height: 32px; display: inline-flex; align-items: center; }
-  .accordion-header:hover    { background-color: #222; }
-  .btn-primary:hover         { background-color: var(--btn-color, #9b51e0); transform: none; }
-  .site-footer nav a:hover   { color: #b3b3b3; }
+  .accordion-header {
+    min-height: 44px;
+  }
+  .site-footer nav a {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .accordion-header:hover {
+    background-color: #222;
+  }
+  .btn-primary:hover {
+    background-color: var(--btn-color, #9b51e0);
+    transform: none;
+  }
+  .site-footer nav a:hover {
+    color: #b3b3b3;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -424,6 +476,7 @@ img  { max-width: 100%; height: auto; display: block; }
   .accordion-header,
   .accordion-header span,
   .accordion-content,
-  .site-footer nav a { transition: none; }
+  .site-footer nav a {
+    transition: none;
+  }
 }
-

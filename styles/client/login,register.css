@@ -12,7 +12,7 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
   gap: 8px;
 }
 .page {
@@ -23,9 +23,9 @@ body {
 }
 /* ── Logo ── */
 .logo {
-  position: static; 
+  position: static;
   width: 200px;
-  height: auto;     
+  height: auto;
   top: auto;
 }
 
@@ -77,12 +77,12 @@ body {
   font-weight: 500;
   background: linear-gradient(90deg, #8b53e3, #9c60f5);
   color: #fff;
-  box-shadow: 0 15px 35px rgba(139, 83, 227, 0.25);
+  box-shadow: 0 15px 35px #8b53e340;
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 25px 50px rgba(139, 83, 227, 0.35);
+  box-shadow: 0 25px 50px #8b53e359;
 }
 
 .btn:active {
