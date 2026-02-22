@@ -7,35 +7,34 @@
 
     <link rel="stylesheet" href="../../global/reset.css" />
     <link rel="stylesheet" href="../../global/clientGlobal.css" />
-    <link rel="stylesheet" href="../../styles/client/search.css" />
     <link rel="stylesheet" href="../../styles/client/home.css" />
   </head>
 
   <body>
-    <div class="layout">
+    <div class="home-layout">
       <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="side-top">
+      <aside class="home-sidebar">
+        <div class="home-side-top">
           <img
-            class="logo"
+            class="home-logo"
             src="../../assets/client/İconsİmages/logo.svg"
             alt="Logo"
           />
 
-          <nav class="side-nav">
-            <a class="side-link active" href="#">
+          <nav class="home-side-nav">
+            <a class="home-side-link active" href="#">
               <img src="../../assets/client/İconsİmages/home.svg" alt="" />
             </a>
 
-            <a class="side-link" href="#">
+            <a class="home-side-link" href="#">
               <img src="../../assets/client/İconsİmages/grid.svg" alt="" />
             </a>
 
-            <a class="side-link" href="#">
+            <a class="home-side-link" href="#">
               <img src="../../assets/client/İconsİmages/video.svg" alt="" />
             </a>
 
-            <a class="side-link" href="#">
+            <a class="home-side-link" href="#">
               <img src="../../assets/client/İconsİmages/star.svg" alt="" />
             </a>
           </nav>
@@ -47,61 +46,62 @@
         <!-- HERO SLIDER HTML -->
 
         <div class="hero-slider" id="heroSlider">
-          <!-- SLIDE 1 -->
-          <div class="hero-slide active">
-            <img
-              src="../../assets/client/movieCardsImages/elemental-movie-poster.jpg"
-              class="hero-img"
-              alt="Elemental"
-            />
-
-            <div class="hero-content">
-              <span class="hero-category">Comedy</span>
-              <h1 class="hero-title">Elemental</h1>
-              <p class="hero-desc">
-                Ember and Wade live in Element City where fire, water, earth and
-                air residents coexist. Despite their differences, they discover
-                they have more in common than they thought.
-              </p>
-              <a href="#" class="hero-btn">Watch Now</a>
+          <div class="hero-slides-wrapper" id="heroWrapper">
+            <!-- SLIDE 1 -->
+            <div class="hero-slide">
+              <img
+                src="../../assets/client/movieCardsImages/elemental-movie-poster.jpg"
+                class="hero-img"
+                alt="Elemental"
+              />
+              <div class="hero-content">
+                <span class="hero-category">Comedy</span>
+                <h1 class="hero-title">Elemental</h1>
+                <p class="hero-desc">
+                  Ember and Wade live in Element City where fire, water, earth
+                  and air residents coexist. Despite their differences, they
+                  discover they have more in common than they thought.
+                </p>
+                <a href="#" class="hero-btn">Watch Now</a>
+              </div>
             </div>
-          </div>
 
-          <!-- SLIDE 2 -->
-          <div class="hero-slide">
-            <img
-              src="../../assets/client/movieCardsImages/Sandra.jpg"
-              class="hero-img"
-              alt="The Net"
-            />
-            <div class="hero-content">
-              <span class="hero-category">Thriller</span>
-              <h1 class="hero-title">The Net</h1>
-              <p class="hero-desc">
-                A computer programmer stumbles upon a conspiracy, putting her
-                life in danger. Her driver's license, credit cards, bank
-                accounts — her entire identity deleted.
-              </p>
-              <a href="#" class="hero-btn">Watch Now</a>
+            <!-- SLIDE 2 -->
+            <div class="hero-slide">
+              <img
+                src="../../assets/client/movieCardsImages/Sandra.jpg"
+                class="hero-img"
+                alt="The Net"
+              />
+              <div class="hero-content">
+                <span class="hero-category">Thriller</span>
+                <h1 class="hero-title">The Net</h1>
+                <p class="hero-desc">
+                  A computer programmer stumbles upon a conspiracy, putting her
+                  life in danger. Her driver's license, credit cards, bank
+                  accounts — her entire identity deleted.
+                </p>
+                <a href="#" class="hero-btn">Watch Now</a>
+              </div>
             </div>
-          </div>
 
-          <!-- SLIDE 3 -->
-          <div class="hero-slide">
-            <img
-              src="../../assets/client/movieCardsImages/strangeDays.jpg"
-              class="hero-img"
-              alt="Strange Days"
-            />
-            <div class="hero-content">
-              <span class="hero-category">Sci-Fi</span>
-              <h1 class="hero-title">Strange Days</h1>
-              <p class="hero-desc">
-                Set on the eve of the new millennium, a black market dealer of
-                recorded memories gets pulled into a conspiracy involving a
-                murder and the technology he sells.
-              </p>
-              <a href="#" class="hero-btn">Watch Now</a>
+            <!-- SLIDE 3 -->
+            <div class="hero-slide">
+              <img
+                src="../../assets/client/movieCardsImages/Godzilla.svg"
+                class="hero-img"
+                alt="Godzilla"
+              />
+              <div class="hero-content">
+                <span class="hero-category">Sci-Fi</span>
+                <h1 class="hero-title">Godzilla vs. Kong</h1>
+                <p class="hero-desc">
+                  Set on the eve of the new millennium, a black market dealer of
+                  recorded memories gets pulled into a conspiracy involving a
+                  murder and the technology he sells.
+                </p>
+                <a href="#" class="hero-btn">Watch Now</a>
+              </div>
             </div>
           </div>
 
@@ -112,6 +112,184 @@
             <span class="hero-dot"></span>
           </div>
         </div>
+
+        <!-- Movie category -->
+        <section class="category-section">
+          <div class="category-header">
+            <h2 class="ctg-title">Fantasy</h2>
+            <img
+              class="vector-icon"
+              src="../../assets/client/İconsİmages/vector.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="category-carousel">
+            <button class="carousel-btn prev">
+              <img
+                src="../../assets/client/İconsİmages/vector.svg"
+                alt="prev"
+              />
+            </button>
+            <div class="carousel-track">
+              <div class="movie-grid">
+                <div class="movie-card">
+                  <img
+                    src="../../assets/client/movieCardsImages/Sandra.jpg"
+                    class="movie-image"
+                    alt=""
+                  />
+                  <div class="movie-details">
+                    <div class="movie-category-container">
+                      <span class="movie-category">Fantasy</span>
+                    </div>
+                    <div class="movie-rating">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star half">★</span>
+                    </div>
+                    <p class="movie-title">Sandra</p>
+                  </div>
+                </div>
+
+                <div class="movie-card">
+                  <img
+                    src="../../assets/client/movieCardsImages/strangeDays.jpg"
+                    class="movie-image"
+                    alt=""
+                  />
+                  <div class="movie-details">
+                    <div class="movie-category-container">
+                      <span class="movie-category">Fantasy</span>
+                    </div>
+                    <div class="movie-rating">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star half">★</span>
+                    </div>
+                    <p class="movie-title">Strange Days</p>
+                  </div>
+                </div>
+
+                <div class="movie-card">
+                  <img
+                    src="../../assets/client/movieCardsImages/zootopia.jpg"
+                    class="movie-image"
+                    alt=""
+                  />
+                  <div class="movie-details">
+                    <div class="movie-category-container">
+                      <span class="movie-category">Fantasy</span>
+                    </div>
+                    <div class="movie-rating">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star half">★</span>
+                    </div>
+                    <p class="movie-title">Zootopia</p>
+                  </div>
+                </div>
+
+                <div class="movie-card">
+                  <img
+                    src="../../assets/client/movieCardsImages/elemental-movie-poster.jpg"
+                    class="movie-image"
+                    alt=""
+                  />
+                  <div class="movie-details">
+                    <div class="movie-category-container">
+                      <span class="movie-category">Fantasy</span>
+                    </div>
+                    <div class="movie-rating">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star half">★</span>
+                    </div>
+                    <p class="movie-title">Elemental</p>
+                  </div>
+                </div>
+
+                <div class="movie-card">
+                  <img
+                    src="../../assets/client/movieCardsImages/moviecard1.svg"
+                    class="movie-image"
+                    alt=""
+                  />
+                  <div class="movie-details">
+                    <div class="movie-category-container">
+                      <span class="movie-category">Fantasy</span>
+                    </div>
+                    <div class="movie-rating">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star half">★</span>
+                    </div>
+                    <p class="movie-title">Game of Thrones</p>
+                  </div>
+                </div>
+
+                <div class="movie-card">
+                  <img
+                    src="../../assets/client/movieCardsImages/moviecard2.svg"
+                    class="movie-image"
+                    alt=""
+                  />
+                  <div class="movie-details">
+                    <div class="movie-category-container">
+                      <span class="movie-category">Fantasy</span>
+                    </div>
+                    <div class="movie-rating">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star half">★</span>
+                    </div>
+                    <p class="movie-title">The Falcon</p>
+                  </div>
+                </div>
+
+                <div class="movie-card">
+                  <img
+                    src="../../assets/client/movieCardsImages/moviecard3.svg"
+                    class="movie-image"
+                    alt=""
+                  />
+                  <div class="movie-details">
+                    <div class="movie-category-container">
+                      <span class="movie-category">Fantasy</span>
+                    </div>
+                    <div class="movie-rating">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star half">★</span>
+                    </div>
+                    <p class="movie-title">Vanda Vision</p>
+                  </div>
+                </div>
+                <!--  -->
+              </div>
+            </div>
+            <button class="carousel-btn next">
+              <img
+                src="../../assets/client/İconsİmages/vector.svg"
+                alt="next"
+              />
+            </button>
+          </div>
+        </section>
       </main>
     </div>
     <script src="../../script/client/home.js"></script>
