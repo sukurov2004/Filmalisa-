@@ -71,18 +71,16 @@ body{
 /* Grid */
 .grid{
   display:grid;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* minmax(0,1fr) daha stabil */
   gap: 26px 22px;
   padding: 14px 8px 0;
 }
-
 .card{
-  position:relative;
-  overflow:hidden;
+  position: relative;
+  overflow: hidden;
   background: #ffffff08;
   border: 1px solid #ffffff0f;
   box-shadow: 0 18px 55px #00000073;
-  min-height: 280px;
 }
 
 .poster{
@@ -97,7 +95,7 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  z-index: 0; /* <-- IMPORTANT */
+  z-index: 1;
   background: linear-gradient(
     to top,
     #000000bf 0%,
@@ -148,18 +146,59 @@ body{
 
 /* Responsive */
 @media (max-width: 1100px){
-  .grid{ grid-template-columns: repeat(3, minmax(180px, 1fr)); }
-  .search{ width: 300px; }
+  .grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px 18px;
+  }
 }
-
 @media (max-width: 820px){
-  .layout{ grid-template-columns: 70px 1fr; }
-  .grid{ grid-template-columns: repeat(2, minmax(170px, 1fr)); }
-  .title{ font-size: 26px; }
-  .search{ width: 220px; }
+  .grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .meta{
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+  }
+
+  .name{
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 520px){
-  .grid{ grid-template-columns: 1fr; }
-  .search{ width: 180px; }
+  .grid{
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 8px 4px;
+  }
+
+
+  /* poster nisbəti telefon üçün ideal */
+  .poster,
+  .poster {
+    aspect-ratio: 2 / 3;
+  }
+
+  .meta{
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .tag{
+    font-size: 11px;
+  }
+
+  .stars{
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .name{
+    font-size: 14px;
+    line-height: 1.2;
+  }
 }
