@@ -300,6 +300,14 @@ body {
 /* ===========================================
    PAGINATION
    =========================================== */
+
+   .pagination-dots {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  color: #888;
+  user-select: none;
+}
 .pagination {
   display: flex;
   justify-content: center;
