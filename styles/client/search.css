@@ -95,7 +95,7 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  z-index: 1;
+  z-index: 1;   /* overlay aşağı qatda */
   background: linear-gradient(
     to top,
     #000000bf 0%,
@@ -106,14 +106,13 @@ body{
 
 /* Meta: soldan başlasın */
 .meta{
-  position: absolute;      /* <-- FIX */
-  left: 16px;              /* soldan */
-  right: 16px;             /* eni düzgün */
+  position: absolute;
+  left: 16px;
+  right: 16px;
   bottom: 20px;
 
-  text-align: left;
+  z-index: 2;   /* <-- ƏN VACİB */
   color: #fff;
-  z-index: 1;
 
   display: flex;
   flex-direction: column;
