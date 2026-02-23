@@ -1,25 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Numans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import url("https://fonts.googleapis.com/css2?family=Numans&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Numans&family=Roboto:wght@400;500;700&display=swap");
 
 :root {
   --bg: #0b0c10;
-  --panel: rgba(255, 255, 255, 0.04);
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.55);
-  --line: rgba(255, 255, 255, 0.1);
+  --panel: #ffffff0a;
+  --text: #ffffffeb;
+  --muted: #ffffff8c;
+  --line: #ffffff1a;
 
   /* Common Colors */
   --accent-purple: #9b51e0;
   --accent-purple-hover: #8b3fd0;
   --accent-purple-dark: #5a1f8f;
   --text-muted: #c3c8d4;
-  --text-muted-alt: rgba(160, 180, 255, 0.35);
-  --bg-input-dark: rgba(0, 0, 0, 0.55);
-  --bg-input-dark-hover: rgba(0, 0, 0, 0.75);
-  --border-blue: rgba(140, 170, 255, 0.18);
-  --border-blue-hover: rgba(140, 170, 255, 0.3);
-  --border-blue-focus: rgba(140, 170, 255, 0.5);
+  --text-muted-alt: #a0b4ff59;
+  --bg-input-dark: #0000008c;
+  --bg-input-dark-hover: #000000bf;
+  --border-blue: #8caaff2e;
+  --border-blue-hover: #8caaff4d;
+  --border-blue-focus: #8caaff80;
 
   /* Common Border Radius */
   --radius-sm: 4px;
@@ -36,7 +36,7 @@
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: "Roboto", sans-serif;
   background:
     radial-gradient(
       900px 420px at 30% 0%,
@@ -45,7 +45,7 @@ body {
     ),
     radial-gradient(
       800px 400px at 70% 0%,
-      rgba(255, 255, 255, 0.05),
+      #ffffff0d,
       transparent 60%
     ),
     var(--bg);
@@ -302,7 +302,7 @@ body {
 .field input:focus,
 .field textarea:focus {
   border-color: var(--border-blue-focus);
-  box-shadow: 0 0 0 3px rgba(140, 170, 255, 0.15);
+  box-shadow: 0 0 0 3px #8caaff26;
   background: var(--bg-input-dark-hover);
 }
 
@@ -382,7 +382,7 @@ body {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 15, 0.75);
+  background: #0a0a0fbf;
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -423,12 +423,12 @@ body {
   background:
     radial-gradient(
       900px 520px at 50% 0%,
-      rgba(255, 255, 255, 0.05),
+      #ffffff0d,
       transparent 60%
     ),
     radial-gradient(
       900px 520px at 50% 100%,
-      rgba(255, 255, 255, 0.03),
+      #ffffff08,
       transparent 60%
     ),
     linear-gradient(180deg, #0e0e10, #121214);

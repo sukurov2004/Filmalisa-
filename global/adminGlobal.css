@@ -33,11 +33,11 @@
   --transition: 0.2s ease;
   
   /* Common Input Colors */
-  --bg-input-dark: rgba(0, 0, 0, 0.55);
-  --bg-input-dark-hover: rgba(0, 0, 0, 0.75);
-  --border-blue: rgba(140, 170, 255, 0.18);
-  --border-blue-hover: rgba(140, 170, 255, 0.3);
-  --border-blue-focus: rgba(140, 170, 255, 0.5);
+  --bg-input-dark: #0000008c;
+  --bg-input-dark-hover: #000000bf;
+  --border-blue: #8caaff2e;
+  --border-blue-hover: #8caaff4d;
+  --border-blue-focus: #8caaff80;
 }
 
 /* ===========================================
@@ -278,7 +278,7 @@ body {
 }
 
 .edit {
-  background: rgba(34, 197, 94, 0.15);
+  background: #22c55e26;
   color: var(--success);
 }
 
@@ -288,7 +288,7 @@ body {
 }
 
 .delete {
-  background: rgba(239, 68, 68, 0.15);
+  background: #ef444426;
   color: var(--danger);
 }
 
@@ -300,6 +300,14 @@ body {
 /* ===========================================
    PAGINATION
    =========================================== */
+
+   .pagination-dots {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  color: #888;
+  user-select: none;
+}
 .pagination {
   display: flex;
   justify-content: center;
@@ -338,7 +346,7 @@ body {
   background: var(--accent);
   color: #ffffff;
   border-color: var(--accent);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 12px #7c3aed4d;
   transform: translateY(-2px);
 }
 
@@ -359,7 +367,7 @@ body {
 .delete-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 15, 0.75);
+  background: #0a0a0fbf;
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -403,7 +411,7 @@ body {
   background: linear-gradient(145deg, #141416, var(--bg-primary));
   border-radius: var(--radius-2xl);
   padding: 50px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 40px 80px #00000099;
   position: relative;
 }
 
@@ -442,7 +450,7 @@ body {
 .modal-left textarea:focus,
 .modal-left select:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 0 3px #7c3aed33;
 }
 
 .modal-left textarea {
@@ -489,7 +497,7 @@ body {
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 10px 25px #7c3aed66;
 }
 
 /* Right Side - Image Preview */
@@ -504,7 +512,7 @@ body {
   width: 100%;
   border-radius: var(--radius-xl);
   object-fit: cover;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px #00000080;
 }
 
 /* Close Icon */
@@ -544,7 +552,7 @@ body {
   color: #111827;
   border-radius: 16px;
   padding: 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 50px #00000026;
   transform: translateY(20px) scale(0.96);
   transition: transform 0.25s ease;
 }
@@ -608,7 +616,7 @@ body {
 .actor-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 15, 16, 0.85);
+  background: #0f0f10d9;
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -632,7 +640,7 @@ body {
   background: var(--bg-card);
   padding: 30px 25px;
   border-radius: var(--radius-xl);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 50px #00000080;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -663,7 +671,7 @@ body {
 .category-modal input:focus,
 .actor-modal input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 0 3px #7c3aed33;
 }
 
 .category-modal-actions,

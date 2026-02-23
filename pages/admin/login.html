@@ -20,7 +20,7 @@
         </div>
         <h1 class="title">Admin</h1>
 
-        <form class="form" action="#" method="post">
+        <form class="form">
           <!-- Username -->
           <label class="field">
             <span class="icon" aria-hidden="true">
@@ -31,7 +31,7 @@
               />
             </span>
 
-            <input type="text" name="username" placeholder="Username" />
+            <input class="loginName" type="text" name="username" placeholder="Username" />
           </label>
 
           <!-- Password -->
@@ -41,7 +41,7 @@
               <img src="../../assets/Admin/icons/loginPassword.svg" alt="" />
             </span>
 
-            <input type="password" name="password" placeholder="Password" />
+            <input class="loginPassword" type="password" name="password" placeholder="Password" />
 
             <span class="eye" aria-hidden="true">
               <!-- eye icon -->
@@ -53,5 +53,7 @@
         </form>
       </section>
     </main>
+    
+    <script src="../../script/admin/login.js"></script>
   </body>
 </html>

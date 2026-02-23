@@ -266,7 +266,9 @@
         <a href="/shop">Filmalisa Shop</a>
         <a href="/terms">Terms of Use</a>
         <a href="/contact">Contact Us</a>
-        <a href="/privacy/do-not-sell">Do Not Sell or Share Personal Information</a>
+        <a href="/privacy/do-not-sell"
+          >Do Not Sell or Share Personal Information</a
+        >
       </nav>
       <nav aria-label="Footer links 4">
         <a href="/media">Media Center</a>
@@ -279,52 +281,37 @@
 
     <!-- ═══════════════════════════════════════════════════
          FAQ ACCORDION — JavaScript
-         
-         Problem: HTML-də hidden atributu vardı → browser display:none edir
-                  → CSS max-height transition işləmirdi, açılmırdı.
-         
-         Həll:
-         1. Bütün .accordion-content elementlərindən hidden atributu çıxarıldı.
-         2. CSS-də başlanğıc vəziyyət: max-height:0; overflow:hidden; opacity:0
-         3. JS aria-expanded="true" qoyanda CSS :not([aria-expanded="false"])
-            + sibling selector ilə content açılır.
-         4. Eyni vaxtda yalnız bir sual açıq qalır (accordion davranışı).
     ═══════════════════════════════════════════════════ -->
-    <script>
-      (function () {
-        const headers = document.querySelectorAll('.accordion-header');
+<script>
+  (function () {
+    const headers = document.querySelectorAll('.accordion-header');
 
-        headers.forEach(function (btn) {
-          const contentId = btn.getAttribute('aria-controls');
-          const content   = document.getElementById(contentId);
+    headers.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
 
-          // Başlanğıcda hamısı bağlı
-          content.style.maxHeight = '0';
-
-          btn.addEventListener('click', function () {
-            const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-            // Əvvəlcə hamısını bağla
-            headers.forEach(function (otherBtn) {
-              const otherId      = otherBtn.getAttribute('aria-controls');
-              const otherContent = document.getElementById(otherId);
-              otherBtn.setAttribute('aria-expanded', 'false');
-              otherContent.style.maxHeight = '0';
-              otherContent.style.padding   = '0 15px';
-              otherContent.style.opacity   = '0';
-            });
-
-            // Kliklənəni aç (əgər bağlıydısa)
-            if (!isOpen) {
-              btn.setAttribute('aria-expanded', 'true');
-              // scrollHeight — elementin tam hündürlüyü
-              content.style.maxHeight = content.scrollHeight + 'px';
-              content.style.padding   = '15px';
-              content.style.opacity   = '1';
-            }
-          });
+        // Hamısını bağla
+        headers.forEach(function (otherBtn) {
+          const otherId = otherBtn.getAttribute('aria-controls');
+          const otherContent = document.getElementById(otherId);
+          otherBtn.setAttribute('aria-expanded', 'false');
+          otherContent.style.maxHeight = '0';
+          otherContent.style.padding = '0 15px';
+          otherContent.style.opacity = '0';
         });
-      })();
-    </script>
+
+        // Kliklənəni aç (əgər bağlıydısa)
+        if (!isOpen) {
+          const contentId = btn.getAttribute('aria-controls');
+          const content = document.getElementById(contentId);
+          btn.setAttribute('aria-expanded', 'true');
+          content.style.maxHeight = content.scrollHeight + 'px';
+          content.style.padding = '30px';
+          content.style.opacity = '1';
+        }
+      });
+    });
+  })();
+</script>
   </body>
 </html>
