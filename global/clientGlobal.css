@@ -55,14 +55,25 @@ body {
 .layout {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 86px 1fr;
+}
+
+.main {
+  flex: 1;
+  overflow: hidden;
 }
 
 /* ── Sidebar ── */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 100;
+  width: 56px;
+  flex-shrink: 0;
   background: #ffffff05;
   border-right: 1px solid #ffffff0f;
-  padding: 18px 10px;
+  padding: 40px 0px;
   display: flex;
   flex-direction: column;
 }
@@ -74,7 +85,6 @@ body {
   align-items: center;
   gap: 50px;
 }
-
 
 .side-nav {
   display: flex;
@@ -104,15 +114,14 @@ body {
 }
 
 .side-link:hover {
-  color: #0FEFFD;
+  color: #0feffd;
   transform: scale(1.05);
 }
 
 .side-link:hover img {
   filter: brightness(1);
-  color: #0FEFFD;
+  color: #0feffd;
 }
-
 
 /* =====HOME SIDEBAR====== */
 .home-layout {
