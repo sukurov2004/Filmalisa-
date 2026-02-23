@@ -8,12 +8,27 @@
       content="Filmalisa — unlimited movies, TV shows and more. Stream on any device."
     />
     <meta name="robots" content="index, follow" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/client/İconsİmages/logo.svg"
+    />
     <title>Filmalisa — Unlimited Movies &amp; TV Shows</title>
     <link rel="stylesheet" href="./global/reset.css" />
     <link rel="stylesheet" href="./styles/client/responsive.css" />
     <link rel="stylesheet" href="./styles/client/landingPage.css" />
   </head>
   <body>
+    <div class="cinema-intro" id="cinemaIntro">
+      <div class="cinema-bg"></div>
+      <div class="logo-wrapper">
+        <img
+          src="./assets/Admin/images/logo.svg"
+          alt="Filmalisa logo"
+          class="intro-logo"
+        />
+      </div>
+    </div>
     <header class="site-header">
       <div class="header-inner">
         <a href="/" class="header-logo" aria-label="Filmalisa home">
@@ -279,39 +294,6 @@
       </nav>
     </footer>
 
-    <!-- ═══════════════════════════════════════════════════
-         FAQ ACCORDION — JavaScript
-    ═══════════════════════════════════════════════════ -->
-<script>
-  (function () {
-    const headers = document.querySelectorAll('.accordion-header');
-
-    headers.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-        // Hamısını bağla
-        headers.forEach(function (otherBtn) {
-          const otherId = otherBtn.getAttribute('aria-controls');
-          const otherContent = document.getElementById(otherId);
-          otherBtn.setAttribute('aria-expanded', 'false');
-          otherContent.style.maxHeight = '0';
-          otherContent.style.padding = '0 15px';
-          otherContent.style.opacity = '0';
-        });
-
-        // Kliklənəni aç (əgər bağlıydısa)
-        if (!isOpen) {
-          const contentId = btn.getAttribute('aria-controls');
-          const content = document.getElementById(contentId);
-          btn.setAttribute('aria-expanded', 'true');
-          content.style.maxHeight = content.scrollHeight + 'px';
-          content.style.padding = '30px';
-          content.style.opacity = '1';
-        }
-      });
-    });
-  })();
-</script>
+    <script src="./global/clientGlobal.js"></script>
   </body>
 </html>
