@@ -83,7 +83,6 @@ body {
 
 .card {
   position: relative;
-  border-radius: 12px;
   overflow: hidden;
   background: #ffffff08;
   border: 1px solid #ffffff0f;
