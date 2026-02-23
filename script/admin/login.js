@@ -1,4 +1,11 @@
-document.querySelector('.form').addEventListener('submit', async function (e) {
+const eye = document.querySelector('.eye');
+const passwordInput = document.querySelector('.loginPassword');
+const eyeIcon = eye.querySelector('img');
+const form = document.querySelector('.form');
+
+form.addEventListener('submit', loginAdmin);
+
+async function loginAdmin(e) {
   e.preventDefault();
 
   const username = document.querySelector('.loginName').value.trim();
@@ -22,14 +29,23 @@ document.querySelector('.form').addEventListener('submit', async function (e) {
       alert(data.message || 'Login failed!');
       return;
     }
+
     localStorage.setItem('adminToken', data.data.tokens.access_token);
     window.location.href = 'https://sukurov2004.github.io/Filmalisa-/pages/admin/dashboard.html';
+
   } catch (error) {
     console.error('Error:', error);
     alert('Something went wrong. Please try again.');
   }
-});
-document.querySelector('.eye').addEventListener('click', function () {
-  const passwordInput = document.querySelector('.loginPassword');
-  passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+}
+
+// Password show/hide
+eye.addEventListener('click', function () {
+  const isPassword = passwordInput.type === 'password';
+
+  passwordInput.type = isPassword ? 'text' : 'password';
+
+  eyeIcon.src = isPassword
+    ? '../../assets/client/İconsİmages/eyeOff.svg'
+    : '../../assets/client/İconsİmages/eye.svg';
 });
