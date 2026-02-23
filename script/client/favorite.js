@@ -7,7 +7,7 @@
 
   const CARD_WIDTH = 300;
   const CARD_GAP = 0;
-  const VISIBLE = 4.8;
+  const VISIBLE = 4.9;
 
   const cards = grid.querySelectorAll(".movie-card");
   const step = CARD_WIDTH + CARD_GAP;
