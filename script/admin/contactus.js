@@ -1,28 +1,48 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem("adminToken");
+// contactus.js (ALL-IN-ONE: Auth Check + GET + DELETE + Modal + Pagination)
 
-  if (!token) {
-         window.location.href = "https://sukurov2004.github.io/Filmalisa-/index.html";
+document.addEventListener("DOMContentLoaded", () => {
+  // =========================
+  // AUTH CHECK
+  // =========================
+  const adminToken = localStorage.getItem("adminToken");
+  if (!adminToken) {
+    window.location.href =
+      "https://sukurov2004.github.io/Filmalisa-/index.html";
+    return;
   }
-});
 
+  // =========================
+  // API CONFIG (POSTMAN-DAN DƏQİQ YAZ)
+  // =========================
+  // Postman-da işləyən base URL-ni yaz:
+  // Misal: https://api.sarkhanrahimli.dev
+  const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin/contacts"; // <-- BUNU DƏYİŞ
 
-// contactus.js (ALL-IN-ONE: GET + DELETE + Modal + Pagination)
+  // Postman-da Contact -> GET list və DEL remove yollarını yaz:
+  // Misal:
+  // list: "/admin/contact/list"
+  // delete: (id) => `/admin/contact/remove/${id}`
+  const ENDPOINTS = {
+    list: "/contactus", // <-- BUNU POSTMAN-A UYĞUNLAŞDIR
+    delete: (id) => `/contactus/${id}`, // <-- BUNU POSTMAN-A UYĞUNLAŞDIR
+  };
 
-const API_BASE = "http://localhost:3000"; // <-- dəyiş: sənin backend base URL
-const ENDPOINTS = {
-  list: "/contactus",         // GET  -> bütün mesajlar
-  delete: (id) => `/contactus/${id}`, // DELETE -> bir mesaj
-};
+  // =========================
+  // HEADERS (TOKEN)
+  // =========================
+  // Əgər backend "Bearer" istəyirsə:
+  const AUTH_HEADERS = adminToken
+    ? { Authorization: `Bearer ${adminToken}` }
+    : {};
 
-// Əgər auth lazımdırsa token əlavə et:
-// const TOKEN = localStorage.getItem("token");
-// const AUTH_HEADERS = TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {};
-const AUTH_HEADERS = {}; // auth yoxdursa belə qalsın
+  // Əgər Bearer işləməsə bunu yoxla:
+  // const AUTH_HEADERS = adminToken ? { Authorization: adminToken } : {};
 
-const ROWS_PER_PAGE = 5;
+  // =========================
+  // SETTINGS
+  // =========================
+  const ROWS_PER_PAGE = 5;
 
-document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // ELEMENTS
   // =========================
@@ -34,59 +54,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelBtn = modalOverlay?.querySelector(".cancel-btn");
   const deleteBtn = modalOverlay?.querySelector(".delete-btn");
 
-  if (!table || !tbody || !paginationWrap || !modalOverlay) return;
+  // Əgər HTML-də nəsə yoxdursa çıx:
+  if (!table || !tbody || !paginationWrap || !modalOverlay || !cancelBtn || !deleteBtn) {
+    console.warn("Contact page elements not found. Check HTML selectors/IDs.");
+    return;
+  }
 
   // =========================
   // STATE
   // =========================
-  let data = [];             // API-dən gələn massiv
-  let currentPage = 1;       // pagination page
-  let selectedId = null;     // delete ediləcək mesaj id
+  let data = [];
+  let currentPage = 1;
+  let selectedId = null;
   let isDeleting = false;
 
   // =========================
-  // API HELPERS
+  // HELPERS
   // =========================
-  async function apiGet(url) {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        ...AUTH_HEADERS,
-      },
-    });
-
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      throw new Error(`GET failed: ${res.status} ${res.statusText} ${text}`);
-    }
-
-    return res.json();
+  function buildUrl(pathOrFullUrl) {
+    // Əgər full URL göndərmisənsə elə onu qaytar:
+    if (/^https?:\/\//i.test(pathOrFullUrl)) return pathOrFullUrl;
+    return API_BASE.replace(/\/$/, "") + "/" + String(pathOrFullUrl).replace(/^\//, "");
   }
 
-  async function apiDelete(url) {
-    const res = await fetch(url, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        ...AUTH_HEADERS,
-      },
-    });
-
-    // Bəzi backendlər DELETE-də 204 No Content qaytarır
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      throw new Error(`DELETE failed: ${res.status} ${res.statusText} ${text}`);
-    }
-
-    // 204 olduqda json parse etmə
-    if (res.status === 204) return null;
-    return res.json().catch(() => null);
-  }
-
-  // =========================
-  // RENDER
-  // =========================
   function escapeHtml(str) {
     return String(str ?? "")
       .replaceAll("&", "&amp;")
@@ -96,8 +86,46 @@ document.addEventListener("DOMContentLoaded", () => {
       .replaceAll("'", "&#039;");
   }
 
+  // =========================
+  // API
+  // =========================
+  async function apiGet(url) {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        ...AUTH_HEADERS,
+      },
+    });
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(`GET failed: ${res.status} ${res.statusText} ${text}`);
+    }
+    return res.json();
+  }
+
+  async function apiDelete(url) {
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        ...AUTH_HEADERS,
+      },
+    });
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(`DELETE failed: ${res.status} ${res.statusText} ${text}`);
+    }
+
+    // 204 No Content ola bilər
+    if (res.status === 204) return null;
+    return res.json().catch(() => null);
+  }
+
+  // =========================
+  // RENDER ROWS
+  // =========================
   function renderRows() {
-    // data -> tbody
     tbody.innerHTML = "";
 
     if (!Array.isArray(data) || data.length === 0) {
@@ -109,14 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const rowsHtml = data
+    tbody.innerHTML = data
       .map((item) => {
-        // Serverdən gələn field-ları özünə uyğunlaşdır:
-        // Məs: item.id / item.username / item.email / item.question
-        const id = item.id ?? item._id ?? "";
-        const username = item.username ?? item.name ?? "";
+        // Backend field-larını uyğunlaşdır:
+        const id = item.id ?? item._id ?? item.contactId ?? "";
+        const username = item.username ?? item.name ?? item.fullname ?? "";
         const email = item.email ?? "";
-        const question = item.question ?? item.message ?? "";
+        const question = item.question ?? item.message ?? item.text ?? "";
 
         return `
           <tr data-id="${escapeHtml(id)}">
@@ -129,8 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       })
       .join("");
-
-    tbody.innerHTML = rowsHtml;
   }
 
   // =========================
@@ -154,14 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return btn;
     };
 
-    paginationWrap.appendChild(
-      makeBtn("‹", page === 1, () => showPage(page - 1))
-    );
+    paginationWrap.appendChild(makeBtn("‹", page === 1, () => showPage(page - 1)));
 
     for (let i = 1; i <= totalPages; i++) {
-      paginationWrap.appendChild(
-        makeBtn(String(i), false, () => showPage(i), i === page)
-      );
+      paginationWrap.appendChild(makeBtn(String(i), false, () => showPage(i), i === page));
     }
 
     paginationWrap.appendChild(
@@ -171,8 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showPage(page) {
     const rows = getRows();
-    const totalRows = rows.length;
-    const totalPages = Math.max(1, Math.ceil(totalRows / ROWS_PER_PAGE));
+    const totalPages = Math.max(1, Math.ceil(rows.length / ROWS_PER_PAGE));
 
     currentPage = Math.min(Math.max(1, page), totalPages);
 
@@ -209,21 +229,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // LOAD DATA (GET)
+  // LOAD (GET)
   // =========================
   async function loadMessages() {
     try {
-      // istəyirsənsə yüklənmə zamanı placeholder göstərə bilərik:
       tbody.innerHTML = `
         <tr><td colspan="5" style="padding:16px; opacity:.7;">Loading...</td></tr>
       `;
 
-      const url = API_BASE + ENDPOINTS.list;
+      const url = buildUrl(ENDPOINTS.list);
       const result = await apiGet(url);
 
-      // backend iki cür qaytara bilər:
-      // 1) düz massiv: [ {...}, {...} ]
-      // 2) object içində: { data: [...] }
+      // 2 variant ola bilər:
+      // 1) [ {...}, {...} ]
+      // 2) { data: [ ... ] }
       data = Array.isArray(result) ? result : (result?.data ?? []);
 
       renderRows();
@@ -234,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tbody.innerHTML = `
         <tr>
           <td colspan="5" style="padding:16px; color:#ffb4b4;">
-            Failed to load messages.
+            Failed to load messages. (Check console: CORS / URL / Token)
           </td>
         </tr>
       `;
@@ -242,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // DELETE (API)
+  // DELETE
   // =========================
   async function deleteMessage(id) {
     if (!id || isDeleting) return;
@@ -252,18 +271,18 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteBtn.textContent = "Deleting...";
 
     try {
-      const url = API_BASE + ENDPOINTS.delete(id);
+      const url = buildUrl(ENDPOINTS.delete(id));
       await apiDelete(url);
 
-      // UI-dan sil (data state-dən)
-      data = data.filter((x) => String(x.id ?? x._id) !== String(id));
+      // State-dən sil:
+      data = data.filter((x) => String(x.id ?? x._id ?? x.contactId) !== String(id));
 
       renderRows();
       closeModal();
       refreshPagination();
     } catch (err) {
       console.error(err);
-      alert("Delete failed. Check console / API.");
+      alert("Delete failed. Console-a bax (401 / CORS / 404 ola bilər).");
     } finally {
       isDeleting = false;
       deleteBtn.disabled = false;
@@ -292,9 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalOverlay.classList.contains("show")) {
-      closeModal();
-    }
+    if (e.key === "Escape" && modalOverlay.classList.contains("show")) closeModal();
   });
 
   deleteBtn.addEventListener("click", () => {
