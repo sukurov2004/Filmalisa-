@@ -1,4 +1,3 @@
-// contactus.js (ALL-IN-ONE: Auth Check + GET + DELETE + Modal + Pagination)
 
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
