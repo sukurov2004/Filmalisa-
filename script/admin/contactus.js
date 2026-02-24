@@ -1,30 +1,28 @@
 // contactus.js (ALL-IN-ONE: Auth Check + GET + DELETE + Modal + Pagination)
 
 document.addEventListener("DOMContentLoaded", () => {
-
+  // =========================
+  // AUTH CHECK
+  // =========================
   const adminToken = localStorage.getItem("adminToken");
   if (!adminToken) {
-    window.location.href =
-      "https://sukurov2004.github.io/Filmalisa-/index.html";
+    window.location.href = "https://sukurov2004.github.io/Filmalisa-/index.html";
     return;
   }
 
-
-const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
-
-const ENDPOINTS = {
-  list: "/contacts",             
-  delete: (id) => `/contact/${id}` 
-};
-
   // =========================
-  // HEADERS (TOKEN)
+  // API CONFIG
   // =========================
- 
-  const AUTH_HEADERS = adminToken
-    ? { Authorization: `Bearer ${adminToken}` }
-    : {};
+  const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
+  const ENDPOINTS = {
+    list: "/contacts",
+    delete: (id) => `/contact/${encodeURIComponent(String(id))}`, 
+  };
 
+  const AUTH_HEADERS = {
+    Authorization: `Bearer ${adminToken}`,
+    "Content-Type": "application/json",
+  };
 
   // =========================
   // SETTINGS
@@ -42,7 +40,6 @@ const ENDPOINTS = {
   const cancelBtn = modalOverlay?.querySelector(".cancel-btn");
   const deleteBtn = modalOverlay?.querySelector(".delete-btn");
 
-  
   if (!table || !tbody || !paginationWrap || !modalOverlay || !cancelBtn || !deleteBtn) {
     console.warn("Contact page elements not found. Check HTML selectors/IDs.");
     return;
@@ -60,9 +57,12 @@ const ENDPOINTS = {
   // HELPERS
   // =========================
   function buildUrl(pathOrFullUrl) {
-  
     if (/^https?:\/\//i.test(pathOrFullUrl)) return pathOrFullUrl;
-    return API_BASE.replace(/\/$/, "") + "/" + String(pathOrFullUrl).replace(/^\//, "");
+    return (
+      API_BASE.replace(/\/$/, "") +
+      "/" +
+      String(pathOrFullUrl).replace(/^\//, "")
+    );
   }
 
   function escapeHtml(str) {
@@ -74,30 +74,39 @@ const ENDPOINTS = {
       .replaceAll("'", "&#039;");
   }
 
+  function extractArray(result) {
+    if (Array.isArray(result)) return result;
+    if (Array.isArray(result?.data)) return result.data;
+    if (Array.isArray(result?.contacts)) return result.contacts;
+    if (Array.isArray(result?.data?.contacts)) return result.data.contacts;
+    return [];
+  }
+
+  function getItemId(item) {
+    return item?.id ?? item?._id ?? item?.contactId ?? item?.contact_id ?? "";
+  }
+
   // =========================
   // API
   // =========================
   async function apiGet(url) {
     const res = await fetch(url, {
       method: "GET",
-      headers: {
-        ...AUTH_HEADERS,
-      },
+      headers: { ...AUTH_HEADERS },
     });
 
     if (!res.ok) {
       const text = await res.text().catch(() => "");
       throw new Error(`GET failed: ${res.status} ${res.statusText} ${text}`);
     }
+
     return res.json();
   }
 
   async function apiDelete(url) {
     const res = await fetch(url, {
       method: "DELETE",
-      headers: {
-        ...AUTH_HEADERS,
-      },
+      headers: { ...AUTH_HEADERS },
     });
 
     if (!res.ok) {
@@ -105,7 +114,6 @@ const ENDPOINTS = {
       throw new Error(`DELETE failed: ${res.status} ${res.statusText} ${text}`);
     }
 
-    // 204 No Content ola bilər
     if (res.status === 204) return null;
     return res.json().catch(() => null);
   }
@@ -127,14 +135,19 @@ const ENDPOINTS = {
 
     tbody.innerHTML = data
       .map((item) => {
-      
-        const id = item.id ?? item._id ?? item.contactId ?? "";
-        const username = item.username ?? item.name ?? item.fullname ?? "";
-        const email = item.email ?? "";
-        const question = item.question ?? item.message ?? item.text ?? "";
+        const id = getItemId(item);
+
+        const username =
+          item?.username ?? item?.name ?? item?.fullname ?? item?.fullName ?? "";
+
+        const email = item?.email ?? "";
+        const question = item?.question ?? item?.message ?? item?.text ?? "";
+
+        
+        const safeId = encodeURIComponent(String(id));
 
         return `
-          <tr data-id="${encodeURIComponent(String(id))}">
+          <tr data-id="${safeId}">
             <td>${escapeHtml(id)}</td>
             <td>${escapeHtml(username)}</td>
             <td>${escapeHtml(email)}</td>
@@ -170,7 +183,9 @@ const ENDPOINTS = {
     paginationWrap.appendChild(makeBtn("‹", page === 1, () => showPage(page - 1)));
 
     for (let i = 1; i <= totalPages; i++) {
-      paginationWrap.appendChild(makeBtn(String(i), false, () => showPage(i), i === page));
+      paginationWrap.appendChild(
+        makeBtn(String(i), false, () => showPage(i), i === page)
+      );
     }
 
     paginationWrap.appendChild(
@@ -194,10 +209,13 @@ const ENDPOINTS = {
     renderControls(currentPage, totalPages);
   }
 
-  function refreshPagination() {
+  function refreshPagination(resetToFirst = false) {
     const rows = getRows();
     const totalPages = Math.max(1, Math.ceil(rows.length / ROWS_PER_PAGE));
+
+    if (resetToFirst) currentPage = 1;
     if (currentPage > totalPages) currentPage = totalPages;
+
     showPage(currentPage);
   }
 
@@ -228,18 +246,16 @@ const ENDPOINTS = {
       const url = buildUrl(ENDPOINTS.list);
       const result = await apiGet(url);
 
-      
-      data = Array.isArray(result) ? result : (result?.data ?? []);
+      data = extractArray(result);
 
       renderRows();
-      refreshPagination();
-      showPage(1);
+      refreshPagination(true); 
     } catch (err) {
       console.error(err);
       tbody.innerHTML = `
         <tr>
           <td colspan="5" style="padding:16px; color:#ffb4b4;">
-            Failed to load messages. (Check console: CORS / URL / Token)
+            Failed to load messages. (Console-a bax: CORS / URL / Token / Response)
           </td>
         </tr>
       `;
@@ -261,14 +277,14 @@ const ENDPOINTS = {
       await apiDelete(url);
 
     
-      data = data.filter((x) => String(x.id ?? x._id ?? x.contactId) !== String(id));
+      data = data.filter((x) => String(getItemId(x)) !== String(id));
 
       renderRows();
       closeModal();
       refreshPagination();
     } catch (err) {
       console.error(err);
-      alert("Delete failed. Console-a bax (401 / CORS / 404 ola bilər).");
+      alert("Delete failed. Console-a bax (401 / 403 / 404 / CORS ola bilər).");
     } finally {
       isDeleting = false;
       deleteBtn.disabled = false;
@@ -284,9 +300,10 @@ const ENDPOINTS = {
     if (!trash) return;
 
     const row = trash.closest("tr");
-    const id = row?.dataset?.id;
-    if (!id) return;
+    const safeId = row?.dataset?.id;
+    if (!safeId) return;
 
+    const id = decodeURIComponent(safeId); 
     openModal(id);
   });
 
