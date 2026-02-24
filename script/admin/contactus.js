@@ -134,7 +134,7 @@ const ENDPOINTS = {
         const question = item.question ?? item.message ?? item.text ?? "";
 
         return `
-          <tr data-id="${escapeHtml(id)}">
+          <tr data-id="${encodeURIComponent(String(id))}">
             <td>${escapeHtml(id)}</td>
             <td>${escapeHtml(username)}</td>
             <td>${escapeHtml(email)}</td>
