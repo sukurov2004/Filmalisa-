@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+          window.location.href = "https://sukurov2004.github.io/Filmalisa-/index.html";
+  }
+});
+
 const createBtn = document.getElementById("createBtn");
 const modal = document.getElementById("movieModal");
 const closeModal = document.getElementById("closeModal");

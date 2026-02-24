@@ -1,0 +1,137 @@
+/* ====== LAYOUT ====== */
+body {
+  font-family: "Raleway", sans-serif;
+  background:
+    radial-gradient(
+      900px 420px at 30% 0%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 400px at 70% 0%,
+      rgba(255, 255, 255, 0.05),
+      transparent 60%
+    ),
+    var(--bg);
+  color: var(--text);
+}
+
+.layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 86px 1fr;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  background: #ffffff05;
+  border-right: 1px solid #ffffff0f;
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  align-items: center;
+}
+
+.side-link {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #0feffd;
+  text-decoration: none;
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base);
+}
+
+.side-link img {
+  width: 32px;
+  height: 32px;
+  transition: filter var(--transition-base);
+  filter: brightness(0.55);
+}
+
+.side-link:hover {
+  color: #0feffd;
+  transform: scale(1.05);
+}
+
+.side-link:hover img {
+  filter: brightness(1);
+  color: #0feffd;
+}
+
+.side-bottom {
+  padding-bottom: 4px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 980px) {
+  .hero {
+    height: 460px;
+  }
+  .hero-title {
+    font-size: 48px;
+  }
+  .profile-bubble {
+    right: 46px;
+    top: 160px;
+  }
+  .hero-content {
+    padding-top: 110px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+  .main {
+    margin-left: 60px;
+  }
+
+  .hero {
+    height: 420px;
+  }
+  .hero-content {
+    padding: 96px 18px 24px 18px;
+  }
+  .hero-title {
+    font-size: 38px;
+  }
+
+  .profile-bubble {
+    right: 18px;
+    top: 22px;
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 32px;
+  }
+  .hero-desc {
+    font-size: 13px;
+  }
+  .btn {
+    height: 46px;
+    padding: 0 22px;
+  }
+}
