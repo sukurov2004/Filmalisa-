@@ -11,32 +11,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // =========================
-  // API CONFIG (POSTMAN-DAN DƏQİQ YAZ)
-  // =========================
-  // Postman-da işləyən base URL-ni yaz:
-  // Misal: https://api.sarkhanrahimli.dev
-  const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin/contacts"; // <-- BUNU DƏYİŞ
 
-  // Postman-da Contact -> GET list və DEL remove yollarını yaz:
-  // Misal:
-  // list: "/admin/contact/list"
-  // delete: (id) => `/admin/contact/remove/${id}`
+  const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin/contacts"; 
+
+ 
   const ENDPOINTS = {
-    list: "/contactus", // <-- BUNU POSTMAN-A UYĞUNLAŞDIR
-    delete: (id) => `/contactus/${id}`, // <-- BUNU POSTMAN-A UYĞUNLAŞDIR
+    list: "/contactus", 
+    delete: (id) => `https://api.sarkhanrahimli.dev/api/filmalisa/admin/contact/${id}`, 
   };
 
   // =========================
   // HEADERS (TOKEN)
   // =========================
-  // Əgər backend "Bearer" istəyirsə:
+ 
   const AUTH_HEADERS = adminToken
     ? { Authorization: `Bearer ${adminToken}` }
     : {};
 
-  // Əgər Bearer işləməsə bunu yoxla:
-  // const AUTH_HEADERS = adminToken ? { Authorization: adminToken } : {};
 
   // =========================
   // SETTINGS
@@ -54,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelBtn = modalOverlay?.querySelector(".cancel-btn");
   const deleteBtn = modalOverlay?.querySelector(".delete-btn");
 
-  // Əgər HTML-də nəsə yoxdursa çıx:
+  
   if (!table || !tbody || !paginationWrap || !modalOverlay || !cancelBtn || !deleteBtn) {
     console.warn("Contact page elements not found. Check HTML selectors/IDs.");
     return;
@@ -72,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // HELPERS
   // =========================
   function buildUrl(pathOrFullUrl) {
-    // Əgər full URL göndərmisənsə elə onu qaytar:
+  
     if (/^https?:\/\//i.test(pathOrFullUrl)) return pathOrFullUrl;
     return API_BASE.replace(/\/$/, "") + "/" + String(pathOrFullUrl).replace(/^\//, "");
   }
@@ -139,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tbody.innerHTML = data
       .map((item) => {
-        // Backend field-larını uyğunlaşdır:
+      
         const id = item.id ?? item._id ?? item.contactId ?? "";
         const username = item.username ?? item.name ?? item.fullname ?? "";
         const email = item.email ?? "";
@@ -240,9 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const url = buildUrl(ENDPOINTS.list);
       const result = await apiGet(url);
 
-      // 2 variant ola bilər:
-      // 1) [ {...}, {...} ]
-      // 2) { data: [ ... ] }
+      
       data = Array.isArray(result) ? result : (result?.data ?? []);
 
       renderRows();
@@ -274,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const url = buildUrl(ENDPOINTS.delete(id));
       await apiDelete(url);
 
-      // State-dən sil:
+    
       data = data.filter((x) => String(x.id ?? x._id ?? x.contactId) !== String(id));
 
       renderRows();
