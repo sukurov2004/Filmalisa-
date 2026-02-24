@@ -24,7 +24,7 @@ const token    = localStorage.getItem("adminToken");
 // ── Səhifə yüklənəndə ─────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   if (!token) {
-    window.location.href = "https://sukurov2004.github.io/Filmalisa-/index.html";
+    window.location.href = "http://127.0.0.1:5500/index.html";
     return;
   }
   pagination = initPagination(tableBody, document.querySelector(".pagination"), 8);

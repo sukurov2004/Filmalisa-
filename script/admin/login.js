@@ -29,9 +29,9 @@ async function loginAdmin(e) {
       alert(data.message || 'Login failed!');
       return;
     }
-
+0
     localStorage.setItem('adminToken', data.data.tokens.access_token);
-    window.location.href = 'https://sukurov2004.github.io/Filmalisa-/pages/admin/dashboard.html';
+    window.location.href = 'http://127.0.0.1:5500/pages/admin/dashboard.html';
 
   } catch (error) {
     console.error('Error:', error);
