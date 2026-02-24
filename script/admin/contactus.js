@@ -12,13 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin/contacts"; 
+const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
 
- 
-  const ENDPOINTS = {
-    list: "/contactus", 
-    delete: (id) => `https://api.sarkhanrahimli.dev/api/filmalisa/admin/contact/${id}`, 
-  };
+const ENDPOINTS = {
+  list: "/contacts",             
+  delete: (id) => `/contact/${id}` 
+};
 
   // =========================
   // HEADERS (TOKEN)
