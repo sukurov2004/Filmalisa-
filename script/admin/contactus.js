@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ================= API =================
-  const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
+  const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin/contact/3";
   const ENDPOINTS = {
     list: "/contacts",
     delete: (id) => `/contact/${encodeURIComponent(id)}`,
