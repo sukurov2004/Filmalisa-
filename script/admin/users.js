@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const paginationEl = document.querySelector(".pagination");
 
   // pagination.js-dən gələn funksiya
-  const pager = initPagination(tableBody, paginationEl, 4);
+  const pager = initPagination(tableBody, paginationEl, 5);
 
   fetch("https://api.sarkhanrahimli.dev/api/filmalisa/admin/users", {
     method: "GET",
