@@ -1,5 +1,6 @@
 /* Movie modal uses shared styles from adminGlobal.css */
 /* Page-specific movie modal adjustments */
+
 .movie-modal {
   max-width: 1000px;
   max-height: 90vh;
@@ -29,4 +30,10 @@
 .close-modal {
   top: 25px;
   right: 30px;
+}
+
+/* Actor multi-select: category ilə eyni stil (adminGlobal.css-dən gəlir),
+   yalnız multiple olduğu üçün hündürlük əlavə edilir */
+#actorSelect {
+  height: 120px;
 }
