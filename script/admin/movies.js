@@ -17,27 +17,227 @@ const actorSelect = document.getElementById("actorSelect");
 const categorySelect = document.getElementById("categorySelect");
 const adultCheck = document.getElementById("adultCheck");
 
+// Custom dropdown state
+let actorDropdownWrapper = null;
+let actorTrigger = null;
+let actorList = null;
+let selectedActorIds = new Set();
+
+let categoryDropdownWrapper = null;
+let categoryTrigger = null;
+let categoryList = null;
+let selectedCategoryId = null;
+let selectedCategoryName = "";
+
 let editingId = null;
 let pagination = null;
 const token = localStorage.getItem("adminToken");
 
-// Səhifə yükləndikdə token yoxlanılır, data çəkilir
+// =============================================
+// DOMContentLoaded
+// =============================================
 document.addEventListener("DOMContentLoaded", async () => {
   if (!token) {
     window.location.href = "http://127.0.0.1:5500/index.html";
     return;
   }
+
   pagination = initPagination(
     tableBody,
     document.querySelector(".pagination"),
-    8,
+    5,
   );
+
+  buildActorDropdown();
+  buildCategoryDropdown();
+
   await getCategories();
   await getActors();
   await getMovies();
 });
 
-// Ekranın sağ yuxarısında müvəqqəti bildiriş göstərir
+// =============================================
+// CUSTOM ACTOR CHECKBOX DROPDOWN
+// =============================================
+function buildActorDropdown() {
+  actorSelect.style.display = "none";
+
+  actorDropdownWrapper = document.createElement("div");
+  actorDropdownWrapper.className = "actor-dropdown";
+
+  actorTrigger = document.createElement("div");
+  actorTrigger.className = "actor-dropdown-trigger";
+  actorTrigger.textContent = "Actors seçin";
+
+  actorList = document.createElement("div");
+  actorList.className = "actor-dropdown-list";
+
+  actorDropdownWrapper.appendChild(actorTrigger);
+  actorDropdownWrapper.appendChild(actorList);
+  actorSelect.parentNode.insertBefore(actorDropdownWrapper, actorSelect);
+
+  actorTrigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    actorDropdownWrapper.classList.toggle("open");
+    categoryDropdownWrapper.classList.remove("open");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!actorDropdownWrapper.contains(e.target)) {
+      actorDropdownWrapper.classList.remove("open");
+    }
+  });
+}
+
+function populateActorDropdown(actors) {
+  actorList.innerHTML = "";
+  actors.forEach((actor) => {
+    const id = actor.id;
+    const name = actor.full_name || actor.name || actor.fullName || `Actor #${id}`;
+
+    const label = document.createElement("label");
+    label.className = "actor-option";
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.value = id;
+    cb.checked = selectedActorIds.has(Number(id));
+
+    cb.addEventListener("change", () => {
+      if (cb.checked) selectedActorIds.add(Number(id));
+      else selectedActorIds.delete(Number(id));
+      updateActorTriggerLabel();
+    });
+
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(" " + name));
+    actorList.appendChild(label);
+  });
+
+  updateActorTriggerLabel();
+}
+
+function updateActorTriggerLabel() {
+  const count = selectedActorIds.size;
+  actorTrigger.textContent = count === 0 ? "Actors seçin" : `${count} actor seçildi`;
+}
+
+function clearActorSelection() {
+  selectedActorIds.clear();
+  actorList.querySelectorAll("input[type=checkbox]").forEach((cb) => (cb.checked = false));
+  updateActorTriggerLabel();
+}
+
+function setSelectedActors(actorIds) {
+  selectedActorIds = new Set(actorIds.map(Number));
+  actorList.querySelectorAll("input[type=checkbox]").forEach((cb) => {
+    cb.checked = selectedActorIds.has(Number(cb.value));
+  });
+  updateActorTriggerLabel();
+}
+
+// =============================================
+// CUSTOM CATEGORY RADIO DROPDOWN
+// =============================================
+function buildCategoryDropdown() {
+  categorySelect.style.display = "none";
+
+  categoryDropdownWrapper = document.createElement("div");
+  categoryDropdownWrapper.className = "actor-dropdown";
+
+  categoryTrigger = document.createElement("div");
+  categoryTrigger.className = "actor-dropdown-trigger";
+  categoryTrigger.textContent = "Category seçin";
+
+  categoryList = document.createElement("div");
+  categoryList.className = "actor-dropdown-list";
+
+  categoryDropdownWrapper.appendChild(categoryTrigger);
+  categoryDropdownWrapper.appendChild(categoryList);
+  categorySelect.parentNode.insertBefore(categoryDropdownWrapper, categorySelect);
+
+  categoryTrigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    categoryDropdownWrapper.classList.toggle("open");
+    actorDropdownWrapper.classList.remove("open");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!categoryDropdownWrapper.contains(e.target)) {
+      categoryDropdownWrapper.classList.remove("open");
+    }
+  });
+}
+
+function populateCategoryDropdown(categories) {
+  categoryList.innerHTML = "";
+
+  // "Seçilməyib" seçimi
+  const noneLabel = document.createElement("label");
+  noneLabel.className = "actor-option";
+  const noneCb = document.createElement("input");
+  noneCb.type = "radio";
+  noneCb.name = "category-radio";
+  noneCb.value = "";
+  noneCb.checked = !selectedCategoryId;
+  noneCb.addEventListener("change", () => {
+    selectedCategoryId = null;
+    selectedCategoryName = "";
+    categoryTrigger.textContent = "Category seçin";
+    categorySelect.value = "";
+    categoryDropdownWrapper.classList.remove("open");
+  });
+  noneLabel.appendChild(noneCb);
+  noneLabel.appendChild(document.createTextNode(" —"));
+  categoryList.appendChild(noneLabel);
+
+  categories.forEach((cat) => {
+    const label = document.createElement("label");
+    label.className = "actor-option";
+
+    const rb = document.createElement("input");
+    rb.type = "radio";
+    rb.name = "category-radio";
+    rb.value = cat.id;
+    rb.checked = Number(selectedCategoryId) === Number(cat.id);
+
+    rb.addEventListener("change", () => {
+      selectedCategoryId = cat.id;
+      selectedCategoryName = cat.name;
+      categoryTrigger.textContent = cat.name;
+      categorySelect.value = cat.id;
+      categoryDropdownWrapper.classList.remove("open");
+    });
+
+    label.appendChild(rb);
+    label.appendChild(document.createTextNode(" " + cat.name));
+    categoryList.appendChild(label);
+  });
+}
+
+function setSelectedCategory(catId) {
+  selectedCategoryId = catId ? Number(catId) : null;
+  const opt = categorySelect.querySelector(`option[value="${catId}"]`);
+  selectedCategoryName = opt ? opt.textContent : "";
+  categoryTrigger.textContent = selectedCategoryName || "Category seçin";
+  categoryList.querySelectorAll("input[type=radio]").forEach((rb) => {
+    rb.checked = rb.value == catId;
+  });
+}
+
+function clearCategorySelection() {
+  selectedCategoryId = null;
+  selectedCategoryName = "";
+  categoryTrigger.textContent = "Category seçin";
+  categorySelect.value = "";
+  categoryList.querySelectorAll("input[type=radio]").forEach((rb) => {
+    rb.checked = rb.value === "";
+  });
+}
+
+// =============================================
+// NOTIFICATION
+// =============================================
 function showNotification(msg, type = "success") {
   document.querySelector(".notif")?.remove();
   const notif = document.createElement("div");
@@ -53,7 +253,9 @@ function showNotification(msg, type = "success") {
   setTimeout(() => notif.remove(), 3000);
 }
 
-// API-dən gələn film obyektini sabit formatda normallaşdırır
+// =============================================
+// NORMALIZE
+// =============================================
 function normalizeMovie(movie) {
   return {
     id: movie.id,
@@ -70,7 +272,9 @@ function normalizeMovie(movie) {
   };
 }
 
-// Modaldakı bütün inputları sıfırlayır
+// =============================================
+// CLEAR INPUTS
+// =============================================
 function clearInputs() {
   titleInput.value = "";
   overviewInput.value = "";
@@ -79,15 +283,17 @@ function clearInputs() {
   watchInput.value = "";
   imdbInput.value = "";
   runtimeInput.value = "";
-  categorySelect.value = "";
   adultCheck.checked = false;
   previewImg.src = "../../assets/Admin/images/movies.svg";
   submitBtn.textContent = "Submit";
   editingId = null;
-  [...actorSelect.options].forEach((o) => (o.selected = false));
+  clearActorSelection();
+  clearCategorySelection();
 }
 
-// Kateqoriyaları API-dən çəkib select-ə doldurur
+// =============================================
+// API CALLS
+// =============================================
 async function getCategories() {
   try {
     const res = await fetch(`${API_BASE}/categories`, {
@@ -98,9 +304,7 @@ async function getCategories() {
     });
     if (!res.ok) return;
     const data = await res.json();
-    const categories = Array.isArray(data)
-      ? data
-      : data.categories || data.data || [];
+    const categories = Array.isArray(data) ? data : data.categories || data.data || [];
 
     categorySelect.innerHTML = `<option value="">Category</option>`;
     categories.forEach((cat) => {
@@ -109,12 +313,13 @@ async function getCategories() {
       opt.textContent = cat.name;
       categorySelect.appendChild(opt);
     });
+
+    populateCategoryDropdown(categories);
   } catch (err) {
     console.error("Categories error:", err);
   }
 }
 
-// Aktörları API-dən çəkib multiple select-ə doldurur
 async function getActors() {
   try {
     const res = await fetch(`${API_BASE}/admin/actors`, {
@@ -125,24 +330,22 @@ async function getActors() {
     });
     if (!res.ok) return;
     const data = await res.json();
-    const actors = Array.isArray(data)
-      ? data
-      : data.actors || data.data || data.results || [];
+    const actors = Array.isArray(data) ? data : data.actors || data.data || data.results || [];
 
     actorSelect.innerHTML = "";
     actors.forEach((actor) => {
       const opt = document.createElement("option");
       opt.value = actor.id;
-      opt.textContent =
-        actor.full_name || actor.name || actor.fullName || `Actor #${actor.id}`;
+      opt.textContent = actor.full_name || actor.name || actor.fullName || `Actor #${actor.id}`;
       actorSelect.appendChild(opt);
     });
+
+    populateActorDropdown(actors);
   } catch (err) {
     console.error("Actors error:", err);
   }
 }
 
-// Bütün filmləri API-dən çəkib cədvəldə göstərir
 async function getMovies() {
   try {
     const res = await fetch(`${API_BASE}/admin/movies`, {
@@ -160,7 +363,6 @@ async function getMovies() {
   }
 }
 
-// Seçilmiş filmin məlumatlarını modal açıb inputlara doldurur (edit rejimi)
 async function getMovieById(id) {
   try {
     const res = await fetch(`${API_BASE}/admin/movies/${id}`, {
@@ -177,13 +379,14 @@ async function getMovieById(id) {
   }
 }
 
-// Mətni müəyyən uzunluqda kəsib sonuna "..." əlavə edir
+// =============================================
+// TABLE RENDER
+// =============================================
 function truncate(text, max) {
   if (!text) return "—";
   return text.length > max ? text.slice(0, max) + "..." : text;
 }
 
-// Film siyahısını cədvəl sətirləri kimi render edir
 function renderTable(movies) {
   tableBody.innerHTML = "";
 
@@ -200,10 +403,10 @@ function renderTable(movies) {
       <td class="movie-title">
         <img src="${movie.cover || "../../assets/Admin/images/movies.svg"}" alt=""
           onerror="this.src='../../assets/Admin/images/movies.svg'" />
-        <span title="${movie.title}">${truncate(movie.title, 20)}</span>
+        <span class="cell-clamp" data-tooltip="${(movie.title || "").replace(/"/g, "&quot;")}">${movie.title || "—"}</span>
       </td>
-      <td title="${movie.overview}">${truncate(movie.overview, 35)}</td>
-      <td>${truncate(categorySelect.querySelector(`option[value="${movie.category}"]`)?.textContent || "—", 12)}</td>
+      <td><span class="cell-clamp" data-tooltip="${(movie.overview || "").replace(/"/g, "&quot;")}">${movie.overview || "—"}</span></td>
+      <td><span class="cell-clamp" data-tooltip="${categorySelect.querySelector(`option[value="${movie.category}"]`)?.textContent || "—"}">${categorySelect.querySelector(`option[value="${movie.category}"]`)?.textContent || "—"}</span></td>
       <td>${movie.imdb || "—"}</td>
       <td><i class="fa-solid fa-pen edit"    data-id="${movie.id}"></i></td>
       <td><i class="fa-solid fa-trash delete" data-id="${movie.id}"></i></td>
@@ -211,21 +414,19 @@ function renderTable(movies) {
     tableBody.appendChild(tr);
   });
 
-  tableBody
-    .querySelectorAll(".edit")
-    .forEach((btn) =>
-      btn.addEventListener("click", () => getMovieById(btn.dataset.id)),
-    );
-  tableBody
-    .querySelectorAll(".delete")
-    .forEach((btn) =>
-      btn.addEventListener("click", () => confirmDelete(btn.dataset.id)),
-    );
+  tableBody.querySelectorAll(".edit").forEach((btn) =>
+    btn.addEventListener("click", () => getMovieById(btn.dataset.id))
+  );
+  tableBody.querySelectorAll(".delete").forEach((btn) =>
+    btn.addEventListener("click", () => confirmDelete(btn.dataset.id))
+  );
 
   pagination.init([...tableBody.querySelectorAll("tr")]);
 }
 
-// Modalı açır: movie varsa edit, yoxdursa create rejimi
+// =============================================
+// MODAL
+// =============================================
 function openModal(movie = null) {
   if (!movie) {
     clearInputs();
@@ -240,27 +441,27 @@ function openModal(movie = null) {
     watchInput.value = m.watch;
     imdbInput.value = m.imdb;
     runtimeInput.value = m.runtime;
-    categorySelect.value = m.category;
     adultCheck.checked = m.isAdult;
     previewImg.src = m.cover || "../../assets/Admin/images/movies.svg";
     submitBtn.textContent = "Update";
 
-    // Filmə aid olan aktörları seçili vəziyyətə gətirir
+    setSelectedCategory(m.category);
     const actorIds = m.actors.map((a) => Number(a.id ?? a));
-    [...actorSelect.options].forEach((o) => {
-      o.selected = actorIds.includes(Number(o.value));
-    });
+    setSelectedActors(actorIds);
   }
 
   modal.classList.add("active");
 }
 
-// Modalı bağlayır (inputlar qalır, yalnız görünüş gizlənir)
 function closeModal() {
   modal.classList.remove("active");
+  actorDropdownWrapper.classList.remove("open");
+  categoryDropdownWrapper.classList.remove("open");
 }
 
-// Silmə əməliyyatından əvvəl təsdiq modalı açır
+// =============================================
+// DELETE
+// =============================================
 function confirmDelete(id) {
   if (typeof openDeleteModal === "function") {
     openDeleteModal(() => deleteMovie(id));
@@ -269,7 +470,6 @@ function confirmDelete(id) {
   }
 }
 
-// Seçilmiş filmi API-dən silir
 async function deleteMovie(id) {
   try {
     const res = await fetch(`${API_BASE}/admin/movie/${id}`, {
@@ -287,10 +487,11 @@ async function deleteMovie(id) {
   }
 }
 
-// Cover URL dəyişdikdə sağ tərəfdəki önizləməni yeniləyir
+// =============================================
+// EVENT LISTENERS
+// =============================================
 coverInput.addEventListener("input", () => {
-  previewImg.src =
-    coverInput.value.trim() || "../../assets/Admin/images/movies.svg";
+  previewImg.src = coverInput.value.trim() || "../../assets/Admin/images/movies.svg";
 });
 
 createBtn.addEventListener("click", () => openModal());
@@ -299,12 +500,9 @@ modal.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
 
-// Formu submit edir: editingId varsa PUT, yoxdursa POST göndərir
 submitBtn.addEventListener("click", async () => {
   const title = titleInput.value.trim();
-  const actors = [...actorSelect.selectedOptions]
-    .map((o) => Number(o.value))
-    .filter((n) => n > 0);
+  const actors = [...selectedActorIds];
 
   if (!title) {
     showNotification("Title boş ola bilməz", "error");
@@ -323,7 +521,7 @@ submitBtn.addEventListener("click", async () => {
     watch_url: watchInput.value.trim(),
     imdb: imdbInput.value.trim(),
     run_time_min: Number(runtimeInput.value) || 0,
-    category: Number(categorySelect.value) || null,
+    category: selectedCategoryId ? Number(selectedCategoryId) : null,
     adult: adultCheck.checked,
     actors,
   };
