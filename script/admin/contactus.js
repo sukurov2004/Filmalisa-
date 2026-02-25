@@ -1,330 +1,138 @@
-// contactus.js (ALL-IN-ONE: Auth Check + GET + DELETE + Modal + Pagination)
-
 document.addEventListener("DOMContentLoaded", () => {
-  // =========================
-  // AUTH CHECK
-  // =========================
+  // ================= AUTH =================
   const adminToken = localStorage.getItem("adminToken");
   if (!adminToken) {
-    window.location.href = "https://sukurov2004.github.io/Filmalisa-/index.html";
+    window.location.href =
+      "https://sukurov2004.github.io/Filmalisa-/index.html";
     return;
   }
 
-  // =========================
-  // API CONFIG
-  // =========================
+  // ================= API =================
   const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
   const ENDPOINTS = {
     list: "/contacts",
-    delete: (id) => `/contact/${encodeURIComponent(String(id))}`, // id birbaşa url-ə uyğun
+    delete: (id) => `/contact/${encodeURIComponent(id)}`,
   };
 
-  const AUTH_HEADERS = {
+  const HEADERS = {
     Authorization: `Bearer ${adminToken}`,
-    "Content-Type": "application/json",
   };
 
-  // =========================
-  // SETTINGS
-  // =========================
+  // ================= SETTINGS =================
   const ROWS_PER_PAGE = 5;
 
-  // =========================
-  // ELEMENTS
-  // =========================
-  const table = document.querySelector(".movies-table");
-  const tbody = table?.querySelector("tbody");
-  const paginationWrap = document.querySelector(".pagination");
+  // ================= ELEMENTS =================
+  const tbody = document.querySelector(".movies-table tbody");
+  const pagination = document.querySelector(".pagination");
+  const modal = document.getElementById("deleteModal");
+  const cancelBtn = modal.querySelector(".cancel-btn");
+  const deleteBtn = modal.querySelector(".delete-btn");
 
-  const modalOverlay = document.getElementById("deleteModal");
-  const cancelBtn = modalOverlay?.querySelector(".cancel-btn");
-  const deleteBtn = modalOverlay?.querySelector(".delete-btn");
-
-  if (!table || !tbody || !paginationWrap || !modalOverlay || !cancelBtn || !deleteBtn) {
-    console.warn("Contact page elements not found. Check HTML selectors/IDs.");
-    return;
-  }
-
-  // =========================
-  // STATE
-  // =========================
   let data = [];
   let currentPage = 1;
   let selectedId = null;
-  let isDeleting = false;
 
-  // =========================
-  // HELPERS
-  // =========================
-  function buildUrl(pathOrFullUrl) {
-    if (/^https?:\/\//i.test(pathOrFullUrl)) return pathOrFullUrl;
-    return (
-      API_BASE.replace(/\/$/, "") +
-      "/" +
-      String(pathOrFullUrl).replace(/^\//, "")
-    );
-  }
+  // ================= HELPERS =================
+  const buildUrl = (path) =>
+    API_BASE.replace(/\/$/, "") + "/" + path.replace(/^\//, "");
 
-  function escapeHtml(str) {
-    return String(str ?? "")
+  const escapeHtml = (str) =>
+    String(str ?? "")
       .replaceAll("&", "&amp;")
       .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
+      .replaceAll(">", "&gt;");
 
-  function extractArray(result) {
-    // backend fərqli formatda qaytara bilər, hamısını tuturuq
-    if (Array.isArray(result)) return result;
-    if (Array.isArray(result?.data)) return result.data;
-    if (Array.isArray(result?.contacts)) return result.contacts;
-    if (Array.isArray(result?.data?.contacts)) return result.data.contacts;
-    return [];
-  }
+  const extractArray = (res) =>
+    Array.isArray(res) ? res : res?.data ?? [];
 
-  function getItemId(item) {
-    return item?.id ?? item?._id ?? item?.contactId ?? item?.contact_id ?? "";
-  }
-
-  // =========================
-  // API
-  // =========================
+  // ================= API =================
   async function apiGet(url) {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: { ...AUTH_HEADERS },
-    });
-
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      throw new Error(`GET failed: ${res.status} ${res.statusText} ${text}`);
-    }
-
+    const res = await fetch(url, { headers: HEADERS });
+    if (!res.ok) throw new Error(res.status);
     return res.json();
   }
 
   async function apiDelete(url) {
-    const res = await fetch(url, {
-      method: "DELETE",
-      headers: { ...AUTH_HEADERS },
-    });
-
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      throw new Error(`DELETE failed: ${res.status} ${res.statusText} ${text}`);
-    }
-
-    if (res.status === 204) return null;
-    return res.json().catch(() => null);
+    const res = await fetch(url, { method: "DELETE", headers: HEADERS });
+    if (!res.ok) throw new Error(res.status);
   }
 
-  // =========================
-  // RENDER ROWS
-  // =========================
+  // ================= RENDER =================
   function renderRows() {
     tbody.innerHTML = "";
 
-    if (!Array.isArray(data) || data.length === 0) {
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="5" style="padding:16px; opacity:.7;">No messages found.</td>
-        </tr>
-      `;
+    const start = (currentPage - 1) * ROWS_PER_PAGE;
+    const pageData = data.slice(start, start + ROWS_PER_PAGE);
+
+    if (pageData.length === 0) {
+      tbody.innerHTML =
+        `<tr><td colspan="5">No messages found</td></tr>`;
       return;
     }
 
-    tbody.innerHTML = data
-      .map((item) => {
-        const id = getItemId(item);
-
-        const username =
-          item?.username ?? item?.name ?? item?.fullname ?? item?.fullName ?? "";
-
-        const email = item?.email ?? "";
-        const question = item?.question ?? item?.message ?? item?.text ?? "";
-
-        // dataset üçün təhlükəsiz saxlanma (sonra decode edəcəyik)
-        const safeId = encodeURIComponent(String(id));
-
-        return `
-          <tr data-id="${safeId}">
-            <td>${escapeHtml(id)}</td>
-            <td>${escapeHtml(username)}</td>
-            <td>${escapeHtml(email)}</td>
-            <td>${escapeHtml(question)}</td>
-            <td><i class="fa-solid fa-trash delete" title="Delete"></i></td>
-          </tr>
-        `;
-      })
-      .join("");
-  }
-
-  // =========================
-  // PAGINATION
-  // =========================
-  function getRows() {
-    return Array.from(tbody.querySelectorAll("tr"));
-  }
-
-  function renderControls(page, totalPages) {
-    paginationWrap.innerHTML = "";
-
-    const makeBtn = (text, disabled, onClick, isActive = false) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "page-btn";
-      btn.textContent = text;
-      if (disabled) btn.disabled = true;
-      if (isActive) btn.classList.add("active");
-      btn.addEventListener("click", onClick);
-      return btn;
-    };
-
-    paginationWrap.appendChild(makeBtn("‹", page === 1, () => showPage(page - 1)));
-
-    for (let i = 1; i <= totalPages; i++) {
-      paginationWrap.appendChild(
-        makeBtn(String(i), false, () => showPage(i), i === page)
-      );
-    }
-
-    paginationWrap.appendChild(
-      makeBtn("›", page === totalPages, () => showPage(page + 1))
-    );
-  }
-
-  function showPage(page) {
-    const rows = getRows();
-    const totalPages = Math.max(1, Math.ceil(rows.length / ROWS_PER_PAGE));
-
-    currentPage = Math.min(Math.max(1, page), totalPages);
-
-    const start = (currentPage - 1) * ROWS_PER_PAGE;
-    const end = start + ROWS_PER_PAGE;
-
-    rows.forEach((row, idx) => {
-      row.style.display = idx >= start && idx < end ? "" : "none";
-    });
-
-    renderControls(currentPage, totalPages);
-  }
-
-  function refreshPagination(resetToFirst = false) {
-    const rows = getRows();
-    const totalPages = Math.max(1, Math.ceil(rows.length / ROWS_PER_PAGE));
-
-    if (resetToFirst) currentPage = 1;
-    if (currentPage > totalPages) currentPage = totalPages;
-
-    showPage(currentPage);
-  }
-
-  // =========================
-  // MODAL
-  // =========================
-  function openModal(id) {
-    selectedId = id;
-    modalOverlay.classList.add("show");
-    document.body.classList.add("modal-open");
-  }
-
-  function closeModal() {
-    modalOverlay.classList.remove("show");
-    document.body.classList.remove("modal-open");
-    selectedId = null;
-  }
-
-  // =========================
-  // LOAD (GET)
-  // =========================
-  async function loadMessages() {
-    try {
-      tbody.innerHTML = `
-        <tr><td colspan="5" style="padding:16px; opacity:.7;">Loading...</td></tr>
-      `;
-
-      const url = buildUrl(ENDPOINTS.list);
-      const result = await apiGet(url);
-
-      data = extractArray(result);
-
-      renderRows();
-      refreshPagination(true); // birinci səhifədən başlasın
-    } catch (err) {
-      console.error(err);
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="5" style="padding:16px; color:#ffb4b4;">
-            Failed to load messages. (Console-a bax: CORS / URL / Token / Response)
-          </td>
+    pageData.forEach((item) => {
+      tbody.innerHTML += `
+        <tr data-id="${escapeHtml(item.id)}">
+          <td>${escapeHtml(item.id)}</td>
+          <td>${escapeHtml(item.username || item.name)}</td>
+          <td>${escapeHtml(item.email)}</td>
+          <td>${escapeHtml(item.question || item.message)}</td>
+          <td><i class="fa-solid fa-trash delete"></i></td>
         </tr>
       `;
+    });
+  }
+
+  function renderPagination() {
+    pagination.innerHTML = "";
+    const totalPages = Math.ceil(data.length / ROWS_PER_PAGE);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      btn.className = i === currentPage ? "active" : "";
+      btn.onclick = () => {
+        currentPage = i;
+        renderRows();
+        renderPagination();
+      };
+      pagination.appendChild(btn);
     }
   }
 
-  // =========================
-  // DELETE
-  // =========================
-  async function deleteMessage(id) {
-    if (!id || isDeleting) return;
-
-    isDeleting = true;
-    deleteBtn.disabled = true;
-    deleteBtn.textContent = "Deleting...";
-
+  // ================= LOAD =================
+  async function loadMessages() {
     try {
-      const url = buildUrl(ENDPOINTS.delete(id));
-      await apiDelete(url);
-
-      // local state-dən sil
-      data = data.filter((x) => String(getItemId(x)) !== String(id));
-
+      const res = await apiGet(buildUrl(ENDPOINTS.list));
+      data = extractArray(res);
+      currentPage = 1;
       renderRows();
-      closeModal();
-      refreshPagination();
-    } catch (err) {
-      console.error(err);
-      alert("Delete failed. Console-a bax (401 / 403 / 404 / CORS ola bilər).");
-    } finally {
-      isDeleting = false;
-      deleteBtn.disabled = false;
-      deleteBtn.textContent = "Delete";
+      renderPagination();
+    } catch (e) {
+      tbody.innerHTML =
+        `<tr><td colspan="5">Failed to load data</td></tr>`;
     }
   }
 
-  // =========================
-  // EVENTS
-  // =========================
+  // ================= DELETE =================
   document.addEventListener("click", (e) => {
-    const trash = e.target.closest(".delete");
-    if (!trash) return;
-
-    const row = trash.closest("tr");
-    const safeId = row?.dataset?.id;
-    if (!safeId) return;
-
-    const id = decodeURIComponent(safeId); // dataset-də encoded saxlamışdıq
-    openModal(id);
+    if (e.target.classList.contains("delete")) {
+      selectedId = e.target.closest("tr").dataset.id;
+      modal.classList.add("show");
+    }
   });
 
-  cancelBtn.addEventListener("click", closeModal);
+  cancelBtn.onclick = () => modal.classList.remove("show");
 
-  modalOverlay.addEventListener("click", (e) => {
-    if (e.target === modalOverlay) closeModal();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalOverlay.classList.contains("show")) closeModal();
-  });
-
-  deleteBtn.addEventListener("click", () => {
+  deleteBtn.onclick = async () => {
     if (!selectedId) return;
-    deleteMessage(selectedId);
-  });
+    await apiDelete(buildUrl(ENDPOINTS.delete(selectedId)));
+    data = data.filter((x) => String(x.id) !== String(selectedId));
+    modal.classList.remove("show");
+    renderRows();
+    renderPagination();
+  };
 
-  // =========================
-  // INIT
-  // =========================
+  // ================= INIT =================
   loadMessages();
 });
