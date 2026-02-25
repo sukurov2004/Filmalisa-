@@ -1,12 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cinemaIntro = document.getElementById("cinemaIntro");
 
-  // 4 saniyədən sonra fade out
+  // Əgər əvvəl intro göstərilibsə, birbaşa gizlət
+  if (localStorage.getItem("introPlayed")) {
+    cinemaIntro.style.display = "none";
+    return;
+  }
+
+  // Əks halda intro göstər və sonra yadda saxla
   setTimeout(() => {
     cinemaIntro.classList.add("fade-out");
-    // Fade out bitdikdən sonra elementi tamamilə gizlət
+
     setTimeout(() => {
       cinemaIntro.style.display = "none";
+      localStorage.setItem("introPlayed", "true"); // yadda saxla
     }, 1500);
-  }, 4000);
+  }, 3000);
 });

@@ -1,4 +1,5 @@
 
+
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // AUTH CHECK
@@ -7,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!adminToken) {
     window.location.href = "https://sukurov2004.github.io/Filmalisa-/index.html";
     return;
+
+  if (!token) {
+         window.location.href = "http://127.0.0.1:5500/index.html"; 
   }
 
   // =========================

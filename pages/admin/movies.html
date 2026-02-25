@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="../../assets/client/İconsİmages/logo.svg" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../../assets/client/İconsİmages/logo.svg"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="../../global/reset.css" />
     <link rel="stylesheet" href="../../global/adminGlobal.css" />
     <link rel="stylesheet" href="../../styles/admin/movies.css" />
@@ -12,7 +19,6 @@
   </head>
   <body>
     <div class="app">
-
       <aside class="sidebar">
         <div>
           <div class="brand">
@@ -20,13 +26,39 @@
             <span>filmalisa</span>
           </div>
           <nav class="menu">
-            <a href="dashboard.html"  class="item"><img src="../../assets/Admin/icons/Dashboard.svg"  alt="" />Dashboard</a>
-            <a href="movies.html"     class="item"><img src="../../assets/Admin/icons/Movies.svg"     alt="" />Movies</a>
-            <a href="categories.html" class="item"><img src="../../assets/Admin/icons/Categories.svg" alt="" />Categories</a>
-            <a href="users.html"      class="item"><img src="../../assets/Admin/icons/Users.svg"      alt="" />Users</a>
-            <a href="comments.html"   class="item"><img src="../../assets/Admin/icons/Comments.svg"   alt="" />Comments</a>
-            <a href="contactus.html"  class="item"><img src="../../assets/Admin/icons/Contactus.svg"  alt="" />Contact us</a>
-            <a href="actors.html"     class="item"><img src="../../assets/Admin/icons/Actors.svg"     alt="" />Actors</a>
+            <a href="dashboard.html" class="item"
+              ><img
+                src="../../assets/Admin/icons/Dashboard.svg"
+                alt=""
+              />Dashboard</a
+            >
+            <a href="movies.html" class="item"
+              ><img src="../../assets/Admin/icons/Movies.svg" alt="" />Movies</a
+            >
+            <a href="categories.html" class="item"
+              ><img
+                src="../../assets/Admin/icons/Categories.svg"
+                alt=""
+              />Categories</a
+            >
+            <a href="users.html" class="item"
+              ><img src="../../assets/Admin/icons/Users.svg" alt="" />Users</a
+            >
+            <a href="comments.html" class="item"
+              ><img
+                src="../../assets/Admin/icons/Comments.svg"
+                alt=""
+              />Comments</a
+            >
+            <a href="contactus.html" class="item"
+              ><img
+                src="../../assets/Admin/icons/Contactus.svg"
+                alt=""
+              />Contact us</a
+            >
+            <a href="actors.html" class="item"
+              ><img src="../../assets/Admin/icons/Actors.svg" alt="" />Actors</a
+            >
           </nav>
         </div>
         <a href="login.html" class="logout">
@@ -83,17 +115,29 @@
           <i class="fa-solid fa-xmark close-modal" id="closeModal"></i>
           <div class="modal-content">
             <div class="modal-left">
-              <input type="text"   id="titleInput"    placeholder="Title" />
-              <textarea            id="overviewInput" placeholder="Overview"></textarea>
-              <input type="text"   id="coverInput"    placeholder="Cover URL" />
-              <input type="text"   id="trailerInput"  placeholder="Trailer (YouTube embed URL)" />
-              <input type="text"   id="watchInput"    placeholder="Watch URL" />
-              <input type="text"   id="imdbInput"     placeholder="IMDB rating" />
-              <input type="number" id="runtimeInput"  placeholder="Runtime (minutes)" />
-              <input type="text"   id="actorsInput"   placeholder="Actors IDs (22,10)" />
+              <input type="text" id="titleInput" placeholder="Title" />
+              <textarea id="overviewInput" placeholder="Overview"></textarea>
+              <input type="text" id="coverInput" placeholder="Cover URL" />
+              <input
+                type="text"
+                id="trailerInput"
+                placeholder="Trailer (YouTube embed URL)"
+              />
+              <input type="text" id="watchInput" placeholder="Watch URL" />
+              <input type="text" id="imdbInput" placeholder="IMDB rating" />
+              <input
+                type="number"
+                id="runtimeInput"
+                placeholder="Runtime (minutes)"
+              />
+
+              <select id="actorSelect" multiple>
+                <!-- JS tərəfindən doldurulur (getActors) -->
+              </select>
 
               <select id="categorySelect">
                 <option value="">Category</option>
+                <!-- JS tərəfindən doldurulur (getCategories) -->
               </select>
 
               <label class="adult-check">
@@ -110,7 +154,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <script src="../../script/admin/movies.js"></script>
