@@ -1,4 +1,4 @@
-
+// contactus.js (ALL-IN-ONE: Auth Check + GET + DELETE + Modal + Pagination)
 
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
@@ -6,11 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const adminToken = localStorage.getItem("adminToken");
   if (!adminToken) {
-    window.location.href = "https://sukurov2004.github.io/Filmalisa-/index.html";
+    window.location.href =
+      "https://sukurov2004.github.io/Filmalisa-/index.html";
     return;
-
-  if (!token) {
-         window.location.href = "http://127.0.0.1:5500/index.html"; 
   }
 
   // =========================
@@ -19,12 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
   const ENDPOINTS = {
     list: "/contacts",
-    delete: (id) => `/contact/${encodeURIComponent(String(id))}`, 
+    delete: (id) => `/contact/${encodeURIComponent(String(id))}`,
   };
 
   const AUTH_HEADERS = {
     Authorization: `Bearer ${adminToken}`,
-    "Content-Type": "application/json",
   };
 
   // =========================
@@ -43,7 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelBtn = modalOverlay?.querySelector(".cancel-btn");
   const deleteBtn = modalOverlay?.querySelector(".delete-btn");
 
-  if (!table || !tbody || !paginationWrap || !modalOverlay || !cancelBtn || !deleteBtn) {
+  if (
+    !table ||
+    !tbody ||
+    !paginationWrap ||
+    !modalOverlay ||
+    !cancelBtn ||
+    !deleteBtn
+  ) {
     console.warn("Contact page elements not found. Check HTML selectors/IDs.");
     return;
   }
@@ -59,12 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // HELPERS
   // =========================
-  function buildUrl(pathOrFullUrl) {
-    if (/^https?:\/\//i.test(pathOrFullUrl)) return pathOrFullUrl;
+  function buildUrl(path) {
     return (
-      API_BASE.replace(/\/$/, "") +
-      "/" +
-      String(pathOrFullUrl).replace(/^\//, "")
+      API_BASE.replace(/\/$/, "") + "/" + String(path).replace(/^\//, "")
     );
   }
 
@@ -139,18 +140,13 @@ document.addEventListener("DOMContentLoaded", () => {
     tbody.innerHTML = data
       .map((item) => {
         const id = getItemId(item);
-
         const username =
           item?.username ?? item?.name ?? item?.fullname ?? item?.fullName ?? "";
-
         const email = item?.email ?? "";
         const question = item?.question ?? item?.message ?? item?.text ?? "";
 
-        
-        const safeId = encodeURIComponent(String(id));
-
         return `
-          <tr data-id="${safeId}">
+          <tr data-id="${escapeHtml(id)}">
             <td>${escapeHtml(id)}</td>
             <td>${escapeHtml(username)}</td>
             <td>${escapeHtml(email)}</td>
@@ -183,7 +179,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return btn;
     };
 
-    paginationWrap.appendChild(makeBtn("‹", page === 1, () => showPage(page - 1)));
+    paginationWrap.appendChild(
+      makeBtn("‹", page === 1, () => showPage(page - 1))
+    );
 
     for (let i = 1; i <= totalPages; i++) {
       paginationWrap.appendChild(
@@ -252,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data = extractArray(result);
 
       renderRows();
-      refreshPagination(true); 
+      refreshPagination(true);
     } catch (err) {
       console.error(err);
       tbody.innerHTML = `
@@ -279,7 +277,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const url = buildUrl(ENDPOINTS.delete(id));
       await apiDelete(url);
 
-    
       data = data.filter((x) => String(getItemId(x)) !== String(id));
 
       renderRows();
@@ -303,10 +300,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!trash) return;
 
     const row = trash.closest("tr");
-    const safeId = row?.dataset?.id;
-    if (!safeId) return;
+    const id = row?.dataset?.id;
+    if (!id) return;
 
-    const id = decodeURIComponent(safeId); 
     openModal(id);
   });
 
@@ -317,7 +313,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalOverlay.classList.contains("show")) closeModal();
+    if (e.key === "Escape" && modalOverlay.classList.contains("show")) {
+      closeModal();
+    }
   });
 
   deleteBtn.addEventListener("click", () => {

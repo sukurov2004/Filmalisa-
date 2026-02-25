@@ -21,10 +21,10 @@ let editingId = null;
 let pagination = null;
 const token = localStorage.getItem("adminToken");
 
-<<<<<<< HEAD
+
 // ── Səhifə yüklənəndə ─────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
-<<<<<<< HEAD
+
   // =====================
   // AUTH CHECK
   // =====================
@@ -76,11 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.classList.remove("active");
     }
   });
-=======
-=======
+
 // Səhifə yükləndikdə token yoxlanılır, data çəkilir
 document.addEventListener("DOMContentLoaded", async () => {
->>>>>>> f981f923d478ab1eb8cf277357fba4d4776470a2
+
   if (!token) {
     window.location.href = "http://127.0.0.1:5500/index.html";
     return;
@@ -414,9 +413,7 @@ submitBtn.addEventListener("click", async () => {
   } catch (err) {
     showNotification("Xəta: " + err.message, "error");
   }
-<<<<<<< HEAD
->>>>>>> 35d4e02f24798b89d5e380ca1411159b87758712
 });
-=======
+
 });
->>>>>>> f981f923d478ab1eb8cf277357fba4d4776470a2
+
