@@ -1,19 +1,12 @@
+/* Movie modal uses shared styles from adminGlobal.css */
+/* Page-specific movie modal adjustments */
 
-/* ===========================================
-   MOVIE MODAL
-   =========================================== */
 .movie-modal {
-  width: 100%;
   max-width: 1000px;
-  max-height: 90vh; /* ekranın 90%-ni keçməsin */
-  overflow-y: auto; /* lazım olsa scroll */
-  background: linear-gradient(145deg, #141416, var(--bg-primary));
-  border-radius: var(--radius-2xl);
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 50px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-  position: relative;
 }
-
 
 .modal-content {
   display: flex;
@@ -21,17 +14,34 @@
   gap: 60px;
 }
 
-/* Left Side */
 .modal-left {
   flex: 1;
-  display: flex;
-  flex-direction: column;
   gap: 22px;
 }
 
-.modal-left input,
-.modal-left textarea,
-.modal-left select {
+.modal-left textarea {
+  min-height: 110px;
+}
+
+.modal-right {
+  width: 260px;
+}
+
+.close-modal {
+  top: 25px;
+  right: 30px;
+}
+/* ===========================================
+   CUSTOM ACTOR CHECKBOX DROPDOWN
+   movies.css-ə əlavə edin (.modal-left select blokun altına)
+   =========================================== */
+
+.actor-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.actor-dropdown-trigger {
   width: 100%;
   background: var(--bg-input);
   border: 1px solid var(--border-color);
@@ -39,105 +49,235 @@
   border-radius: var(--radius-lg);
   color: #e4e4e7;
   font-size: 14px;
-  outline: none;
-  box-sizing: border-box;
-  transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.modal-left input:focus,
-.modal-left textarea:focus,
-.modal-left select:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
-}
-
-.modal-left textarea {
-  resize: none;
-  min-height: 110px;
-}
-
-.modal-left select {
-  appearance: none;
   cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+  /* ox işarəsi */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Adult Checkbox */
-.adult-check {
+.actor-dropdown-trigger::after {
+  content: "▾";
+  font-size: 12px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.actor-dropdown.open .actor-dropdown-trigger {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px #7c3aed33;
+}
+
+.actor-dropdown.open .actor-dropdown-trigger::after {
+  transform: rotate(180deg);
+}
+
+.actor-dropdown-list {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #1a1a1e;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 6px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.actor-dropdown.open .actor-dropdown-list {
+  display: block;
+}
+
+.actor-option {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--text-secondary);
-  font-size: 14px;
+  padding: 10px 16px;
+  color: #e4e4e7;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
-.adult-check input {
+.actor-option:hover {
+  background: rgba(124, 58, 237, 0.15);
+}
+
+.actor-option input[type="checkbox"],
+.actor-option input[type="radio"] {
   accent-color: var(--accent);
-  width: 16px;
-  height: 16px;
-}
-
-/* Submit Button */
-.submit-btn {
-  align-self: flex-end;
-  margin-top: 10px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  color: var(--text-primary);
-  border: none;
-  padding: 12px 36px;
-  border-radius: var(--radius-lg);
-  font-weight: 500;
-  font-size: 14px;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
   cursor: pointer;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
 }
 
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+/* Scrollbar */
+.actor-dropdown-list::-webkit-scrollbar {
+  width: 5px;
 }
-
-/* Right Side - Image Preview */
-.modal-right {
-  width: 260px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.modal-right img {
-  width: 100%;
-  border-radius: var(--radius-xl);
-  object-fit: cover;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* Close Icon */
-.close-modal {
-  position: absolute;
-  top: 25px;
-  right: 30px;
-  font-size: 20px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: color var(--transition);
-}
-
-.close-modal:hover {
-  color: var(--text-primary);
-}
-.movie-modal::-webkit-scrollbar {
-  width: 6px;
-}
-
-.movie-modal::-webkit-scrollbar-thumb {
+.actor-dropdown-list::-webkit-scrollbar-thumb {
   background: var(--accent);
   border-radius: 3px;
 }
+.actor-dropdown-list::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-.movie-modal::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05);
+/* ===========================================
+   TABLE CELL TEXT LIMIT (cell-clamp)
+   movies.css-ə əlavə edin
+   =========================================== */
+.movies-table {
+  table-layout: fixed;
+}
+
+.movies-table th:nth-child(1),
+.movies-table td:nth-child(1) { width: 60px; }
+
+.movies-table th:nth-child(2),
+.movies-table td:nth-child(2) { width: 200px; }
+
+.movies-table th:nth-child(3),
+.movies-table td:nth-child(3) { width: 230px; }
+
+.movies-table th:nth-child(4),
+.movies-table td:nth-child(4) { width: 110px; }
+
+.movies-table th:nth-child(5),
+.movies-table td:nth-child(5) { width: 80px; }
+
+.movies-table th:nth-child(6),
+.movies-table th:nth-child(7),
+.movies-table td:nth-child(6),
+.movies-table td:nth-child(7) { width: 65px; }
+
+.cell-clamp {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  position: relative;
+  cursor: default;
+}
+
+/* Custom tooltip */
+.cell-clamp::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e1e1e;
+  color: #e4e4e7;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: normal;
+  max-width: 260px;
+  width: max-content;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  border: 1px solid #333;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Tooltip ox */
+.cell-clamp::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #333;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.cell-clamp:hover::after,
+.cell-clamp:hover::before {
+  opacity: 1;
+}
+
+.movie-title .cell-clamp {
+  max-width: 130px;
+  text-align: left;
+}
+
+/* ===========================================
+   CUSTOM CSS TOOLTIP (hover-da tam mətn)
+   =========================================== */
+.cell-clamp {
+  position: relative;
+  cursor: default;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Tooltip baloncuq */
+.cell-clamp::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e1e1e;
+  color: #e4e4e7;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-radius: 7px;
+  white-space: normal;
+  max-width: 280px;
+  width: max-content;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  border: 1px solid #333;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* Tooltip ox */
+.cell-clamp::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #333;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.cell-clamp:hover::after,
+.cell-clamp:hover::before {
+  opacity: 1;
+}
+
+.movie-title .cell-clamp {
+  max-width: 130px;
+  text-align: left;
 }
