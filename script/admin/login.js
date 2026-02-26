@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Əgər artıq login olubsa login səhifəsini blokla
   if (token) {
-    window.location.replace("http://127.0.0.1:5500/pages/admin/dashboard.html");
+    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/admin/dashboard.html");
   }
 });
 
@@ -43,7 +43,7 @@ async function loginAdmin(e) {
     localStorage.setItem('adminToken', data.data.tokens.access_token);
 
     // replace istifadə edirik ki history-də qalmasın
-    window.location.replace("http://127.0.0.1:5500/pages/admin/dashboard.html");
+    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/admin/dashboard.html");
 
   } catch (error) {
     console.error('Error:', error);

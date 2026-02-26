@@ -11,7 +11,7 @@ const token = localStorage.getItem("adminToken");
 // =============================================
 document.addEventListener("DOMContentLoaded", async () => {
   if (!token) {
-    window.location.href = "http://127.0.0.1:5500/index.html";
+    window.location.href = "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html";
     return;
   }
 
