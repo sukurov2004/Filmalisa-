@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
          return;
   }
   const commentsBody = document.querySelector("#comments-body");
+  const deleteModal = document.querySelector("#deleteModal");
+  const cancelBtn = document.querySelector(".cancel-btn");
+  const confirmDeleteBtn = document.querySelector(".delete-btn");
+
+  let commentIdToDelete = null;
+  let movieIdToDelete = null;
 
  const url = "https://api.sarkhanrahimli.dev/api/filmalisa/admin/comments"
 async function getComments() {
@@ -41,7 +47,10 @@ async function getComments() {
                 <td>${item.movie?.title || "Film adı yoxdur"}</td>
                 <td>${item.comment}</td> 
                 <td>
-                    <i class="fa-solid fa-trash delete-icon" data-id="${item.id}" style="cursor:pointer; color:red; background: #ef444426;"></i>
+                    <i class="fa-solid fa-trash delete-icon" 
+                    data-id="${item.id}"
+                    style="cursor:pointer; color:red; background: #ef444426;"
+                    data-movie-id="${item.movie_id}" ></i>
                 </td>
         `;
 
@@ -54,4 +63,45 @@ async function getComments() {
   }
 }
 getComments();
+//modal cixir
+  commentsBody.addEventListener("click", (e) => {
+    const icon = e.target.closest(".delete-icon");
+    if (!icon) return;
+    commentIdToDelete = icon.dataset.id;
+    movieIdToDelete = icon.dataset.movieId;
+    deleteModal.classList.add("active");
+  });
+
+  cancelBtn.addEventListener("click", () => deleteModal.classList.remove("active"));
+  deleteModal.addEventListener("click", (e) => {
+    if (e.target === deleteModal) deleteModal.classList.remove("active");
+  });
+
+  confirmDeleteBtn.addEventListener("click", async () => {
+    if (!commentIdToDelete || !movieIdToDelete) return;
+
+    try {
+      const response = await fetch(
+        `https://api.sarkhanrahimli.dev/api/filmalisa/admin/movies/${movieIdToDelete}/comment/${commentIdToDelete}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Silmek olmadi");
+
+      const row = commentsBody.querySelector(`[data-id="${commentIdToDelete}"]`)?.closest("tr");
+      if (row) row.remove();
+
+      deleteModal.classList.remove("active");
+      commentIdToDelete = null;
+      movieIdToDelete = null;
+    } catch (error) {
+      console.log("Xəta:", error);
+    }
+  });
 });
