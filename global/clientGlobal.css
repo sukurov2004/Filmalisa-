@@ -1,12 +1,13 @@
+/* =========================
+   FONTS (MUST BE TOP)
+========================= */
+@import url("https://fonts.googleapis.com/css2?family=Numans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
-body {
-  font-family: 'Raleway', sans-serif;
-    background:
-    radial-gradient(900px 420px at 30% 0%, rgba(255,255,255,0.06), transparent 60%),
-    radial-gradient(800px 400px at 70% 0%, rgba(255,255,255,0.05), transparent 60%),
-@import url("https://fonts.googleapis.com/css2?family=Numans&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Numans&family=Roboto:wght@400;500;700&display=swap");
-}
+/* =========================
+   VARIABLES
+========================= */
 :root {
   --bg: #0b0c10;
   --panel: #ffffff0a;
@@ -18,10 +19,13 @@ body {
   --accent-purple: #9b51e0;
   --accent-purple-hover: #8b3fd0;
   --accent-purple-dark: #5a1f8f;
+
   --text-muted: #c3c8d4;
   --text-muted-alt: #a0b4ff59;
+
   --bg-input-dark: #0000008c;
   --bg-input-dark-hover: #000000bf;
+
   --border-blue: #8caaff2e;
   --border-blue-hover: #8caaff4d;
   --border-blue-focus: #8caaff80;
@@ -40,39 +44,45 @@ body {
   --transition-slow: 0.3s ease;
 }
 
+/* =========================
+   BASE
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  font-family: "Roboto", sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   background:
-    radial-gradient(
-      900px 420px at 30% 0%,
-      rgba(255, 255, 255, 0.06),
-      transparent 60%
-    ),
-    radial-gradient(
-      800px 400px at 70% 0%,
-      #ffffff0d,
-      transparent 60%
-    ),
+    radial-gradient(900px 420px at 30% 0%, rgba(255, 255, 255, 0.06), transparent 60%),
+    radial-gradient(800px 400px at 70% 0%, rgba(255, 255, 255, 0.05), transparent 60%),
     var(--bg);
   color: var(--text);
 }
 
+/* =========================
+   LAYOUT
+========================= */
 .layout {
   min-height: 100vh;
-  display: grid;
+  display: flex;
 }
 
-/* Sidebar */
-.sidebar {
-  background: rgba(255, 255, 255, 0.02);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 18px 10px;
 .main {
   flex: 1;
   overflow: hidden;
+  margin-left: 56px; /* fixed sidebar width */
 }
 
-/* ── Sidebar ── */
+/* =========================
+   SIDEBAR (DEFAULT)
+========================= */
 .sidebar {
   position: fixed;
   top: 0;
@@ -83,7 +93,7 @@ body {
   flex-shrink: 0;
   background: #ffffff05;
   border-right: 1px solid #ffffff0f;
-  padding: 40px 0px;
+  padding: 40px 0;
   display: flex;
   flex-direction: column;
 }
@@ -93,17 +103,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px; /* LOGO ilə HOME arası məsafə */
-}
-
-.logo {
-  gap: 50px;
+  gap: 50px; /* LOGO ilə HOME arası */
 }
 
 .side-nav {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 80px; /* ikonlar arası */
   align-items: center;
 }
 
@@ -113,11 +119,8 @@ body {
   border-radius: 14px;
   display: grid;
   place-items: center;
-  color: #ffffff8c;
   text-decoration: none;
-  transition:
-    background var(--transition-base),
-    transform var(--transition-base);
+  transition: background var(--transition-base), transform var(--transition-base);
 }
 
 .side-link img {
@@ -128,16 +131,20 @@ body {
 }
 
 .side-link:hover {
-  color: #0feffd;
   transform: scale(1.05);
 }
 
 .side-link:hover img {
   filter: brightness(1);
-  color: #0feffd;
 }
 
-/* =====HOME SIDEBAR====== */
+.side-link.active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   HOME SIDEBAR (IF USED)
+========================= */
 .home-layout {
   min-height: 100vh;
   display: flex;
@@ -169,21 +176,6 @@ body {
   gap: 50px;
 }
 
-.home-logo {
-  width: 56px;
-  height: 56px;
-  top: 40px;
-}
-
-
-.side-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 80px; /* ikonlar arası */
-  align-items: center;
-}
-
-.side-link {
 .home-side-nav {
   display: flex;
   flex-direction: column;
@@ -197,29 +189,8 @@ body {
   border-radius: 14px;
   display: grid;
   place-items: center;
-  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
-  transition: 0.15s ease;
-}
-
-.side-link img {
-  width: 32px;
-  height: 32px;
-}
-
-.side-link:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.side-link.active {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(120, 170, 255, 0.9);
-  color: #ffffff8c;
-  text-decoration: none;
-  transition:
-    background var(--transition-base),
-    transform var(--transition-base);
+  transition: var(--transition-fast);
 }
 
 .home-side-link img {
@@ -246,12 +217,9 @@ body {
   filter: brightness(1) hue-rotate(200deg) saturate(1.5);
 }
 
-.home-side-link.active:hover {
-  background: #ffffff1f;
-  transform: scale(1.05);
-}
-
-/* ── Buttons ── */
+/* =========================
+   BUTTONS
+========================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -298,11 +266,9 @@ body {
   box-shadow: 0 20px 45px rgba(139, 83, 227, 0.35);
 }
 
-.btn-gradient:active {
-  transform: translateY(0);
-}
-
-/* ── Fields / Inputs ── */
+/* =========================
+   FIELDS / INPUTS
+========================= */
 .field {
   position: relative;
   width: 100%;
@@ -320,7 +286,6 @@ body {
   font-size: 14px;
   outline: none;
   transition: all var(--transition-medium);
-  box-sizing: border-box;
 }
 
 .field textarea {
@@ -351,7 +316,6 @@ body {
   opacity: 0.5;
 }
 
-/* Input icon positioning */
 .input-icon,
 .icon {
   position: absolute;
@@ -375,11 +339,6 @@ body {
   pointer-events: all;
 }
 
-.input-icon.right:hover,
-.icon.right:hover {
-  opacity: 0.9;
-}
-
 .input-icon img,
 .icon img {
   width: 100%;
@@ -399,15 +358,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition:
-    opacity var(--transition-base),
-    transform var(--transition-base);
+  transition: opacity var(--transition-base), transform var(--transition-base);
   z-index: 2;
-}
-
-.eye img {
-  width: 100%;
-  height: 100%;
 }
 
 .eye:hover {
@@ -419,7 +371,9 @@ body {
   opacity: 1;
 }
 
-/* ── Modal / Overlay ── */
+/* =========================
+   MODAL
+========================= */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -431,9 +385,7 @@ body {
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity var(--transition-medium),
-    visibility var(--transition-medium);
+  transition: opacity var(--transition-medium), visibility var(--transition-medium);
 }
 
 .modal-overlay.active {
@@ -441,7 +393,9 @@ body {
   visibility: visible;
 }
 
-/* ── Utilities ── */
+/* =========================
+   UTILITIES
+========================= */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -462,16 +416,8 @@ body {
   justify-content: center;
   padding: 40px 20px;
   background:
-    radial-gradient(
-      900px 520px at 50% 0%,
-      #ffffff0d,
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 520px at 50% 100%,
-      #ffffff08,
-      transparent 60%
-    ),
+    radial-gradient(900px 520px at 50% 0%, #ffffff0d, transparent 60%),
+    radial-gradient(900px 520px at 50% 100%, #ffffff08, transparent 60%),
     linear-gradient(180deg, #0e0e10, #121214);
 }
 
