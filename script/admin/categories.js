@@ -19,6 +19,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let deleteId = null;
   let editId = null;
+  let pagination = null;
+
+  // ── Notification ──
+  function showNotification(msg, type = "success") {
+    document.querySelector(".notif")?.remove();
+    const notif = document.createElement("div");
+    notif.className = "notif";
+    notif.textContent = msg;
+    notif.style.cssText = `
+      position:fixed; top:20px; right:20px; z-index:9999;
+      padding:12px 20px; border-radius:8px; font-size:14px; font-weight:500;
+      background:${type === "success" ? "#22c55e" : "#ef4444"}; color:#fff;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    `;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+  }
 
   // ── Kateqoriyaları gətir ──
   async function fetchCategories() {
@@ -29,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
       renderCategories(data.data);
     } catch (err) {
+      showNotification("Kateqoriyalar yüklənmədi", "error");
       console.error("Categories can't downloaded:", err);
     }
   }
@@ -37,27 +55,56 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderCategories(categories) {
     tbody.innerHTML = "";
 
-    categories.forEach((cat) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${cat.id}</td>
-        <td>${cat.name}</td>
-        <td><i class="fa-solid fa-pen edit" data-id="${cat.id}" data-name="${cat.name}"></i></td>
-        <td><i class="fa-solid fa-trash delete" data-id="${cat.id}"></i></td>
-      `;
-      tbody.appendChild(tr);
+    // Əvvəlcə hamısını normal sıra ilə əlavə et, sonra pagination init et
+    categories.forEach((cat,index) => {
+      appendCategoryRow(cat,index);
     });
 
-    // Trash — silmə modalı
-    document.querySelectorAll(".delete").forEach((icon) => {
+    bindTableEvents();
+    refreshPagination();
+  }
+
+  // ── Sıranı cədvələ əlavə et (normal) ──
+  function appendCategoryRow(cat,index) {
+    const tr = document.createElement("tr");
+    tr.dataset.id = cat.id;
+    tr.innerHTML = `
+      <td>${index +1}</td>
+      <td>${cat.name}</td>
+      <td><i class="fa-solid fa-pen edit" data-id="${cat.id}" data-name="${cat.name}"></i></td>
+      <td><i class="fa-solid fa-trash delete" data-id="${cat.id}"></i></td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  // ── Yeni sıranı cədvəlin ƏN BAŞINA əlavə et ──
+  function prependCategoryRow(cat) {
+    const tr = document.createElement("tr");
+    tr.dataset.id = cat.id;
+    tr.innerHTML = `
+      <td>${cat.id}</td>
+      <td>${cat.name}</td>
+      <td><i class="fa-solid fa-pen edit" data-id="${cat.id}" data-name="${cat.name}"></i></td>
+      <td><i class="fa-solid fa-trash delete" data-id="${cat.id}"></i></td>
+    `;
+    tbody.prepend(tr);
+  }
+
+  // ── Pagination-ı yenilə ──
+  function refreshPagination() {
+    pagination.init([...tbody.querySelectorAll("tr")]);
+  }
+
+  // ── Event-ləri bind et ──
+  function bindTableEvents() {
+    tbody.querySelectorAll(".delete").forEach((icon) => {
       icon.addEventListener("click", () => {
         deleteId = icon.dataset.id;
         deleteModal.classList.add("active");
       });
     });
 
-    // Edit — create modalı edit rejimində aç
-    document.querySelectorAll(".edit").forEach((icon) => {
+    tbody.querySelectorAll(".edit").forEach((icon) => {
       icon.addEventListener("click", () => {
         editId = icon.dataset.id;
         categoryInput.value = icon.dataset.name;
@@ -77,12 +124,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   submitCategory.addEventListener("click", async () => {
     const name = categoryInput.value.trim();
-    if (!name) return;
+    if (!name) {
+      showNotification("Kateqoriya adı boş ola bilməz", "error");
+      return;
+    }
 
     try {
       if (editId) {
         // PUT — update
-        await fetch(`${BASE_URL}/admin/category/${editId}`, {
+        const res = await fetch(`${BASE_URL}/admin/category/${editId}`, {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,9 +140,19 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           body: JSON.stringify({ name }),
         });
+        if (!res.ok) throw new Error(`${res.status}`);
+
+        // Cədvəldəki mövcud sıranı yenilə
+        const row = tbody.querySelector(`tr[data-id="${editId}"]`);
+        if (row) {
+          row.querySelector("td:nth-child(2)").textContent = name;
+          row.querySelector(".edit").dataset.name = name;
+        }
+
+        showNotification("Kateqoriya yeniləndi!");
       } else {
         // POST — create
-        await fetch(`${BASE_URL}/admin/category`, {
+        const res = await fetch(`${BASE_URL}/admin/category`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,12 +160,23 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           body: JSON.stringify({ name }),
         });
+        if (!res.ok) throw new Error(`${res.status}`);
+
+        const data = await res.json();
+        const newCat = data.category || data.data || data;
+
+        // Yeni kateqoriyanı cədvəlin ƏN BAŞINA əlavə et
+        prependCategoryRow(newCat);
+        bindTableEvents();
+        refreshPagination();
+
+        showNotification("Kateqoriya əlavə edildi!");
       }
 
       categoryModal.classList.remove("active");
       editId = null;
-      fetchCategories();
     } catch (err) {
+      showNotification("Əməliyyat uğursuz oldu: " + err.message, "error");
       console.error("Əməliyyat uğursuz oldu:", err);
     }
   });
@@ -114,14 +185,21 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".delete-btn").addEventListener("click", async () => {
     if (!deleteId) return;
     try {
-      await fetch(`${BASE_URL}/admin/category/${deleteId}`, {
+      const res = await fetch(`${BASE_URL}/admin/category/${deleteId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
+      if (!res.ok) throw new Error(`${res.status}`);
+
+      // Cədvəldən həmin sıranı sil
+      tbody.querySelector(`tr[data-id="${deleteId}"]`)?.remove();
+      refreshPagination();
+
+      showNotification("Kateqoriya silindi!");
       deleteModal.classList.remove("active");
       deleteId = null;
-      fetchCategories();
     } catch (err) {
+      showNotification("Silmə uğursuz oldu: " + err.message, "error");
       console.error("Silmə uğursuz oldu:", err);
     }
   });
@@ -145,6 +223,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", (e) => {
       e.stopPropagation();
     });
+
+  pagination = initPagination(
+    tbody,
+    document.querySelector(".pagination"),
+    5,
+  );
 
   fetchCategories();
 });
