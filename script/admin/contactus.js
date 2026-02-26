@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ── Sıranı cədvələ əlavə et ──
-  function appendMessageRow(msg) {
+  function appendMessageRow(msg,index) {
     const tr = document.createElement("tr");
     tr.dataset.id = msg.id;
     tr.innerHTML = `
-      <td>${msg.id}</td>
+      <td>${index + 1}</td>
       <td>${msg.full_name || msg.name}</td>
       <td>${msg.email}</td>
       <td>${msg.reason || msg.message}</td>
