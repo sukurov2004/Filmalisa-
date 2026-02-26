@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("adminToken");
 
   if (!token) {
-             window.location.href = "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html";
+         window.location.href = "http://127.0.0.1:5500/index.html";
          return;
   }
   const commentsBody = document.querySelector("#comments-body");
@@ -41,11 +41,11 @@ async function getComments() {
            <td>${index + 1}</td>
                 <td>
                     <img src="${item.movie?.cover_url || '../../assets/Admin/images/movies.svg'}" 
-                         style="width: 45px; height: 60px; object-fit: cover; border-radius: 4px;"
+                         style="width: 45px; height: 60px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto"
                          onerror="this.src='../../assets/Admin/images/movies.svg'">
                 </td>
                 <td>${item.movie?.title || "Film adı yoxdur"}</td>
-                <td>${item.comment}</td> 
+                <td class="comment-cell" data-full="${item.comment}">${item.comment}</td> 
                 <td>
                     <i class="fa-solid fa-trash delete-icon" 
                     data-id="${item.id}"
