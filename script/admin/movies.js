@@ -393,11 +393,11 @@ function renderTable(movies) {
     return;
   }
 
-  movies.forEach((raw, i) => {
+  movies.forEach((raw, index) => {
     const movie = normalizeMovie(raw);
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${movie.id ?? i + 1}</td>
+      <td>${index + 1}</td>
       <td class="movie-title">
         <img src="${movie.cover || "../../assets/Admin/images/movies.svg"}" alt=""
           onerror="this.src='../../assets/Admin/images/movies.svg'" />

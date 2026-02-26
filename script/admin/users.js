@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${index + 1}</td>
-          <td>
-            <div class="user-avatar">
-              <i class="fa-solid fa-user"></i>
-            </div>
-          </td>
+         <td>
+  <div style="display:flex;width:40px;height:40px;border-radius:50%;background:#2a2a3a;align-items:center;justify-content:center;">
+    <i class="fa-solid fa-user" style="color:#888;font-size:18px;"></i>
+  </div>
+</td>
           <td>${user.full_name}</td>
           <td>${user.email}</td>
         `;
