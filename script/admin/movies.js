@@ -38,7 +38,8 @@ const token = localStorage.getItem("adminToken");
 // =============================================
 document.addEventListener("DOMContentLoaded", async () => {
   if (!token) {
-    window.location.href = "http://127.0.0.1:5500/index.html";
+         window.location.href = "http://127.0.0.1:5500/index.html";
+
     return;
   }
 
@@ -67,7 +68,7 @@ function buildActorDropdown() {
 
   actorTrigger = document.createElement("div");
   actorTrigger.className = "actor-dropdown-trigger";
-  actorTrigger.textContent = "Actors seçin";
+  actorTrigger.textContent = "Actors";
 
   actorList = document.createElement("div");
   actorList.className = "actor-dropdown-list";
@@ -147,7 +148,7 @@ function buildCategoryDropdown() {
 
   categoryTrigger = document.createElement("div");
   categoryTrigger.className = "actor-dropdown-trigger";
-  categoryTrigger.textContent = "Category seçin";
+  categoryTrigger.textContent = "Category";
 
   categoryList = document.createElement("div");
   categoryList.className = "actor-dropdown-list";
@@ -168,7 +169,6 @@ function buildCategoryDropdown() {
     }
   });
 }
-
 function populateCategoryDropdown(categories) {
   categoryList.innerHTML = "";
 
@@ -214,7 +214,6 @@ function populateCategoryDropdown(categories) {
     categoryList.appendChild(label);
   });
 }
-
 function setSelectedCategory(catId) {
   selectedCategoryId = catId ? Number(catId) : null;
   const opt = categorySelect.querySelector(`option[value="${catId}"]`);
@@ -224,7 +223,6 @@ function setSelectedCategory(catId) {
     rb.checked = rb.value == catId;
   });
 }
-
 function clearCategorySelection() {
   selectedCategoryId = null;
   selectedCategoryName = "";
@@ -234,7 +232,6 @@ function clearCategorySelection() {
     rb.checked = rb.value === "";
   });
 }
-
 // =============================================
 // NOTIFICATION
 // =============================================
@@ -386,6 +383,7 @@ function truncate(text, max) {
   if (!text) return "—";
   return text.length > max ? text.slice(0, max) + "..." : text;
 }
+
 
 function renderTable(movies) {
   tableBody.innerHTML = "";
