@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="icon" type="image/png" href="../../assets/client/İconsİmages/logo.svg">
     <title>Register – Filmalisa</title>
 
     <link rel="stylesheet" href="../../global/reset.css" />
@@ -11,17 +12,19 @@
   </head>
 
   <body>
-    <main class="page">
+ <main class="page">
       <section class="card">
 
         <div class="logo">
-          <img src="../../assets/Admin/images/logo.svg" alt="Filmalisa Logo" />
+          <img src="../../assets/client/GridImages/login,register.svg" alt="Filmalisa Logo" />
         </div>
 
         <h1 class="brand">filmalisa</h1>
         <h2 class="title">register</h2>
 
-        <form class="form" action="#" method="post">
+        <p id="formMessage" style="display:none; text-align:center; margin-bottom:12px; font-size:14px;"></p>
+
+        <form class="form" id="registerForm" action="#" method="post">
 
           <!-- Full Name -->
           <label class="field">
@@ -30,6 +33,7 @@
             </span>
             <input
               type="text"
+              id="fullname"
               name="fullname"
               placeholder="Full Name"
               autocomplete="name"
@@ -43,6 +47,7 @@
             </span>
             <input
               type="email"
+              id="email"
               name="email"
               placeholder="Email"
               autocomplete="email"
@@ -62,17 +67,17 @@
               autocomplete="new-password"
             />
             <span class="eye" id="registerEye" role="button" aria-label="Show password">
-              <img src="../../assets/client/İconsİmages/eye.svg" alt="" />
+              <img src="../../assets/client/İconsİmages/eyeOff.svg" alt="" />
             </span>
           </label>
 
           <a href="login.html" class="register">Already have an account? Login here</a>
 
-          <button class="btn btn-gradient" type="submit">register</button>
+          <button class="btn btn-gradient" id="submitBtn" type="submit">register</button>
 
         </form>
       </section>
     </main>
-
+<script src="../../script/client/register.js"></script>
   </body>
 </html>

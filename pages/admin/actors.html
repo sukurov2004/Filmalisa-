@@ -3,16 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- !Icon link -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <!-- !Reset Css link -->
+    <link rel="icon" type="image/png" href="../../assets/client/İconsİmages/logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../../global/reset.css" />
-    <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/adminGlobal.css" />
-    <!-- !Actors Css link -->
     <link rel="stylesheet" href="../../styles/admin/actors.css" />
     <title>Admin / Actors</title>
   </head>
@@ -65,33 +59,31 @@
         </a>
       </aside>
 
-   <!-- DELETE MODAL -->
-<div class="delete-overlay" id="deleteModal">
-  <div class="modal">
-    <h2>Delete Message</h2>
-    <p>Are you sure you want to delete this message?</p>
+      <!-- DELETE MODAL -->
+      <div class="delete-overlay" id="deleteModal">
+        <div class="modal">
+          <h2>Delete Actor</h2>
+          <p>Are you sure you want to delete this actor?</p>
+          <div class="modal-actions">
+            <button class="btn cancel-btn">Cancel</button>
+            <button class="btn delete-btn">Delete</button>
+          </div>
+        </div>
+      </div>
 
-    <div class="modal-actions">
-      <button class="btn cancel-btn">Cancel</button>
-      <button class="btn delete-btn">Delete</button>
-    </div>
-  </div>
-</div>
-<!-- ACTOR CREATE MODAL -->
-<div class="category-modal-overlay" id="actorModal">
-  <div class="category-modal">
-    <h2>Create Actor</h2>
-
-    <input type="text" placeholder="Name" id="nameInput" />
-    <input type="text" placeholder="Surname" id="surnameInput" />
-    <input type="text" placeholder="Image URL" id="imgInput" />
-
-    <div class="category-modal-actions">
-      <button class="category-cancel-btn" id="cancelBtn">Cancel</button>
-      <button class="category-submit-btn" id="saveBtn">Save</button>
-    </div>
-  </div>
-</div>
+      <!-- ACTOR CREATE / EDIT MODAL -->
+      <div class="category-modal-overlay" id="actorModal">
+        <div class="category-modal" onclick="event.stopPropagation()">
+          <h2 id="modalTitle">Create Actor</h2>
+          <input type="text" placeholder="Name" id="nameInput" />
+          <input type="text" placeholder="Surname" id="surnameInput" />
+          <input type="text" placeholder="Image URL" id="imgInput" />
+          <div class="category-modal-actions">
+            <button class="category-cancel-btn" id="cancelBtn">Cancel</button>
+            <button class="category-submit-btn" id="saveBtn">Save</button>
+          </div>
+        </div>
+      </div>
 
       <!-- MAIN -->
       <main class="main">
@@ -100,7 +92,6 @@
             <div class="hi">Hi Admin</div>
             <h1>Actors</h1>
           </div>
-
           <div class="profile">
             <button id="createBtn" class="create-btn">Create</button>
             <img src="../../assets/Admin/images/profilimg.svg" alt="" />
@@ -120,48 +111,7 @@
                 <th>Remove</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Malik</td>
-                <td>Shukurov</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="actor image" /></td>
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Ali</td>
-                <td>Aliyev</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="actor image" /></td>
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Leyla</td>
-                <td>Mammadova</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="actor image" /></td>
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Orxan</td>
-                <td>Karimov</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="actor image" /></td>
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Aysel</td>
-                <td>Hasanova</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="actor image" /></td>
-                <td><i class="fa-solid fa-pen edit"></i></td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>
         </section>
 
@@ -170,9 +120,9 @@
 
     </div>
 
-    <script src="../../script/admin/actors.js"></script>
     <script src="../../script/admin/pagination.js"></script>
     <script src="../../script/admin/deleteModal.js"></script>
+    <script src="../../script/admin/actors.js"></script>
     <script src="../../global/adminGlobal.js" defer></script>
   </body>
 </html>
