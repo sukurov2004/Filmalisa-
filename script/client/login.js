@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    window.location.replace("http://127.0.0.1:5500/pages/client/home.html");
+  }
+});
+
+
 // ── Eye toggle ──────────────────────────────────────────────
 const eye = document.getElementById("loginEye");
 const passwordInput = document.getElementById("loginPassword");
@@ -52,7 +61,7 @@ form.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token",data.data.tokens.access_token);
 
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
