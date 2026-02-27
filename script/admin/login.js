@@ -1,13 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("adminToken");
-
-  if (!token) {
+  if (token) {
     window.location.replace(
-      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html"
+      "https://sukurov2004.github.io/Filmalisa-/pages/admin/dashboard.html"
     );
   }
 });
-
 const eye = document.querySelector(".eye");
 const passwordInput = document.querySelector(".loginPassword");
 const eyeIcon = eye.querySelector("img");

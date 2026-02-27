@@ -38,8 +38,9 @@ const token = localStorage.getItem("adminToken");
 // =============================================
 document.addEventListener("DOMContentLoaded", async () => {
   if (!token) {
-          window.location.href = "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html";
-
+    window.location.replace(
+      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html",
+    );
     return;
   }
 
@@ -94,7 +95,8 @@ function populateActorDropdown(actors) {
   actorList.innerHTML = "";
   actors.forEach((actor) => {
     const id = actor.id;
-    const name = actor.full_name || actor.name || actor.fullName || `Actor #${id}`;
+    const name =
+      actor.full_name || actor.name || actor.fullName || `Actor #${id}`;
 
     const label = document.createElement("label");
     label.className = "actor-option";
@@ -120,12 +122,15 @@ function populateActorDropdown(actors) {
 
 function updateActorTriggerLabel() {
   const count = selectedActorIds.size;
-  actorTrigger.textContent = count === 0 ? "Actors seçin" : `${count} actor seçildi`;
+  actorTrigger.textContent =
+    count === 0 ? "Actors seçin" : `${count} actor seçildi`;
 }
 
 function clearActorSelection() {
   selectedActorIds.clear();
-  actorList.querySelectorAll("input[type=checkbox]").forEach((cb) => (cb.checked = false));
+  actorList
+    .querySelectorAll("input[type=checkbox]")
+    .forEach((cb) => (cb.checked = false));
   updateActorTriggerLabel();
 }
 
@@ -155,7 +160,10 @@ function buildCategoryDropdown() {
 
   categoryDropdownWrapper.appendChild(categoryTrigger);
   categoryDropdownWrapper.appendChild(categoryList);
-  categorySelect.parentNode.insertBefore(categoryDropdownWrapper, categorySelect);
+  categorySelect.parentNode.insertBefore(
+    categoryDropdownWrapper,
+    categorySelect,
+  );
 
   categoryTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -301,7 +309,9 @@ async function getCategories() {
     });
     if (!res.ok) return;
     const data = await res.json();
-    const categories = Array.isArray(data) ? data : data.categories || data.data || [];
+    const categories = Array.isArray(data)
+      ? data
+      : data.categories || data.data || [];
 
     categorySelect.innerHTML = `<option value="">Category</option>`;
     categories.forEach((cat) => {
@@ -327,13 +337,16 @@ async function getActors() {
     });
     if (!res.ok) return;
     const data = await res.json();
-    const actors = Array.isArray(data) ? data : data.actors || data.data || data.results || [];
+    const actors = Array.isArray(data)
+      ? data
+      : data.actors || data.data || data.results || [];
 
     actorSelect.innerHTML = "";
     actors.forEach((actor) => {
       const opt = document.createElement("option");
       opt.value = actor.id;
-      opt.textContent = actor.full_name || actor.name || actor.fullName || `Actor #${actor.id}`;
+      opt.textContent =
+        actor.full_name || actor.name || actor.fullName || `Actor #${actor.id}`;
       actorSelect.appendChild(opt);
     });
 
@@ -384,7 +397,6 @@ function truncate(text, max) {
   return text.length > max ? text.slice(0, max) + "..." : text;
 }
 
-
 function renderTable(movies) {
   tableBody.innerHTML = "";
 
@@ -412,12 +424,16 @@ function renderTable(movies) {
     tableBody.appendChild(tr);
   });
 
-  tableBody.querySelectorAll(".edit").forEach((btn) =>
-    btn.addEventListener("click", () => getMovieById(btn.dataset.id))
-  );
-  tableBody.querySelectorAll(".delete").forEach((btn) =>
-    btn.addEventListener("click", () => confirmDelete(btn.dataset.id))
-  );
+  tableBody
+    .querySelectorAll(".edit")
+    .forEach((btn) =>
+      btn.addEventListener("click", () => getMovieById(btn.dataset.id)),
+    );
+  tableBody
+    .querySelectorAll(".delete")
+    .forEach((btn) =>
+      btn.addEventListener("click", () => confirmDelete(btn.dataset.id)),
+    );
 
   pagination.init([...tableBody.querySelectorAll("tr")]);
 }
@@ -489,7 +505,8 @@ async function deleteMovie(id) {
 // EVENT LISTENERS
 // =============================================
 coverInput.addEventListener("input", () => {
-  previewImg.src = coverInput.value.trim() || "../../assets/Admin/images/movies.svg";
+  previewImg.src =
+    coverInput.value.trim() || "../../assets/Admin/images/movies.svg";
 });
 
 createBtn.addEventListener("click", () => openModal());
