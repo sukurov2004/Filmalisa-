@@ -82,7 +82,10 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
-
+.p-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #1D1D1D inset;
+    -webkit-text-fill-color: #fff;
+}
 /* SAVE BUTTON */
 .account-btn {
     width: 100%;
@@ -98,4 +101,8 @@
 
 .account-btn:hover {
     opacity: 0.85;
+}
+.account-btn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
 }
