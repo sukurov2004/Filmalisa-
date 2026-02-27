@@ -1,6 +1,6 @@
 // ── Eye toggle ──────────────────────────────────────────────
-const eye = document.getElementById("loginEye");
-const passwordInput = document.getElementById("loginPassword");
+const eye = document.getElementById("registerEye");
+const passwordInput = document.getElementById("registerPassword");
 
 eye.addEventListener("click", () => {
   const isHidden = passwordInput.type === "password";
@@ -16,19 +16,19 @@ eye.addEventListener("click", () => {
   eye.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
 });
 
-// ── Login form submit ───────────────────────────────────────
-const form = document.querySelector(".form");
-const submitBtn = document.querySelector(".btn");
-const formMessage = document.createElement("p");
-form.appendChild(formMessage);
+// ── Register form submit ────────────────────────────────────
+const form = document.getElementById("registerForm");
+const submitBtn = document.getElementById("submitBtn");
+const formMessage = document.getElementById("formMessage");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const email = form.email.value.trim();
-  const password = passwordInput.value.trim();
+  const full_name = document.getElementById("fullname").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = passwordInput.value;
 
-  if (!email || !password) {
+  if (!full_name || !email || !password) {
     showMessage("Please fill in all fields.", "error");
     return;
   }
@@ -39,41 +39,34 @@ form.addEventListener("submit", async (e) => {
 
   try {
     const response = await fetch(
-      "https://api.sarkhanrahimli.dev/api/filmalisa/auth/login",
+      "https://api.sarkhanrahimli.dev/api/filmalisa/auth/signup",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ password, full_name, email }),
       }
     );
 
     const data = await response.json();
 
     if (response.ok) {
-      localStorage.setItem("token", data.token);
-
-      if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
-
-      showMessage("Login successful! Redirecting...", "success");
-
+      showMessage("Registration successful! Redirecting...", "success");
       setTimeout(() => {
-        window.location.replace("http://127.0.0.1:5500/pages/client/home.html");
+        window.location.href = "http://127.0.0.1:5500/pages/client/login.html";
       }, 1500);
     } else {
       const errorMsg =
-        data?.message || data?.error || "Login failed. Please try again.";
+        data?.message || data?.error || "Registration failed. Please try again.";
       showMessage(errorMsg, "error");
     }
   } catch (err) {
     showMessage("Network error. Please check your connection.", "error");
-    console.error("Login error:", err);
+    console.error("Register error:", err);
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = "login";
+    submitBtn.textContent = "register";
   }
 });
 
