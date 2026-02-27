@@ -2,8 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("adminToken");
 
   if (!token) {
-         window.location.href = "http://127.0.0.1:5500/index.html";
-         return;
+    window.location.replace(
+      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html"
+    );
+    return;
   }
   const commentsBody = document.querySelector("#comments-body");
   const deleteModal = document.querySelector("#deleteModal");

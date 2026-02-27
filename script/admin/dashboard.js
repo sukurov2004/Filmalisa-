@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem("adminToken");
+ const token = localStorage.getItem("adminToken");
 
+  // Əgər token yoxdursa → login-ə at
   if (!token) {
-    window.location.href =
-      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html";
-
-    return;
+    window.location.replace(
+      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html"
+    );
   }
 
   const cardList = document.querySelector(".stats-flex");
