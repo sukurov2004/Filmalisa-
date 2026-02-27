@@ -29,20 +29,31 @@
         />
       </div>
     </div>
-    <header class="site-header">
-      <div class="header-inner">
-        <a href="/" class="header-logo" aria-label="Filmalisa home">
-          <img
-            src="./assets/Admin/images/logo.svg"
-            alt="Filmalisa logo"
-            width="60"
-            height="62"
-          />
-          <span class="logo-text">filmalisa</span>
-        </a>
-        <a href="./pages/client/login.html" class="btn btn-primary">Sign in</a>
-      </div>
-    </header>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="header-logo">
+      <img src="./assets/Admin/images/logo.svg" width="60" height="62" />
+      <span class="logo-text">filmalisa</span>
+    </a>
+<div class="auth-area">
+  <a href="./pages/client/login.html" class="btn btn-primary sign-in-btn">
+    Sign in
+  </a>
+
+  <!-- User Menu -->
+<div class="user-menu hidden">
+  <div class="user-icon">
+ <img src="./assets/client/İconsİmages/user.svg" alt="user icon">
+  </div>
+
+  <div class="dropdown hidden">
+    <a href="http://127.0.0.1:5500/pages/client/account.html">Profile</a>
+    <button class="logout-btn">Logout</button>
+  </div>
+</div>
+</div>
+  </div>
+</header>
 
     <main>
       <!-- HERO -->
