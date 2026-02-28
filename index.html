@@ -22,40 +22,43 @@
     <div class="cinema-intro" id="cinemaIntro">
       <div class="cinema-bg"></div>
       <div class="logo-wrapper">
-      
         <img
           src="./assets/Admin/images/logo.svg"
           alt="Filmalisa logo"
           class="intro-logo"
         />
-       
       </div>
     </div>
-<header class="site-header">
-  <div class="header-inner">
-    <a href="./pages/client/home.html" class="header-logo">
-      <img src="./assets/Admin/images/logo.svg" width="60" height="62" />
-      <span class="logo-text">filmalisa</span>
-    </a>
-<div class="auth-area">
-  <a href="./pages/client/login.html" class="btn btn-primary sign-in-btn">
-    Sign in
-  </a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="./pages/client/home.html" class="header-logo">
+          <img src="./assets/Admin/images/logo.svg" width="60" height="62" />
+          <span class="logo-text">filmalisa</span>
+        </a>
+        <div class="auth-area">
+          <a
+            href="./pages/client/login.html"
+            class="btn btn-primary sign-in-btn"
+          >
+            Sign in
+          </a>
 
-  <!-- User Menu -->
-<div class="user-menu hidden">
-  <div class="user-icon">
- <img src="./assets/Admin/icons/Users.svg" alt="user icon">
-  </div>
+          <!-- User Menu -->
+          <div class="user-menu hidden">
+            <div class="user-icon">
+              <img src="./assets/Admin/icons/Users.svg" alt="user icon" />
+            </div>
 
-  <div class="dropdown hidden">
-    <a href="http://127.0.0.1:5500/pages/client/account.html">Profile</a>
-    <button class="logout-btn">Logout</button>
-  </div>
-</div>
-</div>
-  </div>
-</header>
+            <div class="dropdown hidden">
+              <a href="http://127.0.0.1:5500/pages/client/account.html"
+                >Profile</a
+              >
+              <button class="logout-btn">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
     <main>
       <!-- HERO -->
@@ -74,7 +77,7 @@
             Ready to watch? Enter your email to create or restart your
             membership.
           </p>
-          <form class="hero-form" action="/signup" method="get">
+         <form class="hero-form" id="heroForm">
             <label for="emailInput" class="sr-only">Email address</label>
             <input
               type="email"
@@ -202,7 +205,13 @@
               What is Filmalisa? <span aria-hidden="true">+</span>
             </button>
             <div id="faq-1" class="accordion-content">
-              Filmalisa is a streaming platform offering movies and TV shows.
+              Filmalisa is a modern streaming platform where users can explore
+              and discover a wide variety of movies and TV shows. It allows you
+              to search, browse, and learn detailed information about your
+              favorite titles. The platform is designed with a clean and
+              user-friendly interface for a smooth experience. Whether you're
+              looking for classics or trending content, Filmalisa makes
+              discovery simple and enjoyable.
             </div>
           </li>
           <li class="accordion-item">
@@ -214,7 +223,11 @@
               How much does Filmalisa cost? <span aria-hidden="true">+</span>
             </button>
             <div id="faq-2" class="accordion-content">
-              The cost varies depending on the subscription plan.
+              Filmalisa offers flexible subscription options depending on your
+              needs. Pricing may vary based on features, access level, and
+              future premium services. Our goal is to provide affordable
+              entertainment for everyone. You can check the pricing details in
+              your account or subscription section.
             </div>
           </li>
           <li class="accordion-item">
@@ -226,8 +239,12 @@
               Where can I watch? <span aria-hidden="true">+</span>
             </button>
             <div id="faq-3" class="accordion-content">
-              You can watch on multiple devices, including smartphones, tablets,
-              and TVs.
+              You can access Filmalisa from multiple devices including
+              smartphones, tablets, laptops, and desktop computers. The platform
+              is fully responsive and works smoothly across different screen
+              sizes. As long as you have an internet connection, you can browse
+              and explore content anytime. Support for additional smart devices
+              may be added in the future.
             </div>
           </li>
           <li class="accordion-item">
@@ -239,8 +256,11 @@
               How do I cancel? <span aria-hidden="true">+</span>
             </button>
             <div id="faq-4" class="accordion-content">
-              You can cancel your subscription anytime through your account
-              settings.
+              You can cancel your subscription at any time through your account
+              settings. The cancellation process is simple and does not require
+              contacting support. Once canceled, your access will continue until
+              the end of the current billing period. There are no hidden fees or
+              penalties.
             </div>
           </li>
           <li class="accordion-item">
@@ -252,8 +272,12 @@
               What can I watch on Filmalisa? <span aria-hidden="true">+</span>
             </button>
             <div id="faq-5" class="accordion-content">
-              A wide variety of content, including movies, TV shows, and
-              documentaries.
+              Filmalisa provides access to a broad range of movies, TV shows,
+              and documentaries across different genres. From action and drama
+              to comedy and family content, there is something for everyone. The
+              platform continuously updates its catalog to include trending and
+              popular titles. You can easily search and filter content based on
+              your interests.
             </div>
           </li>
           <li class="accordion-item">
@@ -265,8 +289,11 @@
               Is Filmalisa good for kids? <span aria-hidden="true">+</span>
             </button>
             <div id="faq-6" class="accordion-content">
-              Yes, it has a variety of family-friendly content and parental
-              controls.
+              Yes, Filmalisa includes family-friendly and kid-appropriate
+              content options. Parents can create separate profiles to manage
+              what children can access. The platform aims to provide a safe and
+              enjoyable viewing experience for younger audiences. Parental
+              guidance tools may be expanded in future updates.
             </div>
           </li>
         </ul>
@@ -305,7 +332,7 @@
         <a href="/ad-choices">Ad Choices</a>
       </nav>
     </footer>
-<script src="./script/client/landingPage.js"></script>
+    <script src="./script/client/landingPage.js"></script>
     <script src="./global/clientGlobal.js"></script>
   </body>
 </html>

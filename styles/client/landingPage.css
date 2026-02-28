@@ -393,7 +393,7 @@ body {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  padding: 0 15px;
+  padding:0 15px;
   background-color: #1a1a1a;
   border-top: 1px solid #2e2e2e;
   color: #ffffffd1;
@@ -411,6 +411,7 @@ body {
 .accordion-item:has(.accordion-header[aria-expanded="true"]) {
   box-shadow: 0 0 0 1px #9b51e059;
   border-radius: 2px;
+
 }
 
 /* ─── FOOTER ─────────────────────────────────────────────── */
