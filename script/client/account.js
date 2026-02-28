@@ -53,6 +53,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   getProfile();
 
+  imgUrlInput.addEventListener("input",()=>{
+    if(imgUrlInput.value){
+      profilImg.src = imgUrlInput.value;
+    }
+  });
+
   //PUT
   form.addEventListener("submit", async (e) => {
     e.preventDefault(); //save duymesine basanda sehife yenilenmir
@@ -67,6 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 if (passwordInput.value) {
   body.password = passwordInput.value; //sifre əgər dəyişdirilirsə
 }
+
       const response = await fetch(url, {
         method: "PUT",
         headers: {
