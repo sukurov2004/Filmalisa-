@@ -513,7 +513,7 @@ input:-webkit-autofill:focus {
 .user-icon {
   width: 42px;
   height: 42px;
-  background: linear-gradient(135deg, #e50914, #b20710);
+  background: #9b51e0;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -556,7 +556,7 @@ input:-webkit-autofill:focus {
 
 .dropdown a:hover,
 .dropdown button:hover {
-  background: #e50914;
+  background: #9b51e0;
 }
 
 @keyframes fadeIn {
