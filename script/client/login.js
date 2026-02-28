@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
 
   if (token) {
-    window.location.replace("http://127.0.0.1:5500/pages/client/home.html");
+    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/home.html");
   }
 });
 
@@ -70,7 +70,7 @@ form.addEventListener("submit", async (e) => {
       showMessage("Login successful! Redirecting...", "success");
 
       setTimeout(() => {
-        window.location.replace("http://127.0.0.1:5500/pages/client/home.html");
+        window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/home.html");
       }, 1500);
     } else {
       const errorMsg =

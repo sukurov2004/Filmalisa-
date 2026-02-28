@@ -4,6 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (token) {
     window.location.replace("http://127.0.0.1:5500/pages/client/home.html");
   }
+
+
+   const params = new URLSearchParams(window.location.search);
+  const email = params.get("email");
+
+  if (email) {
+    const emailInput = document.querySelector(".registerEmail"); 
+    if (emailInput) {
+      emailInput.value = email;
+    }
+  }
 });
 
 
@@ -88,3 +99,5 @@ function showMessage(msg, type) {
 function hideMessage() {
   formMessage.style.display = "none";
 }
+
+
