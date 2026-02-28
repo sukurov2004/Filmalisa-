@@ -54,6 +54,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   getProfile();
 
+  imgUrlInput.addEventListener("input",()=>{
+    if(imgUrlInput.value){
+      profilImg.src = imgUrlInput.value;
+    }
+  });
+
   //PUT
   form.addEventListener("submit", async (e) => {
     e.preventDefault(); //save duymesine basanda sehife yenilenmir
@@ -62,8 +68,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       const body = {
         full_name: fullNameInput.value,
         email: emailInput.value,
-        img_url: imgUrlInput.value,
       };
+      if (imgUrlInput.value){
+        body.img_url = imgUrlInput.value;
+      }
       if (passwordInput.value) {
         body.password = passwordInput.value;
       }
