@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       fullNameInput.value = user.full_name || "";
       emailInput.value = user.email || "";
       imgUrlInput.value = user.img_url || "";
-
       if (user.img_url) {
         profilImg.src = user.img_url;
       }
@@ -59,14 +58,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     e.preventDefault(); //save duymesine basanda sehife yenilenmir
 
     try {
-      const body = {
-        full_name: fullNameInput.value,
-        email: emailInput.value,
-        img_url: imgUrlInput.value,
-      };
-      if (passwordInput.value) {
-        body.password = passwordInput.value;
-      }
+    const body = {
+  full_name: fullNameInput.value,
+  email: emailInput.value,       
+  img_url: imgUrlInput.value,    
+};
+
+if (passwordInput.value) {
+  body.password = passwordInput.value; //sifre əgər dəyişdirilirsə
+}
       const response = await fetch(url, {
         method: "PUT",
         headers: {
