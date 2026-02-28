@@ -39,3 +39,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+
+const token = localStorage.getItem("token");
+
+const signInBtn = document.querySelector(".sign-in-btn");
+const userMenu = document.querySelector(".user-menu");
+const logoutBtn = document.querySelector(".logout-btn");
+
+if (token) {
+  signInBtn?.classList.add("hidden");
+  userMenu?.classList.remove("hidden");
+} else {
+  signInBtn?.classList.remove("hidden");
+  userMenu?.classList.add("hidden");
+}
+
+logoutBtn?.addEventListener("click", () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.reload();
+});
+
+const userIcon = document.querySelector(".user-icon");
+const dropdown = document.querySelector(".dropdown");
+
+userIcon?.addEventListener("click", () => {
+  dropdown?.classList.toggle("hidden");
+});
