@@ -87,6 +87,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         .join("");
     }
 
+    // ── Favorite button ──
+    const circleBtn = document.querySelector(".circle-btn");
+
+    // chack if movie is already in favorites
+    const favRes = await fetch(`${BASE_URL}/movies/favorites`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const favData = await favRes.json();
+    const isFav = (favData.data || []).some((m) => m.id === parseInt(movieId));
+    if (isFav) circleBtn.classList.add("active");
+
+    // Click
+    circleBtn.addEventListener("click", async () => {
+      try {
+        await fetch(`${BASE_URL}/movie/${movieId}/favorite`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        circleBtn.classList.toggle("active");
+      } catch (err) {
+        console.error("Favorite əlavə edilmədi:", err);
+      }
+    });
+
     // ── Şərhlər ──
     loadComments(movieId, token, BASE_URL);
 
