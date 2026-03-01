@@ -1,45 +1,54 @@
 // ===== AUTH GUARD =====
 (function () {
   const token = localStorage.getItem("token");
-
   if (!token) {
-    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/login.html");
+    window.location.replace("http://127.0.0.1:5500/pages/client/login.html");
   }
 })();
 
-
-
-// search.js
-
-const API_BASE = "BURADA_API_URL"; 
-// məsələn: "https://api.sarkhanrahimli.dev/api/filmalisa" və ya sizin endpoint
+const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa";
+const token = localStorage.getItem("token");
 
 const grid = document.getElementById("resultsGrid");
 const input = document.getElementById("searchInput");
 const btn = document.getElementById("searchBtn");
 
-// ---------- Kart render edən funksiya ----------
+// ---------- Kart render ----------
 function renderMovies(list) {
   grid.innerHTML = "";
 
-  if (!list || list.length === 0) {
-    grid.innerHTML = `<p style="opacity:.7">No results</p>`;
+if (!list || list.length === 0) {
+    grid.innerHTML = `
+      <main class="main-err main">
+        <div class="error-container">
+          <img
+            class="error-img"
+            src="../../assets/client/GridImages/error.svg"
+            alt=""
+          />
+          <h1 class="error-title">Lost your way?</h1>
+          <p class="error-text">
+            Oops! This is awkward. You are looking for something that doesn't
+            actually exist.
+          </p>
+          <button class="error-btn" onclick="window.location.href='search.html'">Go Home</button>
+        </div>
+      </main>
+    `;
     return;
   }
-
   const fragment = document.createDocumentFragment();
 
   list.forEach((movie) => {
-    // BU field-ləri API-nə uyğunlaşdır:
-    const id = movie.id || movie._id;
-    const title = movie.name || movie.title || "No title";
-    const genre = movie.genre || movie.category || "Unknown";
+    const id = movie.id;
+    const title = movie.title || "No title";
+    const genre = movie.category?.name || "Unknown";
     const rating = Number(movie.rating || 5);
-    const posterUrl = movie.image || movie.poster || movie.posterUrl || "";
+    const posterUrl = movie.cover_url || "";
 
     const card = document.createElement("article");
     card.className = "card";
-    card.dataset.id = id; // klikdə lazım olacaq
+    card.dataset.id = id;
 
     card.innerHTML = `
       <div class="poster" style="background-image:url('${posterUrl}')"></div>
@@ -59,51 +68,46 @@ function renderMovies(list) {
 // ---------- API-dən film gətir ----------
 async function fetchMovies(query = "") {
   try {
-    // endpoint nümunələri:
-    // 1) /movies?search=batman
-    // 2) /movies/search?q=batman
-    // səninki necədirsə onu yaz
-
     const url = query
       ? `${API_BASE}/movies?search=${encodeURIComponent(query)}`
       : `${API_BASE}/movies`;
 
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     if (!res.ok) throw new Error("API error: " + res.status);
 
     const data = await res.json();
-
-    // bəzi API-lər { data: [...] } qaytarır, bəzisi birbaşa [...]
-    const list = Array.isArray(data) ? data : data.data || data.movies || [];
+    const list = Array.isArray(data) ? data : data.data || [];
 
     renderMovies(list);
   } catch (err) {
     console.error(err);
-    grid.innerHTML = `<p style="color:#ff6b6b">Error loading data</p>`;
+    grid.innerHTML = `<p style="color:#ff6b6b; padding:20px;">Error loading data</p>`;
   }
 }
 
-// ---------- Kliklə kart işləsin (Event Delegation) ----------
+// ---------- Karta klik ----------
 grid.addEventListener("click", (e) => {
   const card = e.target.closest(".card");
   if (!card) return;
-
   const id = card.dataset.id;
-
-  // 1) Detal səhifəsinə keçid (ən rahat)
-  window.location.href = `movie-detail.html?id=${encodeURIComponent(id)}`;
-
-  // 2) və ya modal açmaq istəyirsənsə deyərsən, onu da edərəm.
+  window.location.href = `detailed.html?id=${encodeURIComponent(id)}`;
 });
 
-// ---------- Axtarış ----------
+// ---------- Axtarış düyməsi ----------
 btn.addEventListener("click", () => {
   fetchMovies(input.value.trim());
 });
 
+// ---------- Enter ilə axtarış ----------
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") fetchMovies(input.value.trim());
 });
 
-// ---------- Page açılan kimi ----------
+// ---------- Səhifə açılanda bütün filmlər ----------
 fetchMovies();
