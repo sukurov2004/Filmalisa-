@@ -1,18 +1,21 @@
+:root{
+  --sidebarW: 72px;
+  --line: rgba(255,255,255,0.10);
+  --text: rgba(255,255,255,0.92);
+}
+
 body {
   margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: #1d1d1d;
+  color: var(--text);
 }
 
 /* Main */
 .main {
-  padding: 34px 34px 46px;
+  margin-left: var(--sidebarW);
+  padding: 28px 24px 36px;
+  min-height: 100vh;
 }
 
 /* Topbar */
@@ -21,29 +24,38 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 10px 8px 26px;
+  padding: 8px 0 18px;
 }
+
 .title-wrap {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
 .title {
   margin: 0;
   font-size: 34px;
   font-weight: 750;
   letter-spacing: 0.2px;
 }
+
 .chev {
   font-size: 32px;
   color: #ffffff99;
   transform: translateY(-1px);
 }
 
+.search-wrap{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .search {
-  width: 360px;
+  width: 340px;
   height: 38px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid var(--line);
   background: #00000040;
   color: var(--text);
@@ -69,27 +81,23 @@ body {
   background: #ffffff1a;
 }
 
-.title {
-  margin-left: 52px;
-}
-
-/* Grid */
+/* GRID */
 .grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px 16px;
-  margin-left: 52px;
+  gap: 22px 18px;
+  margin: 0;
 }
 
+/* Card */
 .card {
   position: relative;
   overflow: hidden;
   background: #ffffff08;
   border: 1px solid #ffffff0f;
   box-shadow: 0 18px 55px #00000073;
-  min-height: 280px;
   width: 292px;
-  height: 440px;
+  height: 440px; 
 }
 
 .poster {
@@ -120,14 +128,10 @@ body {
   bottom: 20px;
   z-index: 2;
   color: #fff;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  transition:
-    transform 0.35s ease,
-    opacity 0.35s ease;
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
 .card:hover .meta {
@@ -140,12 +144,14 @@ body {
   color: #24c8d8;
   margin-bottom: 6px;
 }
+
 .stars {
   font-size: 12px;
   letter-spacing: 2px;
   color: #ffffffd9;
   margin-bottom: 6px;
 }
+
 .name {
   margin: 0;
   font-size: 16px;
@@ -153,70 +159,28 @@ body {
   line-height: 1.15;
 }
 
+
 /* Responsive */
 @media (max-width: 1100px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px 18px;
-  }
-  .search {
-    width: 300px;
-  }
+  .search { width: 300px; }
+  .card { width: calc(33% - 12px); height: 395px; }
 }
 
 @media (max-width: 820px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-  }
-  .title {
-    font-size: 26px;
-  }
-  .search {
-    width: 220px;
-  }
-
-  .meta {
-    left: 12px;
-    right: 12px;
-    bottom: 14px;
-  }
-  .name {
-    font-size: 15px;
-  }
+  .main { padding: 22px 16px 28px; }
+  .title { font-size: 26px; }
+  .search { width: 220px; }
+  .card { width: calc(50% - 9px); height: 380px; }
+  .meta { left: 12px; right: 12px; bottom: 14px; }
+  .name { font-size: 15px; }
 }
 
 @media (max-width: 520px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 8px 4px;
-  }
-  .search {
-    width: 180px;
-  }
-
-  .meta {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-  }
-  .tag {
-    font-size: 11px;
-  }
-  .stars {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-  }
-  .name {
-    font-size: 14px;
-    line-height: 1.2;
-  }
-}
-
-/* Mobil hover problemi olmasın */
-@media (hover: none) {
-  .card:hover .meta {
-    transform: none;
-  }
+  .main { padding: 18px 12px 22px; }
+  .search { width: 180px; }
+  .card { width: 100%; height: 360px; }
+  .meta { left: 12px; right: 12px; bottom: 12px; }
+  .tag { font-size: 11px; }
+  .stars { font-size: 11px; letter-spacing: 1.5px; }
+  .name { font-size: 14px; line-height: 1.2; }
 }
