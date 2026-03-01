@@ -35,8 +35,8 @@ async function initHeroSlider() {
         <div class="hero-content">
           <span class="hero-category">${movie.category?.name || ""}</span>
           <h1 class="hero-title">${movie.title}</h1>
-          <p class="hero-desc">${movie.description || ""}</p>
-          <a href="#" class="hero-btn">Watch Now</a>
+          <p class="hero-desc">${movie.description || movie.overview || ""}</p>
+          <a href="${movie.watch_url || "#"}" target="_blank" class="hero-btn">Watch Now</a>
         </div>
       `;
       wrapper.appendChild(slide);
