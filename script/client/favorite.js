@@ -1,15 +1,69 @@
 // ===== AUTH GUARD =====
 (function () {
   const token = localStorage.getItem("token");
-
   if (!token) {
-    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/login.html");
+    window.location.replace("http://127.0.0.1:5500/pages/client/login.html");
   }
 })();
 
-// ===== CAROUSEL JS =====
+// ===== FAVORITE MOVIES =====
+(async function () {
+  const token = localStorage.getItem("token");
+  const BASE_URL = "https://api.sarkhanrahimli.dev/api/filmalisa";
+  const grid = document.getElementById("movieGrid");
 
-(function () {
+  // Ulduz render
+  function renderStars(rating) {
+    let html = "";
+    for (let i = 1; i <= 5; i++) {
+      if (i <= Math.floor(rating)) html += '<span class="star filled">★</span>';
+      else if (i - rating < 1) html += '<span class="star half">★</span>';
+      else html += '<span class="star">★</span>';
+    }
+    return html;
+  }
+
+  try {
+    const res = await fetch(`${BASE_URL}/movies/favorites`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    const movies = data.data || [];
+
+    if (movies.length === 0) {
+      grid.innerHTML =
+        '<p style="color:#fff; padding: 20px;">No favorite movies yet.</p>';
+      return;
+    }
+
+    grid.innerHTML = movies
+      .map(
+        (movie) => `
+      <a class="movie-card" href="detailed.html?id=${movie.id}">
+        <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
+        <div class="movie-details">
+          <div class="movie-category-container">
+            <span class="movie-category">${movie.category?.name || ""}</span>
+          </div>
+          <div class="movie-rating">
+            ${renderStars(movie.imdb || 0)}
+          </div>
+          <p class="movie-title">${movie.title}</p>
+        </div>
+      </a>
+    `,
+      )
+      .join("");
+
+    // Carousel-i yenidən işə sal
+    initCarousel();
+  } catch (err) {
+    console.error("Favoritlər yüklənmədi:", err);
+  }
+})();
+
+// ===== CAROUSEL =====
+function initCarousel() {
   const grid = document.getElementById("movieGrid");
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
@@ -17,19 +71,17 @@
   const CARD_WIDTH = 300;
   const CARD_GAP = 0;
   const VISIBLE = 4.9;
+  const step = CARD_WIDTH + CARD_GAP;
 
   const cards = grid.querySelectorAll(".movie-card");
-  const step = CARD_WIDTH + CARD_GAP;
   const maxIndex = Math.max(0, cards.length - VISIBLE);
-
   let currentIndex = 0;
 
   function goTo(index) {
     currentIndex = Math.max(0, Math.min(index, maxIndex));
     grid.style.transform = `translateX(-${currentIndex * step}px)`;
-
     prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex === maxIndex;
+    nextBtn.disabled = currentIndex >= maxIndex;
   }
 
   prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
@@ -103,5 +155,8 @@
     else goTo(currentIndex);
   });
 
+  grid.style.transition = "transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1)";
+  grid.style.cursor = "grab";
+
   goTo(0);
-})();
+}

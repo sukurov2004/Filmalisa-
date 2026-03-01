@@ -211,21 +211,23 @@
 }
 
 .circle-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  transition: 0.3s;
   background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
-.circle-btn:hover {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.05);
+
+.circle-btn i {
+  font-size: 28px;
+  color: #ffffff60;
+  transition: all 0.3s ease;
+}
+
+.circle-btn.active i {
+  background: linear-gradient(to right, #0feffd, #ff00f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .description {
