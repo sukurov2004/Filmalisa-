@@ -23,10 +23,10 @@ async function initHeroSlider() {
     const data = await res.json();
     const movies = data.data || [];
 
-    // Ən son 3 film — id-ə görə azalan sırada
+    // Show only latest 3 movies
     const latest3 = movies.sort((a, b) => b.id - a.id).slice(0, 3);
 
-    // Slide-ları yarat
+    // Create slides
     latest3.forEach((movie) => {
       const slide = document.createElement("div");
       slide.className = "hero-slide";
@@ -41,16 +41,16 @@ async function initHeroSlider() {
       `;
       wrapper.appendChild(slide);
 
-      // Dot yarat
+      // Create dot for each slide
       const dot = document.createElement("span");
       dot.className = "hero-dot";
       dotsContainer.appendChild(dot);
     });
 
-    // İlk dot-u aktiv et
+    // Activate first dot
     dotsContainer.querySelector(".hero-dot").classList.add("active");
 
-    // Slider işə sal
+    // Slider functionality
     const slides = wrapper.querySelectorAll(".hero-slide");
     const dots = dotsContainer.querySelectorAll(".hero-dot");
     let current = 0;
@@ -200,14 +200,14 @@ function initCarousel(carousel) {
   goTo(0);
 }
 
-// ===== API — KATEQORİYA VƏ FİLMLƏR =====
+// ===== API — Categories and Movies =====
 (async function () {
   const BASE_URL = "https://api.sarkhanrahimli.dev/api/filmalisa";
   const token = localStorage.getItem("token");
   const categoriesContainer = document.getElementById("categoriesContainer");
   const vectorIconSrc = "../../assets/client/İconsİmages/vector.svg";
 
-  // Ulduz render funksiyası
+  // Function to render star ratings
   function renderStars(rating) {
     let html = "";
     for (let i = 1; i <= 5; i++) {
@@ -218,25 +218,25 @@ function initCarousel(carousel) {
     return html;
   }
 
-  // Kart HTML-i
+  // Card HTML- creation function
   function createCardHTML(movie, categoryName) {
     return `
-      <div class="movie-card">
-       <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
-        <div class="movie-details">
-          <div class="movie-category-container">
-            <span class="movie-category">${categoryName}</span>
-          </div>
-          <div class="movie-rating">
-            ${renderStars(movie.rating || 0)}
-          </div>
-          <p class="movie-title">${movie.title}</p>
+    <a class="movie-card" href="detailed.html?id=${movie.id}">
+      <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
+      <div class="movie-details">
+        <div class="movie-category-container">
+          <span class="movie-category">${categoryName}</span>
         </div>
+        <div class="movie-rating">
+          ${renderStars(movie.rating || 0)}
+        </div>
+        <p class="movie-title">${movie.title}</p>
       </div>
-    `;
+    </a>
+  `;
   }
 
-  // Kateqoriya section HTML-i
+  // Kateqoriya section HTML
   function createSectionHTML(category, movies) {
     const cardsHTML = movies
       .map((m) => createCardHTML(m, category.name))
