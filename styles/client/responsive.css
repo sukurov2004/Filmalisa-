@@ -71,6 +71,28 @@ img {
   }
   .account-profile {
     padding-bottom: 80px;
+    padding-top: 80px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .profile-card{
+    align-items: center;
+    padding: 20px 16px;
+  }
+  .avatar-gradient{
+    width: 160px;
+    height: 160px;
+    margin-bottom: 54px;
+    margin-top: 40px;
+  }
+  .account-form{
+    width: 100%;
+  }
+  .p-input{
+    font-size: 16px;
+  }
+  .account-btn{
+    margin-top: 24px;
   }
   .main-err {
     padding-top: 120px;

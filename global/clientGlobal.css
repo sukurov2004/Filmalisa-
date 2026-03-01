@@ -67,6 +67,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  top: auto;
   height: 100vh;
   z-index: 100;
   width: 56px;
