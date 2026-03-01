@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ comment: text }),
       });
       commentInput.value = "";
       await loadComments(movieId, token, BASE_URL);
@@ -150,11 +150,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Şərh göndərilmədi:", err);
     }
   });
+  commentInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      sendBtn.click();
+    }
+  });
 });
 
 // ── Şərhlər ──
 async function loadComments(movieId, token, BASE_URL) {
   try {
+    // Cari istifadəçinin id-sini al
+    const profileRes = await fetch(`${BASE_URL}/profile`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const profileData = await profileRes.json();
+    const currentUserId = profileData.data?.id;
+
     const res = await fetch(`${BASE_URL}/movies/${movieId}/comments`, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -165,6 +177,7 @@ async function loadComments(movieId, token, BASE_URL) {
     wrapper.querySelectorAll(".existing-comment").forEach((c) => c.remove());
 
     comments.forEach((comment) => {
+      const isOwner = comment.user?.id === currentUserId;
       const div = document.createElement("div");
       div.className = "existing-comment";
       div.innerHTML = `
@@ -173,11 +186,32 @@ async function loadComments(movieId, token, BASE_URL) {
             <img src="../../assets/client/GridImages/avatar.svg" alt="User" />
             <span class="username">${comment.user?.full_name || "User"}</span>
           </div>
-          <span class="time">${new Date(comment.created_at).toLocaleString()}</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="time">${new Date(comment.created_at).toLocaleString()}</span>
+            ${isOwner ? `<i class="fa-solid fa-trash comment-delete" data-id="${comment.id}" style="cursor:pointer; color:#ffffff60; font-size:14px;"></i>` : ""}
+          </div>
         </div>
         <p class="comment-text">${comment.comment}</p>
-     `;
+      `;
       wrapper.appendChild(div);
+    });
+
+    // Silmə
+    wrapper.querySelectorAll(".comment-delete").forEach((icon) => {
+      icon.addEventListener("click", async () => {
+        try {
+          await fetch(
+            `${BASE_URL}/movies/${movieId}/comment/${icon.dataset.id}`,
+            {
+              method: "DELETE",
+              headers: { Authorization: `Bearer ${token}` },
+            },
+          );
+          await loadComments(movieId, token, BASE_URL);
+        } catch (err) {
+          console.error("Şərh silinmədi:", err);
+        }
+      });
     });
   } catch (err) {
     console.error("Şərhlər yüklənmədi:", err);
@@ -189,17 +223,19 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
   if (!categoryId) return;
 
   try {
-    const res = await fetch(`${BASE_URL}/movies`, {
+    const res = await fetch(`${BASE_URL}/categories`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
-    const movies = data.data || [];
+    const categories = data.data || [];
 
-    const similar = movies
-      .filter(
-        (m) =>
-          m.category_id === categoryId && m.id !== parseInt(currentMovieId),
-      )
+    // Eyni kateqoriyanı tap
+    const category = categories.find((c) => c.id === categoryId);
+    if (!category) return;
+
+    // Həmin kateqoriyanın filmləri
+    const similar = (category.movies || [])
+      .filter((m) => m.id !== parseInt(currentMovieId))
       .slice(0, 4);
 
     if (similar.length === 0) return;
@@ -211,7 +247,7 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
       <article class="movie-card" onclick="window.location.href='detailed.html?id=${movie.id}'">
         <div class="card-poster" style="background-image: url('${movie.cover_url}')"></div>
         <div class="card-meta">
-          <span class="card-genre">${movie.category?.name || ""}</span>
+          <span class="card-genre">${category.name}</span>
           <div class="card-stars">★★★★★</div>
           <h3 class="card-name">${movie.title}</h3>
         </div>

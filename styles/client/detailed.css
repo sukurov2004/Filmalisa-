@@ -406,6 +406,7 @@
   padding: 20px;
   width: 100%;
   max-width: 550px;
+  margin-bottom: 8px;
 }
 .comment-header {
   display: flex;
@@ -416,6 +417,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.comment-delete {
+  transition: all 0.2s ease;
+}
+
+.comment-delete:hover {
+  color: #9b51e0 !important;
+  transform: scale(1.2);
 }
 .comment-user img {
   width: 32px;
