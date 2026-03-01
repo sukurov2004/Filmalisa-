@@ -19,18 +19,21 @@ function renderMovies(list) {
 
 if (!list || list.length === 0) {
     grid.innerHTML = `
-      <div class="error-container">
-        <img
-          class="error-img"
-          src="../../assets/client/GridImages/error.svg"
-          alt=""
-        />
-        <h1 class="error-title">Lost your way?</h1>
-        <p class="error-text">
-          Oops! This is awkward. You are looking for something that doesn't actually exist.
-        </p>
-        <button class="error-btn" onclick="window.location.href='search.html'">Go Home</button>
-      </div>
+      <main class="main-err main">
+        <div class="error-container">
+          <img
+            class="error-img"
+            src="../../assets/client/GridImages/error.svg"
+            alt=""
+          />
+          <h1 class="error-title">Lost your way?</h1>
+          <p class="error-text">
+            Oops! This is awkward. You are looking for something that doesn't
+            actually exist.
+          </p>
+          <button class="error-btn" onclick="window.location.href='search.html'">Go Home</button>
+        </div>
+      </main>
     `;
     return;
   }
