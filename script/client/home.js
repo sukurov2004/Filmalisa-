@@ -2,61 +2,106 @@
 (function () {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/login.html");
+    window.location.replace(
+      "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html",
+    );
   }
 })();
 
 // ===== HERO SLIDER =====
-(function () {
-  const slides = document.querySelectorAll(".hero-slide");
-  const dots = document.querySelectorAll(".hero-dot");
+async function initHeroSlider() {
+  const token = localStorage.getItem("token");
+  const BASE_URL = "https://api.sarkhanrahimli.dev/api/filmalisa";
+
   const wrapper = document.getElementById("heroWrapper");
+  const dotsContainer = document.getElementById("heroDots");
 
-  const AUTOPLAY_DELAY = 5000;
-  let current = 0;
-  let timer;
-
-  function goTo(index) {
-    dots[current].classList.remove("active");
-    current = (index + slides.length) % slides.length;
-    wrapper.style.transform = `translateX(-${current * 100}%)`;
-    dots[current].classList.add("active");
-  }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener("click", () => {
-      clearInterval(timer);
-      goTo(i);
-      startAutoplay();
+  try {
+    const res = await fetch(`${BASE_URL}/movies`, {
+      headers: { Authorization: `Bearer ${token}` },
     });
-  });
+    const data = await res.json();
+    const movies = data.data || [];
 
-  function startAutoplay() {
-    timer = setInterval(() => goTo(current + 1), AUTOPLAY_DELAY);
-  }
+    // Show only latest 3 movies
+    const latest3 = movies.sort((a, b) => b.id - a.id).slice(0, 3);
 
-  const slider = document.getElementById("heroSlider");
-  let touchStartX = 0;
+    // Create slides
+    latest3.forEach((movie) => {
+      const slide = document.createElement("div");
+      slide.className = "hero-slide";
+      slide.innerHTML = `
+        <img src="${movie.cover_url || ""}" class="hero-img" alt="${movie.title}" />
+        <div class="hero-content">
+          <span class="hero-category">${movie.category?.name || ""}</span>
+          <h1 class="hero-title">${movie.title}</h1>
+          <p class="hero-desc">${movie.description || ""}</p>
+          <a href="#" class="hero-btn">Watch Now</a>
+        </div>
+      `;
+      wrapper.appendChild(slide);
 
-  slider.addEventListener(
-    "touchstart",
-    (e) => {
-      touchStartX = e.touches[0].clientX;
-    },
-    { passive: true },
-  );
+      // Create dot for each slide
+      const dot = document.createElement("span");
+      dot.className = "hero-dot";
+      dotsContainer.appendChild(dot);
+    });
 
-  slider.addEventListener("touchend", (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      clearInterval(timer);
-      goTo(current + (diff > 0 ? 1 : -1));
-      startAutoplay();
+    // Activate first dot
+    dotsContainer.querySelector(".hero-dot").classList.add("active");
+
+    // Slider functionality
+    const slides = wrapper.querySelectorAll(".hero-slide");
+    const dots = dotsContainer.querySelectorAll(".hero-dot");
+    let current = 0;
+    let timer;
+
+    function goTo(index) {
+      dots[current].classList.remove("active");
+      current = (index + slides.length) % slides.length;
+      wrapper.style.transform = `translateX(-${current * 100}%)`;
+      dots[current].classList.add("active");
     }
-  });
 
-  startAutoplay();
-})();
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        clearInterval(timer);
+        goTo(i);
+        startAutoplay();
+      });
+    });
+
+    function startAutoplay() {
+      timer = setInterval(() => goTo(current + 1), 5000);
+    }
+
+    const slider = document.getElementById("heroSlider");
+    let touchStartX = 0;
+
+    slider.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartX = e.touches[0].clientX;
+      },
+      { passive: true },
+    );
+
+    slider.addEventListener("touchend", (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        clearInterval(timer);
+        goTo(current + (diff > 0 ? 1 : -1));
+        startAutoplay();
+      }
+    });
+
+    startAutoplay();
+  } catch (err) {
+    console.error("Hero slider xətası:", err);
+  }
+}
+
+initHeroSlider();
 
 // ===== CATEGORY CAROUSEL — UNIVERSAL =====
 function initCarousel(carousel) {
@@ -155,14 +200,14 @@ function initCarousel(carousel) {
   goTo(0);
 }
 
-// ===== API — KATEQORİYA VƏ FİLMLƏR =====
+// ===== API — Categories and Movies =====
 (async function () {
   const BASE_URL = "https://api.sarkhanrahimli.dev/api/filmalisa";
   const token = localStorage.getItem("token");
   const categoriesContainer = document.getElementById("categoriesContainer");
   const vectorIconSrc = "../../assets/client/İconsİmages/vector.svg";
 
-  // Ulduz render funksiyası
+  // Function to render star ratings
   function renderStars(rating) {
     let html = "";
     for (let i = 1; i <= 5; i++) {
@@ -173,25 +218,25 @@ function initCarousel(carousel) {
     return html;
   }
 
-  // Kart HTML-i
+  // Card HTML- creation function
   function createCardHTML(movie, categoryName) {
     return `
-      <div class="movie-card">
-       <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
-        <div class="movie-details">
-          <div class="movie-category-container">
-            <span class="movie-category">${categoryName}</span>
-          </div>
-          <div class="movie-rating">
-            ${renderStars(movie.rating || 0)}
-          </div>
-          <p class="movie-title">${movie.title}</p>
+    <a class="movie-card" href="detailed.html?id=${movie.id}">
+      <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
+      <div class="movie-details">
+        <div class="movie-category-container">
+          <span class="movie-category">${categoryName}</span>
         </div>
+        <div class="movie-rating">
+          ${renderStars(movie.rating || 0)}
+        </div>
+        <p class="movie-title">${movie.title}</p>
       </div>
-    `;
+    </a>
+  `;
   }
 
-  // Kateqoriya section HTML-i
+  // Kateqoriya section HTML
   function createSectionHTML(category, movies) {
     const cardsHTML = movies
       .map((m) => createCardHTML(m, category.name))
