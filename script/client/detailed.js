@@ -111,6 +111,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
+    const watchBtn = document.querySelector(".btn-watch");
+    if (watchBtn && movie.watch_url) {
+      watchBtn.setAttribute(
+        "onclick",
+        `window.open('${movie.watch_url}', '_blank')`,
+      );
+    }
     // ── Şərhlər ──
     loadComments(movieId, token, BASE_URL);
 
@@ -138,7 +145,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify({ message: text }),
       });
       commentInput.value = "";
-      loadComments(movieId, token, BASE_URL);
+      await loadComments(movieId, token, BASE_URL);
     } catch (err) {
       console.error("Şərh göndərilmədi:", err);
     }
@@ -168,8 +175,8 @@ async function loadComments(movieId, token, BASE_URL) {
           </div>
           <span class="time">${new Date(comment.created_at).toLocaleString()}</span>
         </div>
-        <p class="comment-text">${comment.message}</p>
-      `;
+        <p class="comment-text">${comment.comment}</p>
+     `;
       wrapper.appendChild(div);
     });
   } catch (err) {
