@@ -207,17 +207,6 @@ function initCarousel(carousel) {
   const categoriesContainer = document.getElementById("categoriesContainer");
   const vectorIconSrc = "../../assets/client/İconsİmages/vector.svg";
 
-  // Function to render star ratings
-  function renderStars(rating) {
-    let html = "";
-    for (let i = 1; i <= 5; i++) {
-      if (i <= Math.floor(rating)) html += '<span class="star filled">★</span>';
-      else if (i - rating < 1) html += '<span class="star half">★</span>';
-      else html += '<span class="star">★</span>';
-    }
-    return html;
-  }
-
   // Card HTML- creation function
   function createCardHTML(movie, categoryName) {
     return `
@@ -228,7 +217,7 @@ function initCarousel(carousel) {
           <span class="movie-category">${categoryName}</span>
         </div>
         <div class="movie-rating">
-          ${renderStars(movie.rating || 0)}
+          ${renderStars(movie.imdb || 0)}
         </div>
         <p class="movie-title">${movie.title}</p>
       </div>
