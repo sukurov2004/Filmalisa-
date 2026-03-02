@@ -31,8 +31,7 @@
   --radius-2xl: 28px;
 
   --transition: 0.2s ease;
-  
-  /* Common Input Colors */
+
   --bg-input-dark: #0000008c;
   --bg-input-dark-hover: #000000bf;
   --border-blue: #8caaff2e;
@@ -70,7 +69,6 @@ body {
   justify-content: space-between;
 }
 
-/* Brand */
 .brand {
   display: flex;
   align-items: center;
@@ -92,12 +90,11 @@ body {
   color: var(--text-muted);
 }
 
-/* Nav Menu */
 .menu a {
   display: flex;
   gap: 5px;
 }
-.menu a:hover{
+.menu a:hover {
   background: var(--accent-hover);
   color: var(--text-primary);
   border-radius: 0;
@@ -109,7 +106,7 @@ body {
   display: flex;
   gap: 5px;
   background-color: #5b21b6;
-    color: var(--text-primary);
+  color: var(--text-primary);
   border-radius: 0;
   margin-left: -18px;
   margin-right: -18px;
@@ -124,14 +121,9 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  transition:
-    background var(--transition),
-    color var(--transition);
+  transition: background var(--transition), color var(--transition);
 }
 
-
-
-/* Logout */
 .logout {
   text-decoration: none;
   color: var(--accent-light);
@@ -156,7 +148,6 @@ body {
   overflow-y: auto;
 }
 
-/* Topbar */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -186,6 +177,7 @@ body {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--success), var(--accent-light));
 }
+
 .create-btn {
   background: var(--accent);
   color: var(--text-primary);
@@ -201,20 +193,23 @@ body {
 
 .create-btn:hover {
   opacity: 0.8;
-}/* ===========================================
+}
+
+/* ===========================================
    TABLE
    =========================================== */
-
 .table-wrapper {
   margin-top: 40px;
   padding: 0 25px 30px;
+  /* ÖNEMLİ: tooltip-lərin görünməsi üçün overflow görünən olmalıdır */
+  overflow: visible;
 }
 
 .movies-table {
   width: 100%;
-  border-collapse: collapse;   /* collapse əvəzinə separate işlətmə */
+  border-collapse: collapse;
   border-radius: var(--radius-md);
-  overflow: hidden;
+  /* ÖNEMLİ: overflow:hidden tooltip-i kəsir, silindi */
   margin: 0;
 }
 
@@ -239,15 +234,17 @@ body {
   background: #e8e8ee;
 }
 
+/* ÖNEMLİ: overflow:visible və position:relative əlavə edildi */
 .movies-table td {
   padding: 10px 16px;
   text-align: center;
   vertical-align: middle;
   border-bottom: 1px solid #e5e7eb;
-  max-width: 200px;          /* overflow kontrolu üçün */
+  max-width: 200px;
+  overflow: visible;
+  position: relative;
 }
 
-/* Movie title cell */
 .movie-title {
   display: flex;
   align-items: center;
@@ -278,63 +275,12 @@ body {
   line-height: 1.4;
   max-width: 220px;
   cursor: default;
-
-  /* Tooltip base */
   position: relative;
 }
 
-/* Tooltip */
-.cell-clamp::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1e1e2e;
-  color: #e4e4f0;
-  font-size: 12px;
-  line-height: 1.5;
-  padding: 10px 14px;
-  border-radius: 10px;
-  width: max-content;
-  max-width: 320px;
-  white-space: normal;
-  word-break: break-word;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
-  border: 1px solid #2e2e3e;
-  z-index: 9999;
-  pointer-events: none;
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.18s ease, visibility 0.18s ease;
-}
-
-/* Tooltip arrow */
-.cell-clamp::before {
-  content: "";
-  position: absolute;
-  bottom: calc(100% + 2px);
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: #1e1e2e;
-  z-index: 9999;
-  pointer-events: none;
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.18s ease, visibility 0.18s ease;
-}
-
-.cell-clamp:hover::after,
-.cell-clamp:hover::before {
-  opacity: 1;
-  visibility: visible;
-}
 
 /* ===========================================
-   ACTION ICONS (unchanged but cleaned)
+   ACTION ICONS
    =========================================== */
 .movies-table td i {
   display: inline-flex;
@@ -364,17 +310,18 @@ body {
   background: #ef4444;
   color: #fff;
 }
+
 /* ===========================================
    PAGINATION
    =========================================== */
-
-   .pagination-dots {
+.pagination-dots {
   display: inline-flex;
   align-items: center;
   padding: 0 6px;
   color: #888;
   user-select: none;
 }
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -395,11 +342,8 @@ body {
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
-  transition:
-    background var(--transition),
-    border-color var(--transition),
-    color var(--transition),
-    transform var(--transition);
+  transition: background var(--transition), border-color var(--transition),
+    color var(--transition), transform var(--transition);
 }
 
 .pagination button:hover:not(.active):not(:disabled) {
@@ -427,7 +371,7 @@ body {
 }
 
 /* ===========================================
-   MODAL OVERLAY (shared base)
+   MODAL OVERLAY
    =========================================== */
 .modal-overlay,
 .movie-overlay,
@@ -442,13 +386,10 @@ body {
   z-index: 9999;
 }
 
-/* Hidden state */
 .modal-overlay {
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.25s ease,
-    visibility 0.25s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .movie-overlay,
@@ -456,7 +397,6 @@ body {
   display: none;
 }
 
-/* Active states */
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
@@ -473,8 +413,8 @@ body {
 .movie-modal {
   width: 100%;
   max-width: 1000px;
-  max-height: 90vh; /* ekranın 90%-ni keçməsin */
-  overflow-y: auto; /* lazım olsa scroll */
+  max-height: 90vh;
+  overflow-y: auto;
   background: linear-gradient(145deg, #141416, var(--bg-primary));
   border-radius: var(--radius-2xl);
   padding: 50px;
@@ -488,7 +428,6 @@ body {
   gap: 60px;
 }
 
-/* Left Side */
 .modal-left {
   flex: 1;
   display: flex;
@@ -508,9 +447,7 @@ body {
   font-size: 14px;
   outline: none;
   box-sizing: border-box;
-  transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .modal-left input:focus,
@@ -530,7 +467,6 @@ body {
   cursor: pointer;
 }
 
-/* Adult Checkbox */
 .adult-check {
   display: flex;
   align-items: center;
@@ -545,7 +481,6 @@ body {
   height: 16px;
 }
 
-/* Submit Button */
 .submit-btn {
   align-self: flex-end;
   margin-top: 10px;
@@ -557,9 +492,7 @@ body {
   font-weight: 500;
   font-size: 14px;
   cursor: pointer;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .submit-btn:hover {
@@ -567,7 +500,6 @@ body {
   box-shadow: 0 10px 25px #7c3aed66;
 }
 
-/* Right Side - Image Preview */
 .modal-right {
   width: 260px;
   display: flex;
@@ -582,7 +514,6 @@ body {
   box-shadow: 0 20px 40px #00000080;
 }
 
-/* Close Icon */
 .close-modal {
   position: absolute;
   top: 25px;
@@ -596,21 +527,20 @@ body {
 .close-modal:hover {
   color: var(--text-primary);
 }
+
 .movie-modal::-webkit-scrollbar {
   width: 6px;
 }
-
 .movie-modal::-webkit-scrollbar-thumb {
   background: var(--accent);
   border-radius: 3px;
 }
-
 .movie-modal::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
 }
 
 /* ===========================================
-   CONFIRM MODAL (delete / generic)
+   CONFIRM MODAL
    =========================================== */
 .modal {
   width: 100%;
@@ -647,7 +577,6 @@ body {
   gap: 12px;
 }
 
-/* Shared button base */
 .btn {
   flex: 1;
   padding: 10px 0;
@@ -658,11 +587,11 @@ body {
   border: none;
   transition: background var(--transition);
 }
+
 .cancel-btn {
   background: #f3f4f6;
   color: #374151;
 }
-
 .cancel-btn:hover {
   background: #e5e7eb;
 }
@@ -671,13 +600,12 @@ body {
   background: var(--danger);
   color: #ffffff;
 }
-
 .delete-btn:hover {
   background: var(--danger-hover);
 }
 
 /* ===========================================
-   COMMON MODAL STYLES (for category/actor modals)
+   CATEGORY / ACTOR MODALS
    =========================================== */
 .category-modal-overlay,
 .actor-modal-overlay {

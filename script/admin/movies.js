@@ -17,7 +17,6 @@ const actorSelect = document.getElementById("actorSelect");
 const categorySelect = document.getElementById("categorySelect");
 const adultCheck = document.getElementById("adultCheck");
 
-// Custom dropdown state
 let actorDropdownWrapper = null;
 let actorTrigger = null;
 let actorList = null;
@@ -39,7 +38,7 @@ const token = localStorage.getItem("adminToken");
 document.addEventListener("DOMContentLoaded", async () => {
   if (!token) {
     window.location.replace(
-      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html",
+      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html"
     );
     return;
   }
@@ -47,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   pagination = initPagination(
     tableBody,
     document.querySelector(".pagination"),
-    5,
+    5
   );
 
   buildActorDropdown();
@@ -160,10 +159,7 @@ function buildCategoryDropdown() {
 
   categoryDropdownWrapper.appendChild(categoryTrigger);
   categoryDropdownWrapper.appendChild(categoryList);
-  categorySelect.parentNode.insertBefore(
-    categoryDropdownWrapper,
-    categorySelect,
-  );
+  categorySelect.parentNode.insertBefore(categoryDropdownWrapper, categorySelect);
 
   categoryTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -177,10 +173,10 @@ function buildCategoryDropdown() {
     }
   });
 }
+
 function populateCategoryDropdown(categories) {
   categoryList.innerHTML = "";
 
-  // "Seçilməyib" seçimi
   const noneLabel = document.createElement("label");
   noneLabel.className = "actor-option";
   const noneCb = document.createElement("input");
@@ -222,6 +218,7 @@ function populateCategoryDropdown(categories) {
     categoryList.appendChild(label);
   });
 }
+
 function setSelectedCategory(catId) {
   selectedCategoryId = catId ? Number(catId) : null;
   const opt = categorySelect.querySelector(`option[value="${catId}"]`);
@@ -231,6 +228,7 @@ function setSelectedCategory(catId) {
     rb.checked = rb.value == catId;
   });
 }
+
 function clearCategorySelection() {
   selectedCategoryId = null;
   selectedCategoryName = "";
@@ -240,6 +238,7 @@ function clearCategorySelection() {
     rb.checked = rb.value === "";
   });
 }
+
 // =============================================
 // NOTIFICATION
 // =============================================
@@ -249,7 +248,7 @@ function showNotification(msg, type = "success") {
   notif.className = "notif";
   notif.textContent = msg;
   notif.style.cssText = `
-    position:fixed; top:20px; right:20px; z-index:9999;
+    position:fixed; top:20px; right:20px; z-index:99999;
     padding:12px 20px; border-radius:8px; font-size:14px; font-weight:500;
     background:${type === "success" ? "#22c55e" : "#ef4444"}; color:#fff;
     box-shadow:0 4px 12px rgba(0,0,0,0.3);
@@ -392,11 +391,6 @@ async function getMovieById(id) {
 // =============================================
 // TABLE RENDER
 // =============================================
-function truncate(text, max) {
-  if (!text) return "—";
-  return text.length > max ? text.slice(0, max) + "..." : text;
-}
-
 function renderTable(movies) {
   tableBody.innerHTML = "";
 
@@ -407,33 +401,49 @@ function renderTable(movies) {
 
   movies.forEach((raw, index) => {
     const movie = normalizeMovie(raw);
+    const catName =
+      categorySelect.querySelector(`option[value="${movie.category}"]`)
+        ?.textContent || "—";
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${index + 1}</td>
-      <td class="movie-title">
-        <img src="${movie.cover || "../../assets/Admin/images/movies.svg"}" alt=""
-          onerror="this.src='../../assets/Admin/images/movies.svg'" />
-        <span class="cell-clamp" data-tooltip="${(movie.title || "").replace(/"/g, "&quot;")}">${movie.title || "—"}</span>
+      <td class="movie-title" style="overflow:visible; position:relative;">
+        <img
+          src="${movie.cover || "../../assets/Admin/images/movies.svg"}"
+          alt=""
+          onerror="this.src='../../assets/Admin/images/movies.svg'"
+        />
+        <span
+          class="cell-clamp"
+          data-tooltip="${(movie.title || "").replace(/"/g, "&quot;")}"
+        >${movie.title || "—"}</span>
       </td>
-      <td><span class="cell-clamp" data-tooltip="${(movie.overview || "").replace(/"/g, "&quot;")}">${movie.overview || "—"}</span></td>
-      <td><span class="cell-clamp" data-tooltip="${categorySelect.querySelector(`option[value="${movie.category}"]`)?.textContent || "—"}">${categorySelect.querySelector(`option[value="${movie.category}"]`)?.textContent || "—"}</span></td>
+      <td style="overflow:visible; position:relative;">
+        <span
+          class="cell-clamp"
+          data-tooltip="${(movie.overview || "").replace(/"/g, "&quot;")}"
+        >${movie.overview || "—"}</span>
+      </td>
+      <td style="overflow:visible; position:relative;">
+        <span
+          class="cell-clamp"
+          data-tooltip="${catName}"
+        >${catName}</span>
+      </td>
       <td>${movie.imdb || "—"}</td>
-      <td><i class="fa-solid fa-pen edit"    data-id="${movie.id}"></i></td>
+      <td><i class="fa-solid fa-pen edit" data-id="${movie.id}"></i></td>
       <td><i class="fa-solid fa-trash delete" data-id="${movie.id}"></i></td>
     `;
     tableBody.appendChild(tr);
   });
 
-  tableBody
-    .querySelectorAll(".edit")
-    .forEach((btn) =>
-      btn.addEventListener("click", () => getMovieById(btn.dataset.id)),
-    );
-  tableBody
-    .querySelectorAll(".delete")
-    .forEach((btn) =>
-      btn.addEventListener("click", () => confirmDelete(btn.dataset.id)),
-    );
+  tableBody.querySelectorAll(".edit").forEach((btn) =>
+    btn.addEventListener("click", () => getMovieById(btn.dataset.id))
+  );
+  tableBody.querySelectorAll(".delete").forEach((btn) =>
+    btn.addEventListener("click", () => confirmDelete(btn.dataset.id))
+  );
 
   pagination.init([...tableBody.querySelectorAll("tr")]);
 }
@@ -569,4 +579,37 @@ submitBtn.addEventListener("click", async () => {
   } catch (err) {
     showNotification("Xəta: " + err.message, "error");
   }
+});
+// =============================================
+// JS TOOLTIP
+// =============================================
+const jsTooltip = document.createElement("div");
+jsTooltip.className = "js-tooltip";
+document.body.appendChild(jsTooltip);
+
+document.addEventListener("mouseover", (e) => {
+  const el = e.target.closest(".cell-clamp");
+  if (!el) return;
+  const text = el.dataset.tooltip;
+  if (!text || !text.trim()) return;
+  jsTooltip.textContent = text;
+  jsTooltip.style.display = "block";
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (jsTooltip.style.display === "none") return;
+  const x = e.clientX;
+  const y = e.clientY;
+  const tw = jsTooltip.offsetWidth;
+  const th = jsTooltip.offsetHeight;
+  const left = Math.min(x - tw / 2, window.innerWidth - tw - 8);
+  const top = y - th - 12 < 0 ? y + 16 : y - th - 12;
+  jsTooltip.style.left = Math.max(8, left) + "px";
+  jsTooltip.style.top = top + "px";
+});
+
+document.addEventListener("mouseout", (e) => {
+  const el = e.target.closest(".cell-clamp");
+  if (!el) return;
+  jsTooltip.style.display = "none";
 });

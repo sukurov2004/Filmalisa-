@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── Cədvəli doldur ──
   function renderMessages(messages) {
     tbody.innerHTML = "";
-    messages.forEach((msg) => {
-      appendMessageRow(msg);
+    messages.forEach((msg,index) => {
+      appendMessageRow(msg,index);
     });
     bindTableEvents();
     refreshPagination();

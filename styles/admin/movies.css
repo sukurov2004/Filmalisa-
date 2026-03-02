@@ -1,6 +1,6 @@
-/* Movie modal uses shared styles from adminGlobal.css */
-/* Page-specific movie modal adjustments */
-
+/* ===========================================
+   MOVIE MODAL
+   =========================================== */
 .movie-modal {
   max-width: 1000px;
   max-height: 90vh;
@@ -31,11 +31,10 @@
   top: 25px;
   right: 30px;
 }
-/* ===========================================
-   CUSTOM ACTOR CHECKBOX DROPDOWN
-   movies.css-ə əlavə edin (.modal-left select blokun altına)
-   =========================================== */
 
+/* ===========================================
+   CUSTOM ACTOR / CATEGORY DROPDOWN
+   =========================================== */
 .actor-dropdown {
   position: relative;
   width: 100%;
@@ -53,7 +52,6 @@
   box-sizing: border-box;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
   user-select: none;
-  /* ox işarəsi */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -119,21 +117,12 @@
   cursor: pointer;
 }
 
-/* Scrollbar */
-.actor-dropdown-list::-webkit-scrollbar {
-  width: 5px;
-}
-.actor-dropdown-list::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 3px;
-}
-.actor-dropdown-list::-webkit-scrollbar-track {
-  background: transparent;
-}
+.actor-dropdown-list::-webkit-scrollbar { width: 5px; }
+.actor-dropdown-list::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+.actor-dropdown-list::-webkit-scrollbar-track { background: transparent; }
 
 /* ===========================================
-   TABLE CELL TEXT LIMIT (cell-clamp)
-   movies.css-ə əlavə edin
+   TABLE LAYOUT
    =========================================== */
 .movies-table {
   table-layout: fixed;
@@ -143,13 +132,13 @@
 .movies-table td:nth-child(1) { width: 60px; }
 
 .movies-table th:nth-child(2),
-.movies-table td:nth-child(2) { width: 200px; }
+.movies-table td:nth-child(2) { width: 200px; overflow: visible; position: relative; }
 
 .movies-table th:nth-child(3),
-.movies-table td:nth-child(3) { width: 230px; }
+.movies-table td:nth-child(3) { width: 230px; overflow: visible; position: relative; }
 
 .movies-table th:nth-child(4),
-.movies-table td:nth-child(4) { width: 110px; }
+.movies-table td:nth-child(4) { width: 110px; overflow: visible; position: relative; }
 
 .movies-table th:nth-child(5),
 .movies-table td:nth-child(5) { width: 80px; }
@@ -158,60 +147,14 @@
 .movies-table th:nth-child(7),
 .movies-table td:nth-child(6),
 .movies-table td:nth-child(7) { width: 65px; }
-
 .cell-clamp {
+  position: relative;
+  cursor: default;
   display: block;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
-  position: relative;
-  cursor: default;
-}
-
-/* Custom tooltip */
-.cell-clamp::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1e1e1e;
-  color: #e4e4e7;
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  white-space: normal;
-  max-width: 260px;
-  width: max-content;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-  border: 1px solid #333;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  line-height: 1.4;
-  text-align: left;
-}
-
-/* Tooltip ox */
-.cell-clamp::before {
-  content: "";
-  position: absolute;
-  bottom: calc(100% + 2px);
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: #333;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.cell-clamp:hover::after,
-.cell-clamp:hover::before {
-  opacity: 1;
 }
 
 .movie-title .cell-clamp {
@@ -219,65 +162,22 @@
   text-align: left;
 }
 
-/* ===========================================
-   CUSTOM CSS TOOLTIP (hover-da tam mətn)
-   =========================================== */
-.cell-clamp {
-  position: relative;
-  cursor: default;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-/* Tooltip baloncuq */
-.cell-clamp::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1e1e1e;
-  color: #e4e4e7;
+/* JS Tooltip */
+.js-tooltip {
+  position: fixed;
+  background: #1e1e2e;
+  color: #e4e4f0;
   font-size: 12px;
-  padding: 7px 12px;
-  border-radius: 7px;
-  white-space: normal;
-  max-width: 280px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  max-width: 300px;
   width: max-content;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  border: 1px solid #333;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.18s ease;
+  white-space: normal;
   line-height: 1.5;
   text-align: left;
-}
-
-/* Tooltip ox */
-.cell-clamp::before {
-  content: "";
-  position: absolute;
-  bottom: calc(100% + 2px);
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: #333;
-  z-index: 9999;
-  opacity: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  border: 1px solid #2e2e3e;
+  z-index: 99999;
   pointer-events: none;
-  transition: opacity 0.18s ease;
-}
-
-.cell-clamp:hover::after,
-.cell-clamp:hover::before {
-  opacity: 1;
-}
-
-.movie-title .cell-clamp {
-  max-width: 130px;
-  text-align: left;
+  display: none;
 }

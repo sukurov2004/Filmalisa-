@@ -17,35 +17,36 @@
     <link rel="stylesheet" href="../../global/reset.css" />
     <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/adminGlobal.css" />
+    <link rel="stylesheet" href="../../styles/admin/comments.css">
     <title>Admin / Comments</title>
-    <style>
-      .comment-cell {
-        max-width: 200px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        cursor: pointer;
-        position: relative;
-      }
+  <style>
+  .comment-cell {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
 
-      .comment-cell:hover::after {
-        content: attr(data-full);
-        position: absolute;
-        background: #1e1e1e;
-        color: #fff;
-        padding: 6px 10px;
-        border-radius: 6px;
-        white-space: normal;
-        max-width: 300px;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
-        font-size: 13px;
-        border: 1px solid #333;
-        box-shadow: 0 4px 12px #00000066;
-      }
-    </style>
+  .js-tooltip {
+    position: fixed;
+    background: #1e1e2e;
+    color: #e4e4f0;
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    max-width: 300px;
+    width: max-content;
+    white-space: normal;
+    line-height: 1.5;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    border: 1px solid #2e2e3e;
+    z-index: 99999;
+    pointer-events: none;
+    display: none;
+  }
+</style>
   </head>
   <body>
     <div class="app">
@@ -159,41 +160,7 @@
                 <td>Lorem ipsum test...</td>
                 <td><i class="fa-solid fa-trash delete"></i></td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
-                <td>Interstellar</td>
-                <td>Space travel story...</td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
-                <td>Inception</td>
-                <td>Dream inside dream...</td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
-                <td>Inception</td>
-                <td>Dream inside dream...</td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
-                <td>Inception</td>
-                <td>Dream inside dream...</td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td><img src="../../assets/Admin/images/movies.svg" alt="movie" /></td>
-                <td>Inception</td>
-                <td>Dream inside dream...</td>
-                <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr> -->
+              -->
             </tbody>
           </table>
         </section>
