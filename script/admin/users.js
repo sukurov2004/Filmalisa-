@@ -28,21 +28,29 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then((data) => {
       tableBody.innerHTML = "";
-
-      data.data.forEach((user, index) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${index + 1}</td>
-         <td>
-  <div style="display:flex;width:40px;height:40px;border-radius:50%;background:#2a2a3a;align-items:center;justify-content:center;">
-    <i class="fa-solid fa-user" style="color:#888;font-size:18px;"></i>
-  </div>
-</td>
-          <td>${user.full_name}</td>
-          <td>${user.email}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
+data.data.forEach((user, index) => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${index + 1}</td>
+    <td style="text-align:center;">
+      <div style="
+        margin:0 auto;
+        display:flex;
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        background:#2a2a3a;
+        align-items:center;
+        justify-content:center;">
+        <i class="fa-solid fa-user" 
+           style="color:#888;font-size:18px;"></i>
+      </div>
+    </td>
+    <td>${user.full_name}</td>
+    <td>${user.email}</td>
+  `;
+  tableBody.appendChild(tr);
+});
 
       const rows = Array.from(tableBody.querySelectorAll("tr"));
       pager.init(rows); // ← pagination işə düşür

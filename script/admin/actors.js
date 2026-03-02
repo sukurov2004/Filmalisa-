@@ -78,20 +78,35 @@ function normalizeActor(actor) {
 // =============================================
 // AVATAR HTML
 // =============================================
-function avatarHtml(img, name) {
-  if (img) {
-    return `
-      <img src="${img}" alt="${name}"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-        style="width:40px;height:40px;object-fit:cover;border-radius:50%;" />
-      <div style="display:none;width:40px;height:40px;border-radius:50%;background:#2a2a3a;align-items:center;justify-content:center;">
-        <i class="fa-solid fa-user" style="color:#888;font-size:18px;"></i>
-      </div>`;
-  }
+function avatarHtml(img, name = "") {
+  const firstLetter = name ? name.charAt(0).toUpperCase() : "U";
+
   return `
-    <div style="display:flex;width:40px;height:40px;border-radius:50%;background:#2a2a3a;align-items:center;justify-content:center;">
-      <i class="fa-solid fa-user" style="color:#888;font-size:18px;"></i>
-    </div>`;
+    <div style="display:flex;justify-content:center;">
+      <div style="
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        background:#2a2a3a;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        overflow:hidden;
+        color:#fff;
+        font-weight:600;
+        font-size:16px;">
+        
+        ${
+          img
+            ? `<img src="${img}" alt="${name}"
+                 style="width:100%;height:100%;object-fit:cover;"
+                 onerror="this.remove(); this.parentElement.innerHTML='${firstLetter}'">`
+            : firstLetter
+        }
+
+      </div>
+    </div>
+  `;
 }
 
 // =============================================
