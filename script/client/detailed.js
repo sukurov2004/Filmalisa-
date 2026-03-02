@@ -234,9 +234,9 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
     if (!category) return;
 
     // Həmin kateqoriyanın filmləri
-    const similar = (category.movies || [])
-      .filter((m) => m.id !== parseInt(currentMovieId))
-      .slice(0, 4);
+    const similar = (category.movies || []).filter(
+      (m) => m.id !== parseInt(currentMovieId),
+    );
 
     if (similar.length === 0) return;
 
@@ -244,18 +244,26 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
     grid.innerHTML = similar
       .map(
         (movie) => `
-      <article class="movie-card" onclick="window.location.href='detailed.html?id=${movie.id}'">
-        <div class="card-poster" style="background-image: url('${movie.cover_url}')"></div>
-        <div class="card-meta">
-          <span class="card-genre">${category.name}</span>
-          <div class="card-stars">★★★★★</div>
-          <h3 class="card-name">${movie.title}</h3>
+      <a class="movie-card" href="detailed.html?id=${movie.id}">
+        <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
+        <div class="movie-details">
+          <div class="movie-category-container">
+            <span class="movie-category">${category.name}</span>
+          </div>
+          <div class="movie-rating">
+            ${renderStars(movie.imdb || 0)}
+          </div>
+          <p class="movie-title">${movie.title}</p>
         </div>
-      </article>
+      </a>
     `,
       )
       .join("");
   } catch (err) {
     console.error("Oxşar filmlər yüklənmədi:", err);
   }
+  const similarCarousel = document.querySelector(
+    ".similar-wrapper .category-carousel",
+  );
+  if (similarCarousel) initCarousel(similarCarousel);
 }
