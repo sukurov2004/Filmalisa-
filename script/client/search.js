@@ -17,48 +17,38 @@ const btn = document.getElementById("searchBtn");
 function renderMovies(list) {
   grid.innerHTML = "";
 
-if (!list || list.length === 0) {
+  if (!list || list.length === 0) {
     grid.innerHTML = `
       <main class="main-err main">
         <div class="error-container">
-          <img
-            class="error-img"
-            src="../../assets/client/GridImages/error.svg"
-            alt=""
-          />
+          <img class="error-img" src="../../assets/client/GridImages/error.svg" alt="" />
           <h1 class="error-title">Lost your way?</h1>
-          <p class="error-text">
-            Oops! This is awkward. You are looking for something that doesn't
-            actually exist.
-          </p>
+          <p class="error-text">Oops! This is awkward. You are looking for something that doesn't actually exist.</p>
           <button class="error-btn" onclick="window.location.href='search.html'">Go Home</button>
         </div>
       </main>
     `;
     return;
   }
+
   const fragment = document.createDocumentFragment();
 
   list.forEach((movie) => {
-    const id = movie.id;
-    const title = movie.title || "No title";
-    const genre = movie.category?.name || "Unknown";
-    const rating = Number(movie.rating || 5);
-    const posterUrl = movie.cover_url || "";
-
-    const card = document.createElement("article");
-    card.className = "card";
-    card.dataset.id = id;
-
+    const card = document.createElement("a");
+    card.className = "movie-card";
+    card.href = `detailed.html?id=${movie.id}`;
     card.innerHTML = `
-      <div class="poster" style="background-image:url('${posterUrl}')"></div>
-      <div class="meta">
-        <span class="tag">${genre}</span>
-        <div class="stars">${"★".repeat(Math.round(rating))}</div>
-        <h3 class="name">${title}</h3>
+      <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
+      <div class="movie-details">
+        <div class="movie-category-container">
+          <span class="movie-category">${movie.category?.name || ""}</span>
+        </div>
+        <div class="movie-rating">
+          ${renderStars(movie.imdb || 0)}
+        </div>
+        <p class="movie-title">${movie.title}</p>
       </div>
     `;
-
     fragment.appendChild(card);
   });
 
@@ -90,14 +80,6 @@ async function fetchMovies(query = "") {
     grid.innerHTML = `<p style="color:#ff6b6b; padding:20px;">Error loading data</p>`;
   }
 }
-
-// ---------- Karta klik ----------
-grid.addEventListener("click", (e) => {
-  const card = e.target.closest(".card");
-  if (!card) return;
-  const id = card.dataset.id;
-  window.location.href = `detailed.html?id=${encodeURIComponent(id)}`;
-});
 
 // ---------- Axtarış düyməsi ----------
 btn.addEventListener("click", () => {
