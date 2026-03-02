@@ -13,15 +13,6 @@
   const grid = document.getElementById("movieGrid");
 
   // Ulduz render
-  function renderStars(rating) {
-    let html = "";
-    for (let i = 1; i <= 5; i++) {
-      if (i <= Math.floor(rating)) html += '<span class="star filled">★</span>';
-      else if (i - rating < 1) html += '<span class="star half">★</span>';
-      else html += '<span class="star">★</span>';
-    }
-    return html;
-  }
 
   try {
     const res = await fetch(`${BASE_URL}/movies/favorites`, {
