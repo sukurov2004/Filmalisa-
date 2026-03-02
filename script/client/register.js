@@ -74,7 +74,7 @@ form.addEventListener("submit", async (e) => {
     if (response.ok) {
       showMessage("Registration successful! Redirecting...", "success");
       setTimeout(() => {
-        window.location.href = "http://127.0.0.1:5500/pages/client/login.html";
+        window.location.href = "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html";
       }, 1500);
     } else {
       const errorMsg =
