@@ -23,10 +23,8 @@ async function initHeroSlider() {
     const data = await res.json();
     const movies = data.data || [];
 
-    // Show only latest 3 movies
     const latest3 = movies.sort((a, b) => b.id - a.id).slice(0, 3);
 
-    // Create slides
     latest3.forEach((movie) => {
       const slide = document.createElement("div");
       slide.className = "hero-slide";
@@ -41,16 +39,13 @@ async function initHeroSlider() {
       `;
       wrapper.appendChild(slide);
 
-      // Create dot for each slide
       const dot = document.createElement("span");
       dot.className = "hero-dot";
       dotsContainer.appendChild(dot);
     });
 
-    // Activate first dot
     dotsContainer.querySelector(".hero-dot").classList.add("active");
 
-    // Slider functionality
     const slides = wrapper.querySelectorAll(".hero-slide");
     const dots = dotsContainer.querySelectorAll(".hero-dot");
     let current = 0;
@@ -96,9 +91,24 @@ async function initHeroSlider() {
     });
 
     startAutoplay();
-  } catch (err) {
-    console.error("Hero slider xətası:", err);
-  }
+  } catch {
+  document.querySelector(".main").innerHTML = `
+    <main class="main-err main">
+      <div class="error-container">
+        <img
+          class="error-img"
+          src="../../assets/client/GridImages/error.svg"
+          alt=""
+        />
+        <h1 class="error-title">Lost your way?</h1>
+        <p class="error-text">
+          Oops! This is awkward. You are looking for something that doesn't
+          actually exist.
+        </p>
+      </div>
+    </main>
+  `;
+}
 }
 
 initHeroSlider();
@@ -207,7 +217,6 @@ function initCarousel(carousel) {
   const categoriesContainer = document.getElementById("categoriesContainer");
   const vectorIconSrc = "../../assets/client/İconsİmages/vector.svg";
 
-  // Card HTML- creation function
   function createCardHTML(movie, categoryName) {
     return `
     <a class="movie-card" href="detailed.html?id=${movie.id}">
@@ -225,12 +234,10 @@ function initCarousel(carousel) {
   `;
   }
 
-  // Kateqoriya section HTML
   function createSectionHTML(category, movies) {
     const cardsHTML = movies
       .map((m) => createCardHTML(m, category.name))
       .join("");
-
     return `
       <section class="category-section">
         <div class="category-header">
@@ -255,22 +262,16 @@ function initCarousel(carousel) {
   }
 
   try {
-    // Categories and movies data fetching simultaneously
-
-    const [categoriesRes] = await Promise.all([
-      fetch(`${BASE_URL}/categories`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    ]);
+    const categoriesRes = await fetch(`${BASE_URL}/categories`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     const categoriesData = await categoriesRes.json();
     const categories = categoriesData.data || [];
 
     categories.forEach((category) => {
       const categoryMovies = category.movies || [];
-
       if (categoryMovies.length === 0) return;
-
       categoriesContainer.innerHTML += createSectionHTML(
         category,
         categoryMovies,
@@ -278,25 +279,7 @@ function initCarousel(carousel) {
     });
 
     document.querySelectorAll(".category-carousel").forEach(initCarousel);
-
-    // Group movies by category
-    categories.forEach((category) => {
-      const categoryMovies = movies.filter(
-        (m) => m.category_id === category.id,
-      );
-
-      // Show category without movie
-      if (categoryMovies.length === 0) return;
-
-      categoriesContainer.innerHTML += createSectionHTML(
-        category,
-        categoryMovies,
-      );
-    });
-
-    // Initialize all carousels
-    document.querySelectorAll(".category-carousel").forEach(initCarousel);
-  } catch (err) {
-    console.error("API xətası:", err);
-  }
+  } catch {
+  console.error("Failed to load categories or movies");
+}
 })();

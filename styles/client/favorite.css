@@ -1,4 +1,4 @@
-/* FAVORITE CARoUSEL */
+/* FAVORITE PAGE */
 .header-ctg {
   display: flex;
   gap: 20px;
@@ -15,72 +15,20 @@
   width: 17px;
 }
 
-.movie-grid {
-  display: flex;
-}
-
 .movie-category {
   color: #0feffd;
 }
 
-.carousel-wrapper {
-  position: relative;
-  margin-left: 56px;
-}
-
-.carousel-track {
-  overflow: hidden;
-  margin: 0;
-}
-
 .movie-grid {
-  transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
-  will-change: transform;
-  cursor: grab;
-  user-select: none;
-}
-
-.movie-grid.dragging {
-  cursor: grabbing;
-  transition: none;
-}
-
-.movie-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  -webkit-user-drag: none;
-}
-
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  background: none;
-  border: none;
-  opacity: 0.3;
-  transition: opacity 0.2s;
-}
-
-.carousel-btn:hover {
-  opacity: 0.6;
-}
-
-.carousel-btn.prev {
-  left: 0;
-}
-
-.carousel-btn.next {
-  right: 0;
-}
-
-.carousel-btn:disabled {
-  opacity: 0.25;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0 66px 40px;
   cursor: default;
-  pointer-events: none;
+}
+
+.movie-card {
+  flex-shrink: 0;
 }
 
 body {
@@ -89,25 +37,4 @@ body {
 
 .main {
   overflow-x: hidden;
-}
-
-.movie-grid {
-  flex-wrap: nowrap;
-}
-
-.movie-card {
-  flex-shrink: 0;
-}
-
-.carousel-btn img {
-  width: 17px;
-}
-
-.carousel-btn.prev img {
-  transform: rotate(180deg);
-}
-
-.carousel-wrapper {
-  position: relative;
-  overflow: hidden;
 }
