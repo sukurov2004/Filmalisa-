@@ -11,12 +11,12 @@
   padding-top: 0 !important;
   width: 100%;
 }
-
 .top-header-profile {
   position: absolute;
   top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 40px;
+  left: auto;
+  transform: none;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -61,8 +61,7 @@
 
 .hero-floating-card {
   position: absolute;
-
-  bottom: 50px;
+  bottom: 30px;
   left: 60px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
