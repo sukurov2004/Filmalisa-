@@ -19,7 +19,11 @@ logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("adminToken");
   window.location.href = "http://127.0.0.1:5500/pages/admin/login.html";
 });
-
+//ADMIN USER
+const profileImg = document.querySelector(".profile img");
+if (profileImg) {
+  profileImg.src = "../../assets/Admin/icons/Users.svg";
+}
 // FAQ ACCORDION — JavaScript
 
 (function () {

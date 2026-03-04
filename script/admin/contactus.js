@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <td>${index + 1}</td>
       <td>${msg.full_name || msg.name}</td>
       <td>${msg.email}</td>
-      <td>${msg.reason || msg.message}</td>
+      <td style="text-align:center">
+      <span class="contact-clamp" data-tooltip="${(msg.reason || msg.message || "").replace(/"/g, "&quot;")}">${msg.reason || msg.message}</span>
+      </td>
       <td><i class="fa-solid fa-trash delete" data-id="${msg.id}"></i></td>
     `;
     tbody.appendChild(tr);
@@ -118,4 +120,36 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   fetchMessages();
+});
+
+// ── Tooltip ──
+const jsTooltip = document.createElement("div");
+jsTooltip.className = "js-tooltip";
+document.body.appendChild(jsTooltip);
+
+document.addEventListener("mouseover", (e) => {
+  const el = e.target.closest(".contact-clamp");
+  if (!el) return;
+  const text = el.dataset.tooltip;
+  if (!text || !text.trim()) return;
+  jsTooltip.textContent = text;
+  jsTooltip.style.display = "block";
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (jsTooltip.style.display === "none") return;
+  const x = e.clientX;
+  const y = e.clientY;
+  const tw = jsTooltip.offsetWidth;
+  const th = jsTooltip.offsetHeight;
+  const left = Math.min(x - tw / 2, window.innerWidth - tw - 8);
+  const top = y - th - 12 < 0 ? y + 16 : y - th - 12;
+  jsTooltip.style.left = Math.max(8, left) + "px";
+  jsTooltip.style.top = top + "px";
+});
+
+document.addEventListener("mouseout", (e) => {
+  const el = e.target.closest(".contact-clamp");
+  if (!el) return;
+  jsTooltip.style.display = "none";
 });
