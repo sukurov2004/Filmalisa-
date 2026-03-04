@@ -142,10 +142,27 @@ document.addEventListener("mousemove", (e) => {
   const y = e.clientY;
   const tw = jsTooltip.offsetWidth;
   const th = jsTooltip.offsetHeight;
-  const left = Math.min(x - tw / 2, window.innerWidth - tw - 8);
-  const top = y - th - 12 < 0 ? y + 16 : y - th - 12;
-  jsTooltip.style.left = Math.max(8, left) + "px";
-  jsTooltip.style.top = top + "px";
+  let left = x - tw / 2;
+  let top = y - th - 12;
+
+if (left + tw > window.innerWidth - 8) {
+  left = window.innerWidth - tw - 8;
+}
+
+if (left < 8) {
+  left = 8;
+}
+
+if (top < 8) {
+  top = y + 16;
+}
+
+if (top + th > window.innerHeight - 8) {
+  top = window.innerHeight - th - 8;
+}
+
+jsTooltip.style.left = left + "px";
+jsTooltip.style.top = top + "px";
 });
 
 document.addEventListener("mouseout", (e) => {
