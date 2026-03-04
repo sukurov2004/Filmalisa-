@@ -14,6 +14,56 @@
     <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/adminGlobal.css" />
     <title>Admin / Contact Us</title>
+  <style>
+  .contact-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .contact-table th:nth-child(1),
+  .contact-table td:nth-child(1) { width: 60px; text-align: center; }
+
+  .contact-table th:nth-child(2),
+  .contact-table td:nth-child(2) { width: 150px; text-align: center; }
+
+  .contact-table th:nth-child(3),
+  .contact-table td:nth-child(3) { width: 220px; text-align: center; }
+
+  .contact-table th:nth-child(4),
+  .contact-table td:nth-child(4) { width: 200px; text-align: center ; overflow: hidden; }
+
+  .contact-table th:nth-child(5),
+  .contact-table td:nth-child(5) { width: 60px; text-align: center; }
+
+  .contact-table td:nth-child(4) .contact-clamp {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: 180px;
+  margin: 0 auto; 
+}
+
+  .js-tooltip {
+    position: fixed;
+    background: #1e1e2e;
+    color: #e4e4f0;
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    max-width: 300px;
+    width: max-content;
+    white-space: normal;
+    line-height: 1.5;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    border: 1px solid #2e2e3e;
+    z-index: 99999;
+    pointer-events: none;
+    display: none;
+  }
+</style>
   </head>
   <body>
     <div class="app">
@@ -91,7 +141,7 @@
         </header>
 
         <section class="table-wrapper">
-          <table class="movies-table">
+          <table class="movies-table contact-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -102,7 +152,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>1</td>
                 <td>Malik</td>
                 <td>malik@mail.com</td>
@@ -143,7 +193,7 @@
                 <td>leyla@mail.com</td>
                 <td>How to change my email address?</td>
                 <td><i class="fa-solid fa-trash delete"></i></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </section>

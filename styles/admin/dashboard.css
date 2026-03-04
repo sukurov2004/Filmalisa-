@@ -1,5 +1,5 @@
 .stats-flex {
-  max-width: 1440px;
+  max-width: 1170px;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -12,6 +12,8 @@
   height: 190px;
   border-radius: 30px;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -42,6 +44,8 @@
   letter-spacing: 0%;
   color: #ffffff;
   padding-left: 24px;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
 }
 .card-letter {
   background-color: #2d2d2d;
@@ -49,6 +53,8 @@
   height: 190px;
   border-radius: 30px;
   cursor: pointer;
+  display: flex;          
+  flex-direction: column;
 }
 
 @media (max-width: 1024px) {

@@ -127,7 +127,16 @@
 .movies-table {
   table-layout: fixed;
 }
+.main .movies-table th {
+  text-align: left;
+}
 
+.main .movies-table th:nth-child(1),
+.main .movies-table th:nth-child(5),
+.main .movies-table th:nth-child(6),
+.main .movies-table th:nth-child(7) {
+  text-align: center;
+}
 .movies-table th:nth-child(1),
 .movies-table td:nth-child(1) { width: 60px; }
 
