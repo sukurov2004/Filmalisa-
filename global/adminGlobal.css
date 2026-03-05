@@ -96,7 +96,7 @@ body {
 }
 .menu a {
   display: flex;
-  gap: 5px;
+  gap: 13px;
 }
 .menu a:hover {
   background: var(--accent-hover);
