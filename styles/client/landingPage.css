@@ -393,7 +393,7 @@ body {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  padding:0 15px;
+  padding: 3px 15px;
   background-color: #1a1a1a;
   border-top: 1px solid #2e2e2e;
   color: #ffffffd1;
@@ -411,7 +411,6 @@ body {
 .accordion-item:has(.accordion-header[aria-expanded="true"]) {
   box-shadow: 0 0 0 1px #9b51e059;
   border-radius: 2px;
-
 }
 
 /* ─── FOOTER ─────────────────────────────────────────────── */
@@ -521,7 +520,7 @@ input:-webkit-autofill:focus {
   justify-content: center;
   cursor: pointer;
   transition: 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .user-icon:hover {
@@ -537,7 +536,7 @@ input:-webkit-autofill:focus {
   backdrop-filter: blur(10px);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   animation: fadeIn 0.2s ease-in-out;
 }
 

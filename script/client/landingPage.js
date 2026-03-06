@@ -1,5 +1,99 @@
+/* ─── TOAST NOTIFICATION ─── */
+function showToast(message, type = "success") {
+  // Remove existing toast if any
+  const existing = document.querySelector(".toast-notification");
+  if (existing) existing.remove();
+
+  const toast = document.createElement("div");
+  toast.className = `toast-notification toast-${type}`;
+  toast.innerHTML = `
+    <span class="toast-icon">${type === "success" ? "✓" : "✕"}</span>
+    <span class="toast-message">${message}</span>
+    <button class="toast-close" aria-label="Close">×</button>
+  `;
+
+  // Inject styles if not already present
+  if (!document.getElementById("toast-styles")) {
+    const style = document.createElement("style");
+    style.id = "toast-styles";
+    style.textContent = `
+      .toast-notification {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        min-width: 260px;
+        max-width: 360px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        animation: toastSlideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+        cursor: default;
+      }
+      .toast-success {
+        background: linear-gradient(135deg, #1db954, #17a34a);
+      }
+      .toast-error {
+        background: linear-gradient(135deg, #e53935, #c62828);
+      }
+      .toast-icon {
+        font-size: 16px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .toast-message {
+        flex: 1;
+        line-height: 1.4;
+      }
+      .toast-close {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.75);
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0 2px;
+        flex-shrink: 0;
+        transition: color 0.2s;
+      }
+      .toast-close:hover { color: #fff; }
+      .toast-hide {
+        animation: toastSlideOut 0.3s ease forwards;
+      }
+      @keyframes toastSlideIn {
+        from { opacity: 0; transform: translateX(110%); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes toastSlideOut {
+        from { opacity: 1; transform: translateX(0); }
+        to   { opacity: 0; transform: translateX(110%); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  document.body.appendChild(toast);
+
+  const dismiss = () => {
+    toast.classList.add("toast-hide");
+    toast.addEventListener("animationend", () => toast.remove(), { once: true });
+  };
+
+  toast.querySelector(".toast-close").addEventListener("click", dismiss);
+
+  // Auto-dismiss after 4 seconds
+  setTimeout(dismiss, 4000);
+}
+
+/* ───────── FAQ ACCORDION ───────── */
 document.addEventListener("DOMContentLoaded", () => {
-  /* ───────── FAQ ACCORDION ───────── */
   const accordionHeaders = document.querySelectorAll(".accordion-header");
 
   accordionHeaders.forEach((header) => {
@@ -36,15 +130,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+/* ───────── AUTH STATE ───────── */
 const token = localStorage.getItem("token");
 
 const signInBtn = document.querySelector(".sign-in-btn");
 const userMenu = document.querySelector(".user-menu");
 const logoutBtn = document.querySelector(".logout-btn");
+const userIconImg = document.querySelector(".user-icon img");
 
 if (token) {
   signInBtn?.classList.add("hidden");
   userMenu?.classList.remove("hidden");
+
+  // localStorage-dəki profil şəklini header-da göstər
+  try {
+    const cachedUser = JSON.parse(localStorage.getItem("user") || "{}");
+    if (cachedUser.img_url && userIconImg) {
+      userIconImg.src = cachedUser.img_url;
+      userIconImg.style.borderRadius = "50%";
+      userIconImg.style.width = "36px";
+      userIconImg.style.height = "36px";
+      userIconImg.style.objectFit = "cover";
+    }
+  } catch (_) {}
 } else {
   signInBtn?.classList.remove("hidden");
   userMenu?.classList.add("hidden");
@@ -63,24 +171,25 @@ userIcon?.addEventListener("click", () => {
   dropdown?.classList.toggle("hidden");
 });
 
-
-
+/* ───────── CONTACT FORM ───────── */
 const contactForm = document.getElementById("contactForm");
 
 contactForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-const full_name = document.getElementById("fullname").value.trim();
-const email = document.getElementById("contactEmail").value.trim();
-const reason = document.getElementById("reason").value.trim();
+  const full_name = document.getElementById("fullname").value.trim();
+  const email = document.getElementById("contactEmail").value.trim();
+  const reason = document.getElementById("reason").value.trim();
 
-if (!full_name || !email || !reason) return;
+  if (!full_name || !email || !reason) return;
 
-  // Tokeni localStorage-dən al
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
   if (!token) {
-    alert("You must be logged in to send a message.");
-    window.location.href = "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html";
+    showToast("You must be logged in to send a message.", "error");
+    setTimeout(() => {
+      window.location.href =
+        "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html";
+    }, 1500);
     return;
   }
 
@@ -91,24 +200,18 @@ if (!full_name || !email || !reason) return;
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          full_name,
-          email,
-          reason,
-        }),
+        body: JSON.stringify({ full_name, email, reason }),
       }
     );
 
-    if (!res.ok) {
-      throw new Error("Failed to send");
-    }
+    if (!res.ok) throw new Error("Failed to send");
 
-    alert("Message sent successfully!");
+    showToast("Message sent successfully!", "success");
     contactForm.reset();
   } catch (error) {
     console.error(error);
-    alert("Something went wrong!");
+    showToast("Something went wrong. Please try again.", "error");
   }
 });
