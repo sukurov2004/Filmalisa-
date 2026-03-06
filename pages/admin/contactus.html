@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" type="image/png" href="../../assets/client/İconsİmages/logo.svg">
+    <link
+      rel="icon"
+      type="image/png"
+      href="../../assets/client/İconsİmages/logo.svg"
+    />
     <!-- !Icon link -->
     <link
       rel="stylesheet"
@@ -14,60 +18,80 @@
     <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/adminGlobal.css" />
     <title>Admin / Contact Us</title>
-  <style>
-  .contact-table {
-    table-layout: fixed;
-    width: 100%;
-  }
+    <style>
+      .contact-table {
+        table-layout: fixed;
+        width: 100%;
+      }
 
-  .contact-table th:nth-child(1),
-  .contact-table td:nth-child(1) { width: 60px; text-align: center; }
+      .contact-table th:nth-child(1),
+      .contact-table td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
 
-  .contact-table th:nth-child(2),
-  .contact-table td:nth-child(2) { width: 150px; text-align: center; }
+      .contact-table th:nth-child(2),
+      .contact-table td:nth-child(2) {
+        width: 150px;
+        text-align: center;
+      }
 
-  .contact-table th:nth-child(3),
-  .contact-table td:nth-child(3) { width: 220px; text-align: center; }
+      .contact-table th:nth-child(3),
+      .contact-table td:nth-child(3) {
+        width: 220px;
+        text-align: center;
+      }
 
-  .contact-table th:nth-child(4),
-  .contact-table td:nth-child(4) { width: 200px; text-align: center ; overflow: hidden; }
+      .contact-table th:nth-child(4),
+      .contact-table td:nth-child(4) {
+        width: 200px;
+        text-align: center;
+        overflow: hidden;
+      }
 
-  .contact-table th:nth-child(5),
-  .contact-table td:nth-child(5) { width: 60px; text-align: center; }
+      .contact-table th:nth-child(5),
+      .contact-table td:nth-child(5) {
+        width: 60px;
+        text-align: center;
+      }
 
-  .contact-table td:nth-child(4) .contact-clamp {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-  width: 180px;
-  margin: 0 auto; 
-}
+      .contact-table td:nth-child(4) .contact-clamp {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        width: 180px;
+        margin: 0 auto;
+      }
 
-  .js-tooltip {
-    position: fixed;
-    background: #1e1e2e;
-    color: #e4e4f0;
-    font-size: 12px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    max-width: 280px;
-    white-space: normal;
-    line-height: 1.5;
-    text-align: left;
-    word-break: break-word;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    border: 1px solid #2e2e3e;
-    z-index: 99999;
-    pointer-events: none;
-    display: none;
-  }
-</style>
+      .js-tooltip {
+        position: fixed;
+        background: #1e1e2e;
+        color: #e4e4f0;
+        font-size: 12px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        max-width: 280px;
+        white-space: normal;
+        line-height: 1.5;
+        text-align: left;
+        word-break: break-word;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        border: 1px solid #2e2e3e;
+        z-index: 99999;
+        pointer-events: none;
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <div class="app">
+    <!-- GLOBAL LOADER -->
+    <div id="globalLoader" class="loader-overlay">
+      <div class="jimu-primary-loading"></div>
+    </div>
 
+    <div class="app">
       <!-- SIDEBAR -->
       <aside class="sidebar">
         <div>
@@ -78,15 +102,24 @@
 
           <nav class="menu">
             <a href="dashboard.html" class="item">
-              <img src="../../assets/Admin/icons/Dashboard.svg" alt="Dashboard Icon" />
+              <img
+                src="../../assets/Admin/icons/Dashboard.svg"
+                alt="Dashboard Icon"
+              />
               Dashboard
             </a>
             <a href="movies.html" class="item">
-              <img src="../../assets/Admin/icons/Movies.svg" alt="Movies Icon" />
+              <img
+                src="../../assets/Admin/icons/Movies.svg"
+                alt="Movies Icon"
+              />
               Movies
             </a>
             <a href="categories.html" class="item">
-              <img src="../../assets/Admin/icons/Categories.svg" alt="Categories Icon" />
+              <img
+                src="../../assets/Admin/icons/Categories.svg"
+                alt="Categories Icon"
+              />
               Categories
             </a>
             <a href="users.html" class="item">
@@ -94,15 +127,24 @@
               Users
             </a>
             <a href="comments.html" class="item">
-              <img src="../../assets/Admin/icons/Comments.svg" alt="Comments Icon" />
+              <img
+                src="../../assets/Admin/icons/Comments.svg"
+                alt="Comments Icon"
+              />
               Comments
             </a>
             <a href="contactus.html" class="item">
-              <img src="../../assets/Admin/icons/Contactus.svg" alt="Contact us Icon" />
+              <img
+                src="../../assets/Admin/icons/Contactus.svg"
+                alt="Contact us Icon"
+              />
               Contact us
             </a>
             <a href="actors.html" class="item">
-              <img src="../../assets/Admin/icons/Actors.svg" alt="Actors Icon" />
+              <img
+                src="../../assets/Admin/icons/Actors.svg"
+                alt="Actors Icon"
+              />
               Actors
             </a>
           </nav>
@@ -114,18 +156,18 @@
         </a>
       </aside>
 
-<!-- DELETE MODAL -->
-<div class="delete-overlay" id="deleteModal">
-  <div class="modal">
-    <h2>Delete Message</h2>
-    <p>Are you sure you want to delete this message?</p>
+      <!-- DELETE MODAL -->
+      <div class="delete-overlay" id="deleteModal">
+        <div class="modal">
+          <h2>Delete Message</h2>
+          <p>Are you sure you want to delete this message?</p>
 
-    <div class="modal-actions">
-      <button class="btn cancel-btn">Cancel</button>
-      <button class="btn delete-btn">Delete</button>
-    </div>
-  </div>
-</div>
+          <div class="modal-actions">
+            <button class="btn cancel-btn">Cancel</button>
+            <button class="btn delete-btn">Delete</button>
+          </div>
+        </div>
+      </div>
       <!-- MAIN -->
       <main class="main">
         <header class="topbar">
@@ -200,12 +242,11 @@
 
         <div class="pagination"></div>
       </main>
-
     </div>
 
     <script src="../../script/admin/contactus.js"></script>
     <script src="../../script/admin/pagination.js"></script>
     <script src="../../script/admin/deleteModal.js"></script>
-      <script src="../../global/adminGlobal.js" defer></script>
+    <script src="../../global/adminGlobal.js" defer></script>
   </body>
 </html>

@@ -55,3 +55,30 @@ if (profileImg) {
     });
   });
 })();
+
+// GLOBAL LOADER
+
+let activeRequests = 0;
+
+function showLoader() {
+  activeRequests++;
+  document.getElementById("globalLoader")?.classList.remove("hidden");
+}
+
+function hideLoader() {
+  activeRequests--;
+  if (activeRequests <= 0) {
+    activeRequests = 0;
+    document.getElementById("globalLoader")?.classList.add("hidden");
+  }
+}
+
+const originalFetch = window.fetch;
+window.fetch = async (...args) => {
+  try {
+    showLoader();
+    return await originalFetch(...args);
+  } finally {
+    hideLoader();
+  }
+};
