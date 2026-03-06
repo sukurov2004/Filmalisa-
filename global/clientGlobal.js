@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       cinemaIntro.style.display = "none";
       localStorage.setItem("introPlayed", "true");
-    }, 1500);
-  }, 3000);
+    }, 1000);
+  }, 2000);
 });
 
 
