@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="cast-item">
             <div class="cast-img-box">
               <img
-                src="${actor.img_url || "../../assets/client/GridImages/detailedActor.svg"}"
+                src="${actor.img_url}"
                 alt="${actor.name}"
               />
             </div>
@@ -194,7 +194,7 @@ async function loadComments(movieId, token, BASE_URL) {
       // Öz şərhisə profil avatarı, deyilsə default avatar
       const avatar = isOwner
         ? currentUserAvatar
-        : "../../assets/client/GridImages/avatar.svg";
+        : "../../assets/client/İconsİmages/user.svg";
 
       const div = document.createElement("div");
       div.className = "existing-comment";
