@@ -17,39 +17,44 @@
     <link rel="stylesheet" href="../../global/reset.css" />
     <!-- !Global Css link -->
     <link rel="stylesheet" href="../../global/adminGlobal.css" />
-    <link rel="stylesheet" href="../../styles/admin/comments.css">
+    <link rel="stylesheet" href="../../styles/admin/comments.css" />
     <title>Admin / Comments</title>
-  <style>
-  .comment-cell {
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-  }
+    <style>
+      .comment-cell {
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+      }
 
-  .js-tooltip {
-    position: fixed;
-    background: #1e1e2e;
-    color: #e4e4f0;
-    font-size: 12px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    max-width: 280px;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    line-height: 1.5;
-    text-align: left;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    border: 1px solid #2e2e3e;
-    z-index: 99999;
-    pointer-events: none;
-    display: none;
-  }
-</style>
+      .js-tooltip {
+        position: fixed;
+        background: #1e1e2e;
+        color: #e4e4f0;
+        font-size: 12px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        max-width: 280px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        line-height: 1.5;
+        text-align: left;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        border: 1px solid #2e2e3e;
+        z-index: 99999;
+        pointer-events: none;
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <!-- GLOBAL LOADER -->
+    <div id="globalLoader" class="loader-overlay">
+      <div class="jimu-primary-loading"></div>
+    </div>
+
     <div class="app">
       <!-- SIDEBAR -->
       <aside class="sidebar">
