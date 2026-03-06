@@ -2,7 +2,9 @@
 (function () {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/login.html");
+    window.location.replace(
+      "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html"
+    );
   }
 })();
 
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await res.json();
     const movie = data.data;
 
-    // Fragman-ı global dəyişənə yaz
+    // Fragmanı global dəyişənə yaz
     currentFragman = movie.fragman || "";
 
     // ── Backdrop və hero ──
@@ -74,15 +76,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       castList.innerHTML = movie.actors
         .map(
           (actor) => `
-        <div class="cast-item">
-          <div class="cast-img-box">
-            <img src="${actor.img_url || "../../assets/client/GridImages/detailedActor.svg"}" alt="${actor.name}" />
+          <div class="cast-item">
+            <div class="cast-img-box">
+              <img
+                src="${actor.img_url || "../../assets/client/GridImages/detailedActor.svg"}"
+                alt="${actor.name}"
+              />
+            </div>
+            <div class="cast-info">
+              <span class="actor-real-name">${actor.name} ${actor.surname}</span>
+            </div>
           </div>
-          <div class="cast-info">
-            <span class="actor-real-name">${actor.name} ${actor.surname}</span>
-          </div>
-        </div>
-      `,
+        `
         )
         .join("");
     }
@@ -90,7 +95,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // ── Favorite button ──
     const circleBtn = document.querySelector(".circle-btn");
 
-    // chack if movie is already in favorites
     const favRes = await fetch(`${BASE_URL}/movies/favorites`, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -98,7 +102,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isFav = (favData.data || []).some((m) => m.id === parseInt(movieId));
     if (isFav) circleBtn.classList.add("active");
 
-    // Click
     circleBtn.addEventListener("click", async () => {
       try {
         await fetch(`${BASE_URL}/movie/${movieId}/favorite`, {
@@ -111,17 +114,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
+    // ── Watch button ──
     const watchBtn = document.querySelector(".btn-watch");
     if (watchBtn && movie.watch_url) {
       watchBtn.setAttribute(
         "onclick",
-        `window.open('${movie.watch_url}', '_blank')`,
+        `window.open('${movie.watch_url}', '_blank')`
       );
     }
-    // ── Şərhlər ──
-    loadComments(movieId, token, BASE_URL);
 
-    // ── Oxşar filmlər ──
+    // ── Şərhlər və oxşar filmlər ──
+    await loadComments(movieId, token, BASE_URL);
     loadSimilar(movie.category?.id, movieId, token, BASE_URL);
   } catch (err) {
     console.error("Film məlumatları yüklənmədi:", err);
@@ -150,26 +153,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Şərh göndərilmədi:", err);
     }
   });
+
   commentInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      sendBtn.click();
-    }
+    if (e.key === "Enter") sendBtn.click();
   });
 });
 
-// ── Şərhlər ──
+// ===== LOAD COMMENTS =====
 async function loadComments(movieId, token, BASE_URL) {
   try {
-    // Cari istifadəçinin id-sini al
-    const profileRes = await fetch(`${BASE_URL}/profile`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    // Cari istifadəçinin məlumatlarını al
+    const profileRes = await fetch(
+      `https://api.sarkhanrahimli.dev/api/filmalisa/profile`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     const profileData = await profileRes.json();
     const currentUserId = profileData.data?.id;
+    const currentUserAvatar =
+      profileData.data?.img_url ||
+      "../../assets/client/GridImages/avatar.svg";
 
-    const res = await fetch(`${BASE_URL}/movies/${movieId}/comments`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    // Input area avatarını profil şəkli ilə yenilə
+    const inputAvatar = document.querySelector(".user-avatar-sm img");
+    if (inputAvatar) inputAvatar.src = currentUserAvatar;
+
+    // Şərhləri yüklə
+    const res = await fetch(
+      `https://api.sarkhanrahimli.dev/api/filmalisa/movies/${movieId}/comments`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     const data = await res.json();
     const comments = data.data || [];
 
@@ -178,17 +190,27 @@ async function loadComments(movieId, token, BASE_URL) {
 
     comments.forEach((comment) => {
       const isOwner = comment.user?.id === currentUserId;
+
+      // Öz şərhisə profil avatarı, deyilsə default avatar
+      const avatar = isOwner
+        ? currentUserAvatar
+        : "../../assets/client/GridImages/avatar.svg";
+
       const div = document.createElement("div");
       div.className = "existing-comment";
       div.innerHTML = `
         <div class="comment-header">
           <div class="comment-user">
-            <img src="../../assets/client/GridImages/avatar.svg" alt="User" />
+            <img src="${avatar}" alt="User" />
             <span class="username">${comment.user?.full_name || "User"}</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <span class="time">${new Date(comment.created_at).toLocaleString()}</span>
-            ${isOwner ? `<i class="fa-solid fa-trash comment-delete" data-id="${comment.id}" style="cursor:pointer; color:#ffffff60; font-size:14px;"></i>` : ""}
+            ${
+              isOwner
+                ? `<i class="fa-solid fa-trash comment-delete" data-id="${comment.id}" style="cursor:pointer; color:#ffffff60; font-size:14px;"></i>`
+                : ""
+            }
           </div>
         </div>
         <p class="comment-text">${comment.comment}</p>
@@ -196,16 +218,16 @@ async function loadComments(movieId, token, BASE_URL) {
       wrapper.appendChild(div);
     });
 
-    // Silmə
+    // Şərh silmə
     wrapper.querySelectorAll(".comment-delete").forEach((icon) => {
       icon.addEventListener("click", async () => {
         try {
           await fetch(
-            `${BASE_URL}/movies/${movieId}/comment/${icon.dataset.id}`,
+            `https://api.sarkhanrahimli.dev/api/filmalisa/movies/${movieId}/comment/${icon.dataset.id}`,
             {
               method: "DELETE",
               headers: { Authorization: `Bearer ${token}` },
-            },
+            }
           );
           await loadComments(movieId, token, BASE_URL);
         } catch (err) {
@@ -218,52 +240,55 @@ async function loadComments(movieId, token, BASE_URL) {
   }
 }
 
-// ── Oxşar filmlər ──
+// ===== LOAD SIMILAR MOVIES =====
 async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
   if (!categoryId) return;
 
   try {
-    const res = await fetch(`${BASE_URL}/categories`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const res = await fetch(
+      `https://api.sarkhanrahimli.dev/api/filmalisa/categories`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     const data = await res.json();
     const categories = data.data || [];
 
-    // Eyni kateqoriyanı tap
     const category = categories.find((c) => c.id === categoryId);
     if (!category) return;
 
-    // Həmin kateqoriyanın filmləri
     const similar = (category.movies || []).filter(
-      (m) => m.id !== parseInt(currentMovieId),
+      (m) => m.id !== parseInt(currentMovieId)
     );
-
     if (similar.length === 0) return;
 
     const grid = document.querySelector(".similar-grid");
     grid.innerHTML = similar
       .map(
         (movie) => `
-      <a class="movie-card" href="detailed.html?id=${movie.id}">
-        <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
-        <div class="movie-details">
-          <div class="movie-category-container">
-            <span class="movie-category">${category.name}</span>
+        <a class="movie-card" href="detailed.html?id=${movie.id}">
+          <img
+            src="${movie.cover_url || ""}"
+            class="movie-image"
+            alt="${movie.title}"
+          />
+          <div class="movie-details">
+            <div class="movie-category-container">
+              <span class="movie-category">${category.name}</span>
+            </div>
+            <div class="movie-rating">
+              ${renderStars(movie.imdb || 0)}
+            </div>
+            <p class="movie-title">${movie.title}</p>
           </div>
-          <div class="movie-rating">
-            ${renderStars(movie.imdb || 0)}
-          </div>
-          <p class="movie-title">${movie.title}</p>
-        </div>
-      </a>
-    `,
+        </a>
+      `
       )
       .join("");
   } catch (err) {
     console.error("Oxşar filmlər yüklənmədi:", err);
   }
+
   const similarCarousel = document.querySelector(
-    ".similar-wrapper .category-carousel",
+    ".similar-wrapper .category-carousel"
   );
   if (similarCarousel) initCarousel(similarCarousel);
 }
