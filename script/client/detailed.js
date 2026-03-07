@@ -2,9 +2,7 @@
 (function () {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.replace(
-      "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html"
-    );
+     window.location.replace("http://127.0.0.1:5500/pages/client/login.html");
   }
 })();
 
@@ -87,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               <span class="actor-real-name">${actor.name} ${actor.surname}</span>
             </div>
           </div>
-        `
+        `,
         )
         .join("");
     }
@@ -119,7 +117,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (watchBtn && movie.watch_url) {
       watchBtn.setAttribute(
         "onclick",
-        `window.open('${movie.watch_url}', '_blank')`
+        `window.open('${movie.watch_url}', '_blank')`,
       );
     }
 
@@ -165,13 +163,12 @@ async function loadComments(movieId, token, BASE_URL) {
     // Cari istifadəçinin məlumatlarını al
     const profileRes = await fetch(
       `https://api.sarkhanrahimli.dev/api/filmalisa/profile`,
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     const profileData = await profileRes.json();
     const currentUserId = profileData.data?.id;
     const currentUserAvatar =
-      profileData.data?.img_url ||
-      "../../assets/client/GridImages/avatar.svg";
+      profileData.data?.img_url || "../../assets/client/GridImages/avatar.svg";
 
     // Input area avatarını profil şəkli ilə yenilə
     const inputAvatar = document.querySelector(".user-avatar-sm img");
@@ -180,7 +177,7 @@ async function loadComments(movieId, token, BASE_URL) {
     // Şərhləri yüklə
     const res = await fetch(
       `https://api.sarkhanrahimli.dev/api/filmalisa/movies/${movieId}/comments`,
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     const data = await res.json();
     const comments = data.data || [];
@@ -227,7 +224,7 @@ async function loadComments(movieId, token, BASE_URL) {
             {
               method: "DELETE",
               headers: { Authorization: `Bearer ${token}` },
-            }
+            },
           );
           await loadComments(movieId, token, BASE_URL);
         } catch (err) {
@@ -247,7 +244,7 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
   try {
     const res = await fetch(
       `https://api.sarkhanrahimli.dev/api/filmalisa/categories`,
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     const data = await res.json();
     const categories = data.data || [];
@@ -256,7 +253,7 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
     if (!category) return;
 
     const similar = (category.movies || []).filter(
-      (m) => m.id !== parseInt(currentMovieId)
+      (m) => m.id !== parseInt(currentMovieId),
     );
     if (similar.length === 0) return;
 
@@ -280,7 +277,7 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
             <p class="movie-title">${movie.title}</p>
           </div>
         </a>
-      `
+      `,
       )
       .join("");
   } catch (err) {
@@ -288,7 +285,7 @@ async function loadSimilar(categoryId, currentMovieId, token, BASE_URL) {
   }
 
   const similarCarousel = document.querySelector(
-    ".similar-wrapper .category-carousel"
+    ".similar-wrapper .category-carousel",
   );
   if (similarCarousel) initCarousel(similarCarousel);
 }
