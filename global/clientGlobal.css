@@ -119,6 +119,11 @@ body {
   color: #0feffd;
 }
 
+.side-link.active img {
+  filter: brightness(0) saturate(100%) invert(85%) sepia(50%) saturate(600%)
+    hue-rotate(130deg) brightness(85%);
+}
+
 /* =====HOME SIDEBAR====== */
 .home-layout {
   min-height: 100vh;
@@ -189,16 +194,9 @@ body {
   transform: scale(1.05);
 }
 
-.home-side-link:hover img {
-  filter: brightness(1);
-}
-
-.home-side-link.active {
-  background: #ffffff14;
-}
-
 .home-side-link.active img {
-  filter: brightness(1) hue-rotate(200deg) saturate(1.5);
+  filter: brightness(0) saturate(100%) invert(85%) sepia(50%) saturate(600%)
+    hue-rotate(130deg) brightness(85%);
 }
 
 .home-side-link.active:hover {
@@ -514,7 +512,7 @@ body {
   font-weight: 600;
   margin-top: 4px;
 }
-/* From Uiverse.io by Donewenfu */ 
+/* From Uiverse.io by Donewenfu */
 .loader {
   position: absolute;
   top: 0;
@@ -527,7 +525,7 @@ body {
 .jimu-primary-loading:after {
   position: absolute;
   top: 0;
-  content: '';
+  content: "";
 }
 
 .jimu-primary-loading:before {
@@ -577,11 +575,10 @@ body {
 }
 
 @-webkit-keyframes loading-keys-app-loading {
-
   0%,
   80%,
   100% {
-    opacity: .75;
+    opacity: 0.75;
     box-shadow: 0 0 #076fe5;
     height: 32px;
   }
@@ -594,11 +591,10 @@ body {
 }
 
 @keyframes loading-keys-app-loading {
-
   0%,
   80%,
   100% {
-    opacity: .75;
+    opacity: 0.75;
     box-shadow: 0 0 #076fe5;
     height: 32px;
   }
