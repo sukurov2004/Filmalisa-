@@ -27,30 +27,35 @@ document.addEventListener("DOMContentLoaded", () => {
       return res.json();
     })
     .then((data) => {
+      console.log(data); // API-dən gələn məlumatı yoxlamaq üçün muveqqeti olaraq console.log əlavə etdim. Sonra silinəcək.
       tableBody.innerHTML = "";
-data.data.forEach((user, index) => {
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
+      data.data.forEach((user, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
     <td>${index + 1}</td>
     <td style="text-align:center;">
       <div style="
-        margin:0 auto;
-        display:flex;
-        width:40px;
-        height:40px;
-        border-radius:50%;
-        background:#2a2a3a;
-        align-items:center;
-        justify-content:center;">
-        <i class="fa-solid fa-user" 
-           style="color:#888;font-size:18px;"></i>
+      margin:0 auto;
+      display:flex;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      background:#2a2a3a;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;">
+      ${
+        user.img_url
+          ? `<img src="${user.img_url}" style="width:100%;height:100%;object-fit:cover;">`
+          : `<i class="fa-solid fa-user" style="color:#888;font-size:18px;"></i>`
+      }
       </div>
     </td>
     <td>${user.full_name}</td>
     <td>${user.email}</td>
   `;
-  tableBody.appendChild(tr);
-});
+        tableBody.appendChild(tr);
+      });
 
       const rows = Array.from(tableBody.querySelectorAll("tr"));
       pager.init(rows); // ← pagination işə düşür
