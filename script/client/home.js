@@ -92,7 +92,7 @@ async function initHeroSlider() {
 
     startAutoplay();
   } catch {
-  document.querySelector(".main").innerHTML = `
+    document.querySelector(".main").innerHTML = `
     <main class="main-err main">
       <div class="error-container">
         <img
@@ -108,7 +108,7 @@ async function initHeroSlider() {
       </div>
     </main>
   `;
-}
+  }
 }
 
 initHeroSlider();
@@ -242,7 +242,7 @@ function initCarousel(carousel) {
       <section class="category-section">
         <div class="category-header">
           <h2 class="ctg-title">${category.name}</h2>
-          <img class="vector-icon" src="${vectorIconSrc}" alt="" />
+          <img class="vector-icon" src="${vectorIconSrc}" alt="" style="width:10px;" />
         </div>
         <div class="category-carousel">
           <button class="carousel-btn prev">
@@ -280,6 +280,6 @@ function initCarousel(carousel) {
 
     document.querySelectorAll(".category-carousel").forEach(initCarousel);
   } catch {
-  console.error("Failed to load categories or movies");
-}
+    console.error("Failed to load categories or movies");
+  }
 })();
