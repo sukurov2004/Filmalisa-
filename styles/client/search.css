@@ -36,7 +36,7 @@ body {
 .title-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
 }
 
 .title {
@@ -44,12 +44,6 @@ body {
   font-size: 34px;
   font-weight: 750;
   letter-spacing: 0.2px;
-}
-
-.chev {
-  font-size: 32px;
-  color: #ffffff99;
-  transform: translateY(-1px);
 }
 
 .search-wrap {
@@ -87,6 +81,19 @@ body {
   background: #ffffff1a;
 }
 
+.search:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px #7c3aed33;
+  background: #000000bf;
+}
+
+.search:hover {
+  border-color: #7c3aed66;
+}
+
+.search:focus:hover {
+  border-color: #7c3aed;
+}
 /* GRID */
 .grid {
   display: flex;
