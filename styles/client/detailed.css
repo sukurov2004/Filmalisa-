@@ -1,7 +1,3 @@
-/* ==========================================================================
-   FİLMARLİSA - DETALLI SƏHİFƏ (DETAILED PAGE) CSS
-   ========================================================================== */
-
 /* --------------------------------------------------------------------------
    1.                           LAYOUT & PROFILE
    -------------------------------------------------------------------------- */
@@ -221,7 +217,7 @@
 .watch-actions {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 50px;
 }
 
 .btn-watch {
@@ -415,7 +411,13 @@
 }
 
 .comment-field:focus {
-  border-color: #9b51e0; /* Fokslanan zaman bənövşəyi çərçivə */
+  outline: none;
+  
+  border: 1px solid #5a1a94 !important; 
+  
+  /* box-shadow: 0 0 5px rgba(155, 81, 224, 0.5);  */
+  background-color: transparent;
+  transition: all 0.2s ease;
 }
 
 .comment-field::placeholder {
@@ -506,12 +508,21 @@
 }
 
 .similar-title {
+  display: flex;          
+  align-items: center;
+  gap: 12px;
   margin-bottom: 25px;
   color: #fff;
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
 }
+
+.similar-title img {
+  width: 12px;
+  height: auto;
+}
+
 .similar-grid {
   display: flex;
   flex-wrap: wrap;
