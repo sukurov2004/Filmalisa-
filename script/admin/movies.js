@@ -38,7 +38,7 @@ const token = localStorage.getItem("adminToken");
 document.addEventListener("DOMContentLoaded", async () => {
   if (!token) {
     window.location.replace(
-      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html"
+      "https://sukurov2004.github.io/Filmalisa-/pages/admin/login.html",
     );
     return;
   }
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   pagination = initPagination(
     tableBody,
     document.querySelector(".pagination"),
-    5
+    5,
   );
 
   buildActorDropdown();
@@ -122,7 +122,7 @@ function populateActorDropdown(actors) {
 function updateActorTriggerLabel() {
   const count = selectedActorIds.size;
   actorTrigger.textContent =
-    count === 0 ? "Actors seçin" : `${count} actor seçildi`;
+    count === 0 ? "Select Actors" : `${count} Actors Selected`;
 }
 
 function clearActorSelection() {
@@ -159,7 +159,10 @@ function buildCategoryDropdown() {
 
   categoryDropdownWrapper.appendChild(categoryTrigger);
   categoryDropdownWrapper.appendChild(categoryList);
-  categorySelect.parentNode.insertBefore(categoryDropdownWrapper, categorySelect);
+  categorySelect.parentNode.insertBefore(
+    categoryDropdownWrapper,
+    categorySelect,
+  );
 
   categoryTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -187,7 +190,7 @@ function populateCategoryDropdown(categories) {
   noneCb.addEventListener("change", () => {
     selectedCategoryId = null;
     selectedCategoryName = "";
-    categoryTrigger.textContent = "Category seçin";
+    categoryTrigger.textContent = "Select Category";
     categorySelect.value = "";
     categoryDropdownWrapper.classList.remove("open");
   });
@@ -223,7 +226,7 @@ function setSelectedCategory(catId) {
   selectedCategoryId = catId ? Number(catId) : null;
   const opt = categorySelect.querySelector(`option[value="${catId}"]`);
   selectedCategoryName = opt ? opt.textContent : "";
-  categoryTrigger.textContent = selectedCategoryName || "Category seçin";
+  categoryTrigger.textContent = selectedCategoryName || "Select Category";
   categoryList.querySelectorAll("input[type=radio]").forEach((rb) => {
     rb.checked = rb.value == catId;
   });
@@ -232,7 +235,7 @@ function setSelectedCategory(catId) {
 function clearCategorySelection() {
   selectedCategoryId = null;
   selectedCategoryName = "";
-  categoryTrigger.textContent = "Category seçin";
+  categoryTrigger.textContent = "Select Category";
   categorySelect.value = "";
   categoryList.querySelectorAll("input[type=radio]").forEach((rb) => {
     rb.checked = rb.value === "";
@@ -438,12 +441,16 @@ function renderTable(movies) {
     tableBody.appendChild(tr);
   });
 
-  tableBody.querySelectorAll(".edit").forEach((btn) =>
-    btn.addEventListener("click", () => getMovieById(btn.dataset.id))
-  );
-  tableBody.querySelectorAll(".delete").forEach((btn) =>
-    btn.addEventListener("click", () => confirmDelete(btn.dataset.id))
-  );
+  tableBody
+    .querySelectorAll(".edit")
+    .forEach((btn) =>
+      btn.addEventListener("click", () => getMovieById(btn.dataset.id)),
+    );
+  tableBody
+    .querySelectorAll(".delete")
+    .forEach((btn) =>
+      btn.addEventListener("click", () => confirmDelete(btn.dataset.id)),
+    );
 
   pagination.init([...tableBody.querySelectorAll("tr")]);
 }
@@ -514,9 +521,19 @@ async function deleteMovie(id) {
 // =============================================
 // EVENT LISTENERS
 // =============================================
-coverInput.addEventListener("input", () => {
-  previewImg.src =
-    coverInput.value.trim() || "../../assets/Admin/images/movies.svg";
+document.getElementById("coverInput").addEventListener("input", function () {
+  const url = this.value.trim();
+  const img = document.getElementById("coverPreviewImg");
+  const placeholder = document.getElementById("coverPlaceholder");
+
+  if (url) {
+    img.src = url;
+    img.style.display = "block";
+    placeholder.style.display = "none";
+  } else {
+    img.style.display = "none";
+    placeholder.style.display = "flex";
+  }
 });
 
 createBtn.addEventListener("click", () => openModal());
