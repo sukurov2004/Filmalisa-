@@ -2,7 +2,7 @@
 (function () {
   const token = localStorage.getItem("token");
   if (!token) {
-     window.location.replace("http://127.0.0.1:5500/pages/client/login.html");
+    window.location.replace("http://127.0.0.1:5500/pages/client/login.html");
   }
 })();
 
@@ -22,12 +22,28 @@ let currentFragman = "";
 window.toggleVideo = function () {
   const modal = document.getElementById("videoModal");
   const iframe = document.getElementById("youtubeFrame");
+  const thumbnail = document.getElementById("videoThumbnail");
+
   modal.classList.toggle("active");
+
   if (modal.classList.contains("active")) {
-    iframe.src = getEmbedUrl(currentFragman);
+    // Əvvəlcə thumbnail göstər, iframe gizlət
+    iframe.src = "";
+    iframe.style.display = "none";
+    if (thumbnail) thumbnail.style.display = "flex";
   } else {
     iframe.src = "";
+    iframe.style.display = "none";
+    if (thumbnail) thumbnail.style.display = "flex";
   }
+};
+
+window.playVideo = function () {
+  const iframe = document.getElementById("youtubeFrame");
+  const thumbnail = document.getElementById("videoThumbnail");
+  iframe.src = getEmbedUrl(currentFragman);
+  iframe.style.display = "block";
+  if (thumbnail) thumbnail.style.display = "none";
 };
 
 // ===== DETAILS PAGE =====
@@ -62,6 +78,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // ── Poster ──
     document.querySelector("#mainPoster img").src = movie.cover_url;
+    const thumbImg = document.getElementById("thumbImg");
+    if (thumbImg) thumbImg.src = movie.cover_url;
 
     // ── Mətn ──
     document.querySelector(".description").textContent = movie.overview || "";
