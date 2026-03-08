@@ -190,18 +190,18 @@ body {
 }
 
 .home-side-link:hover {
-  background: #ffffff1a;
+  color: #0feffd;
   transform: scale(1.05);
+}
+
+.home-side-link:hover img {
+  filter: brightness(1);
+  color: #0feffd;
 }
 
 .home-side-link.active img {
   filter: brightness(0) saturate(100%) invert(85%) sepia(50%) saturate(600%)
     hue-rotate(130deg) brightness(85%);
-}
-
-.home-side-link.active:hover {
-  background: #ffffff1f;
-  transform: scale(1.05);
 }
 
 /* ── Buttons ── */
