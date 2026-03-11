@@ -1,6 +1,5 @@
 /* ─── TOAST NOTIFICATION ─── */
 function showToast(message, type = "success") {
-  // Remove existing toast if any
   const existing = document.querySelector(".toast-notification");
   if (existing) existing.remove();
 
@@ -12,7 +11,6 @@ function showToast(message, type = "success") {
     <button class="toast-close" aria-label="Close">×</button>
   `;
 
-  // Inject styles if not already present
   if (!document.getElementById("toast-styles")) {
     const style = document.createElement("style");
     style.id = "toast-styles";
@@ -37,36 +35,17 @@ function showToast(message, type = "success") {
         animation: toastSlideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
         cursor: default;
       }
-      .toast-success {
-        background: linear-gradient(135deg, #1db954, #17a34a);
-      }
-      .toast-error {
-        background: linear-gradient(135deg, #e53935, #c62828);
-      }
-      .toast-icon {
-        font-size: 16px;
-        font-weight: 700;
-        flex-shrink: 0;
-      }
-      .toast-message {
-        flex: 1;
-        line-height: 1.4;
-      }
+      .toast-success { background: linear-gradient(135deg, #1db954, #17a34a); }
+      .toast-error   { background: linear-gradient(135deg, #e53935, #c62828); }
+      .toast-icon  { font-size: 16px; font-weight: 700; flex-shrink: 0; }
+      .toast-message { flex: 1; line-height: 1.4; }
       .toast-close {
-        background: none;
-        border: none;
-        color: rgba(255,255,255,0.75);
-        font-size: 18px;
-        line-height: 1;
-        cursor: pointer;
-        padding: 0 2px;
-        flex-shrink: 0;
-        transition: color 0.2s;
+        background: none; border: none; color: rgba(255,255,255,0.75);
+        font-size: 18px; line-height: 1; cursor: pointer;
+        padding: 0 2px; flex-shrink: 0; transition: color 0.2s;
       }
       .toast-close:hover { color: #fff; }
-      .toast-hide {
-        animation: toastSlideOut 0.3s ease forwards;
-      }
+      .toast-hide { animation: toastSlideOut 0.3s ease forwards; }
       @keyframes toastSlideIn {
         from { opacity: 0; transform: translateX(110%); }
         to   { opacity: 1; transform: translateX(0); }
@@ -87,8 +66,6 @@ function showToast(message, type = "success") {
   };
 
   toast.querySelector(".toast-close").addEventListener("click", dismiss);
-
-  // Auto-dismiss after 4 seconds
   setTimeout(dismiss, 4000);
 }
 
@@ -124,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const email = emailInput.value.trim();
       if (!email) return;
-
       window.location.href = `https://sukurov2004.github.io/Filmalisa-/pages/client/register.html?email=${encodeURIComponent(email)}`;
     });
   }
@@ -142,7 +118,7 @@ if (token) {
   signInBtn?.classList.add("hidden");
   userMenu?.classList.remove("hidden");
 
-  // localStorage-dəki profil şəklini header-da göstər
+  // Əvvəlcə cache-dən göstər (sürətli yüklənmə üçün)
   try {
     const cachedUser = JSON.parse(localStorage.getItem("user") || "{}");
     if (cachedUser.img_url && userIconImg) {
@@ -153,6 +129,33 @@ if (token) {
       userIconImg.style.objectFit = "cover";
     }
   } catch (_) {}
+
+  // Sonra API-dən təzə data çək və yenilə
+  fetch("https://api.sarkhanrahimli.dev/api/filmalisa/profile", {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const img_url = data?.data?.img_url;
+      if (img_url && userIconImg) {
+        userIconImg.src = img_url;
+        userIconImg.style.borderRadius = "50%";
+        userIconImg.style.width = "36px";
+        userIconImg.style.height = "36px";
+        userIconImg.style.objectFit = "cover";
+        userIconImg.onerror = () => {
+          userIconImg.src = "./assets/Admin/icons/Users.svg";
+        };
+
+        // Cache-i yenilə
+        try {
+          const cached = JSON.parse(localStorage.getItem("user") || "{}");
+          cached.img_url = img_url;
+          localStorage.setItem("user", JSON.stringify(cached));
+        } catch (_) {}
+      }
+    })
+    .catch(() => {});
 } else {
   signInBtn?.classList.remove("hidden");
   userMenu?.classList.add("hidden");

@@ -27,7 +27,6 @@ window.toggleVideo = function () {
   modal.classList.toggle("active");
 
   if (modal.classList.contains("active")) {
-    // Əvvəlcə thumbnail göstər, iframe gizlət
     iframe.src = "";
     iframe.style.display = "none";
     if (thumbnail) thumbnail.style.display = "flex";
@@ -66,27 +65,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await res.json();
     const movie = data.data;
 
-    // Fragmanı global dəyişənə yaz
     currentFragman = movie.fragman || "";
 
-    // ── Backdrop və hero ──
     document.querySelector(".hero-backdrop").style.backgroundImage =
       `url('${movie.cover_url}')`;
     document.querySelector(".hero-movie-name").textContent = movie.title;
     document.querySelector(".hero-genre").textContent =
       movie.category?.name || "";
 
-    // ── Poster ──
     document.querySelector("#mainPoster img").src = movie.cover_url;
     const thumbImg = document.getElementById("thumbImg");
     if (thumbImg) thumbImg.src = movie.cover_url;
 
-    // ── Mətn ──
     document.querySelector(".description").textContent = movie.overview || "";
     document.querySelector(".rating-badge").innerHTML =
       `<i class="fa-solid fa-star"></i> ${movie.imdb || ""}`;
 
-    // ── Cast ──
     if (movie.actors && movie.actors.length > 0) {
       const castList = document.querySelector(".cast-list");
       castList.innerHTML = movie.actors
@@ -94,10 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           (actor) => `
           <div class="cast-item">
             <div class="cast-img-box">
-              <img
-                src="${actor.img_url}"
-                alt="${actor.name}"
-              />
+              <img src="${actor.img_url}" alt="${actor.name}" />
             </div>
             <div class="cast-info">
               <span class="actor-real-name">${actor.name} ${actor.surname}</span>
@@ -108,7 +99,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         .join("");
     }
 
-    // ── Favorite button ──
     const circleBtn = document.querySelector(".circle-btn");
 
     const favRes = await fetch(`${BASE_URL}/movies/favorites`, {
@@ -130,7 +120,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-    // ── Watch button ──
     const watchBtn = document.querySelector(".btn-watch");
     if (watchBtn && movie.watch_url) {
       watchBtn.setAttribute(
@@ -139,14 +128,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
     }
 
-    // ── Şərhlər və oxşar filmlər ──
     await loadComments(movieId, token, BASE_URL);
     loadSimilar(movie.category?.id, movieId, token, BASE_URL);
   } catch (err) {
     console.error("Film məlumatları yüklənmədi:", err);
   }
 
-  // ── Şərh göndər ──
   const commentInput = document.querySelector(".comment-field");
   const sendBtn = document.querySelector(".btn-send-comment");
 
@@ -178,7 +165,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ===== LOAD COMMENTS =====
 async function loadComments(movieId, token, BASE_URL) {
   try {
-    // Cari istifadəçinin məlumatlarını al
     const profileRes = await fetch(
       `https://api.sarkhanrahimli.dev/api/filmalisa/profile`,
       { headers: { Authorization: `Bearer ${token}` } },
@@ -188,11 +174,19 @@ async function loadComments(movieId, token, BASE_URL) {
     const currentUserAvatar =
       profileData.data?.img_url || "../../assets/client/GridImages/avatar.svg";
 
-    // Input area avatarını profil şəkli ilə yenilə
+    // Input area avatarını yenilə
     const inputAvatar = document.querySelector(".user-avatar-sm img");
     if (inputAvatar) inputAvatar.src = currentUserAvatar;
 
-    // Şərhləri yüklə
+    // Top-header profil şəklini yenilə
+    const headerAvatar = document.querySelector(".top-header-profile img");
+    if (headerAvatar) {
+      headerAvatar.src = currentUserAvatar;
+      headerAvatar.onerror = () => {
+        headerAvatar.src = "../../assets/client/İconsİmages/user.svg";
+      };
+    }
+
     const res = await fetch(
       `https://api.sarkhanrahimli.dev/api/filmalisa/movies/${movieId}/comments`,
       { headers: { Authorization: `Bearer ${token}` } },
@@ -206,7 +200,6 @@ async function loadComments(movieId, token, BASE_URL) {
     comments.forEach((comment) => {
       const isOwner = comment.user?.id === currentUserId;
 
-      // Öz şərhisə profil avatarı, deyilsə default avatar
       const avatar = isOwner
         ? currentUserAvatar
         : "../../assets/client/İconsİmages/user.svg";
@@ -233,7 +226,6 @@ async function loadComments(movieId, token, BASE_URL) {
       wrapper.appendChild(div);
     });
 
-    // Şərh silmə
     wrapper.querySelectorAll(".comment-delete").forEach((icon) => {
       icon.addEventListener("click", async () => {
         try {
