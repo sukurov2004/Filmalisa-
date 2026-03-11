@@ -9,6 +9,7 @@
   --line: #ffffff1a;
 
   /* Common Colors */
+  --accent: #9b51e0;
   --accent-purple: #9b51e0;
   --accent-purple-hover: #8b3fd0;
   --accent-purple-dark: #5a1f8f;
@@ -54,7 +55,7 @@ body {
 
 .main {
   flex: 1;
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* ── Sidebar ── */
@@ -513,6 +514,7 @@ body {
   font-weight: 600;
   margin-top: 4px;
 }
+
 /* From Uiverse.io by Donewenfu */
 .loader {
   position: absolute;
@@ -558,6 +560,7 @@ body {
   -webkit-animation-delay: 0.16s !important;
   animation-delay: 0.16s !important;
 }
+
 .loader-overlay {
   position: fixed;
   inset: 0;
@@ -606,6 +609,7 @@ body {
     height: 40px;
   }
 }
+
 /* ===========================================
    PAGINATION
    =========================================== */
@@ -630,28 +634,26 @@ body {
   min-width: 38px;
   height: 38px;
   padding: 0 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #ffffff20;
   border-radius: var(--radius-md);
-  background: #ffffff;
-  color: #374151;
+  background: #ffffff0a;
+  color: #ffffffcc;
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
   transition:
-    background var(--transition),
-    border-color var(--transition),
-    color var(--transition),
-    transform var(--transition);
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-base);
   font-variant-numeric: lining-nums tabular-nums;
-  font-feature-settings:
-    "lnum" 1,
-    "tnum" 1;
+  font-feature-settings: "lnum" 1, "tnum" 1;
 }
 
 .pagination button:hover:not(.active):not(:disabled) {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-  color: #111827;
+  background: #ffffff15;
+  border-color: #ffffff40;
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -659,15 +661,15 @@ body {
   background: var(--accent);
   color: #ffffff;
   border-color: var(--accent);
-  box-shadow: 0 4px 12px #7c3aed4d;
+  box-shadow: 0 4px 12px #9b51e04d;
   transform: translateY(-2px);
 }
 
 .pagination button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  background: #f9fafb;
-  border-color: #e5e7eb;
-  color: #9ca3af;
+  background: #ffffff05;
+  border-color: #ffffff10;
+  color: #ffffff50;
   transform: none;
 }
