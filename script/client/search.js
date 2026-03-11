@@ -2,7 +2,9 @@
 (function () {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/login.html");
+    window.location.replace(
+      "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html",
+    );
   }
 })();
 
@@ -12,6 +14,7 @@ const token = localStorage.getItem("token");
 const grid = document.getElementById("resultsGrid");
 const input = document.getElementById("searchInput");
 const btn = document.getElementById("searchBtn");
+const paginationEl = document.querySelector(".pagination");
 
 // ---------- Kart render ----------
 function renderMovies(list) {
@@ -62,6 +65,11 @@ function renderMovies(list) {
   });
 
   grid.appendChild(fragment);
+
+  // Render bitdikdən SONRA pagination işlət
+  const cards = Array.from(grid.querySelectorAll(".movie-card"));
+  const pager = initPagination(null, paginationEl, 8);
+  pager.init(cards);
 }
 
 // ---------- API-dən film gətir ----------
