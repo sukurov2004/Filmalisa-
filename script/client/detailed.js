@@ -141,6 +141,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const text = commentInput.value.trim();
     if (!text) return;
 
+    const BASE_URL = "https://api.sarkhanrahimli.dev/api/filmalisa";
+    const params = new URLSearchParams(window.location.search);
+    const movieId = params.get("id");
+
     try {
       await fetch(`${BASE_URL}/movies/${movieId}/comment`, {
         method: "POST",
@@ -164,6 +168,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // ===== LOAD COMMENTS =====
 async function loadComments(movieId, token, BASE_URL) {
+  const DEFAULT_AVATAR = "../../assets/client/İconsİmages/user.svg";
+
   try {
     const profileRes = await fetch(
       `https://api.sarkhanrahimli.dev/api/filmalisa/profile`,
@@ -171,8 +177,11 @@ async function loadComments(movieId, token, BASE_URL) {
     );
     const profileData = await profileRes.json();
     const currentUserId = profileData.data?.id;
+
+    // API-dən gələn url varsa istifadə et, yoxdursa default icon
+    const rawAvatar = profileData.data?.img_url;
     const currentUserAvatar =
-      profileData.data?.img_url || "../../assets/client/GridImages/avatar.svg";
+      rawAvatar && rawAvatar.trim() !== "" ? rawAvatar : DEFAULT_AVATAR;
 
     // Input area avatarını yenilə
     const inputAvatar = document.querySelector(".user-avatar-sm img");
@@ -181,10 +190,14 @@ async function loadComments(movieId, token, BASE_URL) {
     // Top-header profil şəklini yenilə
     const headerAvatar = document.querySelector(".top-header-profile img");
     if (headerAvatar) {
-      headerAvatar.src = currentUserAvatar;
-      headerAvatar.onerror = () => {
-        headerAvatar.src = "../../assets/client/İconsİmages/user.svg";
-      };
+      if (rawAvatar && rawAvatar.trim() !== "") {
+        headerAvatar.src = rawAvatar;
+        headerAvatar.onerror = () => {
+          headerAvatar.src = DEFAULT_AVATAR;
+        };
+      } else {
+        headerAvatar.src = DEFAULT_AVATAR;
+      }
     }
 
     const res = await fetch(
@@ -200,9 +213,7 @@ async function loadComments(movieId, token, BASE_URL) {
     comments.forEach((comment) => {
       const isOwner = comment.user?.id === currentUserId;
 
-      const avatar = isOwner
-        ? currentUserAvatar
-        : "../../assets/client/İconsİmages/user.svg";
+      const avatar = isOwner ? currentUserAvatar : DEFAULT_AVATAR;
 
       const div = document.createElement("div");
       div.className = "existing-comment";
