@@ -106,6 +106,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+/* ───────── DEFAULT AVATAR ───────── */
+const DEFAULT_AVATAR = "./assets/Admin/icons/Users.svg";
+
+/* ───────── AVATAR HELPER ───────── */
+function setAvatar(img, url) {
+  if (!img) return;
+  img.src = url && url.trim() !== "" ? url : DEFAULT_AVATAR;
+  img.style.borderRadius = "50%";
+  img.style.width = "36px";
+  img.style.height = "36px";
+  img.style.objectFit = "cover";
+  img.onerror = () => { img.src = DEFAULT_AVATAR; };
+}
+
 /* ───────── AUTH STATE ───────── */
 const token = localStorage.getItem("token");
 
@@ -121,14 +135,10 @@ if (token) {
   // Əvvəlcə cache-dən göstər (sürətli yüklənmə üçün)
   try {
     const cachedUser = JSON.parse(localStorage.getItem("user") || "{}");
-    if (cachedUser.img_url && userIconImg) {
-      userIconImg.src = cachedUser.img_url;
-      userIconImg.style.borderRadius = "50%";
-      userIconImg.style.width = "36px";
-      userIconImg.style.height = "36px";
-      userIconImg.style.objectFit = "cover";
-    }
-  } catch (_) {}
+    setAvatar(userIconImg, cachedUser.img_url);
+  } catch (_) {
+    setAvatar(userIconImg, null);
+  }
 
   // Sonra API-dən təzə data çək və yenilə
   fetch("https://api.sarkhanrahimli.dev/api/filmalisa/profile", {
@@ -137,25 +147,18 @@ if (token) {
     .then((res) => res.json())
     .then((data) => {
       const img_url = data?.data?.img_url;
-      if (img_url && userIconImg) {
-        userIconImg.src = img_url;
-        userIconImg.style.borderRadius = "50%";
-        userIconImg.style.width = "36px";
-        userIconImg.style.height = "36px";
-        userIconImg.style.objectFit = "cover";
-        userIconImg.onerror = () => {
-          userIconImg.src = "./assets/Admin/icons/Users.svg";
-        };
+      setAvatar(userIconImg, img_url);
 
-        // Cache-i yenilə
-        try {
-          const cached = JSON.parse(localStorage.getItem("user") || "{}");
-          cached.img_url = img_url;
-          localStorage.setItem("user", JSON.stringify(cached));
-        } catch (_) {}
-      }
+      // Cache-i yenilə
+      try {
+        const cached = JSON.parse(localStorage.getItem("user") || "{}");
+        cached.img_url = img_url;
+        localStorage.setItem("user", JSON.stringify(cached));
+      } catch (_) {}
     })
-    .catch(() => {});
+    .catch(() => {
+      setAvatar(userIconImg, null);
+    });
 } else {
   signInBtn?.classList.remove("hidden");
   userMenu?.classList.add("hidden");
