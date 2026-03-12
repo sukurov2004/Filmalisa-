@@ -90,10 +90,9 @@
 }
 
 .hero-floating-card:hover {
-  transform: translateY(-15px) scale(1.03); /* Bir az daha yuxarı və qabarıq */
-  background: rgba(255, 255, 255, 0.15); /* Parlaqlığı bir az artırdıq */
+  transform: translateY(-15px) scale(1.03);
+  background: rgba(255, 255, 255, 0.15); 
   border: 1px solid rgba(255, 255, 255, 0.4);
-  /* Kölgəni daha yumşaq və geniş etdik */
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
 }
 .hero-genre {
@@ -108,7 +107,7 @@
   margin: 0;
   font-family: "Numans", sans-serif;
   color: #fff;
-  font-size: 24px; /* Ölçünü bir az kiçiltdik ki, qutuya yaraşsın */
+  font-size: 24px;
   font-weight: 800;
   line-height: 1.2;
 }
