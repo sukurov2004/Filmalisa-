@@ -21,6 +21,7 @@ function renderMovies(list) {
   grid.innerHTML = "";
 
   if (!list || list.length === 0) {
+    paginationEl.innerHTML = "";
     grid.innerHTML = `
       <div style="
         position: fixed;
@@ -66,7 +67,6 @@ function renderMovies(list) {
 
   grid.appendChild(fragment);
 
-  // Render bitdikdən SONRA pagination işlət
   const cards = Array.from(grid.querySelectorAll(".movie-card"));
   const pager = initPagination(null, paginationEl, 8);
   pager.init(cards);
@@ -94,6 +94,7 @@ async function fetchMovies(query = "") {
     renderMovies(list);
   } catch (err) {
     console.error(err);
+    paginationEl.innerHTML = "";
     grid.innerHTML = `<p style="color:#ff6b6b; padding:20px;">Error loading data</p>`;
   }
 }
