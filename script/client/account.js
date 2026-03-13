@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const body = {
         full_name: fullNameInput.value,
-        email: emailInput.value,
+        // email: emailInput.value,
         img_url: imgUrlInput.value,
       };
 
