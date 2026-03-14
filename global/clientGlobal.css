@@ -116,8 +116,8 @@ body {
 }
 
 .side-link:hover img {
-  filter: brightness(1);
-  color: #0feffd;
+  filter: brightness(0) saturate(100%) invert(85%) sepia(50%) saturate(600%)
+    hue-rotate(130deg) brightness(85%);
 }
 
 .side-link.active img {
@@ -196,7 +196,7 @@ body {
 }
 
 .home-side-link:hover img {
-   filter: brightness(0) saturate(100%) invert(85%) sepia(50%) saturate(600%)
+  filter: brightness(0) saturate(100%) invert(85%) sepia(50%) saturate(600%)
     hue-rotate(130deg) brightness(85%);
 }
 
@@ -647,7 +647,9 @@ body {
     color var(--transition-base),
     transform var(--transition-base);
   font-variant-numeric: lining-nums tabular-nums;
-  font-feature-settings: "lnum" 1, "tnum" 1;
+  font-feature-settings:
+    "lnum" 1,
+    "tnum" 1;
 }
 
 .pagination button:hover:not(.active):not(:disabled) {
@@ -718,29 +720,29 @@ body {
     align-items: center;
     justify-content: flex-start;
   }
-  .profile-card{
+  .profile-card {
     align-items: center;
     padding: 20px 16px;
   }
-  .avatar-gradient{
+  .avatar-gradient {
     width: 160px;
     height: 160px;
     margin-bottom: 54px;
     margin-top: 40px;
   }
-  .account-form{
+  .account-form {
     width: 100%;
   }
-  .p-input{
+  .p-input {
     font-size: 16px;
   }
-  .account-btn{
+  .account-btn {
     margin-top: 24px;
   }
   .main-err {
     padding-top: 120px;
   }
-    .home-layout {
+  .home-layout {
     display: flex !important;
     flex-direction: column;
     min-height: 100vh;
