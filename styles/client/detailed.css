@@ -227,7 +227,6 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #ffa500;
-  border: 1px solid rgba(255, 165, 0, 0.4);
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -235,8 +234,8 @@
 }
 
 .btn-watch:hover {
-  background: rgba(255, 165, 0, 0.1);
-  box-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
+  background: #ffa5001a;
+  box-shadow: 0 0 5px hwb(39 0% 0% / 0.2);
 }
 
 .circle-btn {
@@ -277,7 +276,6 @@
   background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid #ffa500;
   border-radius: 8px;
   color: #fff;
   font-size: 14px;
