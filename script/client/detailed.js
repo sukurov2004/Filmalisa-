@@ -2,7 +2,9 @@
 (function () {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.replace("https://sukurov2004.github.io/Filmalisa-/pages/client/login.html");
+    window.location.replace(
+      "https://sukurov2004.github.io/Filmalisa-/pages/client/login.html",
+    );
   }
 })();
 
@@ -40,7 +42,7 @@ window.toggleVideo = function () {
 window.playVideo = function () {
   const iframe = document.getElementById("youtubeFrame");
   const thumbnail = document.getElementById("videoThumbnail");
-  iframe.src = getEmbedUrl(currentFragman);
+  iframe.src = getEmbedUrl(currentFragman) + "?autoplay=1";
   iframe.style.display = "block";
   if (thumbnail) thumbnail.style.display = "none";
 };
@@ -99,6 +101,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         .join("");
     }
 
+    document.querySelector(".meta-grid").innerHTML = `
+      <div class="meta-item">
+        <span class="label">Category</span>
+        <span class="value">${movie.category?.name || "—"}</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Runtime</span>
+        <span class="value">${movie.run_time_min ? movie.run_time_min + " min" : "—"}</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Adult</span>
+        <span class="value">${movie.adult ? "18+" : "Family"}</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Added</span>
+        <span class="value">${movie.created_at ? new Date(movie.created_at).getFullYear() : "—"}</span>
+      </div>
+    `;
+
     const circleBtn = document.querySelector(".circle-btn");
 
     const favRes = await fetch(`${BASE_URL}/movies/favorites`, {
@@ -116,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         circleBtn.classList.toggle("active");
       } catch (err) {
-        console.error("Favorite əlavə edilmədi:", err);
+        console.error("Failed to add to favorites:", err);
       }
     });
 
@@ -131,7 +152,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadComments(movieId, token, BASE_URL);
     loadSimilar(movie.category?.id, movieId, token, BASE_URL);
   } catch (err) {
-    console.error("Film məlumatları yüklənmədi:", err);
+    console.error("Unable to load movie details:", err);
   }
 
   const commentInput = document.querySelector(".comment-field");
