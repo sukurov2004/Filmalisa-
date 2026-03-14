@@ -136,17 +136,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   // PUT
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     try {
       const body = {
         full_name: fullNameInput.value,
-        // email: emailInput.value,
+        email: emailInput.value,
         img_url: imgUrlInput.value,
+        password: passwordInput.value,
       };
 
-      if (passwordInput.value) {
-        body.password = passwordInput.value;
-      }
 
       const response = await fetch(url, {
         method: "PUT",
@@ -160,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!response.ok) throw new Error("Yenilənmədi");
 
       showToast("Profile updated successfully!", "success");
-      passwordInput.value = "";
+      // passwordInput.value = "";
       getProfile();
     } catch (error) {
       console.error("Xəta:", error);

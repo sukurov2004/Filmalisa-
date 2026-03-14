@@ -133,10 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
               ${item.comment.length > 30 ? item.comment.slice(0, 30) + "..." : item.comment}
             </td>
             <td>
-              <i class="fa-solid fa-trash delete-icon"
+              <i class="fa-solid fa-trash delete"
                  data-id="${item.id}"
                  data-movie-id="${item.movie?.id}"
-                 style="cursor:pointer;color:red;background:#ef444426;"></i>
+                "></i>
             </td>
           `;
 
@@ -205,7 +205,7 @@ jsTooltip.style.top = top + "px";
 
   // ── Modal və delete eventləri ──
   commentsBody.addEventListener("click", (e) => {
-    const icon = e.target.closest(".delete-icon");
+    const icon = e.target.closest(".delete");
     if (!icon) return;
     commentIdToDelete = icon.dataset.id;
     movieIdToDelete = icon.dataset.movieId;
