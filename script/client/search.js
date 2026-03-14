@@ -8,6 +8,54 @@
   }
 })();
 
+// ===== TRAILER HELPERS =====
+function getEmbedUrl(url) {
+  if (!url) return "";
+  const short = url.match(/youtu\.be\/([^?&]+)/);
+  if (short) return `https://www.youtube.com/embed/${short[1]}`;
+  const long = url.match(/[?&]v=([^&]+)/);
+  if (long) return `https://www.youtube.com/embed/${long[1]}`;
+  const embed = url.match(/embed\/([^?&]+)/);
+  if (embed) return `https://www.youtube.com/embed/${embed[1]}`;
+  return url;
+}
+
+function getVideoId(url) {
+  if (!url) return "";
+  const short = url.match(/youtu\.be\/([^?&]+)/);
+  if (short) return short[1];
+  const long = url.match(/[?&]v=([^&]+)/);
+  if (long) return long[1];
+  const embed = url.match(/embed\/([^?&]+)/);
+  if (embed) return embed[1];
+  return "";
+}
+
+function initCardTrailers() {
+  document.querySelectorAll(".movie-card").forEach((card) => {
+    const trailer = card.querySelector(".card-trailer");
+    if (!trailer) return;
+    const iframe = trailer.querySelector("iframe");
+    let hoverTimer = null;
+    let stopTimer = null;
+
+    card.addEventListener("mouseenter", () => {
+      hoverTimer = setTimeout(() => {
+        iframe.src = iframe.dataset.src;
+        stopTimer = setTimeout(() => {
+          iframe.src = "";
+        }, 15000);
+      }, 5000);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      clearTimeout(hoverTimer);
+      clearTimeout(stopTimer);
+      iframe.src = "";
+    });
+  });
+}
+
 const API_BASE = "https://api.sarkhanrahimli.dev/api/filmalisa";
 const token = localStorage.getItem("token");
 
@@ -47,11 +95,22 @@ function renderMovies(list) {
   const fragment = document.createDocumentFragment();
 
   list.forEach((movie) => {
+    const embedBase = getEmbedUrl(movie.fragman);
+    const videoId = getVideoId(movie.fragman);
+    const trailerSrc = embedBase
+      ? `${embedBase}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${videoId}&disablekb=1&iv_load_policy=3&rel=0&fs=0&playsinline=1`
+      : "";
+
     const card = document.createElement("a");
     card.className = "movie-card";
     card.href = `detailed.html?id=${movie.id}`;
     card.innerHTML = `
       <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
+      ${trailerSrc ? `
+        <div class="card-trailer">
+          <iframe src="" data-src="${trailerSrc}" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      ` : ""}
       <div class="movie-details">
         <div class="movie-category-container">
           <span class="movie-category">${movie.category?.name || ""}</span>
@@ -70,6 +129,7 @@ function renderMovies(list) {
   const cards = Array.from(grid.querySelectorAll(".movie-card"));
   const pager = initPagination(null, paginationEl, 8);
   pager.init(cards);
+  initCardTrailers();
 }
 
 // ---------- API-dən film gətir ----------

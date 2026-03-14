@@ -210,6 +210,32 @@ function initCarousel(carousel) {
   goTo(0);
 }
 
+// ===== CARD TRAILERS =====
+function initCardTrailers() {
+  document.querySelectorAll(".movie-card").forEach((card) => {
+    const trailer = card.querySelector(".card-trailer");
+    if (!trailer) return;
+    const iframe = trailer.querySelector("iframe");
+    let hoverTimer = null;
+    let stopTimer = null;
+
+    card.addEventListener("mouseenter", () => {
+      hoverTimer = setTimeout(() => {
+        iframe.src = iframe.dataset.src;
+        stopTimer = setTimeout(() => {
+          iframe.src = "";
+        }, 15000);
+      }, 5000);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      clearTimeout(hoverTimer);
+      clearTimeout(stopTimer);
+      iframe.src = "";
+    });
+  });
+}
+
 // ===== API — Categories and Movies =====
 (async function () {
   const BASE_URL = "https://api.sarkhanrahimli.dev/api/filmalisa";
@@ -217,10 +243,47 @@ function initCarousel(carousel) {
   const categoriesContainer = document.getElementById("categoriesContainer");
   const vectorIconSrc = "../../assets/client/İconsİmages/vector.svg";
 
+  function getEmbedUrl(url) {
+    if (!url) return "";
+    const short = url.match(/youtu\.be\/([^?&]+)/);
+    if (short) return `https://www.youtube.com/embed/${short[1]}`;
+    const long = url.match(/[?&]v=([^&]+)/);
+    if (long) return `https://www.youtube.com/embed/${long[1]}`;
+    const embed = url.match(/embed\/([^?&]+)/);
+    if (embed) return `https://www.youtube.com/embed/${embed[1]}`;
+    return url;
+  }
+
+  function getVideoId(url) {
+    if (!url) return "";
+    const short = url.match(/youtu\.be\/([^?&]+)/);
+    if (short) return short[1];
+    const long = url.match(/[?&]v=([^&]+)/);
+    if (long) return long[1];
+    const embed = url.match(/embed\/([^?&]+)/);
+    if (embed) return embed[1];
+    return "";
+  }
+
   function createCardHTML(movie, categoryName) {
+    const embedBase = getEmbedUrl(movie.fragman);
+    const videoId = getVideoId(movie.fragman);
+    const trailerSrc = embedBase
+      ? `${embedBase}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${videoId}&disablekb=1&iv_load_policy=3&rel=0&fs=0&playsinline=1`
+      : "";
+
     return `
     <a class="movie-card" href="detailed.html?id=${movie.id}">
       <img src="${movie.cover_url || ""}" class="movie-image" alt="${movie.title}" />
+      ${
+        trailerSrc
+          ? `
+        <div class="card-trailer">
+          <iframe src="" data-src="${trailerSrc}" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      `
+          : ""
+      }
       <div class="movie-details">
         <div class="movie-category-container">
           <span class="movie-category">${categoryName}</span>
@@ -279,6 +342,7 @@ function initCarousel(carousel) {
     });
 
     document.querySelectorAll(".category-carousel").forEach(initCarousel);
+    initCardTrailers();
   } catch {
     console.error("Failed to load categories or movies");
   }
