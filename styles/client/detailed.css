@@ -223,7 +223,9 @@
 
 .btn-watch {
   padding: 12px 24px;
-  background: #1d1d1d;
+  background: #000000a6;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #ffa500;
   border: 1px solid rgba(255, 165, 0, 0.4);
   border-radius: 10px;
@@ -272,7 +274,9 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  background: #1d1d1d;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid #ffa500;
   border-radius: 8px;
   color: #fff;
@@ -281,7 +285,8 @@
 }
 
 .rating-badge i {
-  color: #ffa500;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #ffa500;
 }
 
 .meta-grid {
