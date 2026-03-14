@@ -35,7 +35,6 @@
   object-fit: cover;
 }
 
-
 /* --------------------------------------------------------------------------
    2.                             HERO SECTION
    -------------------------------------------------------------------------- */
@@ -57,7 +56,6 @@
   background-position: center;
 }
 
-
 .hero-gradient-overlay {
   position: absolute;
   inset: 0;
@@ -69,15 +67,14 @@
   );
 }
 
-
 .hero-floating-card {
   position: absolute;
-  bottom: -40px;  
-  left: 110px;  
+  bottom: -40px;
+  left: 110px;
 
-  width: 564px; 
+  width: 564px;
   min-width: auto;
-  
+
   padding: 20px 40px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.08);
@@ -91,9 +88,11 @@
 
 .hero-floating-card:hover {
   transform: translateY(-15px) scale(1.03);
-  background: rgba(255, 255, 255, 0.15); 
+  background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
 }
 .hero-genre {
   display: block;
@@ -111,7 +110,6 @@
   font-weight: 800;
   line-height: 1.2;
 }
-
 
 /* --------------------------------------------------------------------------
    3.                           CONTENT LAYOUT
@@ -194,7 +192,7 @@
 
 /* --- SAĞ SÜTUN (Filmin Məlumatları) --- */
 .right-column {
-  flex: 1; 
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -202,9 +200,9 @@
 /* Başlıq və butonların yan-yana durması */
 .header-content {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: flex-start;
-  gap: 25px; 
+  gap: 25px;
   margin-bottom: 20px;
   width: 100%;
 }
@@ -212,7 +210,7 @@
 /* İkinci böyük başlıq mətni */
 .promo-text {
   max-width: 100%;
-  font-size: 42px; 
+  font-size: 42px;
   font-weight: 800;
 }
 
@@ -220,7 +218,7 @@
 .watch-actions {
   display: flex;
   align-items: center;
-  gap: 120px; 
+  gap: 120px;
 }
 
 .btn-watch {
@@ -290,7 +288,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  max-width: 800px; 
+  max-width: 800px;
   margin: 30px 0;
 }
 
@@ -304,14 +302,14 @@
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.4); 
+  color: #ffffff66;
   margin-bottom: 5px;
 }
 
 .meta-item .value {
-  font-size: 18px; 
-  font-weight: 600;
-  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  color: #c3c8d4;
 }
 
 .genres-block {
@@ -373,7 +371,6 @@
   font-size: 11px;
 }
 
-
 /* --------------------------------------------------------------------------
    4.                           COMMENT SECTION
    -------------------------------------------------------------------------- */
@@ -417,9 +414,9 @@
 
 .comment-field:focus {
   outline: none;
-  
-  border: 1px solid #5a1a94 !important; 
-  
+
+  border: 1px solid #5a1a94 !important;
+
   /* box-shadow: 0 0 5px rgba(155, 81, 224, 0.5);  */
   background-color: transparent;
   transition: all 0.2s ease;
@@ -501,7 +498,6 @@
   line-height: 1.5;
 }
 
-
 /* --------------------------------------------------------------------------
    5.                           SIMILAR MOVIES
    -------------------------------------------------------------------------- */
@@ -509,11 +505,11 @@
 .similar-wrapper {
   max-width: 1500px;
   margin: 80px auto 0;
-  padding: 0 60px 0 110px; 
+  padding: 0 60px 0 110px;
 }
 
 .similar-title {
-  display: flex;          
+  display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 25px;
@@ -554,7 +550,7 @@
   position: relative;
   width: 80%;
   max-width: 1000px;
-  aspect-ratio: 16/9; 
+  aspect-ratio: 16/9;
   background: #000;
 }
 .close-modal-wrapper {
@@ -563,7 +559,6 @@
   right: 0;
 }
 .close-modal-btn {
-
   width: 36px;
   height: 36px;
   background: rgba(255, 255, 255, 0.2);
@@ -575,7 +570,6 @@
   font-size: 30px;
   cursor: pointer;
 }
-
 
 /* --------------------------------------------------------------------------
    7.                           SIDEBAR FIX
@@ -597,7 +591,6 @@
   align-items: center;
   z-index: 10000;
 }
-
 
 /* --------------------------------------------------------------------------
    8.                   RESPONSIVE - MEDIA QUERIES
@@ -629,7 +622,6 @@
   .right-column {
     width: 100%;
     padding-top: 0;
-
   }
   .comments-wrapper-full {
     max-width: 100%;
@@ -641,5 +633,3 @@
     justify-content: center;
   }
 }
-
-
