@@ -23,8 +23,12 @@ Filmalisa consists of:
 👥 Team
 
 1)Frontend Developer(Cəfərov Babək)
+
 2)Frontend Developer(Qasımova Hökümə)
+
 3)Frontend Developer(Malik Şükürov)
+
 4)Frontend Developer(Səmədova Könül)
+
 5)Frontend Developer(Əhmədov Murad)
 
